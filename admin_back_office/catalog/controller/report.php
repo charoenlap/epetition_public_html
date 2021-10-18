@@ -1,0 +1,7 @@
+<?php 
+	class ReportController extends Controller {
+	    public function index() {
+	    	$this->view('report/home');
+	    }
+	}
+?>

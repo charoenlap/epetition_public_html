@@ -1,0 +1,20 @@
+/* menu */
+.menu-left .nav-item a.active {
+    background-color: rgba(255,255,255,.1) !important;
+}
+
+/* text */
+.text-theme {
+    color: #FF4316;
+}
+
+/* background */
+.bg-theme {
+    background-color: #FF4316;
+}
+
+/* button */
+.btn-theme,.btn-theme:hover {
+    background-color: #FF4316;
+    color: #fff;
+}
