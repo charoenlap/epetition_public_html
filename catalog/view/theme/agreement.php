@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="col-md-12 text-center">
-                <a href="form_type.html" class="btn btn-success">ยอมรับเงื่อนไข</a>
+                <a href="<?php echo route('home/form'); ?>" class="btn btn-success">ยอมรับเงื่อนไข</a>
             </div>
         </div>
     </div>

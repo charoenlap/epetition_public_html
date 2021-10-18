@@ -12,9 +12,9 @@
 		require_once('catalog/setup.php'); 
 		require_once($_SERVER['DOCUMENT_ROOT'].'/epetition/lib/system/loader/autoload.php'); 
 	}else{
-		require_once('/home/charoenlap/domains/charoenlap.com/config/domains/epetition/config.php'); 
-		require_once('/home/charoenlap/domains/charoenlap.com/lib/function/main_function.php');
+		require_once('/home/hostphp7/domains/hostphp7.com/config/domains/epetition/config.php'); 
+		require_once('/home/hostphp7/domains/hostphp7.com/lib/function/main_function.php');
 		require_once('catalog/setup.php'); 
-		require_once('/home/charoenlap/domains/charoenlap.com/lib/system/loader/autoload.php'); 
+		require_once('/home/hostphp7/domains/hostphp7.com/lib/system/loader/autoload.php'); 
 	}
 ?>
