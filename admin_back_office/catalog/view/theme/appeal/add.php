@@ -274,7 +274,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <label for="">สิ่งที่ต้องการให้กระทรวงทรัพยากรธรรมชาติและสิ่งแวดล้อมดำเนินการ</label>
+                                    <label for="">สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ</label>
                                     <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
                                 </div>
                             </div>
@@ -291,7 +291,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <button class="btn btn-primary">ส่งเรื่อง</button>
-                                    <a href="complaint.php" class="btn btn-danger">ยกเลิก</a>
+                                    <a href="<?php echo route('appeal');?>" class="btn btn-danger">ยกเลิก</a>
                                 </div>
                             </div>
                         </div>
@@ -304,5 +304,5 @@
 </div>
 
 <script>
-    $('#complaint').addClass('active');
+    $('#appeal').addClass('active');
 </script>

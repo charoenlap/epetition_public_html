@@ -48,12 +48,15 @@
                             <div class="row mb-3">
                                 <div class="col-md-3">
                                     <label for="">ปี พ.ศ.</label>
-                                    <select name="" id="" class="form-control mb-1">
+                                    <select name="" id="" class="form-control">
                                         <option value="">2564</option>
                                         <option value="">2563</option>
                                         <option value="">2562</option>
                                         <option value="">2561</option>
                                     </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">&nbsp;</label><br>
                                     <button class="btn btn-primary">ค้นหา</button>
                                 </div>
                             </div>

@@ -107,7 +107,7 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>สิ่งที่ต้องการให้กระทรวงทรัพยากรธรรมชาติและสิ่งแวดล้อมดำเนินการ</td>
+                                                <td>สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ</td>
                                                 <td></td>
                                             </tr>
                                             <tr>
@@ -177,14 +177,14 @@
                                             <tr>
                                                 <th>ลำดับ</th>
                                                 <th>หน่วยงาน</th>
-                                                <th>จัดการ</th>
+                                                <th style="width:100px;">จัดการ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>1</td>
+                                                <td>อื่นๆ</td>
+                                                <td><a href="#" class="btn btn-primary">เลือก</a></td>
                                             </tr>
                                         </tbody>
                                     </table>   
@@ -204,3 +204,6 @@
     </section>
     <!-- /.content -->
   </div>
+<script>
+    $('#appeal').addClass('active');
+</script>

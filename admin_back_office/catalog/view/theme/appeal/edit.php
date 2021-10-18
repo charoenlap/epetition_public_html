@@ -307,5 +307,5 @@
   </div>
 
 <script>
-    $('#complaint').addClass('active');
+    $('#appeal').addClass('active');
 </script>

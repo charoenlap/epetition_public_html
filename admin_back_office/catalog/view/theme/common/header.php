@@ -38,6 +38,37 @@
       foreach ($style as $key => $value) { ?>
     <link rel="stylesheet" href="<?php echo $value;?>">
   <?php } } ?>
+  <!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<!-- <script src="plugins/jqvmap/jquery.vmap.min.js"></script> -->
+<!-- <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script> -->
+<!-- jQuery Knob Chart -->
+<!-- <script src="plugins/jquery-knob/jquery.knob.min.js"></script> -->
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
   <?php 
   if(isset($script)){
   foreach ($script as $key => $value) { ?>
@@ -87,8 +118,9 @@
         <div class="image">
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="info">
-          <a href="index.php" class="d-block">johny depp</a>
+        <div class="info d-block">
+          <p class="text-light h5 text-center">สมชาย ใจดี</p>
+          <p class="text-light h6 text-center">หัวหน้า</p>
         </div>
       </div>
 
@@ -96,7 +128,15 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column menu-left" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="<?php echo route('appeal'); ?>" class="nav-link px-1" id="complaint">
+            <a href="<?php echo route('home'); ?>" class="nav-link px-1" id="dashbord">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                หน้าหลัก
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo route('appeal'); ?>" class="nav-link px-1" id="appeal">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 เรื่องร้องเรียน
@@ -112,15 +152,70 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="#" class="nav-link px-1" id="report">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                รายงาน
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo route('report'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>รายงานผลความก้าวหน้า</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo route('report'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>รายงานเรื่องร้องเรียน</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
             <a href="<?php echo route('report'); ?>" class="nav-link px-1" id="report">
               <i class="nav-icon fas fa-file"></i>
               <p>
                 รายงาน
               </p>
             </a>
+            <ul class="nav nav-pills nav-sidebar flex-column">
+              <li class="nav-item">
+                <a href="" class="nav-link px-1">- รายงานผลความก้าวหน้า</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link px-1">- รายงานเรื่องร้องเรียน</a>
+              </li>
+            </ul>
+          </li> -->
+          <li class="nav-item">
+            <a href="<?php echo route('user'); ?>" class="nav-link px-1" id="pageUser">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                ผู้ใช้งานทั้งหมด
+              </p>
+            </a>
           </li>
           <li class="nav-item">
-            <a href="login.php" class="nav-link px-1" id="report">
+            <a href="<?php echo route('user/group'); ?>" class="nav-link px-1" id="pagePermission">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                กำหนดสิทธิ์ผู้ใช้งาน
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo route('setting'); ?>" class="nav-link px-1" id="">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                ตั้งค่าระบบ
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo route('login'); ?>" class="nav-link px-1" id="">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 ออกจากระบบ

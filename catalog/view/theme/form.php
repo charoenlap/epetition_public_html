@@ -259,7 +259,7 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-12">
-                <label for="">สิ่งที่ต้องการให้กระทรวงทรัพยากรธรรมชาติและสิ่งแวดล้อมดำเนินการ</label>
+                <label for="">สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ</label>
                 <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
             </div>
         </div>

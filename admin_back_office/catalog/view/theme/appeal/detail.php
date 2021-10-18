@@ -28,12 +28,12 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">รายละเอียดเรื่องร้องเรียน</h4>
-                            <a href="complaint.php" class="float-right btn btn-dark btn-sm">ย้อนกลับ</a>
+                            <a href="<?php echo route('appeal'); ?>" class="float-right btn btn-dark btn-sm">ย้อนกลับ</a>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <table class="table table-bordered table-primary">
+                                    <table class="table table-bordered table-light">
                                         <tbody>
                                             <tr>
                                                 <td>Ticket ID : 00001</td>
@@ -110,7 +110,7 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>สิ่งที่ต้องการให้กระทรวงทรัพยากรธรรมชาติและสิ่งแวดล้อมดำเนินการ</td>
+                                                <td>สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ</td>
                                                 <td></td>
                                             </tr>
                                             <tr>
@@ -135,6 +135,16 @@
                                                 <th>ไฟล์แนบ</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>2561-02-01</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a href="#" class="btn btn-primary btn-xs">ไฟล์แนบ</a></td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -142,6 +152,89 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">ความคิดเห็น</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header bg-primary">
+                                            <h4 class="card-title">เจ้าหน้าที่</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2 w-25 mb-2" alt="User Image">
+                                                    <p>เจ้าหน้าที่</p>
+                                                </div>
+                                                <div class="col-10">
+                                                    <small>วันที่ : 17/10/2564 15:49</small>
+                                                    <p>ประสานงาน</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header bg-warning">
+                                            <h4 class="card-title">สปน.</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2 w-25 mb-2" alt="User Image">
+                                                    <p>สปน.</p>
+                                                </div>
+                                                <div class="col-10">
+                                                    <small>วันที่ : 17/10/2564 15:49</small>
+                                                    <p>ประสานงาน</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header bg-theme">
+                                            <h4 class="card-title">ปกท.ทส/รอง ปทก.ทส</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2 w-25 mb-2" alt="User Image">
+                                                    <p>รอง ปทก.ทส</p>
+                                                </div>
+                                                <div class="col-10">
+                                                    <small>วันที่ : 17/10/2564 15:49</small>
+                                                    <p>ประสานงาน</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="">กรอกข้อมูล/ความเห็น</label>
+                                    <textarea name="" id="summernote" cols="30" rows="30"></textarea>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="file" class="btn btn-info">เอกสารแนบ</label>
+                                    <input type="file" class="form-control d-none" id="file">
+                                    รองรับไฟล์การอัพโหลด
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary">บันทึก</button>  
+                                    <a href="<?php echo route('appeal');?>" class="btn btn-danger">ยกเลิก</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -163,7 +256,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -171,7 +264,8 @@
   </div>
 
 <script>
-    $('#complaint').addClass('active');
+    $('#appeal').addClass('active');
+
 
     $('#summernote').summernote({
         height: 300
