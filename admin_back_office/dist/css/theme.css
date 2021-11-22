@@ -26,3 +26,50 @@ html,body {
     background-color: #FF4316;
     color: #fff;
 }
+
+
+/* color status */
+.status-green {
+    /* background-color: green;
+    color: white;
+    width: 30px;
+    height: 30px;
+    padding: 7px 5px;
+    text-align: center;
+    border-radius: 3px; */
+    color: green;
+    font-size: 1.5rem;
+}
+.status-yellow {
+    /* background-color: yellow;
+    color: #333;
+    width: 30px;
+    height: 30px;
+    padding: 7px 5px;
+    text-align: center;
+    border-radius: 3px; */
+    color: yellow;
+    font-size: 1.5rem;
+}
+.status-orange {
+    /* background-color: orange;
+    color: white;
+    width: 30px;
+    height: 30px;
+    padding: 7px 5px;
+    text-align: center;
+    border-radius: 3px; */
+    color: orange;
+    font-size: 1.5rem;
+}
+.status-red {
+    /* background-color: red;
+    color: white;
+    width: 30px;
+    height: 30px;
+    padding: 7px 5px;
+    text-align: center;
+    border-radius: 3px; */
+    color: red;
+    font-size: 1.5rem;
+}

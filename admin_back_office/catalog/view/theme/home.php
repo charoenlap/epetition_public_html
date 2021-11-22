@@ -85,7 +85,7 @@
         <!-- ./col -->
       </div>
       <!-- /.row -->
-      <div class="row">
+      <!-- <div class="row mb-3">
           <div class="col-md-4">
               <div id="piechart_3d" style="height: 500px;"></div>
           </div>
@@ -95,6 +95,22 @@
           <div class="col-md-4">
             <div id="chart_div_combo" style="height: 500px;"></div>
           </div>
+      </div> -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div id="vmap" style="width: 100%; height: 800px;"></div>
+                </div>
+                <div class="col-md-6">
+                  <div id="chart_div_combo" style="height: 500px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div> 
     </div><!-- /.container-fluid -->
   </section>
@@ -193,3 +209,28 @@ function drawMultSeries() {
         chart.draw(data, options);
       }
     </script>
+<script type="text/javascript">
+	jQuery('#vmap').vectorMap(
+  {
+      map: 'thai_en',
+      backgroundColor: '#fff',
+      borderColor: '#F3F0D7',
+      borderOpacity: 0.25,
+      borderWidth: 1,
+      color: '#CEE5D0',
+      enableZoom: true,
+      hoverColor: '#FF7878',
+      hoverOpacity: null,
+      normalizeFunction: 'linear',
+      scaleColors: ['#b6d6ff', '#005ace'],
+      selectedColor: '#c9dfaf',
+      selectedRegion: true,
+      showTooltip: true,
+      showLabels: true,
+      // onRegionClick: function(element, code, region)
+      // {
+      //     var message = 'You clicked "'+region+'"' 
+      //     alert(message);
+      // }
+  });
+</script>

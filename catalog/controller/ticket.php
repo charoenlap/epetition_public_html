@@ -6,5 +6,8 @@
 	    	$data['descreption'] = "";
  	    	$this->view('ticket',$data); 
 	    }
+		public function ticketStatus(){
+			$this->view('ticketStatus');
+		}
 	}
 ?>

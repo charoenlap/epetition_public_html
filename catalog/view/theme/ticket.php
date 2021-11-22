@@ -10,14 +10,14 @@
     </div>
   </div>
 </div>
-<section class="py-5 h-75 mt-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-7">
-        <h3>ติดตามเรื่องร้องเรียน</h3>
-        <input type="text" class="form-control mb-3 py-3" placeholder="กรอก Ticket ID สำหรับค้นหา">
-        <a href="<?php echo route('home/status'); ?>" class="btn btn-theme w-100">ค้นหา</a>
-      </div>
+<section class="py-5 h-75">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h3>ติดตามเรื่องร้องเรียน</h3>
+                <input type="text" class="form-control form-control-lg mb-3" placeholder="กรอก Ticket ID สำหรับค้นหา">
+                <a href="<?php echo route('ticket/ticketStatus'); ?>" class="btn btn-theme btn-lg btn-block">ค้นหา</a>
+            </div>
+        </div>
     </div>
-  </div>
 </section>

@@ -69,6 +69,11 @@
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
+<!-- thailand -->
+<link href="plugins/jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="plugins/jqvmap-thai-stable/jqvmap/jquery.vmap.js"></script>
+<script src="plugins/jqvmap-thai-stable/jqvmap/maps/jquery.vmap.world.js"></script>
+<script src="plugins/jqvmap-thai-stable/jqvmap/maps/jquery.vmap.thai.js"></script>
   <?php 
   if(isset($script)){
   foreach ($script as $key => $value) { ?>
@@ -118,9 +123,8 @@
         <div class="image">
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="info d-block">
-          <p class="text-light h5 text-center">สมชาย ใจดี</p>
-          <p class="text-light h6 text-center">หัวหน้า</p>
+        <div class="info">
+          <a href="#" class="d-block">สมชาย ใจดี (หัวหน้า)</a>
         </div>
       </div>
 
@@ -144,6 +148,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo route('topic'); ?>" class="nav-link px-1" id="pageTopic">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                ประเภทเรื่องร้องเรียน
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo route('progress'); ?>" class="nav-link px-1" id="progress">
               <i class="nav-icon far fa-address-book"></i>
               <p>
@@ -161,35 +173,73 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo route('report'); ?>" class="nav-link">
+                <a href="<?php echo route('report/department'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>รายงานผลความก้าวหน้า</p>
+                  <p>แยกตามหน่วยงาน</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo route('report'); ?>" class="nav-link">
+                <a href="<?php echo route('report/way'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>รายงานเรื่องร้องเรียน</p>
+                  <p>แยกตามช่องทางการร้องเรียน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo route('report/zone'); ?>" class="nav-link px-1">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>แยกตามพื้นที่เขตตรวจ</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo route('report/mission'); ?>" class="nav-link px-1">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>แยกตามกลุ่มภารกิจ</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo route('report/land'); ?>" class="nav-link px-1">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>แยกตามภูมิภาคและจังหวัด</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo route('report/problem'); ?>" class="nav-link px-1">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>รายงานเวลาเฉลี่ยของแต่ละประเภทปัญหา</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo route('report/type'); ?>" class="nav-link px-1">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>แยกตามประเภทปัญหา</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo route('report/progress'); ?>" class="nav-link px-1">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>รายงานความก้าวหน้า</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo route('report/topic'); ?>" class="nav-link px-1">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>แยกตามหัวข้อเรื่องร้องเรียน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo route('report/status'); ?>" class="nav-link px-1">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>สรุปผลการดำเนินงาน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo route('report/satisfaction'); ?>" class="nav-link px-1">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>ข้อเสนอแนะการใช้งานเว็บไซต์ e-Petition</p>
                 </a>
               </li>
             </ul>
           </li>
-          <!-- <li class="nav-item">
-            <a href="<?php echo route('report'); ?>" class="nav-link px-1" id="report">
-              <i class="nav-icon fas fa-file"></i>
-              <p>
-                รายงาน
-              </p>
-            </a>
-            <ul class="nav nav-pills nav-sidebar flex-column">
-              <li class="nav-item">
-                <a href="" class="nav-link px-1">- รายงานผลความก้าวหน้า</a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link px-1">- รายงานเรื่องร้องเรียน</a>
-              </li>
-            </ul>
-          </li> -->
           <li class="nav-item">
             <a href="<?php echo route('user'); ?>" class="nav-link px-1" id="pageUser">
               <i class="nav-icon fas fa-user"></i>
@@ -207,7 +257,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo route('setting'); ?>" class="nav-link px-1" id="">
+            <a href="<?php echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                 ตั้งค่าระบบ

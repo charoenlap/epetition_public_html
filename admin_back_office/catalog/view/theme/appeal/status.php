@@ -4,12 +4,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">บันทึกรับเรื่องร้องเรียน</h1>
+            <h1 class="m-0"><?php echo $title; ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-              <li class="breadcrumb-item active">บันทึกรับเรื่องร้องเรียน</li>
+              <li class="breadcrumb-item active"><?php echo $title; ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">บันทึกรับเรื่องร้องเรียน</h4>
+                            <h4 class="card-title"><?php echo $title; ?></h4>
                             <a href="<?php echo route('appeal'); ?>" class="float-right btn btn-dark btn-sm">ย้อนกลับ</a>
                         </div>
                         <div class="card-body">
@@ -33,10 +33,10 @@
                                     <table class="table table-bordered table-primary">
                                         <tbody>
                                             <tr>
-                                                <td>Ticket ID : 00001</td>
+                                                <td>Ticket ID : <?php echo $ticket; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>วันที่เรื่องร้องเรียนเข้าระบบ : 12/10/2021</td>
+                                                <td>วันที่เรื่องร้องเรียนเข้าระบบ : <?php echo $dateadd; ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -44,7 +44,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered table-striped table-primary">
+                                    <table class="table table-bordered table-primary">
                                         <thead class="bg-primary">
                                             <tr>
                                                 <th colspan="2">ข้อมูลผู้ร้องเรียน</th>
@@ -52,42 +52,38 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td colspan="2">เลขประจำตัวประชาชน : 123456789123</td>
+                                                <td colspan="2">เลขประจำตัวประชาชน : <?php echo $idCard; ?></td>
                                             </tr>
                                             <tr>
-                                                <td width="50%">ชื่อ : </td>
-                                                <td>นามสกุล : </td>
+                                                <td width="50%">ชื่อสกุล : <?php echo $fullname; ?></td>
+                                                <td>อายุ : <?php echo $age; ?> ปี</td>
                                             </tr>
                                             <tr>
-                                                <td>เพศ : </td>
-                                                <td>อายุ : </td>
+                                                <td>โทรศัพท์บ้าน : <?php echo $tel; ?> ,โทรศัพท์มือถือ : <?php echo $phone; ?></td>
+                                                <td>e-mail : <?php echo $email; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>โทรศัพท์บ้าน : 0213546879 ,โทรศัพท์มือถือ : 0213654789</td>
-                                                <td>e-mail : </td>
+                                                <td>บ้านเลขที่ : <?php echo $address_no; ?></td>
+                                                <td>หมู่ที่ : <?php echo $moo; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>บ้านเลขที่ : 123</td>
-                                                <td>หมู่ที่ : 1</td>
+                                                <td>ชื่อหมู่บ้าน :  <?php echo $housename; ?></td>
+                                                <td>ซอย : <?php echo $soi; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>ชื่อหมู่บ้าน :  ss</td>
-                                                <td>ซอย : ss</td>
+                                                <td>ถนน : <?php echo $road; ?></td>
+                                                <td>จังหวัด : <?php echo $id_provinces; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>ถนน : ss</td>
-                                                <td>จังหวัด : ss</td>
+                                                <td>อำเภอ/เขต : <?php echo $id_amphures; ?></td>
+                                                <td>ตำบล/แขวง : <?php echo $id_districts; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>อำเภอ/เขต : ss</td>
-                                                <td>ตำบล/แขวง : ss</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">รหัสไปรษณีย์</td>
+                                                <td colspan="2">รหัสไปรษณีย์ : <?php echo $zipcode; ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <table class="table table-bordered table-striped table-success">
+                                    <table class="table table-bordered table-success">
                                         <thead class="bg-success">
                                             <tr>
                                                 <th colspan="2">รายละเอียดเรื่องร้องเรียน</th>
@@ -96,19 +92,19 @@
                                         <tbody>
                                             <tr>
                                                 <td>บุคคล/หน่วยงาน/สถานที่ที่ต้องการร้องเรียน </td>
-                                                <td></td>
+                                                <td><?php echo $note_topic; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>บริเวณที่เกิดเหตุ</td>
-                                                <td>เลขที่ หมู่บ้าน ซอย ถนน ตำบลบางโพงพาง อำเภอเขตยานนาวา จังหวัดกรุงเทพมหานคร</td>
+                                                <td><?php echo $topic_address; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>จุดสังเกตหรือสถานที่ใกล้เคียงที่สำคัญ (โปรดระบุ หากท่านทราบข้อมูล)</td>
-                                                <td></td>
+                                                <td><?php echo $place_landmarks; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ</td>
-                                                <td></td>
+                                                <td><?php echo $response_person; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>เอกสารแนบ</td>

@@ -170,6 +170,9 @@ input:focus,textarea:focus,select:focus {
     box-shadow: none !important;
     border-color: #5089C6 !important;
 }
+.form-control:disabled, .form-control[readonly] {
+    background-color: #eee !important;
+}
 
 /* text */
 a.text-link {
@@ -186,5 +189,19 @@ a.text-link:hover p {
 /* margin */
 .mb-250 {
     margin-bottom: 250px;
+}
+
+
+/*  mickup recapcha  */
+.mockup-recapcha {
+    position: fixed;
+    bottom: 14px;
+    right: 0px;
+    box-shadow: grey 0px 0px 5px;
+    background-color: #fff;
+}
+.mockup-recapcha img {
+    height: 60px;
+    width: 60px;
 }
 

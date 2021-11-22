@@ -28,22 +28,22 @@
                     <tbody>
                         <tr>
                             <td class="text-center">1</td>
-                            <td>ร้องเรียนเรื่อง</td>
+                            <td><a href="<?php echo route('ticket/ticketStatus'); ?>">ร้องเรียนเรื่อง</a></td>
                             <td><i class="fas fa-circle text-success"></i> เรื่องร้องเรียน/ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว</td>
                         </tr>
                         <tr>
                             <td class="text-center">2</td>
-                            <td>ร้องเรียนเรื่อง</td>
+                            <td><a href="<?php echo route('ticket/ticketStatus'); ?>">ร้องเรียนเรื่อง</a></td>
                             <td><i class="fas fa-circle text-warning"></i> เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างดำเนินการ</td>
                         </tr>
                         <tr>
                             <td class="text-center">3</td>
-                            <td>ร้องเรียนเรื่อง</td>
+                            <td><a href="<?php echo route('ticket/ticketStatus'); ?>">ร้องเรียนเรื่อง</a></td>
                             <td><i class="fas fa-circle text-orange"></i>  เรื่องร้องเรียน/ร้องทุกข์ที่อีก 7 วันจะครบกำหนด</td>
                         </tr>
                         <tr>
                             <td class="text-center">4</td>
-                            <td>ร้องเรียนเรื่อง</td>
+                            <td><a href="<?php echo route('ticket/ticketStatus'); ?>">ร้องเรียนเรื่อง</a></td>
                             <td><i class="fas fa-circle text-danger"></i>  เรื่องร้องเรียน/ร้องทุกข์ที่ยังไม่แล้วเสร็จ และล่าช้ากว่ากำหนด</td>
                         </tr>
                     </tbody>
