@@ -220,7 +220,7 @@
                                 <div class="col-md-12 mb-3">
                                     <label for="file" class="btn btn-info">เอกสารแนบ</label>
                                     <input type="file" class="form-control d-none" id="file">
-                                    รองรับไฟล์การอัพโหลด
+                                    รองรับไฟล์การอัพโหลด  word, pdf, excel , jpeg เท่านั้น
                                 </div>
                                 <div class="col-md-12">
                                     <button class="btn btn-primary">บันทึก</button>  

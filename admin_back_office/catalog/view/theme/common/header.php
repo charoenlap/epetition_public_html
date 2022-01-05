@@ -144,6 +144,7 @@
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 เรื่องร้องเรียน
+                <span class="badge badge-danger right">5</span>
               </p>
             </a>
           </li>

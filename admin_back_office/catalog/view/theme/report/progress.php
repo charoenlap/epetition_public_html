@@ -58,6 +58,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <button class="btn btn-primary" type="submit">ค้นหา</button>
+                                    <button type="submit" class="btn btn-primary">Preview</button>
                                 </div>
                             </div>
                         </div>

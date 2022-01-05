@@ -40,6 +40,7 @@
                                 <div class="col-md-2">
                                     <label for="">&nbsp</label><br>
                                     <button type="submit" class="btn btn-primary">ค้นหา</button>
+                                    <button type="submit" class="btn btn-primary">Preview</button>
                                 </div>
                             </div>
                         </div>

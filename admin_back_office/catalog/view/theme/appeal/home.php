@@ -26,20 +26,20 @@
                         <div class="card-body">
                             <form action="" method="post">
                                 <div class="row mb-3">
-                                    <div class="col-md-2 mb-1">
+                                    <div class="col-md-2 mb-3">
                                         <label for="">วันที่เรื่องร้องเรียนเข้าระบบ</label>
                                         <input type="date" class="form-control">
                                     </div>
-                                    <div class="col-md-2 mb-1">
+                                    <div class="col-md-2 mb-3">
                                         <label for="">ถึงวันที่</label>
                                         <input type="date" class="form-control">
                                     </div>
-                                    <div class="col-md-2 mb-1">
+                                    <div class="col-md-2 mb-3">
                                         <label for="">รหัส Ticket ID</label>
                                         <input type="text" class="form-control" placeholder="Ticket ID">
                                     </div>
-                                    <div class="col-md-3 mb-1">
-                                        <label for="">สถาน</label>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="">สถานะ</label>
                                         <select name="" id="" class="form-control">
                                             <option value="">เลือก</option>
                                             <option value="">อยู่ระหว่างการดำเนินการ</option>
@@ -49,11 +49,27 @@
                                             <option value="">กระทรวงฯ ส่งเรื่องร้องเรียนให้หน่วยงานแล้ว แต่หน่วยงานยังไม่รับเรื่อง</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mb-1">
+                                    <div class="col-md-3 mb-3">
                                         <label for="">หน่วยงาน</label>
                                         <select name="" id="" class="form-control">
                                             <option value="">เลือก</option>
                                         </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="">วันที่คาดว่าจะแล้วเสร็จ</label>
+                                        <input type="date" class="form-control">
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="">หมายเลขบัตรประชาชน</label>
+                                        <input type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="">ชื่อสกุล</label>
+                                        <input type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="">เบอร์</label>
+                                        <input type="text" class="form-control" placeholder="">
                                     </div>
                                     <div class="col-md-2">
                                         <label for="">&nbsp;</label>
@@ -73,6 +89,7 @@
                                     <a href="" class="btn btn-primary">เรื่องร้องเรียนที่ได้รับจาก สปน. <span class="badge badge-light">20</span></a>
                                 </div>
                                 <div class="col-md-6 text-right">
+                                    <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a>
                                     <a href="<?php echo route('appeal/add');?>" class="btn btn-primary"><i class="fas fa-folder-plus"></i> แบบฟอร์มเรื่องร้องเรียน</a>
                                 </div>
                             </div>

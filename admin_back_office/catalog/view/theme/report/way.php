@@ -40,6 +40,7 @@
                             <div class="col-md-2">
                                 <label for="">&nbsp</label><br>
                                 <button type="submit" class="btn btn-primary">ค้นหา</button>
+                                <button type="submit" class="btn btn-primary">Preview</button>
                             </div>
                         </div>
                     </div>
@@ -50,6 +51,8 @@
                       <div class="card-header">
                           <h3 class="card-title">แยกตามช่องทางการร้องเรียน</h3>
                           <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export excel</a>
+                          <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export pdf</a>
+                          <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export word</a>
                       </div>
                       <div class="card-body">
                             <div class="row mb-3">
