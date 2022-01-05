@@ -16,5 +16,16 @@
 			}
 	    	$this->view('setting/home',$data);
 	    }
+	    public function EncodeString(){
+	    	$url_test = "http://203.113.25.98/CoreService/";
+	    	$url = "http://service.1111.go.th/";
+	    	$path = "SOAP/General.asmx/EncodeString";
+
+	    	$real_url = $url_test.$path;
+	    	$type = "post";
+	    	$params = array('str'=>'test');
+	    	$result = apiXML($real_url,$type,$params);
+	    	echo $result;
+	    }
 	}
 ?>
