@@ -32,7 +32,18 @@
                         <div class="card-body">
                             <form action="<?php echo route('appeal/edit&id='.$data['id']); ?>" method="post">
                                 <div class="row mb-3">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <label for="">ช่องทางการร้องเรียน</label>   
+                                        <select name="" id="" class="form-control">
+                                            <option value="">จดหมาย</option> 
+                                            <option value="">เว็บไซต์ และ อีเมล์ </option>
+                                            <option value="">Call center </option>
+                                            <option value="">ยื่นหนังสือด้วยตนเอง</option>
+                                            <option value="">facebook </option>
+                                            <option value="">ส่วนด่วน</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
                                         <label for="">หัวข้อเรื่องร้องเรียน <span class="text-danger">*</span></label>
                                         <select name="topic_id" id="" class="form-control">
                                             <?php foreach($title_topic as $key => $value){ ?>
@@ -40,7 +51,7 @@
                                             <?php } ?>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="">เลขประจำตัวประชาชน <span class="text-danger">*</span></label>
                                         <input type="text" name="id_card" class="form-control" placeholder="เลขประจำตัวประชาชน" value="<?php echo $data['id_card']; ?>">
                                     </div>

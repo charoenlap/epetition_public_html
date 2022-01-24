@@ -37,6 +37,10 @@
                                     <option value="">ตามช่วงเวลา</option>
                                 </select>
                             </div>
+                            <div class="col-md-3">
+                              <label for="">ค้นหาช่วงเวลา</label>
+                              <input type="date" class="form-control">
+                            </div>
                             <div class="col-md-2">
                                 <label for="">&nbsp</label><br>
                                 <button type="submit" class="btn btn-primary">ค้นหา</button>
@@ -80,7 +84,7 @@
                                       <tbody>
                                             <tr>
                                                 <td class="text-center">1</td>
-                                                <td>น้ำเสีย</td>
+                                                <td>ด้านนโยบายพลังงาน</td>
                                                 <td class="text-center">1,331</td>
                                                 <td class="text-center">1,221</td>
                                                 <td class="text-center">75</td>
@@ -88,7 +92,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">2</td>
-                                                <td>สิทธิทำกินในพื้นที่ป่าไม้</td>
+                                                <td>ด้านไฟฟ้า</td>
                                                 <td class="text-center">1,331</td>
                                                 <td class="text-center">1,221</td>
                                                 <td class="text-center">75</td>
@@ -96,7 +100,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">3</td>
-                                                <td>แนะนำ/ให้ข้อเสนอแนะ</td>
+                                                <td>ด้านน้ำมันและก๊าซธรรมชาติ</td>
                                                 <td class="text-center">1,331</td>
                                                 <td class="text-center">1,221</td>
                                                 <td class="text-center">75</td>
@@ -104,7 +108,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">4</td>
-                                                <td>บุกรุกพื้นที่ป่าไม้</td>
+                                                <td>ด้านพลังงานทดแทนและอนุรักษ์พลังงาน</td>
                                                 <td class="text-center">1,331</td>
                                                 <td class="text-center">1,221</td>
                                                 <td class="text-center">75</td>
@@ -112,7 +116,15 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">5</td>
-                                                <td>พฤติกรรมเจ้าหน้าที่/การบริหารงานบุคคล</td>
+                                                <td>ด้านการทุจริต/ประพฤติมิชอบ</td>
+                                                <td class="text-center">1,331</td>
+                                                <td class="text-center">1,221</td>
+                                                <td class="text-center">75</td>
+                                                <td class="text-center">35</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">6</td>
+                                                <td>ด้านการแก้ไขปัญหาเรื่องร้องเรียน ตามมติ ครม.</td>
                                                 <td class="text-center">1,331</td>
                                                 <td class="text-center">1,221</td>
                                                 <td class="text-center">75</td>
@@ -144,11 +156,12 @@
 
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['น้ำเสีย', 96.64],
-            ['สิทธิทำกินในพื้นที่ป่าไม้', 70.49],
-            ['แนะนำ/ให้ข้อเสนอแนะ', 78.74],
-            ['บุกรุกพื้นที่ป่าไม้', 89.23],
-            ['พฤติกรรมเจ้าหน้าที่/การบริหารงานบุคคล', 94.40]
+            ['ด้านนโยบายพลังงาน', 96.64],
+            ['ด้านไฟฟ้า', 70.49],
+            ['ด้านน้ำมันและก๊าซธรรมชาติ', 78.74],
+            ['ด้านพลังงานทดแทนและอนุรักษ์พลังงาน', 89.23],
+            ['ด้านการแก้ไขปัญหาเรื่องร้องเรียน ตามมติ ครม.', 94.40],
+            ['ด้านการทุจริต/ประพฤติมิชอบ', 94.40]
         ]);
 
         var options = {
@@ -165,11 +178,12 @@
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['น้ำเสีย', 96.64],
-            ['สิทธิทำกินในพื้นที่ป่าไม้', 70.49],
-            ['แนะนำ/ให้ข้อเสนอแนะ', 78.74],
-            ['บุกรุกพื้นที่ป่าไม้', 89.23],
-            ['พฤติกรรมเจ้าหน้าที่/การบริหารงานบุคคล', 94.40]
+            ['ด้านนโยบายพลังงาน', 96.64],
+            ['ด้านไฟฟ้า', 70.49],
+            ['ด้านน้ำมันและก๊าซธรรมชาติ', 78.74],
+            ['ด้านพลังงานทดแทนและอนุรักษ์พลังงาน', 89.23],
+            ['ด้านการแก้ไขปัญหาเรื่องร้องเรียน ตามมติ ครม.', 94.40],
+            ['ด้านการทุจริต/ประพฤติมิชอบ', 94.40]
         ]);
 
         var options = {

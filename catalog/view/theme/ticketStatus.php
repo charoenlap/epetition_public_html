@@ -14,46 +14,46 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="text-theme font-weight-bold">รายละเอียดเรื่องร้องเรียน</h3>
+                <h3 class="text-theme font-weight-bold">รายละเอียดเรื่องร้องเรียน</h3> <!-- เปลี่ยนหัวข้อเป็นสีน้ำเงินแล้วดีไซน์อถวให้เข้ากัน -->
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered">
-                    <thead class="bg-primary">
+                    <!-- <thead class="bg-primary">
                         <tr>
-                            <th class="text-center text-white">#</th>
+                            <th class="text-center text-white">ลำดับ</th>
                             <th class="text-white">สภานะ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td class="text-center">1</td>
-                            <td>เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างดำเนินการ</td>
+                            <td>อยู่ระหว่างดำเนินการ</td>
                         </tr>
-                    </tbody>
+                    </tbody> -->
                 </table>
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                            <td>บุคคล/หน่วยงาน/สถานที่ที่ต้องการร้องเรียน</td>
-                            <td></td>
+                            <td>ลำดับที่</td>
+                            <td>1</td>
                         </tr>
                         <tr>
-                            <td>บริเวณที่เกิดเหตุ</td>
-                            <td>เลขที่ หมู่บ้าน ซอย ถนน ตำบลบางโพงพาง อำเภอเขตยานนาวา จังหวัดกรุงเทพมหานคร</td>
+                            <td>รหัสเรื่อง (Ticket ID)</td>
+                            <td>65010001</td>
                         </tr>
                         <tr>
-                            <td>จุดสังเกตหรือสถานที่ใกล้เคียงที่สำคัญ (โปรดระบุ หากท่านทราบข้อมูล)</td>
-                            <td></td>
+                            <td>ชื่อเรื่อง</td>
+                            <td>ราคาน้ำมัน</td>
                         </tr>
                         <tr>
-                            <td>สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ</td>
-                            <td></td>
+                            <td>หน่วยงานดำเนินการ</td>
+                            <td>ส่วนกลาง</td>
                         </tr>
                         <tr>
-                            <td>เอกสารแนบ</td>
-                            <td></td>
+                            <td>สถานนะ</td>
+                            <td>อยู่ระหว่างดำเนินการ</td>
                         </tr>
                     </tbody>
                 </table>

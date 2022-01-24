@@ -30,10 +30,11 @@
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <h1 class="text-success">วิธีการติดตามเรื่องร้องเรียนของท่าน</h1>
-                                <p>1. บันทึกหมายเลข Ticket ID ของท่านไว้ที่ขึ้นอยู่ด้านบน</p>
-                                <p>2. นำ Ticket ID ของท่านไปกรอกที่หน้าเว็บตามภาพด้านล่าง</p>
-                                <img src="images/exampleTicket.png" alt="" class="w-100">
-                                <p>หรือกดที่ลิงค์ <a href="<?php echo route('ticket'); ?>">ที่นี้</a></p>
+                                <h4>1. บันทึกหมายเลข Ticket ID ของท่านไว้ที่ขึ้นอยู่ด้านบน</h4>
+                                <h4>2. นำ Ticket ID ของท่านไปกรอกที่หน้าเว็บตามภาพด้านล่าง</h4>
+                                <a href="<?php echo route('home'); ?>" class="btn btn-warning btn-lg">กลับหน้าหลัก</a>
+                                <!-- <img src="images/exampleTicket.png" alt="" class="w-100">
+                                <p>หรือกดที่ลิงค์ <a href="<?php echo route('ticket'); ?>">ที่นี้</a></p> -->
                             </div>
                         </div>
                     </div>

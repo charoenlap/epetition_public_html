@@ -26,7 +26,18 @@
                         <div class="card-body">
                             <form action="<?php echo route('appeal/add'); ?>" method="post">
                                 <div class="row mb-3">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <label for="">ช่องทางการร้องเรียน</label>   
+                                        <select name="" id="" class="form-control">
+                                            <option value="">จดหมาย</option> 
+                                            <option value="">เว็บไซต์ และ อีเมล์ </option>
+                                            <option value="">Call center </option>
+                                            <option value="">ยื่นหนังสือด้วยตนเอง</option>
+                                            <option value="">facebook </option>
+                                            <option value="">ส่วนด่วน</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
                                         <label for="">หัวข้อเรื่องร้องเรียน <span class="text-danger">*</span></label>
                                         <select name="topic_id" id="" class="form-control">
                                             <?php foreach($title_topic as $key => $value){ ?>
@@ -34,7 +45,7 @@
                                             <?php } ?>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <label for="">เลขประจำตัวประชาชน <span class="text-danger">*</span></label>
                                         <input type="text" name="id_card" class="form-control" placeholder="เลขประจำตัวประชาชน" required>
                                     </div>
@@ -322,7 +333,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-12">
                                         <h5>เอกสารหรือภาพประกอบการร้องเรียน</h5>
-                                        <label for="actual-btn" class="btn btn-primary"><i class="fas fa-folder-plus"></i> แนบไพล์</label>
+                                        <label for="actual-btn" class="btn btn-upload"><i class="fas fa-folder-plus"></i> แนบไพล์</label>
                                         <input type="file" id="actual-btn" hidden />
                                     </div>
                                 </div>
@@ -331,9 +342,9 @@
                                         <p class="text-danger">หมายเหตุ : รายการข้อมูลทั้งหมดทางระบบจะเก็บเป็นความลับ
                                             ตามพระราชบัญญัติคอมพิวเตอร์ พ.ศ. 2551</p>
                                     </div>
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-theme btn-lg">ส่งเรื่อง</button>
-                                        <a href="<?php echo route('appeal'); ?>" class="btn btn-dark btn-lg">ยกเลิก</a>
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-success w-100">ส่งเรื่อง</button>
+                                        <!-- <a href="<?php echo route('appeal'); ?>" class="btn btn-dark">ยกเลิก</a> -->
                                     </div>
                                 </div>
                             </form>

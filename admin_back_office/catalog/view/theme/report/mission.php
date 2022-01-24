@@ -37,6 +37,10 @@
                                     <option value="">ตามช่วงเวลา</option>
                                 </select>
                             </div>
+                            <div class="col-md-3">
+                              <label for="">ค้นหาช่วงเวลา</label>
+                              <input type="date" class="form-control">
+                            </div>
                             <div class="col-md-2">
                                 <label for="">&nbsp</label><br>
                                 <button type="submit" class="btn btn-primary">ค้นหา</button>
@@ -77,7 +81,7 @@
                                       <tbody>
                                         <tr>
                                             <td class="text-center">1</td>
-                                            <td>กลุ่มภารกิจด้านอำนวยการ</td>
+                                            <td>หน่วยงานราชการ</td>
                                             <td class="text-center">193</td>
                                             <td class="text-center">37</td>
                                             <td class="text-center">153</td>
@@ -85,7 +89,7 @@
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td class="pl-4">1.1  สำนักงานนโยบายและแผนทรัพยากรธรรมชาติและสิ่งแวดล้อม</td>
+                                            <td class="pl-4">1.1  สำนักงานรัฐมนตรี</td>
                                             <td class="text-center">193</td>
                                             <td class="text-center">37</td>
                                             <td class="text-center">153</td>
@@ -93,7 +97,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text-center">2</td>
-                                            <td>กลุ่มภารกิจด้านทรัพยากรธรรมชาติ</td>
+                                            <td>องค์กรอิสระ</td>
                                             <td class="text-center">193</td>
                                             <td class="text-center">37</td>
                                             <td class="text-center">153</td>
@@ -101,7 +105,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text-center">3</td>
-                                            <td>กลุ่มภารกิจด้านน้ำในแผ่นดิน</td>
+                                            <td>องค์การมหาชนที่จัดตั้งตาม พ.ร.บ. เฉพาะในกำกับรัฐมนตรีว่าการกระทรวง</td>
                                             <td class="text-center">193</td>
                                             <td class="text-center">37</td>
                                             <td class="text-center">153</td>
@@ -109,7 +113,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text-center">4</td>
-                                            <td>กลุ่มภารกิจด้านสิ่งแวดล้อม</td>
+                                            <td>รัฐวิสาหกิจและบริษัทมหาชนในกำกับดูแล</td>
                                             <td class="text-center">193</td>
                                             <td class="text-center">37</td>
                                             <td class="text-center">153</td>
@@ -140,10 +144,10 @@
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
           ['mission', 'หน่วยงาน'],
-          ['อำนวยการ',  165,],
-          ['ทรัพยากรธรรมชาติ',  135,],
-          ['น้ำในแผ่นดิน',  157,],
-          ['สิ่งแวดล้อม',  139,]
+          ['หน่วยงานราชการ',  165,],
+          ['องค์กรอิสระ',  135,],
+          ['องค์การมหาชนที่จัดตั้งตาม พ.ร.บ. เฉพาะในกำกับรัฐมนตรีว่าการกระทรวง',  157,],
+          ['รัฐวิสาหกิจและบริษัทมหาชนในกำกับดูแล',  139,]
         ]);
 
         var options = {

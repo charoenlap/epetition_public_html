@@ -43,6 +43,10 @@
                                         <option value="">เลือก</option>
                                     </select>
                                 </div>
+                                <div class="col-md-3">
+                                    <label for="">ค้นหาช่วงเวลา</label>
+                                    <input type="date" class="form-control">
+                                </div>
                                 <div class="col-md-2">
                                     <label for="">&nbsp</label><br>
                                     <button type="submit" class="btn btn-primary">ค้นหา</button>

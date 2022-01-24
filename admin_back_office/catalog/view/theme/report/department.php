@@ -37,6 +37,10 @@
                                     <option value="">ตามช่วงเวลา</option>
                                 </select>
                             </div>
+                            <div class="col-md-3">
+                              <label for="">ค้นหาช่วงเวลา</label>
+                              <input type="date" class="form-control">
+                            </div>
                             <div class="col-md-2">
                                 <label for="">&nbsp</label><br>
                                 <button type="submit" class="btn btn-primary">ค้นหา</button>
@@ -70,17 +74,138 @@
                                             </tr>
                                       </thead>
                                       <tbody>
-                                          <?php for($i=1; $i<=10; $i++){ ?>
+                                          <!-- <?php for($i=1; $i<=1; $i++){ ?> -->
                                           <tr>
                                             <td class="text-center"><?php echo $i; ?></td>
-                                            <td class="text-center">กรมป่าไม้</td>
+                                            <td class="text-center">สำนักงานรัฐมนตรี</td>
                                             <td class="text-center">877</td>
                                             <td class="text-center">827</td>
                                             <td class="text-center">35</td>
                                             <td class="text-center">15</td>
                                           </tr>
-                                          <?php } ?>
+                                          <!-- <?php } ?> -->
                                       </tbody>
+                                      <tbody>
+                                          
+                                          <tr>
+                                            <td class="text-center"><?php echo $i; ?></td>
+                                            <td class="text-center">สำนักงานปลัดกระทรวงพลังงาน </td>
+                                            <td class="text-center">877</td>
+                                            <td class="text-center">827</td>
+                                            <td class="text-center">35</td>
+                                            <td class="text-center">15</td>
+                                          </tr>
+                                          
+                                      </tbody>
+                                      <tbody>
+                                          
+                                          <tr>
+                                            <td class="text-center">3</td>
+                                            <td class="text-center">กรมเชื้อเพลิงธรรมชาติ </td>
+                                            <td class="text-center">877</td>
+                                            <td class="text-center">827</td>
+                                            <td class="text-center">35</td>
+                                            <td class="text-center">15</td>
+                                          </tr>
+                                      
+                                      </tbody>
+                                       <tbody>
+                                          
+                                          <tr>
+                                            <td class="text-center">4</td>
+                                            <td class="text-center">กรมธุรกิจพลังงาน </td>
+                                            <td class="text-center">877</td>
+                                            <td class="text-center">827</td>
+                                            <td class="text-center">35</td>
+                                            <td class="text-center">15</td>
+                                          </tr>
+                                      
+                                      </tbody>
+                                       <tbody>
+                                          
+                                          <tr>
+                                            <td class="text-center">5</td>
+                                            <td class="text-center">กรมพัฒนาพลังงานทดแทนและอนุรักษ์พลังงาน </td>
+                                            <td class="text-center">877</td>
+                                            <td class="text-center">827</td>
+                                            <td class="text-center">35</td>
+                                            <td class="text-center">15</td>
+                                          </tr>
+                                      
+                                      </tbody>
+                                       <tbody>
+                                          
+                                          <tr>
+                                            <td class="text-center">6</td>
+                                            <td class="text-center">สำนักงานนโยบายและแผนพลังงาน </td>
+                                            <td class="text-center">877</td>
+                                            <td class="text-center">827</td>
+                                            <td class="text-center">35</td>
+                                            <td class="text-center">15</td>
+                                          </tr>
+                                      
+                                      </tbody>
+                                       <tbody>
+                                          
+                                          <tr>
+                                            <td class="text-center">7</td>
+                                            <td class="text-center">สำนักงานพลังงานจังหวัด 76 จังหวัด (ไม่รวม กรุงเทพฯ) </td>
+                                            <td class="text-center">877</td>
+                                            <td class="text-center">827</td>
+                                            <td class="text-center">35</td>
+                                            <td class="text-center">15</td>
+                                          </tr>
+                                      
+                                      </tbody>
+                                       <tbody>
+                                          
+                                          <tr>
+                                            <td class="text-center">8</td>
+                                            <td class="text-center">สำนักงานคณะกรรมการกำกับกิจการพลังงาน </td>
+                                            <td class="text-center">877</td>
+                                            <td class="text-center">827</td>
+                                            <td class="text-center">35</td>
+                                            <td class="text-center">15</td>
+                                          </tr>
+                                      
+                                      </tbody>
+                                       <tbody>
+                                          
+                                          <tr>
+                                            <td class="text-center">9</td>
+                                            <td class="text-center">สำนักงานกองทุนน้ำมันเชื้อเพลิง </td>
+                                            <td class="text-center">877</td>
+                                            <td class="text-center">827</td>
+                                            <td class="text-center">35</td>
+                                            <td class="text-center">15</td>
+                                          </tr>
+                                      
+                                      </tbody>
+                                       <tbody>
+                                          
+                                          <tr>
+                                            <td class="text-center">10</td>
+                                            <td class="text-center">การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย (กฟผ.) </td>
+                                            <td class="text-center">877</td>
+                                            <td class="text-center">827</td>
+                                            <td class="text-center">35</td>
+                                            <td class="text-center">15</td>
+                                          </tr>
+                                      
+                                      </tbody>
+                                       <tbody>
+                                          
+                                          <tr>
+                                            <td class="text-center">11</td>
+                                            <td class="text-center">บริษัท ปตท. จำกัด (มหาชน) </td>
+                                            <td class="text-center">877</td>
+                                            <td class="text-center">827</td>
+                                            <td class="text-center">35</td>
+                                            <td class="text-center">15</td>
+                                          </tr>
+                                      
+                                      </tbody>
+
                                   </table>
                               </div>
                           </div>

@@ -26,6 +26,13 @@
                         <div class="card-body">
                             <form action="" method="post">
                                 <div class="row mb-3">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="">หัวข้อเรื่องร้องเรียน</label>
+                                        <select name="" id="" class="form-control">
+                                            <option value="">เลือก</option>
+                                            <option value="">ด้านการทุจริต/ประพฤติมิชอบ</option>
+                                        </select>
+                                    </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="">วันที่เรื่องร้องเรียนเข้าระบบ</label>
                                         <input type="date" class="form-control">
@@ -34,11 +41,11 @@
                                         <label for="">ถึงวันที่</label>
                                         <input type="date" class="form-control">
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label for="">รหัส Ticket ID</label>
                                         <input type="text" class="form-control" placeholder="Ticket ID">
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label for="">สถานะ</label>
                                         <select name="" id="" class="form-control">
                                             <option value="">เลือก</option>
@@ -71,6 +78,21 @@
                                         <label for="">เบอร์</label>
                                         <input type="text" class="form-control" placeholder="">
                                     </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="">ค้นหา</label>
+                                        <input type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label for="">ช่องทางการร้องเรียน</label>
+                                        <select name="" id="" class="form-control">
+                                            <option value="">จดหมาย</option> 
+                                            <option value="">เว็บไซต์ และ อีเมล์ </option>
+                                            <option value="">Call center </option>
+                                            <option value="">ยื่นหนังสือด้วยตนเอง</option>
+                                            <option value="">facebook </option>
+                                            <option value="">ส่วนด่วน</option>
+                                        </select>
+                                    </div>
                                     <div class="col-md-2">
                                         <label for="">&nbsp;</label>
                                         <button class="btn btn-success btn-block" type="submit"><i class="fas fa-search"></i> ค้นหา</button>
@@ -90,7 +112,7 @@
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a>
-                                    <a href="<?php echo route('appeal/add');?>" class="btn btn-primary"><i class="fas fa-folder-plus"></i> แบบฟอร์มเรื่องร้องเรียน</a>
+                                    <a href="<?php echo route('appeal/add');?>" class="btn btn-info"><i class="fas fa-folder-plus"></i> แบบฟอร์มเรื่องร้องเรียน</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -102,6 +124,7 @@
                                                 <th  style="width:80px;">Ticket ID</th>
                                                 <th style="width:180px;">ชื่อผู้ร้องเรียน</th>
                                                 <th>หัวข้อร้องเรียน</th>
+                                                <th>ช่องทางการร้องเรียน</th>
                                                 <th style="width:130px;">วันที่ร้องเรียน</th>
                                                 <th class="text-center" style="width:50px;">สถานะ</th>
                                                 <th class="text-center" style="width:200px;">การจัดการ</th>
@@ -117,6 +140,7 @@
                                                 <td><?php echo $value['ticketId']; ?></td>
                                                 <td><?php echo $value['fullname']; ?></td>
                                                 <td><?php echo $value['topicTitle']; ?></td>
+                                                <td>จากเว็บไซต์</td>
                                                 <td><?php echo $value['dateadd']; ?></td>
                                                 <td></td>
                                                 <td class="text-center">
