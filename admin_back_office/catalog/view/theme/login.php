@@ -22,6 +22,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
+      <img src="http://localhost/epetition/public_html/images/logo.jpg" alt="" style="width:100%;height:auto;">
       <p class="login-box-msg">เข้าสู่ระบบ</p>
 
       <form action="<?php echo route('home');?>" method="post">
@@ -45,6 +46,13 @@
           <!-- /.col -->
           <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+        <div class="row mt-4">
+          <!-- /.col -->
+          <div class="col-12">
+            <button type="btn-open-id" class="btn btn-default btn-block">เข้าสู่ระบบด้วย Open ID</button>
           </div>
           <!-- /.col -->
         </div>

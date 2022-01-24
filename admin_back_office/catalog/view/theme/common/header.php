@@ -96,7 +96,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
     </ul>
-
+    <img src="http://localhost/epetition/public_html/images/logo.jpg" alt="" style="width:auto;height:50px;">
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
