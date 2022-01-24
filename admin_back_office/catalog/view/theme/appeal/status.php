@@ -241,37 +241,37 @@
                                 </div>
                             </div> -->
                              <section class="content">                
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="<?php echo route('setting'); ?>" method="POST">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="">หัวข้อต่าง ๆ ที่เกี่ยวข้อง</label>
-                                    <textarea name="contact" id="" cols="30" rows="10" class="summernote"><?php echo $data['contacts']; ?></textarea>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form action="<?php echo route('setting'); ?>" method="POST">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label for="">หัวข้อต่าง ๆ ที่เกี่ยวข้อง</label>
+                                                            <textarea name="contact" id="" cols="30" rows="10" class="summernote"><?php echo $data['contacts']; ?></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                    <div class="col-md-12">
+                                                        <button type="submit" class="btn btn-primary">บันทึก</button>
+                                                    </div>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-12">
-                                  <button type="submit" class="btn btn-primary">บันทึก</button>
-                              </div>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                            </section>
                         </div>
                     </div>
                 </div>
                  <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">ประเภทปัญหา</h4>
+                            <h4 class="card-title">ข้อเสนอแนวทางการพิจารณาดําเนินการ</h4>
                         </div>
                         <div class="card-body">
                             <div id="Form">
@@ -297,7 +297,7 @@
                                         </select>
                                         <!-- <button class="btn btn-primary">เลือกหน่วยงาน</button> -->
                                     </div>
-                                    <div class="col-md-5">
+                                    <!-- <div class="col-md-5">
                                         <select name="" id="" class="form-control">
                                             <option value="">เลือกหน่วยงาน</option>
                                             <option value="">1. ปม.</option>
@@ -315,8 +315,8 @@
                                             <option value="">13. อบก.</option>
                                             <option value="">14. สพภ.</option>
                                         </select>
-                                        <!-- <button class="btn btn-primary">เลือกหน่วยงาน</button> -->
-                                    </div>
+                                        <button class="btn btn-primary">เลือกหน่วยงาน</button>
+                                    </div> -->
                                     <div class="col-md-2">
                                         <button class="btn btn-primary" id="addFrom"><i class="fas fa-folder-plus"></i> เพิ่ม</button>
                                     </div>
@@ -329,31 +329,31 @@
                                             <tr>
                                                 <th>ลำดับ</th>
                                                 <th>หน่วยงาน</th>
-                                                <th style="width:100px;">จัดการ</th>
+                                                <!-- <th style="width:100px;">จัดการ</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
                                                 <td>อื่นๆ</td>
-                                                <td><a href="#" class="btn btn-primary">เลือก</a></td>
+                                                <!-- <td><a href="#" class="btn btn-primary">เลือก</a></td> -->
                                             </tr>
                                         </tbody>
-                                    </table> 
-                                    <div class="col-md-5">
-                                        <select name="" id="" class="form-control">
-                                            <option value="">อนุมัติ</option>
-                                            <option value="">ไม่อนุมัติ</option>
-                                            
-                                        </select>
-                                        <!-- <button class="btn btn-primary">เลือกหน่วยงาน</button> -->
-                                    </div>  
+                                    </table>  
                                 </div>
+                                <div class="col-md-5">
+                                    <select name="" id="" class="form-control">
+                                        <option value="">อนุมัติ</option>
+                                        <option value="">ไม่อนุมัติ</option>
+                                        
+                                    </select>
+                                    <!-- <button class="btn btn-primary">เลือกหน่วยงาน</button> -->
+                                </div> 
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary">ส่งเรื่อง</button>
-                                    <a href="<?php echo route('appeal');?>" class="btn btn-danger">ยกเลิก</a>
+                                    <button class="btn btn-dark">ส่งเรื่อง</button>
+                                    <a href="<?php echo route('appeal');?>" class="btn btn-light">ยกเลิก</a>
                                 </div>
                             </div>
                         </div>
@@ -385,5 +385,10 @@
     });
     $(".row").on( "click",".delForm", function() {
         $(this).parent().parent().remove();
+    });
+    $(document).ready(function() {
+        $('.summernote').summernote({
+            height:300
+        });
     });
 </script>

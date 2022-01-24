@@ -37,6 +37,10 @@
                                         <option value="">ตามช่วงเวลา</option>
                                     </select>
                                 </div>
+                                <div class="col-md-3">
+                                    <label for="">ค้นหาช่วงเวลา</label>
+                                    <input type="date" class="form-control">
+                                </div>
                                 <div class="col-md-2">
                                     <label for="">&nbsp</label><br>
                                     <button type="submit" class="btn btn-primary">ค้นหา</button>
@@ -78,7 +82,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="text-center">1</td>
-                                                <td>เรื่องร้องเรียนเกี่ยวกับการทุจริตของเจ้าหน้าที่ ทส.</td>
+                                                <td>เรื่องร้องเรียนเกี่ยวกับการทุจริตของเจ้าหน้าที่ พน.</td>
                                                 <td class="text-center">736</td>
                                                 <td class="text-center">495</td>
                                                 <td class="text-center">165</td>
@@ -86,7 +90,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">2</td>
-                                                <td>รื่องร้องเรียนเกี่ยวกับพฤติกรรมที่ไม่เหมาะสมของเจ้าหน้าที่ ทส.</td>
+                                                <td>รื่องร้องเรียนเกี่ยวกับพฤติกรรมที่ไม่เหมาะสมของเจ้าหน้าที่ พน.</td>
                                                 <td class="text-center">736</td>
                                                 <td class="text-center">495</td>
                                                 <td class="text-center">165</td>
@@ -111,33 +115,34 @@
 </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-    google.charts.load('current', {
-        'packages': ['bar']
-    });
+    google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
-
     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['หัวข้อเรื่องร้องเรียน', 'ช่องทาง'],
-            ['ทุจริต', 22],
-            ['พฤติกรรม', 33],
-            ['ความเดือดร้อน', 60],
-            ['ผลกระทบจากหน่วยงาน ทส', 14],
-            ['แจ้งเบาะแส', 18],
-            ['ประเด็นอื่นๆ', 27],
-            ['ข้อเสนอแนะ', 53],
-        ]);
+      var data = google.visualization.arrayToDataTable([
+        ['หัวข้อเรื่องร้องเรียน', 'ช่องทาง', { role: "style" }],
+        ['ทุจริต', 22, "red"],
+        ['พฤติกรรม', 33, "green"],
+        ['ความเดือดร้อน', 60, "orange"],
+        ['ผลกระทบจากหน่วยงาน พน', 14, "yellow"],
+        ['แจ้งเบาะแส', 18, "black"],
+        ['ประเด็นอื่นๆ', 27, "blue"],
+        ['ข้อเสนอแนะ', 53, "green"],
+      ]);
 
-        var options = {
-            chart: {
-                legend: 'none',
-                // title: 'Company Performance',
-                // subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-            }
-        };
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+        { calc: "stringify",
+            sourceColumn: 1,
+            type: "string",
+            role: "annotation" },
+        2]);
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
-</script>
+      var options = {
+        chart: {
+            legend: 'none',
+        }
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_material"));
+      chart.draw(view, options);
+  }
+  </script>

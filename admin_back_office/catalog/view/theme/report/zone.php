@@ -37,6 +37,10 @@
                                     <option value="">ตามช่วงเวลา</option>
                                 </select>
                             </div>
+                            <div class="col-md-3">
+                              <label for="">ค้นหาช่วงเวลา</label>
+                              <input type="date" class="form-control">
+                            </div>
                             <div class="col-md-2">
                                 <label for="">&nbsp</label><br>
                                 <button type="submit" class="btn btn-primary">ค้นหา</button>
@@ -72,7 +76,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="text-center">1</td>
-                                                <td>เขตตรวจราชการที่ 1</td>
+                                                <td>เขตตรวจราชการที่ 2</td>
                                                 <td class="text-center">573</td>
                                                 <td class="text-center">493</td>
                                                 <td class="text-center">78</td>
@@ -80,7 +84,7 @@
                                             </tr>
                                             <tr>
                                                 <td></td>
-                                                <td class="pl-4">1.1 ปทุมธานี</td>
+                                                <td class="pl-4">1.1 นครปฐม</td>
                                                 <td class="text-center">200</td>
                                                 <td class="text-center">195</td>
                                                 <td class="text-center">5</td>
@@ -88,7 +92,23 @@
                                             </tr>
                                             <tr>
                                                 <td></td>
-                                                <td class="pl-4">1.2 พระนครศรีอยุธยา</td>
+                                                <td class="pl-4">1.2 นนทบุรี </td>
+                                                <td class="text-center">200</td>
+                                                <td class="text-center">195</td>
+                                                <td class="text-center">5</td>
+                                                <td class="text-center">0</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="pl-4">1.3 ปทุมธานี  </td>
+                                                <td class="text-center">200</td>
+                                                <td class="text-center">195</td>
+                                                <td class="text-center">5</td>
+                                                <td class="text-center">0</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="pl-4">1.4 สมุทรปราการ </td>
                                                 <td class="text-center">200</td>
                                                 <td class="text-center">195</td>
                                                 <td class="text-center">5</td>

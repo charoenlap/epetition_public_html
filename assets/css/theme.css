@@ -46,7 +46,7 @@ html,body {
 /* color */
 .text-theme {
     /* color: #0a58b8; */
-    color: #FF4316;
+    color: #28a745;
 }
 .text-orange {
     color: orange;
@@ -57,8 +57,8 @@ html,body {
 .btn-theme {
     /* background-color: #0a58b8;
     border-color: #0a58b8; */
-    background-color: #FF4316;
-    border-color: #FF4316;
+    background-color: #28a745;
+    border-color: #28a745;
     color: #fff;
 }
 .btn-theme:hover {

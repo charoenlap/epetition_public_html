@@ -8,19 +8,19 @@
       <div class="carousel-item active">
         <img class="d-block w-100" src="images/beach.png" alt="First slide">
         <div class="carousel-caption d-none d-md-block">
-          <h1>สำนักงานปลัดกระทรวงพลังงาน</h1>
+          <h1>ศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="images/beach.png" alt="Second slide">
+        <img class="d-block w-100" src="images/beach1.png" alt="Second slide">
         <div class="carousel-caption d-none d-md-block">
-          <h1>สำนักงานปลัดกระทรวงพลังงาน</h1>
+          <h1>ศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="images/beach.png" alt="Third slide">
+        <img class="d-block w-100" src="images/beach2.png" alt="Third slide">
         <div class="carousel-caption d-none d-md-block">
-          <h1>สำนักงานปลัดกระทรวงพลังงาน</h1>
+          <h1>ศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
     </div>
@@ -55,12 +55,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h4 class="text-theme font-weight-bold">ช่องทางที่ท่านสามารถแจ้งเรื่องร้องเรียนต่อสำนักงานปลัดกระทรวงพลังงาน มีดังนี้</h4>
+        <h4 class="text-theme font-weight-bold">ช่องทางที่ท่านสามารถแจ้งเรื่องร้องเรียนต่อศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน (กองตรวจราชการ) มีดังนี้</h4>
         <ul>
           <li>เว็บไซต์ </li>
           <li>จดหมายอิเล็กทรอนิกส์ (E-Mail) : </li>
-          <li>ส่งหนังสือร้องเรียนมาที่สำนักงานปลัดกระทรวงพลังงาน อาคาร บี ศูนย์เอนเนอร์ยี่ คอมเพล็กซ์ 555/2 ถนนวิภาวดีรังสิต แขวงจตุจักร เขตจตุจักร กรุงเทพฯ จตุจักร จตุจักร กรุงเทพมหานคร 10900</li>
-          <li>ข้อมูลการติดต่อ : โทรศัพท์ 0-2140-6000 โทรสาร 02-140-6228</li>
+          <li>ส่งหนังสือร้องเรียนมาที่ศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน (กองตรวจราชการ) ที่อยู่ : 555/2 ศูนย์เอนเนอร์ยี่คอมเพล็กซ์ อาคารบี ชั้น 23 ถนนวิภาวดีรังสิต แขวงจตุจักร เขตจตุจักร กรุงเทพมหานคร 10900</li>
+          <li>ข้อมูลการติดต่อ : โทรศัพท์ 0 2140 6080</li>
           <li>Application โดยสามารถดาวน์โหลด Application ได้ที่</li>
         </ul>
       </div>
