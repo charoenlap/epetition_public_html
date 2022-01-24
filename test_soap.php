@@ -32,7 +32,7 @@
 	// $encrypt_password = str_replace('"','',$encrypt_password);
 	echo 'encrypt_password: '.$encrypt_password.'<br>';
 	// End general_encodeString()
-
+ 
 
 	// Start getToken()
 	$array = array(
