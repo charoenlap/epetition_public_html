@@ -4,30 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>E-Petition</title>
-
-  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- icheck bootstrap -->
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <!-- <div class="login-logo">
-    <img src="images/logo_s.png" alt="" class="w-100">
-  </div> -->
-  <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <img src="http://localhost/epetition/public_html/images/logo.jpg" alt="" style="width:100%;height:auto;">
-      <p class="login-box-msg">เข้าสู่ระบบ</p>
-
+      <div class="text-center">
+        <img src="http://localhost/epetition/public_html/images/logo.jpg" alt="" style="width:250px;height:auto;">
+      </div>
       <form action="<?php echo route('home');?>" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username">
+          <input type="text" class="form-control" placeholder="Username" id="username" name="username" value="opmegov">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -35,7 +26,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" id="password" name="password" value="opmegov">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -43,18 +34,17 @@
           </div>
         </div>
         <div class="row">
-          <!-- /.col -->
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          <div class="col-6">
+            <button type="button" id="btn-opm" class="btn btn-default btn-block">เข้าสู่ระบบ OPM</button>
           </div>
-          <!-- /.col -->
+          <div class="col-6">
+            <button type="button" id="btn-open-id" class="btn btn-default btn-block">OpenID</button>
+          </div>
         </div>
-        <div class="row mt-4">
-          <!-- /.col -->
+        <div class="row mt-2">
           <div class="col-12">
-            <button type="btn-open-id" class="btn btn-default btn-block">เข้าสู่ระบบด้วย Open ID</button>
+            <button type="submit" class="btn btn-primary btn-block">เข้าสู่ระบบ</button>
           </div>
-          <!-- /.col -->
         </div>
       </form>
 
@@ -79,13 +69,45 @@
     <!-- /.login-card-body -->
   </div>
 </div>
-<!-- /.login-box -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.min.js"></script>
+  <script>
+    $(document).on('click','#btn-opm',function(e){
+      $.ajax({
+        url: 'index.php?route=home/loginOPM',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          username: $('#username').val(),
+          password: $('#password').val()
+        },
+      })
+      .done(function(json) {
+        console.log(json);
+        if(json.detail.token_id!=''){
+          window.location = 'index.php?route=home';
+        }
+        console.log("success");
+      })
+      .fail(function(a,b,c) {
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+      
+    });
+  </script>
+  <style>
+    .login-box, .register-box {
+      width: 460px;
+    }
+  </style>
 </body>
 </html>

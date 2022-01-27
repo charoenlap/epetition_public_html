@@ -299,8 +299,10 @@
             <div class="col-md-12">
                 <p class="text-danger">หมายเหตุ : รายการข้อมูลทั้งหมดทางระบบจะเก็บเป็นความลับ ตามพระราชบัญญัติคอมพิวเตอร์ พ.ศ. 2551</p>
             </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-theme w-100 g-recaptcha">ส่งเรื่อง</button>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-theme  g-recaptcha btn-block">ส่งเรื่อง</button>
             </div>
         </div>
         </form>

@@ -12,8 +12,8 @@
 	$url_test = "http://203.113.25.98/OPMApplication";
 
 	// ชื่อเข้ําใช้งํานระบบที่ได้รับจําก สปน.
-	$username = "opmegov";
-	$password = "opmegov";
+	$username = "serviceegov";
+	$password = "serviceegov";
 
 	// $username_egov = "serviceegov";
 	// $password_egov = "serviceegov";
@@ -33,7 +33,7 @@
 	echo 'encrypt_password: '.$encrypt_password.'<br>';
 	// End general_encodeString()
  
-
+	// var_dump($_SERVER);
 	// Start getToken()
 	$array = array(
 		'params' 	=> array(
@@ -46,7 +46,6 @@
 		'func'		=> "GetToken"
 	);
 	$result = soap($array);
-
 	$result = json_decode($result->GetTokenResult,true);
 	if($result=="Err:Invalid username or password."){
 		echo "Login error";

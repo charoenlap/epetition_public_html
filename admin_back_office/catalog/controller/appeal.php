@@ -123,5 +123,177 @@
 
 	    	$this->view('appeal/status',$data);
 	    }
+
+	    public function opm() {
+			$data['title'] 	= "เรื่องร้องเรียนจาก สปน"; 
+			$data['token_id'] = $token_id = $this->getSession('token_id');
+			$data['error'] = '';
+			$data['result'] = array();
+			$dataSelect = array(
+				'token_id' =>  $token_id,
+				'last_get_date_time' =>  '',
+				'timeline_type' => 'A',
+				'skip' => '0',
+				'take' => '10'
+			);
+			$result = $this->model('opm')->getTimelineHeader($dataSelect);
+			if($result=="Err:Not found user!!!"){
+				$data['error'] = "Err:Not found user!!!";
+				$data['error'] .= '<a href="'.route('login').'">Token หมดอายุ กรุณาล็อคอินใหม่</a>';
+				$this->view('appeal/opmHome',$data);
+			}else{
+				$data['result'] = $result;
+				$this->view('appeal/opmHome',$data);
+			}
+	    }
+	    public function opmDetail() {
+			$data['title'] 	= "รายละเอียดเรื่องร้องเรียน";
+			$data['case_id'] = $case_id = get('case_id');
+			$data['case_code']	= get('case_code');
+			$data['token_id'] = $token_id = $this->getSession('token_id');
+			$data['error'] = '';
+			$data['result_TimelineOperating'] = array();
+			// echo "test";exit();
+			$dataSelectTimelineOperating = array(
+				'token_id' 	=>  $token_id,
+				'case_id'	=> $case_id,
+				'skip' 		=> '0',
+				'take' 		=> '10'
+			);
+			$result_TimelineOperating = $this->model('opm')->GetTimelineOperating($dataSelectTimelineOperating);
+
+			$dataSelectGetCase = array(
+				'token_id' 	=>  $token_id,
+				'case_id'	=> $case_id,
+			);
+			$result_GetCase = $this->model('opm')->GetCase($dataSelectGetCase);
+
+			// $dataSelectgetOperatings = array(
+			// 	'token_id' 		=>  $token_id,
+			// 	'case_id'		=> $case_id,
+			// 	'select_org_id'	=> '',
+			// 	'skip' 			=> '0',
+			// 	'take' 			=> '10'
+			// );
+			// $result_getOperatings = $this->model('opm')->getOperatings($dataSelectgetOperatings);
+			// echo "<pre>";
+			// var_dump($result_getOperatings);exit();
+			if($result_TimelineOperating=="Err:Not found user!!!"){
+				$data['error'] = "Err:Not found user!!!";
+				$data['error'] .= '<a href="'.route('login').'">Token หมดอายุ กรุณาล็อคอินใหม่</a>';
+				$this->view('appeal/opmDetail',$data);
+			}else{
+				$data['result_TimelineOperating'] = $result_TimelineOperating;
+				$data['getCase'] = $result_GetCase;
+				// $data['getOperatings'] = $getOperatings;
+				$this->view('appeal/opmDetail',$data);
+			}
+	    }
+	    public function opmAdd() {
+	    	$data = array();
+	    	$data['title'] 			= "แบบฟอร์มเรื่องร้องเรียน";
+	    	$data['token_id'] 	= $token_id = $this->getSession('token_id');
+	    	$this->view('appeal/opmAdd',$data);
+	    }
+	   	public function opmSaveAdd() {
+	   		$data = array();
+			
+			$data['token_id'] 	= $token_id = $this->getSession('token_id');
+			$date 				= date('Y-m-d H:i:s');
+			$case_code 			= get('case_code');
+			$type_id 			= get('type_id');
+			$status_id 			= get('status_id');
+			$organization_id 	= get('organization_id');
+			$channel_id 		= get('channel_id');
+			$detail 			= get('detail');
+			$province_id 		= get('province_id');
+			$district_id 		= get('district_id');
+			$subdistrict_id 	= get('subdistrict_id');
+			$contact_citizen_id = get('contact_citizen_id');
+			$contact_name 		= get('contact_name');
+			$contact_lastname 	= get('contact_lastname');
+			$contact_telephone  = get('contact_telephone');
+			$created_date 		= $date;
+			$updated_date 		= $date;
+			$dataInsert = array(
+				'token_id' 			=> $token_id,
+				'case_code'			=> $case_code,
+				'type_id'			=> $type_id,
+				'status_id'			=> $status_id,
+				'organization_id'	=> $organization_id,
+				'channel_id'		=> $channel_id,
+				'detail'			=> $detail,
+				'province_id'		=> $province_id,
+				'district_id'		=> $district_id,
+				'subdistrict_id'	=> $subdistrict_id,
+				'contact_citizen_id'=> $contact_citizen_id,
+				'contact_name'		=> $contact_name,
+				'contact_lastname'	=> $contact_lastname,
+				'contact_telephone'	=> $contact_telephone,
+				'created_date'		=> $created_date,
+				'updated_date'		=> $updated_date,
+			);
+			$resultAddCase = $this->model('opm')->addCase($dataInsert);
+	    }
+		public function opmDel(){
+			$id 	= $_GET['id'];
+			$del 	= $this->model('response')->del($id);
+			if($del){
+				redirect('appeal/opm');
+			}
+		}
+	    public function opmEdit() {
+			$data['title']	= "แก้ไขแบบฟอร์มเรื่องร้องเรียน";
+
+			$id 			= $_GET['id'];
+			$response 		= $this->model('response');
+			$master 		= $this->model('master',"/home/hostphp7/domains/hostphp7.com/public_html/epetition/public_html/catalog/"); 
+
+			$data['data'] 			= $response->getList($id);
+			$data['title_topic']	= $response->getTopic();
+			$data['geographies']	= $master->getGeographies();
+
+			if($_SERVER['REQUEST_METHOD'] == "POST"){
+				$post 	= $_POST;
+				$update	= $response->updateResponse($post,$id);
+				if($update){
+					redirect('appeal/opm');
+				}
+			}
+			
+	    	$this->view('appeal/edit',$data);
+	    }
+	    	
+	    public function opmStatus() {
+			$data['title']	= "บันทึกรับเรื่องร้องเรียน";
+
+			$id 		= $_GET['id'];
+			$response 	= $this->model('response');
+			$resultData = $response->getList($id);
+
+			$data['ticket']				= "6510000".$resultData['id'];
+			$data['dateadd']			= $resultData['dateadd'];
+			$data['idCard']				= $resultData['id_card'];
+			$data['fullname']			= $resultData['name_title']." ".$resultData['name']." ".$resultData['lastname'];
+			$data['age']				= $resultData['age'];
+			$data['tel']				= $resultData['tel'];
+			$data['phone']				= $resultData['phone'];
+			$data['email']				= $resultData['email'];
+			$data['address_no']			= $resultData['address_no'];
+			$data['moo']				= $resultData['moo'];
+			$data['housename']			= $resultData['housename'];
+			$data['soi']				= $resultData['soi'];
+			$data['road']				= $resultData['road'];
+			$data['id_provinces']		= $resultData['id_provinces'];
+			$data['id_amphures']		= $resultData['id_amphures'];
+			$data['id_districts']		= $resultData['id_districts'];
+			$data['zipcode']			= $resultData['zipcode'];
+			$data['note_topic']			= $resultData['note_topic'];
+			$data['topic_address']		= "เลขที่ ".$resultData['t_address_no']." หมู่บ้าน ".$resultData['t_moo']." ซอย ".$resultData['t_soi']." ถนน ".$resultData['t_road']." ตำบล".$resultData['t_id_districts']." อำเภอ".$resultData['t_id_amphures']." จังหวัด".$resultData['t_id_provinces']."";
+			$data['place_landmarks']	= $resultData['place_landmarks'];
+			$data['response_person']	= $resultData['response_person'];
+
+	    	$this->view('appeal/opmStatus',$data);
+	    }
 	}
 ?>

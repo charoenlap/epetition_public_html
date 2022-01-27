@@ -121,10 +121,13 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <?php if(!empty($image)){ ?>
+            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="">
+          <?php } ?>
         </div>
         <div class="info">
-          <a href="#" class="d-block">สมชาย ใจดี (หัวหน้า)</a>
+          <a href="#" class="d-block"><?php echo $name; ?></a>
+          <a href="#" class="d-block"><small><?php echo $role_name; ?></small></a>
         </div>
       </div>
 
@@ -144,7 +147,7 @@
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 เรื่องร้องเรียน
-                <span class="badge badge-danger right">5</span>
+                <!-- <span class="badge badge-danger right">5</span> -->
               </p>
             </a>
           </li>
@@ -279,3 +282,8 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+  <style>
+    .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+      color: #000 !important;
+    }
+  </style>
