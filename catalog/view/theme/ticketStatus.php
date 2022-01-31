@@ -14,49 +14,51 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="text-theme font-weight-bold">รายละเอียดเรื่องร้องเรียน</h3> <!-- เปลี่ยนหัวข้อเป็นสีน้ำเงินแล้วดีไซน์อถวให้เข้ากัน -->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-bordered">
-                    <!-- <thead class="bg-primary">
-                        <tr>
-                            <th class="text-center text-white">ลำดับ</th>
-                            <th class="text-white">สภานะ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>อยู่ระหว่างดำเนินการ</td>
-                        </tr>
-                    </tbody> -->
-                </table>
+                <?php 
+                    if(isset($ticket['case_code'])){ 
+                        $status = (int)$ticket['status'];
+                        $txt_status = "";
+                        $color = "";
+                        if($status=="0"){
+                            $txt_status = "อยู่ระหว่างดำเนินการ";
+                            $color = "warning";
+                        }else if($status=="1"){
+                            $txt_status = "ดำเนินการแล้วเสร็จ";
+                            $color = "success";
+                        }else if($status=="2"){
+                            $txt_status = "ล่าช้ากว่ากำหนด";
+                            $color = "danger";
+                        }
+                ?>
+                <h3 class="text-theme font-weight-bold">รายละเอียดเรื่องร้องเรียน</h3>
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                            <td>ลำดับที่</td>
-                            <td>1</td>
+                            <td><b>รหัสเรื่อง (Case ID)</b></td>
+                            <td><?php echo $ticket['case_code']; ?></td>
                         </tr>
                         <tr>
-                            <td>รหัสเรื่อง (Ticket ID)</td>
-                            <td>65010001</td>
+                            <td><b>ชื่อเรื่อง</b></td>
+                            <td><?php echo $ticket['response_person']; ?></td>
                         </tr>
                         <tr>
-                            <td>ชื่อเรื่อง</td>
-                            <td>ราคาน้ำมัน</td>
+                            <td><b>หน่วยงานดำเนินการ</b></td>
+                            <td><?php echo $ticket['agency_minor_title']; ?></td>
                         </tr>
                         <tr>
-                            <td>หน่วยงานดำเนินการ</td>
-                            <td>ส่วนกลาง</td>
-                        </tr>
-                        <tr>
-                            <td>สถานนะ</td>
-                            <td>อยู่ระหว่างดำเนินการ</td>
+                            <td><b>สถานะ</b></td>
+                            <td class="text-<?php echo $color;?>">
+                                <?php echo $txt_status; ?>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
+                <?php }else{?>
+                <h4 class="text-center">ไม่พบเลขร้องเรียน " <?php echo $case_code;?> " บนระบบ</h4>
+                <?php } ?>
+                <div class="text-center">
+                    <a href="<?php echo route('ticket');?>">กลับไปหน้าค้นหา</a>
+                </div>
             </div>
         </div>
     </div>

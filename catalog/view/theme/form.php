@@ -18,10 +18,12 @@
             </div>
         </div>
         <form action="<?php echo route('home/form'); ?>" method="post">
+            <input type="hidden" name="topic_id" value="<?php echo $topic_id;?>">
         <div class="row mb-3">
             <div class="col-md-12">
                 <label for="">เลขประจำตัวประชาชน <span class="text-danger">*</span></label>
-                <input type="text" name="id_card" class="form-control" placeholder="เลขประจำตัวประชาชน" required>
+                <input type="text" name="id_card" id="id_card" class="form-control" placeholder="x-xxxxx-xxxxx-xx-x" required 
+                size="25" onkeyup="idcard(this)"  minlength="13" maxlength="20" >
             </div>
         </div>
         <div class="row mb-3">
@@ -49,13 +51,16 @@
             </div>
             <div class="col-md-6">
                 <label for="">โทรศัพท์บ้าน</label>
-                <input type="text" name="tel" class="form-control" placeholder="โทรศัพท์บ้าน">
+                <input type="text" name="tel" class="form-control" placeholder="โทรศัพท์บ้าน" 
+                size="25" onkeyup="home(this)"  minlength="9" maxlength="11"
+                >
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="">โทรศัพท์มือถือ <span class="text-danger">*</span></label>
-                <input type="text" name="phone" class="form-control" placeholder="โทรศัพท์มือถือ" required>
+                <input type="text" name="phone" id="phone" class="form-control" placeholder="โทรศัพท์มือถือ" required
+                size="25" onkeyup="phoneTab(this)"  minlength="10" maxlength="12" >
             </div>
             <div class="col-md-6">
                 <label for="">e-mail</label>
@@ -315,3 +320,53 @@
 
 <!-- script -->
 <script src="assets/js/form.js"></script>
+<script>
+function idcard(obj){  
+    var pattern=new String("_-____-_____-__-_"); // กำหนดรูปแบบในนี้  
+    var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  
+    var returnText=new String("");  
+    var obj_l=obj.value.length;  
+    var obj_l2=obj_l-1;  
+    for(i=0;i<pattern.length;i++){             
+        if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){  
+            returnText+=obj.value+pattern_ex;  
+            obj.value=returnText;  
+        }  
+    }  
+    if(obj_l>=pattern.length){  
+        obj.value=obj.value.substr(0,pattern.length);             
+    }  
+}  
+function phoneTab(obj){  
+    var pattern=new String("___-___-____"); // กำหนดรูปแบบในนี้  
+    var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  
+    var returnText=new String("");  
+    var obj_l=obj.value.length;  
+    var obj_l2=obj_l-1;  
+    for(i=0;i<pattern.length;i++){             
+        if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){  
+            returnText+=obj.value+pattern_ex;  
+            obj.value=returnText;  
+        }  
+    }  
+    if(obj_l>=pattern.length){  
+        obj.value=obj.value.substr(0,pattern.length);             
+    }  
+}  
+function home(obj){  
+    var pattern=new String("__-___-____"); // กำหนดรูปแบบในนี้  
+    var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  
+    var returnText=new String("");  
+    var obj_l=obj.value.length;  
+    var obj_l2=obj_l-1;  
+    for(i=0;i<pattern.length;i++){             
+        if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){  
+            returnText+=obj.value+pattern_ex;  
+            obj.value=returnText;  
+        }  
+    }  
+    if(obj_l>=pattern.length){  
+        obj.value=obj.value.substr(0,pattern.length);             
+    }  
+}  
+</script>

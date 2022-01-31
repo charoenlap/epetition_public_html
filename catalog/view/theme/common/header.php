@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/bootstrap-4/css/bootstrap.min.css">
     <!-- css theme -->
     <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/master.css?time=<?php echo time();?>">
     <!-- icon -->
     <link href="assets/fontawesome-free/css/all.css" rel="stylesheet">
 

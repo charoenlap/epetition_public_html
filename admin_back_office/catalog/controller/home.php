@@ -1,19 +1,19 @@
 <?php 
 	class HomeController extends Controller {
 	    public function index() {
-	    	// $data = array(); 
+	    	$data = array(); 
 	    	// $id_admin = $this->getSession('id_admin');
 	    	// if($id_admin){
 	    	// 	$this->view('home');
 	    	// }else{
 	    	//  	redirect('home/login');
 	    	// }
-	    	$total_case = 0;
-	    	$total_case_process = 0;
-	    	$report = 0;
-	    	$user = 0;
-	    	
-	    	$this->view('home');
+			$data['total_case'] 		= 0;
+			$data['total_case_process'] = 0;
+			$data['total_report'] 		= 0;
+			$data['total_user'] 		= 0;
+
+	    	$this->view('home',$data);
 	    }
 	    public function loginOPM(){
 	    	if(method_post()){

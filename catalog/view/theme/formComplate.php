@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <h1 class="text-success">แจ้งเรื่องร้องเรียนสำเร็จ</h1>
-                                <h3>Ticket ID : 65100001</h3>
+                                <h3>Ticket ID : <?php echo $case_code;?></h3>
                                 <span class="text-danger">กรุณาบันทึกหรือเก็บ Ticket ID ของท่านไว้เผื่อติดตามสถานะเรื่องร้องเรียนของท่าน</span>
                             </div>
                         </div>

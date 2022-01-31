@@ -26,7 +26,7 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
+              <h3><?php echo $total_case;?></h3>
 
               <p>เรื่องร้องเรียน</p>
             </div>
@@ -41,7 +41,7 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53</h3>
+              <h3><?php echo $total_case_process;?></h3>
 
               <p>ความก้าวหน้าของเรื่องร้องเรียน</p>
             </div>
@@ -56,7 +56,7 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?php echo $total_report;?></h3>
 
               <p>รายงาน</p>
             </div>
@@ -72,7 +72,7 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?php echo $total_user;?></h3>
 
               <p>ผู้ใช้งานระบบ</p>
             </div>

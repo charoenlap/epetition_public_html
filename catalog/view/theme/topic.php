@@ -23,7 +23,7 @@
               foreach($topic as $key => $value){ 
             ?>
             <div class="col-md-12">
-              <a href="<?php echo route('home/addTopic&id='.$value['id']); ?>" class="text-link">
+              <a href="<?php echo route('home/form&topic_id='.$value['id']); ?>" class="text-link text-topic-link">
                 <p><?php echo $i++; ?>.<?php echo $value['topic_title']; ?></p>
               </a>
             </div>

@@ -15,8 +15,10 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h3>ติดตามเรื่องร้องเรียน</h3>
-                <input type="text" class="form-control form-control-lg mb-3" placeholder="กรอก Ticket ID สำหรับค้นหา">
-                <a href="<?php echo route('ticket/ticketStatus'); ?>" class="btn btn-theme btn-lg btn-block">ค้นหา</a>
+                <form action="<?php echo route('ticket/ticketStatus');?>" method="POST">
+                  <input type="text" class="form-control form-control-lg mb-3" placeholder="กรอก Ticket ID สำหรับค้นหา" name="case_code">
+                  <button class="btn btn-theme btn-lg btn-block"  type="submit">ค้นหา</button>
+                </form>
             </div>
         </div>
     </div>
