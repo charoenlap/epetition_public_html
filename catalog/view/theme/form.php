@@ -6,7 +6,7 @@
             <li><a href="<?php echo route('home'); ?>">หน้าหลัก</a></li>
             <li class="active" aria-current="page">แจ้งเรื่องร้องเรียน</li>
           </ul>
-        </div>
+        </div> 
       </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
             <div class="col-md-12">
                 <label for="">เลขประจำตัวประชาชน <span class="text-danger">*</span></label>
                 <input type="text" name="id_card" id="id_card" class="form-control" placeholder="x-xxxxx-xxxxx-xx-x" required 
-                size="25" onkeyup="idcard(this)"  minlength="13" maxlength="20" >
+                size="30" onkeyup="idcard(this)"  minlength="15" maxlength="25" >
             </div>
         </div>
         <div class="row mb-3">
@@ -279,7 +279,11 @@
                     <option value="">-- ตำบล/แขวง --</option>
                     <option value="">ตำบล/แขวง</option>   
                 </select>
-            </div>      
+            </div>
+            <div class="col-md-6">
+                <label for="">รหัสไปรษณีย์</label>
+                <input type="text" name="t_zipcode" id="t_zipcode" class="form-control" placeholder="รหัสไปรษณีย์">
+            </div> 
         </div>
         <div class="row mb-3">
             <div class="col-md-12">
@@ -296,8 +300,13 @@
         <div class="row mb-3">
             <div class="col-md-12">
                 <h5>เอกสารหรือภาพประกอบการร้องเรียน</h5>
-                <label for="actual-btn" class="btn btn-upload"><i class="fas fa-folder-plus"></i> แนบไพล์</label>
-                <input type="file" id="actual-btn" hidden/>
+                <!-- <label for="actual-btn" class="btn btn-upload"><i class="fas fa-folder-plus"></i> แนบไพล์</label> -->
+                <!-- <input type="file" id="actual-btn" hidden/> -->
+                <div class="file-upload-wrapper" data-text="Select your file!">
+                  <input name="file-upload-field" type="file" 
+                  class="file-upload-field" id="fileinput" value="">
+                </div>
+                <div id="showFileSize"></div>
             </div>
         </div>
         <div class="row">
@@ -306,8 +315,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <button type="submit" class="btn btn-theme  g-recaptcha btn-block">ส่งเรื่อง</button>
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-theme  g-recaptcha" style="min-width:180px;">ส่งเรื่อง</button>
             </div>
         </div>
         </form>
@@ -317,7 +326,25 @@
 <div class="mockup-recapcha">
     <img src="images/RecaptchaLogo.png" alt="">
 </div>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ขนาดไฟล์ภาพเกินที่กำหนด
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 <!-- script -->
 <script src="assets/js/form.js"></script>
 <script>
@@ -369,4 +396,109 @@ function home(obj){
         obj.value=obj.value.substr(0,pattern.length);             
     }  
 }  
+$(document).on('change','#fileinput',function(e){
+    $(this).parent(".file-upload-wrapper").attr("data-text",$(this).val().replace(/.*(\/|\\)/, '') );
+    var input = document.getElementById('fileinput');
+    if (!input.files) { // This is VERY unlikely, browser support is near-universal
+        console.error("This browser doesn't seem to support the `files` property of file inputs.");
+    } else {
+        var file = input.files[0];
+        var bytes = parseFloat(file.size);
+        var kb = bytes/1024;
+        var mb = bytes/1024/1024;
+        $('#showFileSize').html(  mb + " mb in size");
+        if(mb >= 2){
+            $('#exampleModal').modal('show');
+            $('#fileinput').val('');
+            $('#showFileSize').html('');
+            $(this).parent(".file-upload-wrapper").attr("data-text",''.replace(/.*(\/|\\)/, '') );
+        }
+    }
+});
+// document.getElementById("btnLoad").addEventListener("click", function showFileSize() {
+//     // (Can't use `typeof FileReader === "function"` because apparently it
+//     // comes back as "object" on some browsers. So just see if it's there
+//     // at all.)
+//     if (!window.FileReader) { // This is VERY unlikely, browser support is near-universal
+//         console.log("The file API isn't supported on this browser yet.");
+//         return;
+//     }
+
+//     var input = document.getElementById('fileinput');
+//     if (!input.files) { // This is VERY unlikely, browser support is near-universal
+//         console.error("This browser doesn't seem to support the `files` property of file inputs.");
+//     } else if (!input.files[0]) {
+//         addPara("Please select a file before clicking 'Load'");
+//     } else {
+//         var file = input.files[0];
+//         addPara("File " + file.name + " is " + file.size + " bytes in size");
+//     }
+// });
+
+// function addPara(text) {
+//     var p = document.createElement("p");
+//     p.textContent = text;
+//     document.body.appendChild(p);
+// }
 </script>
+<style>
+    .file-upload-wrapper {
+  position: relative;
+  width: 100%;
+  height: 60px;
+}
+.file-upload-wrapper:after {
+  content: attr(data-text);
+  font-size: 18px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+  padding: 10px 15px;
+  display: block;
+  width: calc(100% - 40px);
+  pointer-events: none;
+  z-index: 20;
+  height: 40px;
+  line-height: 40px;
+  color: #999;
+  border-radius: 5px 10px 10px 5px;
+  font-weight: 300;
+}
+.file-upload-wrapper:before {
+  content: "Upload";
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  height: 60px;
+  background: #4daf7c;
+  color: #fff;
+  font-weight: 700;
+  z-index: 25;
+  font-size: 16px;
+  line-height: 60px;
+  padding: 0 15px;
+  text-transform: uppercase;
+  pointer-events: none;
+  border-radius: 0 5px 5px 0;
+}
+.file-upload-wrapper:hover:before {
+  background: #3d8c63;
+}
+.file-upload-wrapper input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  display: block;
+  cursor: pointer;
+  width: 100%;
+}
+</style>

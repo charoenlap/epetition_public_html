@@ -122,7 +122,7 @@
 		// }
 		public function addResponse($data=array()){
 			$result_last_insert = $this->insert('response',$data);
-			$case_code = (date('y')+43).str_pad($result_last_insert,6,"0", STR_PAD_LEFT);
+			$case_code = (date('ym')+43).str_pad($result_last_insert,4,"0", STR_PAD_LEFT);
 			$sql_update = "UPDATE ep_response SET case_code = '".$case_code."' WHERE id=".$result_last_insert;
 			$query_update = $this->query($sql_update);
 

@@ -20,14 +20,17 @@
                         $txt_status = "";
                         $color = "";
                         if($status=="0"){
-                            $txt_status = "อยู่ระหว่างดำเนินการ";
+                            $txt_status = "เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างการดำเนินการ";
                             $color = "warning";
                         }else if($status=="1"){
-                            $txt_status = "ดำเนินการแล้วเสร็จ";
+                            $txt_status = "เรื่องร้องเรียน/ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว";
                             $color = "success";
                         }else if($status=="2"){
-                            $txt_status = "ล่าช้ากว่ากำหนด";
+                            $txt_status = "เรื่องร้องเรียน/ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด";
                             $color = "danger";
+                        }else if($status=="3"){
+                            $txt_status = "เรื่องร้องเรียน/ร้องทุกข์อีก 7 วันจะครบกำหนด";
+                            $color = "light";
                         }
                 ?>
                 <h3 class="text-theme font-weight-bold">รายละเอียดเรื่องร้องเรียน</h3>

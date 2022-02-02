@@ -249,11 +249,51 @@
                                 <div class="col-md-12">
                                     <p>สถานะ</p>
                                     <ul class="list-unstyled">
-                                        <li><p><i class="fas fa-check status-green"></i> ดำเนินการแล้วเสร็จ</p></li>
-                                        <li><p><i class="fas fa-hourglass-start status-yellow"></i> อยู่ระหว่างการดำเนินการ</p></li>
-                                        <li><p><i class="fas fa-hourglass-half status-orange"></i> อยู่ระหว่างการดำเนินการเหลืออีก 7 วันครบกำหนด</p></li>
-                                        <li><p><i class="fas fa-times-circle status-red"></i> ดำเนินการล่าช้ากว่ากำหนด</p></li>
+                                        <li>
+                                            <p>
+                                                <i class="fas fa-check status-green"></i> เรื่องร้องเรียน/ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                <i class="fas fa-hourglass-start status-yellow"></i> เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างการดำเนินการ
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                <i class="fas fa-hourglass-half status-orange"></i> เรื่องร้องเรียน/ร้องทุกข์อีก 7 วันจะครบกำหนด
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                <i class="fas fa-times-circle status-red"></i> เรื่องร้องเรียน/ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด
+                                            </p>
+                                        </li>
                                     </ul>
+                                    <?php /*
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <p>
+                                                <i class="fas fa-check status-green"></i> ดำเนินการแล้วเสร็จ
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                <i class="fas fa-hourglass-start status-yellow"></i> อยู่ระหว่างการดำเนินการ
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                <i class="fas fa-hourglass-half status-orange"></i> อยู่ระหว่างการดำเนินการเหลืออีก 7 วันครบกำหนด
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>
+                                                <i class="fas fa-times-circle status-red"></i> ดำเนินการล่าช้ากว่ากำหนด
+                                            </p>
+                                        </li>
+                                    </ul>
+                                    */ ?>
                                 </div>
                             </div>
                         </div>
