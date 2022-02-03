@@ -346,7 +346,7 @@
   </div>
 </div>
 <!-- script -->
-<script src="assets/js/form.js"></script>
+<script src="assets/js/form.js?time=<?php echo time();?>"></script>
 <script>
 function idcard(obj){  
     var pattern=new String("_-____-_____-__-_"); // กำหนดรูปแบบในนี้  

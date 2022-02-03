@@ -38,6 +38,7 @@
 				$post 				= $_POST;
 				$post['dateadd']	= date('Y-m-d H:i:s');
 				$post['topic_id'] 	= post('topic_id');
+				unset($post['file-upload-field']);
 				$add = $master->addResponse($post);
 				if($add){
 					redirect('home/formComplate&case_code='.$add);
