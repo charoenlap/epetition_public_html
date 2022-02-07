@@ -2,18 +2,81 @@
 	class HomeController extends Controller {
 	    public function index() {
 	    	$data = array(); 
+
 	    	// $id_admin = $this->getSession('id_admin');
 	    	// if($id_admin){
 	    	// 	$this->view('home');
 	    	// }else{
 	    	//  	redirect('home/login');
 	    	// }
-			$data['total_case'] 		= 0;
-			$data['total_case_process'] = 0;
-			$data['total_report'] 		= 0;
-			$data['total_user'] 		= 0;
+	    	$total_case 		= $this->model('dashboard')->getTotalCase();
+	    	$total_case_process = $this->model('dashboard')->getTotalCaseProcess();
+	    	$total_user 		= $this->model('dashboard')->getTotalUser();
+
+			$data['total_case'] 		= $total_case;
+			$data['total_case_process'] = $total_case_process;
+			$data['total_report'] 		= 11;
+			$data['total_user'] 		= $total_user;
 
 	    	$this->view('home',$data);
+	    }
+	    public function login(){
+
+	    	if(method_post()){
+	    		$result = array(
+	    			'code' 	=> 200,
+	    			'status'=> 'failed',
+	    			'desc'	=> 'Connect'
+	    		);
+	    		$username = post('username');
+	    		$password = post('password');
+	    		if(!empty($password)){
+		    		$selectToken = array(
+		    			'username' 	=> $username,
+		    			'password' 	=> $password
+					);
+					$resultLogin = $this->model('login')->auth($selectToken);
+					if($resultLogin['result']=="fail"){
+						$result = array(
+			    			'code' 	=> 200,
+			    			'status'=> 'failed',
+			    			'desc'	=> 'Login error'
+			    		);
+					}else{
+						$officer_name = $resultLogin['detail']['FIRSTNAME'].' '.$resultLogin['detail']['LASTNAME'];
+						$this->setSession('token_id','');
+						$this->setSession('user_name',$resultLogin['detail']['AUT_USER_ID']);
+						$this->setSession('officer_id',$resultLogin['detail']['AUT_USERNAME']);
+						$this->setSession('officer_name',$officer_name);
+						$this->setSession('role_id',$resultLogin['detail']['USER_GROUP_ID']);
+						$this->setSession('role_name',$resultLogin['detail']['GROUP_NAME']);
+						$this->setSession('org_id','');
+						$this->setSession('org_name','');
+						$this->setSession('position',$resultLogin['detail']['DEPARTMENT_NAME']);
+						$this->setSession('default_language','');
+						$this->setSession('last_login',$resultLogin['last_login']);
+						$result = array(
+			    			'code' 	=> 200,
+			    			'status'=> 'success',
+			    			'desc'	=> 'Login complete',
+			    			'detail'=> $resultLogin
+			    		);
+					}
+				}else{
+					$result = array(
+		    			'code' 	=> 200,
+		    			'status'=> 'failed',
+		    			'desc'	=> 'Password empty'
+		    		);
+				}
+	    	}else{
+	    		$result = array(
+	    			'code' 	=> 200,
+	    			'status'=> 'failed',
+	    			'desc'	=> 'Method not allow'
+	    		);
+	    	}
+	    	$this->json($result);
 	    }
 	    public function loginOPM(){
 	    	if(method_post()){
@@ -491,25 +554,7 @@
 	    	}
 	    	$this->json($result);
 	    }
-	    public function login(){
-	    	$data = array();
-	    // 	if(method_post()){
-	    // 		$admin = $this->model('admin');
-	    // 		$data_login = array(
-	    // 			'admin_user'		=> post('user'),
-					// 'admin_password'	=> post('password'),
-	    // 		);
-	    // 		$result_login = $admin->login($data_login);
-	    // 		if($result_login['result']=='success'){
-	    // 			$this->setSession('id_admin',$result_login['detail']['id_admin']);
-	    // 			redirect('home');
-	    // 		}else{
-	    // 			redirect('home/login&result=fail');
-	    // 		}
-	    // 	}
-	    // 	$data['action'] = route('home/login');
-	    	$this->render('login',$data);
-	    }
+	   
 	    public function logout(){
 	    	// $this->rmSession('id_admin');
 	    	// redirect('home/login');

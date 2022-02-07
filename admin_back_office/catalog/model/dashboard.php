@@ -1,12 +1,30 @@
 <?php 
 	class DashboardModel extends db {
-		public function getTotalGirls($data = array()){
-			$result = array();
-			// $sql = "SELECT COUNT(girls_id) AS total_girls FROM dh_girls WHERE girls_type='1' OR girls_type='3' OR girls_type='4'";
-			// $result['total_girls'] = $this->query($sql)->row['total_girls'];
-			// $sql = "SELECT COUNT(girls_id) AS total_girls_host FROM dh_girls WHERE girls_type='6' OR girls_type='7'";
-			// $result['total_girls_host'] = $this->query($sql)->row['total_girls_host'];
-
+		public function getTotalCase($data = array()){
+			$result = 0;
+			$sql = "SELECT COUNT(*) as total FROM ep_response";
+			$query = $this->query($sql);
+			if($query->num_rows){
+				$result = $query->row['total'];
+			}
+			return $result;
+		}
+		public function getTotalCaseProcess($data = array()){
+			$result = 0;
+			$sql = "SELECT COUNT(*) as total FROM ep_response WHERE `status` != 1";
+			$query = $this->query($sql);
+			if($query->num_rows){
+				$result = $query->row['total'];
+			}
+			return $result;
+		}
+		public function getTotalUser($data = array()){
+			$result = 0;
+			$sql = "SELECT COUNT(*) as total FROM AUT_USER";
+			$query = $this->query($sql);
+			if($query->num_rows){
+				$result = $query->row['total'];
+			}
 			return $result;
 		}
 	}

@@ -16,7 +16,7 @@
       <div class="text-center">
         <img src="http://localhost/epetition/public_html/images/logo.jpg" alt="" style="width:250px;height:auto;">
       </div>
-      <form action="<?php echo route('home');?>" method="post">
+      <form action="<?php echo route('home');?>" method="post" id="form-login">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Username" id="username" name="username" value="opmegov">
           <div class="input-group-append">
@@ -30,6 +30,13 @@
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div id="alert" class="">
+              
             </div>
           </div>
         </div>
@@ -75,6 +82,41 @@
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.min.js"></script>
   <script>
+    $(document).on('submit','#form-login',function(e){
+      $('#alert').addClass('alert');
+      $.ajax({
+        url: 'index.php?route=home/login',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          username: $('#username').val(),
+          password: $('#password').val()
+        },
+      })
+      .done(function(json) {
+        console.log(json);
+        if(json.status=='success'){
+          $('#alert').text(json.desc);
+          $('#alert').addClass('alert-success');
+          window.location='index.php?route=home';
+        }else{
+          $('#alert').text(json.desc);
+          $('#alert').addClass('alert-danger');
+        }
+        console.log("success");
+      })
+      .fail(function(a,b,c) {
+        console.log("error");
+        console.log(a);
+        console.log(b);
+        console.log(c);
+      })
+      .always(function() {
+        console.log("complete");
+      });
+      
+      e.preventDefault();
+    });
     $(document).on('click','#btn-opm',function(e){
       $.ajax({
         url: 'index.php?route=home/loginOPM',

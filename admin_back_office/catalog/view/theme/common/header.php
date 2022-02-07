@@ -128,6 +128,7 @@
         <div class="info">
           <a href="#" class="d-block"><?php echo $name; ?></a>
           <a href="#" class="d-block"><small><?php echo $role_name; ?></small></a>
+          <a href="#" class="d-block"><small>เข้าใช้งานเมื่อ: <?php echo $last_login; ?></small></a>
         </div>
       </div>
 

@@ -1,7 +1,10 @@
 <?php 
 	class AppealController extends Controller {
 	    public function index() {
-			$data['title'] 	= "เรื่องร้องเรียน"; 
+			$data['title'] 	= "เรื่องที่ร้องเรียน/ร้องทุกข์"; 
+			$data['topic'] 			= $this->model('topic')->getLists();
+			$data['department'] 	= $this->model('department')->getLists();
+			$data['status'] 		= $this->model('status')->getLists();
 			$response 		= $this->model('response');
 			$resultData 	= $response->getLists();
 
