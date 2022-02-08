@@ -5,8 +5,51 @@
 			$data['topic'] 			= $this->model('topic')->getLists();
 			$data['department'] 	= $this->model('department')->getLists();
 			$data['status'] 		= $this->model('status')->getLists();
+			// var_dump($data['status']);
 			$response 		= $this->model('response');
-			$resultData 	= $response->getLists();
+			$data['lists'] = array();
+			
+			$chkTypePhone 	= get('chkTypePhone');
+			$data['phone'] = get('phone');
+			$data['chkTypePhone']= get('chkTypePhone');
+			$data['topic_id'] = get('topic_id');
+			$data['dateadd'] = get('dateadd');
+			$data['dateadd_time'] = get('dateadd_time');
+			$data['dateadd_end'] = get('dateadd_end');
+			$data['case_code'] = get('case_code');
+			$data['department_id'] = get('department_id');
+			$data['t_id_provinces'] = get('t_id_provinces');
+			$data['date_end'] = get('date_end');
+			$data['id_card'] = get('id_card');
+			$data['name_lastname'] = get('name_lastname');
+			$data['response_person'] = get('response_person');
+			$data['date_respect'] = get('date_respect');
+			$data['status_id'] = get('status_id');
+			$tel 	= '';
+			$phone 	= '';
+			if($chkTypePhone==1){
+				$tel 	= $data['phone'];
+			}else{
+				$phone 	= $data['phone'];
+			}
+			$data_search = array(
+				'topic_id' 			=> $data['topic_id'],
+				'dateadd'			=> $data['dateadd'],
+				'dateadd_time'		=> $data['dateadd_time'],
+				'dateadd_end'		=> $data['dateadd_end'],
+				'case_code'			=> $data['case_code'],
+				'department_id'		=> $data['department_id'], 
+				't_id_provinces'	=> $data['t_id_provinces'], 
+				'date_end'			=> $data['date_end'], 
+				'id_card'			=> $data['id_card'], 
+				'name_lastname'		=> $data['name_lastname'], 
+				'tel'				=> $tel, 
+				'phone'				=> $phone, 
+				'response_person'	=> $data['response_person'],
+				'status_id'			=> $data['status_id'],
+			);
+			
+			$resultData 	= $response->getLists($data_search);
 
 			foreach($resultData as $key => $value){
 				$data['lists'][] = array(
@@ -16,6 +59,10 @@
 					'dateadd'			=> date('d-m-Y',strtotime($value['dateadd'])),
 					'topicTitle'		=> $value['topic_title'],
 					't_id_provinces'	=> $value['t_id_provinces'],
+					'text_class'		=> $value['text_class'],
+					'text_status'		=> $value['text_status'],
+					'status_id'			=> $value['status_id'],
+					'status_icon'			=> $value['status_icon'],
 				);
 			}
 

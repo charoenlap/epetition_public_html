@@ -24,85 +24,86 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="" method="post">
+                            <form action="<?php echo route('appeal');?>" method="get">
+                                <input type="hidden" name="route" value="appeal">
                                 <div class="row mb-3">
                                     <div class="col-md-3 mb-3">
                                         <label for="">เรื่องที่ร้องเรียน/ร้องทุกข์</label>
-                                        <select name="" id="" class="form-control">
+                                        <select name="topic_id" id="topic_id" class="form-control">
                                             <option value="">เลือก</option>
                                             <?php foreach($topic as $val){ ?>
-                                                <option value=""><?php echo $val['topic_title']; ?></option>
+                                                <option value="<?php echo $val['id']; ?>"><?php echo $val['topic_title']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="">วันที่เรื่องร้องเรียน/ร้องทุกข์</label>
-                                        <input type="date" class="form-control">
+                                        <input type="text" name="dateadd" value="<?php echo $dateadd; ?>" class="datethaipicker form-control">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="">ถึงวันที่</label>
-                                        <input type="date" class="form-control">
+                                        <input type="text" name="dateadd_end" value="<?php echo $dateadd_end; ?>" class="datethaipicker form-control">
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label for="">เวลาที่ร้องเรียน/ร้องทุกข์</label>
-                                        <input type="time" class="form-control">
+                                        <label for="dateadd">เวลาที่ร้องเรียน/ร้องทุกข์</label>
+                                        <input type="text" name="dateadd_time" value="<?php echo $dateadd_time; ?>" class="time timepicker form-control">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="">รหัสเรื่องที่ร้องเรียน/ร้องทุกข์ (Ticket ID)</label>
-                                        <input type="text" class="form-control" placeholder="Ticket ID">
+                                        <input type="text" name="case_code" value="<?php echo $case_code; ?>" id="case_code" class="form-control" placeholder="Ticket ID">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="">สถานะเรื่องร้องเรียน/ร้องทุกข์</label>
-                                        <select name="" id="" class="form-control">
+                                        <select name="status_id" class="form-control">
                                             <option value="">เลือก</option>
                                             <?php foreach($status as $val){ ?>
-                                            <option value="<?php echo $val['id']; ?>"><?php echo $val['text']; ?></option>
+                                            <option value="<?php echo $val['id']; ?>" <?php echo ($status_id==$val['id']?'selected':'');?>><?php echo $val['status_text']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="">หน่วยงานที่รับผิดชอบ</label>
-                                        <select name="" id="" class="form-control">
+                                        <select name="department_id" id="department_id" class="form-control">
+                                            <option value=""></option>
                                             <?php foreach($department as $val){?>
-                                            <option value="<?php echo $val['DEPARTMENT_ID'];?>">
+                                            <option value="<?php echo $val['DEPARTMENT_ID'];?>" <?php echo ($department_id==$val['DEPARTMENT_ID']?'selected':'');?>>
                                                 <?php echo $val['DEPARTMENT_NAME'];?>
                                             </option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label for="">สถานที่</label>
-                                        <input type="text" class="form-control">
+                                        <label for="t_id_provinces">สถานที่</label>
+                                        <input type="text" name="t_id_provinces" value="<?php echo $t_id_provinces;?>" id="t_id_provinces" class="form-control">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="">วันที่คาดว่าจะแล้วเสร็จ</label>
-                                        <input type="date" class="form-control">
+                                        <input type="text" name="date_respect" value="<?php echo $date_respect;?>" class="datethaipicker form-control">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label for="">หมายเลขบัตรประชาชน</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" name="id_card" value="<?php echo $id_card;?>" class="form-control" placeholder="">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="">ชื่อสกุลผู้ร้องเรียน/ร้องทุกข์</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" name="name_lastname" value="<?php echo $name_lastname;?>" class="form-control" placeholder="">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="">เบอร์โทรศัพท์ผู้ร้องเรียน/ร้องทุกข์</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                        <input type="radio" name="chkTypePhone" id="rdoHome" checked>
+                                        <input type="text" name="phone" value="<?php echo $phone;?>" class="form-control" placeholder="">
+                                        <input type="radio" name="chkTypePhone" <?php echo ($chkTypePhone=="tel"?'selected':'');?> value="tel" id="rdoHome" checked>
                                         <label for="rdoHome">โทรศัพท์บ้าน</label>
-                                        <input type="radio" name="chkTypePhone" id="rdoPhone">
+                                        <input type="radio" name="chkTypePhone" <?php echo ($chkTypePhone=="phone"?'selected':'');?> value="phone" id="rdoPhone">
                                         <label for="rdoPhone">มือถือ</label>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="">คำสำคัญ</label>
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" class="form-control" name="response_person" placeholder="" value="<?php echo $response_person;?>">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="">ช่องทางการร้องเรียน</label>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">จดหมาย</option> 
-                                            <option value="">เว็บไซต์ และ อีเมล์ </option>
+                                        <select name="type" id="type" class="form-control">
+                                            <option value="1">เว็บไซต์ และ อีเมล์ </option>
                                             <option value="">Call center </option>
                                             <option value="">ยื่นหนังสือด้วยตนเอง</option>
                                             <option value="">facebook </option>
@@ -114,7 +115,7 @@
                                     <div class="col-md-12 text-center">
                                         <label for="">&nbsp;</label>
                                         <button class="btn btn-success " type="submit"><i class="fas fa-search"></i> ค้นหา</button>
-                                        <button class="btn btn-warning " type="reset">ล้างคำค้นหา</button>
+                                        <a class="btn btn-warning" href="<?php echo route("appeal"); ?>">ล้างคำค้นหา</a>
                                     </div>
                                 </div>
                             </form>
@@ -183,7 +184,9 @@
                                                 <td>จากเว็บไซต์</td>
                                                 <td><?php echo $value['t_id_provinces']; ?></td>
                                                 <td><?php echo $value['dateadd']; ?></td>
-                                                <td></td>
+                                                <td>
+                                                    <i class="fas fa-square-full status-<?php echo $value['status_icon']; ?>"></i>
+                                                </td>
                                                 <td class="text-center">
                                                     <a href="<?php echo route('appeal/detail&id='.$value['id']);?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
                                                     <a href="<?php echo route('appeal/status&id='.$value['id']);?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="รับเรื่องร้องเรียน"><i class="far fa-check-square"></i></a>
@@ -304,5 +307,22 @@
         }else{
             event.preventDefault();
         }
+    });
+    $(document).ready(function(){
+        $('.datethaipicker').datetimepicker({
+            // yearOffset:222,
+            lang:'ch',
+            timepicker:false,
+            format:'Y-m-d',
+            formatDate:'Y-m-d',
+            // minDate:'-1970/01/02', // yesterday is minimum date
+            // maxDate:'+1970/01/02' // and tommorow is maximum date calendar
+        });
+
+        $('.time').datetimepicker({
+            datepicker:false,
+            format:'H:i',
+            step:5
+        });
     });
 </script>
