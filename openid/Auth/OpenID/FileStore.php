@@ -69,9 +69,7 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
         $this->max_nonce_age = 6 * 60 * 60; // Six hours, in seconds
 
         if (!$this->_setup()) {
-            echo $directory."< Failed<br>";
-            trigger_error('Failed to initialize OpenID file store in ' .
-                          $directory, E_USER_ERROR);
+            trigger_error('Failed to initialize OpenID file store in ' . $directory, E_USER_ERROR);
         }
     }
 
@@ -89,6 +87,7 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
      */
     function _setup()
     {
+        echo Auth_OpenID::ensureDir($this->nonce_dir).'<<br>';
         return (Auth_OpenID::ensureDir($this->nonce_dir) &&
                 Auth_OpenID::ensureDir($this->association_dir) &&
                 Auth_OpenID::ensureDir($this->temp_dir));
