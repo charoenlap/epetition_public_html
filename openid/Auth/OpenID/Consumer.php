@@ -334,6 +334,8 @@ class Auth_OpenID_Consumer {
                                      serialize($loader->toSession($m)));
             }
         }
+        echo 'discoverMethod: '.$this->discoverMethod.'<br>';
+        echo 'fetcher: '.$this->consumer->fetcher.'<br>';
 
         $endpoint = $disco->getNextService($this->discoverMethod,
                                            $this->consumer->fetcher);
@@ -347,7 +349,6 @@ class Auth_OpenID_Consumer {
         }
 
         if ($endpoint === null) {
-            echo "test";exit();
             return null;
         } else {
 
