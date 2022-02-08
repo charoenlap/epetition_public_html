@@ -85,7 +85,7 @@ class Auth_Yadis_Service {
     /**
      * Creates an empty service object.
      */
-    function Auth_Yadis_Service()
+    public function __construct()
     {
         $this->element = null;
         $this->parser = null;

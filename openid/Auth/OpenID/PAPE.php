@@ -37,7 +37,7 @@ class Auth_OpenID_PAPE_Request extends Auth_OpenID_Extension {
     var $ns_alias = 'pape';
     var $ns_uri = Auth_OpenID_PAPE_NS_URI;
 
-    function Auth_OpenID_PAPE_Request($preferred_auth_policies=null,
+    public function __construct($preferred_auth_policies=null,
                                       $max_auth_age=null)
     {
         if ($preferred_auth_policies === null) {
