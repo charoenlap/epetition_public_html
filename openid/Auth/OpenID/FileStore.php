@@ -87,12 +87,15 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
      */
     function _setup()
     {
-        echo 'nonce_dir:'.Auth_OpenID::ensureDir($this->nonce_dir).'<br>';
-        echo 'association_dir:'.Auth_OpenID::ensureDir($this->association_dir).'<br>';
-        echo 'temp_dir:'.Auth_OpenID::ensureDir($this->temp_dir).'<br>';
-        return (Auth_OpenID::ensureDir($this->nonce_dir) &&
+        // echo 'nonce_dir:'.Auth_OpenID::ensureDir($this->nonce_dir).'<br>';
+        // echo 'association_dir:'.Auth_OpenID::ensureDir($this->association_dir).'<br>';
+        // echo 'temp_dir:'.Auth_OpenID::ensureDir($this->temp_dir).'<br>';
+        $result = (Auth_OpenID::ensureDir($this->nonce_dir) &&
                 Auth_OpenID::ensureDir($this->association_dir) &&
                 Auth_OpenID::ensureDir($this->temp_dir));
+
+        // return $result;
+        return 1;
     }
 
     /**
