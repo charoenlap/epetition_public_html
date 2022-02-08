@@ -1,5 +1,25 @@
 <?php 
 	class MasterModel extends db {
+		public function addResponse($data=array()){
+			$day_end = 30;
+			$sql_config_day = "SELECT * FROM ep_config WHERE `name` = 'day_end'";
+			$query_config_day = $this->query($sql_config_day);
+			if($query_config_day->num_rows){
+				$day_end = $query_config_day->row['val'];
+			}
+			$dateadd=date('Y-m-d H:i:s');
+			date_add($dateadd,date_interval_create_from_date_string($day_end." days"));
+			$date_end = date_format($date,"Y-m-d");
+			$data['day_end']	= $day_end;
+			$data['dateadd']	= $dateadd; 
+			$data['date_end']	= $date_end;
+			$result_last_insert = $this->insert('response',$data);
+			$case_code = ((date('y')+43).date('m')).str_pad($result_last_insert,4,"0", STR_PAD_LEFT);
+			$sql_update = "UPDATE ep_response SET case_code = '".$case_code."' WHERE id=".$result_last_insert;
+			$query_update = $this->query($sql_update);
+
+			return $case_code;
+		}
 		public function getGeographies($data=array()){
 			$result = array();
 			$path_json = PATH_JSON.'getGeographies.json';
@@ -120,13 +140,6 @@
 		// 	}
 		// 	return $result;
 		// }
-		public function addResponse($data=array()){
-			$result_last_insert = $this->insert('response',$data);
-			$case_code = ((date('y')+43).date('m')).str_pad($result_last_insert,4,"0", STR_PAD_LEFT);
-			$sql_update = "UPDATE ep_response SET case_code = '".$case_code."' WHERE id=".$result_last_insert;
-			$query_update = $this->query($sql_update);
-
-			return $case_code;
-		}
+		
 	}
 ?>

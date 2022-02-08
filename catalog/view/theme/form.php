@@ -415,6 +415,83 @@ $(document).on('change','#fileinput',function(e){
         }
     }
 });
+$('#geographies').on("change",function(){
+    let value = $('option:selected', this).attr('data-id');
+    $.ajax({
+        type: "GET",
+        url: "index.php?route=home/form",
+        data: {idgeographies:value},
+        success: function(data,response){
+            console.log(response);
+            $('#provinces').html(data);
+        }
+    });
+});
+
+$('#provinces').on("change",function(){
+    let value = $('option:selected', this).attr('data-id');
+    $.ajax({
+        type: "GET",
+        url: "index.php?route=home/form",
+        data: {idprovinces:value},
+        success: function(data,response){
+            console.log(response);
+            $('#amphures').html(data);
+        }
+    });
+});
+
+$('#amphures').on("change",function(){
+    let value = $('option:selected', this).attr('data-id');
+    $.ajax({
+        type: "GET",
+        url: "index.php?route=home/form",
+        data: {idamphures:value},
+        success: function(data,response){
+            console.log(response);
+            $('#districts').html(data);
+        }
+    });
+});
+
+$('#t_geographies').on("change",function(){
+    let value = $('option:selected', this).attr('data-id');
+    $.ajax({
+        type: "GET",
+        url: "index.php?route=home/form",
+        data: {t_idgeographies:value},
+        success: function(data,response){
+            console.log(response);
+            $('#t_provinces').html(data);
+        }
+    });
+});
+
+$('#t_provinces').on("change",function(){
+    let value = $('option:selected', this).attr('data-id');
+    $.ajax({
+        type: "GET",
+        url: "index.php?route=home/form",
+        data: {t_idprovinces:value},
+        success: function(data,response){
+            console.log(response);
+            $('#t_amphures').html(data);
+        }
+    });
+});
+
+$('#t_amphures').on("change",function(){
+    let value = $('option:selected', this).attr('data-id');
+    $.ajax({
+        type: "GET",
+        url: "index.php?route=home/form",
+        data: {t_idamphures:value},
+        success: function(data,response){
+            console.log(response);
+            $('#t_districts').html(data);
+        }
+    });
+});
 // document.getElementById("btnLoad").addEventListener("click", function showFileSize() {
 //     // (Can't use `typeof FileReader === "function"` because apparently it
 //     // comes back as "object" on some browsers. So just see if it's there

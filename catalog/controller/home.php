@@ -36,7 +36,6 @@
 			$data['topic_id'] 		= get('topic_id');
 			if(method_post()){
 				$post 				= $_POST;
-				$post['dateadd']	= date('Y-m-d H:i:s');
 				$post['topic_id'] 	= post('topic_id');
 				unset($post['file-upload-field']);
 				$add = $master->addResponse($post);
