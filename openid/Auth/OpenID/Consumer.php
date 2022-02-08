@@ -347,9 +347,10 @@ class Auth_OpenID_Consumer {
         }
 
         if ($endpoint === null) {
+            echo "test";exit();
             return null;
         } else {
-            echo "test";exit();
+
             return $this->beginWithoutDiscovery($endpoint,
                                                 $anonymous);
         }
