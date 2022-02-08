@@ -16,7 +16,7 @@ $store = new Auth_OpenID_FileStore('./oid_store');
 $consumer = new Auth_OpenID_Consumer($store);
 
 // ตรวจสอบค่าที่ได้รับมา (input เป็น URL ที่ให้ Server ส่งค่ากลับมา)
-$response = $consumer->complete('http://localhost/epetition/lib/system/lib/openid/OpenID/oid_return.php');
+$response = $consumer->complete('http://localhost/epetition/lib/system/lib/openid/oid_return.php');
 
 
 if ($response->status == Auth_OpenID_SUCCESS) {

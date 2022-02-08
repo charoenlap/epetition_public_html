@@ -52,8 +52,8 @@ global $pape_policy_uris;
 
     <div id="verify-form">
 		<ul>
-			<li>ทดสอบการทำงานของ OpenID <a href="http://localhost/epetition/lib/system/lib/openid/OpenID/SSOLogin.php" target="_blank">SSOLogin.php</a></li>
-			<li>ทดสอบการทำงานของ OAuth <a href="http://localhost/epetition/lib/system/lib/openid/OpenID/OAuthConsumer.php" target="_blank">OAuthConsumer.php</a></li>
+			<li>ทดสอบการทำงานของ OpenID <a href="http://localhost/epetition/lib/system/lib/openid/SSOLogin.php" target="_blank">SSOLogin.php</a></li>
+			<li>ทดสอบการทำงานของ OAuth <a href="http://localhost/epetition/lib/system/lib/openid/OAuthConsumer.php" target="_blank">OAuthConsumer.php</a></li>
 		</ul>
     </div>
   </body>
