@@ -4,7 +4,7 @@ ob_start();
 // สรอ. OpenID Provider
 $OpenIdProviderUrl = 'http://testopenid.ega.or.th/';  
 //หน้าที่จะให้ส่งกลับ
-$eServiceUrl = "http://localhost/epetition/lib/system/lib/openid/"; 
+$eServiceUrl = "https://charoenlap.com/epetition/public_html/openid/"; 
 include "common.php";
 
 
