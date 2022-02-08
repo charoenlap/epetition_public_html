@@ -24,73 +24,19 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="" method="post">
+                            <form action="<?php echo route('appeal/opm');?>" method="get">
                                 <div class="row mb-3">
                                     <div class="col-md-3 mb-3">
-                                        <label for="">หัวข้อเรื่องร้องเรียน</label>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">เลือก</option>
-                                            <option value="">ด้านการทุจริต/ประพฤติมิชอบ</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="">วันที่เรื่องร้องเรียนเข้าระบบ</label>
-                                        <input type="date" class="form-control">
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="">ถึงวันที่</label>
-                                        <input type="date" class="form-control">
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="">รหัส Ticket ID</label>
-                                        <input type="text" class="form-control" placeholder="Ticket ID">
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="">สถานะ</label>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">เลือก</option>
-                                            <option value="">อยู่ระหว่างการดำเนินการ</option>
-                                            <option value="">อยู่ระหว่างการดำเนินการเหลืออีก 7 วันครบกำหนด</option>
-                                            <option value="">ดำเนินการล่าช้ากว่ากำหนดโดยเกิน 45 วันที่กำหนด</option>
-                                            <option value="">ดำเนินการแล้วเสร็จ</option>
-                                            <option value="">กระทรวงฯ ส่งเรื่องร้องเรียนให้หน่วยงานแล้ว แต่หน่วยงานยังไม่รับเรื่อง</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="">หน่วยงาน</label>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">เลือก</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="">วันที่คาดว่าจะแล้วเสร็จ</label>
-                                        <input type="date" class="form-control">
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="">หมายเลขบัตรประชาชน</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="">ชื่อสกุล</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="">เบอร์</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="">ค้นหา</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="">ช่องทางการร้องเรียน</label>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">จดหมาย</option> 
-                                            <option value="">เว็บไซต์ และ อีเมล์ </option>
-                                            <option value="">Call center </option>
-                                            <option value="">ยื่นหนังสือด้วยตนเอง</option>
-                                            <option value="">facebook </option>
-                                            <option value="">ส่วนด่วน</option>
+                                        <label for="timeline_type">ประเภทกำเนินการร้องเรียน</label>
+                                        <select name="timeline_type" id="timeline_type" class="form-control">
+                                            <option value="A" <?php echo ($timeline_type=="A"?'selected':''); ?>>   ทั้งหมด
+                                            </option>
+                                            <option value="I" <?php echo ($timeline_type=="I"?'selected':''); ?>>   รายการรับ
+                                            </option>
+                                            <option value="P" <?php echo ($timeline_type=="P"?'selected':''); ?>>   กำลังดำเนินการ
+                                            </option>
+                                            <option value="N" <?php echo ($timeline_type=="N"?'selected':''); ?>>   รายการแจ้งเตือน
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-md-2">
@@ -184,7 +130,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            <!-- <div class="row mb-3">
                                 <div class="col-md-12">
                                     <p>สถานะ</p>
                                     <ul class="list-unstyled">
@@ -194,7 +140,7 @@
                                         <li><p><i class="fas fa-times-circle status-red"></i> ดำเนินการล่าช้ากว่ากำหนด</p></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
