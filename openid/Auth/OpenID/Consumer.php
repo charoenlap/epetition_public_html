@@ -212,7 +212,7 @@ define('Auth_OpenID_PARSE_ERROR', 'parse error');
  *
  * @package OpenID
  */
-class Auth_OpenID_Consumer {
+class __construct {
 
     /**
      * @access private
@@ -258,7 +258,7 @@ class Auth_OpenID_Consumer {
      * when creating the internal consumer object.  This is used for
      * testing.
      */
-    function Auth_OpenID_Consumer($store, $session = null,
+    function __construct($store, $session = null,
                                   $consumer_cls = null)
     {
         if ($session === null) {
