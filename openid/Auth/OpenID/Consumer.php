@@ -334,9 +334,9 @@ class Auth_OpenID_Consumer {
                                      serialize($loader->toSession($m)));
             }
         }
-        echo 'discoverMethod: <br>';
+        echo '<br>discoverMethod: <br>';
         var_dump($this->discoverMethod);
-        echo 'fetcher: <br>';
+        echo '<br>fetcher: <br>';
         var_dump($this->consumer->fetcher);
         exit();
         $endpoint = $disco->getNextService($this->discoverMethod,
