@@ -22,7 +22,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
+                    <div class="card"> 
                         <div class="card-body">
                             <form action="<?php echo route('appeal/opm');?>" method="get">
                                 <div class="row mb-3">
