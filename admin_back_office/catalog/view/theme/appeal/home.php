@@ -177,11 +177,11 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center"><?php echo $i++; ?></td>
-                                                <td><?php echo $value['ticketId']; ?></td>
+                                                <td><?php echo $value['case_code']; ?></td>
                                                 <td><?php echo $value['fullname']; ?></td>
                                                 <td><?php echo $value['topicTitle']; ?></td>
                                                 <td>จากเว็บไซต์</td>
-                                                <td>(จังหวัด)</td>
+                                                <td><?php echo $value['t_id_provinces']; ?></td>
                                                 <td><?php echo $value['dateadd']; ?></td>
                                                 <td></td>
                                                 <td class="text-center">

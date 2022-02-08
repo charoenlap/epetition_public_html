@@ -7,12 +7,13 @@
 			if($query_config_day->num_rows){
 				$day_end = $query_config_day->row['val'];
 			}
-			$dateadd=date('Y-m-d H:i:s');
-			date_add($dateadd,date_interval_create_from_date_string($day_end." days"));
-			$date_end = date_format($date,"Y-m-d");
+			$dateadd=date('Y-m-d');
+			$date_end = date('Y-m-d', strtotime($dateadd. ' + '.$day_end.' days'));
+
 			$data['day_end']	= $day_end;
 			$data['dateadd']	= $dateadd; 
 			$data['date_end']	= $date_end;
+			$data['status']		= 2;
 			$result_last_insert = $this->insert('response',$data);
 			$case_code = ((date('y')+43).date('m')).str_pad($result_last_insert,4,"0", STR_PAD_LEFT);
 			$sql_update = "UPDATE ep_response SET case_code = '".$case_code."' WHERE id=".$result_last_insert;

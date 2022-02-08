@@ -9,11 +9,14 @@
 			$resultData 	= $response->getLists();
 
 			foreach($resultData as $key => $value){
-				$data['lists'][$key]['ticketId']	= "6510000".$value['id'];
-				$data['lists'][$key]['id'] 			= $value['id'];
-				$data['lists'][$key]['fullname']	= $value['name_title']." ".$value['name']." ".$value['lastname'];
-				$data['lists'][$key]['dateadd']		= date('d-m-Y',strtotime($value['dateadd']));
-				$data['lists'][$key]['topicTitle']	= $value['topic_title'];
+				$data['lists'][] = array(
+					'case_code'			=> $value['case_code'],
+					'id' 				=> $value['id'],
+					'fullname'			=> $value['name_title']." ".$value['name']." ".$value['lastname'],
+					'dateadd'			=> date('d-m-Y',strtotime($value['dateadd'])),
+					'topicTitle'		=> $value['topic_title'],
+					't_id_provinces'	=> $value['t_id_provinces'],
+				);
 			}
 
 	    	$this->view('appeal/home',$data);

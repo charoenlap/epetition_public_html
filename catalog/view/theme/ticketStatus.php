@@ -16,22 +16,8 @@
             <div class="col-md-12">
                 <?php 
                     if(isset($ticket['case_code'])){ 
-                        $status = (int)$ticket['status'];
-                        $txt_status = "";
-                        $color = "";
-                        if($status=="0"){
-                            $txt_status = "เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างการดำเนินการ";
-                            $color = "warning";
-                        }else if($status=="1"){
-                            $txt_status = "เรื่องร้องเรียน/ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว";
-                            $color = "success";
-                        }else if($status=="2"){
-                            $txt_status = "เรื่องร้องเรียน/ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด";
-                            $color = "danger";
-                        }else if($status=="3"){
-                            $txt_status = "เรื่องร้องเรียน/ร้องทุกข์อีก 7 วันจะครบกำหนด";
-                            $color = "light";
-                        }
+                        $txt_status = $ticket['text_status'];
+                        $color = $ticket['text_class'];
                 ?>
                 <h3 class="text-theme font-weight-bold">รายละเอียดเรื่องร้องเรียน</h3>
                 <table class="table table-bordered">
