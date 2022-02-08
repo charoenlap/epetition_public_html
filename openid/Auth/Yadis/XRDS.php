@@ -255,7 +255,7 @@ class Auth_Yadis_XRDS {
      * Instantiate a Auth_Yadis_XRDS object.  Requires an XPath
      * instance which has been used to parse a valid XRDS document.
      */
-    function Auth_Yadis_XRDS($xmlParser, $xrdNodes)
+    public function __construct($xmlParser, $xrdNodes)
     {
         $this->parser = $xmlParser;
         $this->xrdNode = $xrdNodes[count($xrdNodes) - 1];

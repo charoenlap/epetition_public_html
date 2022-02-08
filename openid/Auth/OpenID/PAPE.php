@@ -161,7 +161,7 @@ class Auth_OpenID_PAPE_Response extends Auth_OpenID_Extension {
     var $ns_alias = 'pape';
     var $ns_uri = Auth_OpenID_PAPE_NS_URI;
 
-    function Auth_OpenID_PAPE_Response($auth_policies=null, $auth_time=null,
+    public function __construct($auth_policies=null, $auth_time=null,
                                        $nist_auth_level=null)
     {
         if ($auth_policies) {
