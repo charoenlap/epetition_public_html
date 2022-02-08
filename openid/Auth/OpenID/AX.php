@@ -69,7 +69,7 @@ function Auth_OpenID_AX_checkAlias($alias)
  * @package OpenID
  */
 class Auth_OpenID_AX_Error {
-    function Auth_OpenID_AX_Error($message=null)
+    public function __construct($message=null)
     {
         $this->message = $message;
     }
