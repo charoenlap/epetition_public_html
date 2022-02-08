@@ -94,8 +94,8 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
                 Auth_OpenID::ensureDir($this->association_dir) &&
                 Auth_OpenID::ensureDir($this->temp_dir));
 
-        // return $result;
-        return 1;
+        return $result;
+        // return 1;
     }
 
     /**
