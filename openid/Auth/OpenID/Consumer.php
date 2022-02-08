@@ -258,7 +258,7 @@ class Auth_OpenID_Consumer {
      * when creating the internal consumer object.  This is used for
      * testing.
      */
-    function Auth_OpenID_Consumer($store, $session = null,
+    public function __construct($store, $session = null,
                                   $consumer_cls = null)
     {
         if ($session === null) {
