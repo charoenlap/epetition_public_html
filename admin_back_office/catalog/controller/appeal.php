@@ -135,7 +135,7 @@
 			$data['token_id'] = $token_id = $this->getSession('token_id');
 			$data['error'] = '';
 			$data['result'] = array();
-			$data['timeline_type'] = (get('timeline_type')?'A':'');
+			$data['timeline_type'] = (get('timeline_type')?get('timeline_type'):'A');
 			$dataSelect = array(
 				'token_id' =>  $token_id,
 				'last_get_date_time' =>  '',
