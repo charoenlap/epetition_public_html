@@ -25,6 +25,7 @@
                     <div class="card"> 
                         <div class="card-body">
                             <form action="<?php echo route('appeal/opm');?>" method="get">
+                                <input type="hidden" name="route" value="appeal/opm">
                                 <div class="row mb-3">
                                     <div class="col-md-3 mb-3">
                                         <label for="timeline_type">ประเภทกำเนินการร้องเรียน</label>
