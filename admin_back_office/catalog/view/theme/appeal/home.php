@@ -139,16 +139,16 @@
                                     <table class="table">
                                         <tr>
                                             <td>
-                                                <i class="fas fa-square-full status-yellow"></i> เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างการดำเนินการ
+                                                <i class="fas fa-square-full status-yellow"></i> <small>เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างการดำเนินการ</small>
                                             </td>
                                             <td>
-                                                <i class="fas fa-square-full status-orange"></i> เรื่องร้องเรียน/ร้องทุกข์อีก 7 วันจะครบกำหนด
+                                                <i class="fas fa-square-full status-orange"></i> <small>เรื่องร้องเรียน/ร้องทุกข์อีก 7 วันจะครบกำหนด</small>
                                             </td>
                                             <td>
-                                                <i class="fas fa-square-full status-red"></i> เรื่องร้องเรียน/ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด
+                                                <i class="fas fa-square-full status-red"></i> <small>เรื่องร้องเรียน/ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด</small>
                                             </td>
                                             <td>
-                                                <i class="fas fa-square-full status-green"></i> เรื่องร้องเรียน/ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว
+                                                <i class="fas fa-square-full status-green"></i> <small>เรื่องร้องเรียน/ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว</small>
                                             </td>
                                         </tr>
                                     </table>
@@ -264,7 +264,7 @@
                                             </tr> -->
                                         </tbody>
                                     </table>
-                                    <nav aria-label="Page navigation example">
+                                    <!-- <nav aria-label="Page navigation example">
                                         <ul class="pagination">
                                             <li class="page-item">
                                             <a class="page-link" href="#" aria-label="Previous">
@@ -282,7 +282,7 @@
                                             </a>
                                             </li>
                                         </ul>
-                                    </nav>
+                                    </nav> -->
                                 </div>
                             </div>
 
