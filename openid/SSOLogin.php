@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 header ('Content-type: text/html; charset=utf-8');
 ob_start();
 // สรอ. OpenID Provider
-$OpenIdProviderUrl = 'http://testopenid.ega.or.th/';  
+$OpenIdProviderUrl = 'http://govid.ega.or.th/';  
 //หน้าที่จะให้ส่งกลับ
 $eServiceUrl = "https://charoenlap.com/epetition/public_html/openid/"; 
 include "common.php";
