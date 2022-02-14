@@ -1,17 +1,17 @@
 <?php 
     $month = array(
-        array("name" => 'มกราคม',"count" => '19'),
-        array("name" => 'กุมภาพันธ์',"count" => '55'),
-        array("name" => 'มีนาคม',"count" => '23'),
-        array("name" => 'เมษายน',"count" => '76'),
-        array("name" => 'พฤษภาคม',"count" => '12'),
-        array("name" => 'มิถุนายน',"count" => '1'),
-        array("name" => 'กรกฎาคม',"count" => '98'),
-        array("name" => 'สิงหาคม',"count" => '89'),
-        array("name" => 'กันยายน',"count" => '54'),
-        array("name" => 'ตุลาคม',"count" => '55'),
-        array("name" => 'พฤศจิกายน',"count" => '32'),
-        array("name" => 'ธันวาคม',"count" => '41')
+        array("name" => 'มกราคม',   "count" => '0', "month" => 1),
+        array("name" => 'กุมภาพันธ์',  "count" => '0', "month" => 2),
+        array("name" => 'มีนาคม',    "count" => '0', "month" => 3),
+        array("name" => 'เมษายน',   "count" => '0', "month" => 4),
+        array("name" => 'พฤษภาคม',  "count" => '0', "month" => 5),
+        array("name" => 'มิถุนายน',   "count" => '0', "month" => 6),
+        array("name" => 'กรกฎาคม',  "count" => '0', "month" => 7),
+        array("name" => 'สิงหาคม',   "count" => '0', "month" => 8),
+        array("name" => 'กันยายน',   "count" => '0', "month" => 9),
+        array("name" => 'ตุลาคม',    "count" => '0', "month" => 10),
+        array("name" => 'พฤศจิกายน', "count" => '0', "month" => 11),
+        array("name" => 'ธันวาคม',   "count" => '0', "month" => 12)
     );
     
 ?>
@@ -48,11 +48,11 @@
                             <div class="row mb-3">
                                 <div class="col-md-3">
                                     <label for="">ปี พ.ศ.</label>
-                                    <select name="" id="" class="form-control">
-                                        <option value="">2564</option>
-                                        <option value="">2563</option>
-                                        <option value="">2562</option>
-                                        <option value="">2561</option>
+                                    <?php $year = date('Y')+543; ?>
+                                    <select name="year" id="year" class="form-control">
+                                        <?php for($i=$year-5;$i<=$year;$i++){?>
+                                            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -74,7 +74,8 @@
                                             <?php foreach($month as $key => $value){ ?>
                                             <tr>
                                                 <td><?php echo $value['name']; ?></td>
-                                                <td><?php echo $value['count']; ?></td>
+                                                <td>
+                                                    <?php echo $listProgress['detail'][$value['month']][0]['count_id']; ?></td>
                                                 <td class="text-center"><a href="<?php echo route('progress/detail'); ?>" class="btn btn-info">รายละเอียด</a></td>
                                             </tr>
                                             <?php } ?>

@@ -2,26 +2,40 @@
 	class HomeController extends Controller {
 	    public function index() {
 	    	$data = array(); 
+			$last_login = $this->getSession('last_login');
+			if($last_login){
+		    	// $id_admin = $this->getSession('id_admin');
+		    	// if($id_admin){
+		    	// 	$this->view('home');
+		    	// }else{
+		    	//  	redirect('home/login');
+		    	// }
+		    	$total_case 		= $this->model('dashboard')->getTotalCase();
+		    	$total_case_process = $this->model('dashboard')->getTotalCaseProcess();
+		    	$total_user 		= $this->model('dashboard')->getTotalUser();
 
-	    	// $id_admin = $this->getSession('id_admin');
-	    	// if($id_admin){
-	    	// 	$this->view('home');
-	    	// }else{
-	    	//  	redirect('home/login');
-	    	// }
-	    	$total_case 		= $this->model('dashboard')->getTotalCase();
-	    	$total_case_process = $this->model('dashboard')->getTotalCaseProcess();
-	    	$total_user 		= $this->model('dashboard')->getTotalUser();
+				$data['total_case'] 		= $total_case;
+				$data['total_case_process'] = $total_case_process;
+				$data['total_report'] 		= 11;
+				$data['total_user'] 		= $total_user;
 
-			$data['total_case'] 		= $total_case;
-			$data['total_case_process'] = $total_case_process;
-			$data['total_report'] 		= 11;
-			$data['total_user'] 		= $total_user;
-
-	    	$this->view('home',$data);
+		    	$this->view('home',$data);
+		    }else{
+		    	redirect('login');
+		    }
 	    }
 	    public function login(){
-
+	    	$this->setSession('token_id','');
+			$this->setSession('user_name','');
+			$this->setSession('officer_id','');
+			$this->setSession('officer_name','');
+			$this->setSession('role_id','');
+			$this->setSession('role_name','');
+			$this->setSession('org_id','');
+			$this->setSession('org_name','');
+			$this->setSession('position','');
+			$this->setSession('default_language','');
+			$this->setSession('last_login','');
 	    	if(method_post()){
 	    		$result = array(
 	    			'code' 	=> 200,

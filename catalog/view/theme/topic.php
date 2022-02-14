@@ -1,3 +1,4 @@
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <div class="breadcrumb-theme">
   <div class="container">
     <div class="row">
@@ -17,17 +18,25 @@
                 <h3 class="text-theme font-weight-bold">ประเภทเรื่องร้องเรียน</h3>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="accordion">
             <?php 
               $i = 1;
               foreach($topic as $key => $value){ 
             ?>
+            <h3 class="text-link text-topic-link btn-block">
+              <?php echo $i++; ?>. <?php echo $value['topic_title']; ?>
+            </h3>
             <div class="col-md-12">
-              <a href="<?php echo route('home/form&topic_id='.$value['id']); ?>" class="text-link text-topic-link">
-                <p><?php echo $i++; ?>.<?php echo $value['topic_title']; ?></p>
+              <a href="<?php echo route('home/form&topic_id='.$value['id']); ?>" >
+                <p><?php echo $value['topic_title']; ?></p>
               </a>
             </div>
             <?php } ?>
         </div>
     </div>
 </section>
+<script>
+  $(function(){
+    $( "#accordion" ).accordion();
+  });
+</script>

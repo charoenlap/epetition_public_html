@@ -27,21 +27,32 @@
 		// 	redirect('home/form');
 		// }
 	    public function form(){
-	    	$data = array();
-	    	$data['title'] = "";
-	    	$data['descreption'] = "";
-
-			$master 				= $this->model('master');
-			$data['geographies'] 	= $master->getGeographies();
-			$data['topic_id'] 		= get('topic_id');
+	    	$master 				= $this->model('master');
 			if(method_post()){
 				$post 				= $_POST;
 				$post['topic_id'] 	= post('topic_id');
 				unset($post['file-upload-field']);
+				if(isset($_FILES['file-upload-field'])){
+					$upload_name = time().$_FILES['file-upload-field']['name'];
+					upload($_FILES['file-upload-field'],'uploads/files/',$upload_name);
+					$post['file'] = $upload_name;
+				}
+				// exit();
 				$add = $master->addResponse($post);
 				if($add){
 					redirect('home/formComplate&case_code='.$add);
 				}
+			}else{
+				$data = array();
+		    	$data['title'] = "";
+		    	$data['descreption'] = "";
+
+				
+				$data['geographies'] 	= $master->getGeographies();
+				$data['topic_id'] 		= get('topic_id');
+				$data['topic'] 			= $this->model('topic')->getTopicDetail($data['topic_id']);
+				// var_dump($data['topic']);
+				$data['prefix']			= $master->getPrefix();
 			}
 			// เลือกจังหวัดจากภาค
 			if(isset($_GET['idgeographies'])){

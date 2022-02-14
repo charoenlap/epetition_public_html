@@ -40,15 +40,17 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <?php $i=1;foreach($getGroups->rows as $val){ ?>
                       <tr>
-                        <td class="text-center">1</td>
-                        <td></td>
+                        <td class="text-center"><?php echo $i++; ?></td>
+                        <td><?php echo $val['GROUP_NAME'];?></td>
                         <td class="text-center">
-                          <a href="" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                          <a href="<?php echo route('user/setting');?>" class="btn btn-primary"><i class="fas fa-cog"></i></a>
                           <a href="" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                           <a href="" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                         </td>
                       </tr>
+                      <?php } ?>
                     </tbody>
                   </table>
                 </div>

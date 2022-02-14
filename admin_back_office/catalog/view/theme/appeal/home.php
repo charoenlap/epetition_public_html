@@ -163,9 +163,9 @@
                                                 <th class="text-center"  style="width:45px;">ลำดับ</th>
                                                 <th  style="width:80px;">Ticket ID</th>
                                                 <th style="width:180px;">ชื่อผู้ร้องเรียน</th>
-                                                <th>เรื่องที่ร้องเรียน/ร้องทุกข์</th>
+                                                <th>ประเภทเรื่องที่ร้องเรียน</th>
                                                 <th>ช่องทางการร้องเรียน</th>
-                                                <th>ช่องสถานที่เกิดเหตุ</th>
+                                                <th>สถานที่เกิดเหตุ</th>
                                                 <th style="width:130px;">วันที่ร้องเรียน</th>
                                                 <th class="text-center" style="width:50px;">สถานะ</th>
                                                 <th class="text-center" style="width:200px;">การจัดการ</th>
@@ -173,11 +173,11 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                                $i = 1;
+                                                $i = ($page-1)*DEFAULT_LIMIT_PAGE;
                                                 foreach($lists as $key => $value){ 
                                             ?>
                                             <tr>
-                                                <td class="text-center"><?php echo $i++; ?></td>
+                                                <td class="text-center"><?php echo ++$i; ?></td>
                                                 <td><?php echo $value['case_code']; ?></td>
                                                 <td><?php echo $value['fullname']; ?></td>
                                                 <td><?php echo $value['topicTitle']; ?></td>
@@ -267,25 +267,27 @@
                                             </tr> -->
                                         </tbody>
                                     </table>
-                                    <!-- <nav aria-label="Page navigation example">
+                                    <nav aria-label="Page navigation example">
                                         <ul class="pagination">
-                                            <li class="page-item">
+                                            <!-- <li class="page-item">
                                             <a class="page-link" href="#" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                                 <span class="sr-only">Previous</span>
                                             </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            </li> -->
+                                            <?php for($i=1; $i<=$page_limit; $i++){ ?>
                                             <li class="page-item">
+                                                <a class="page-link" href="<?php echo route('appeal&page='.$i); ?>"><?php echo $i;?></a>
+                                            </li>
+                                            <?php } ?>
+                                            <!-- <li class="page-item">
                                             <a class="page-link" href="#" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                                 <span class="sr-only">Next</span>
                                             </a>
-                                            </li>
+                                            </li> -->
                                         </ul>
-                                    </nav> -->
+                                    </nav>
                                 </div>
                             </div>
 

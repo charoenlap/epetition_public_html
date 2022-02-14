@@ -1,5 +1,11 @@
 <?php 
 	class MasterModel extends db {
+		public function getPrefix($data=array()){
+			$result = array();
+			$sql = "SELECT * FROM ep_prefix";
+			$query = $this->query($sql);
+			return $query->rows;
+		}
 		public function addResponse($data=array()){
 			$day_end = 30;
 			$sql_config_day = "SELECT * FROM ep_config WHERE `name` = 'day_end'";

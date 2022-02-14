@@ -2,3 +2,6 @@
 	font-weight: bold;
 	font-size:16px;
 }
+.carousel-caption {
+	text-shadow: 2px 2px #3e3e3e;
+}

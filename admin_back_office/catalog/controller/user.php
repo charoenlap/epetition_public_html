@@ -1,7 +1,8 @@
 <?php
     class UserController extends Controller {
         public function index() {
-            $this->view('user/home');
+            $data['lists'] = $this->model('user')->getLists();
+            $this->view('user/home',$data);
         }
         public function add(){
             $this->view('user/add');
@@ -10,7 +11,15 @@
             $this->view('user/edit');
         }
         public function group() {
-            $this->view('permission/home');
+            $data = array();
+            $data['getGroups'] = $this->model('user')->getGroups();
+            $this->view('permission/home',$data);
+        }
+        public function setting() {
+            $data = array();
+            $data['title'] = '';
+            // $data['getGroups'] = $this->model('user')->getGroups();
+            $this->view('permission/setting',$data);
         }
     }
 ?>

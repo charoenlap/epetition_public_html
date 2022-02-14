@@ -45,19 +45,19 @@
                                            </tr>
                                        </thead>
                                        <tbody>
-                                         <?php for($i=1;$i<=5;$i++){?>
+                                         <?php $i=1;foreach($lists as $val){?>
                                           <tr>
                                              <td class="text-center"><?php echo $i; ?></td>
-                                             <td>สมชาย</td>
-                                             <td>ใจดี</td>
-                                             <td>หัวหน้า</td>
+                                             <td><?php echo $val['FIRSTNAME']; ?></td>
+                                             <td><?php echo $val['LASTNAME']; ?></td>
+                                             <td><?php echo $val['DEPARTMENT_NAME']; ?></td>
                                              <td class="text-center">
                                               <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
                                               <a href="<?php echo route('user/edit'); ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="fas fa-edit"></i></a>
                                               <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="ลบ"><i class="far fa-trash-alt"></i></a>
                                              </td>
                                            </tr>
-                                         <?php } ?>
+                                         <?php $i++;} ?>
                                        </tbody>
                                     </table>
                                 </div> 

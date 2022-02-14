@@ -23,7 +23,7 @@
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                            <td><b>รหัสเรื่อง (Case ID)</b></td>
+                            <td width="200px;"><b>รหัสเรื่อง (Case ID)</b></td>
                             <td><?php echo $ticket['case_code']; ?></td>
                         </tr>
                         <tr>
@@ -46,7 +46,7 @@
                 <h4 class="text-center">ไม่พบเลขร้องเรียน " <?php echo $case_code;?> " บนระบบ</h4>
                 <?php } ?>
                 <div class="text-center">
-                    <a href="<?php echo route('ticket');?>">กลับไปหน้าค้นหา</a>
+                    <a href="<?php echo route('home');?>">กลับหน้าหลัก</a>
                 </div>
             </div>
         </div>

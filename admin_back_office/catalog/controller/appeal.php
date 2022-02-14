@@ -32,6 +32,7 @@
 			}else{
 				$phone 	= $data['phone'];
 			}
+			$data['page'] = (get('page')?get('page'):1);
 			$data_search = array(
 				'topic_id' 			=> $data['topic_id'],
 				'dateadd'			=> $data['dateadd'],
@@ -47,11 +48,12 @@
 				'phone'				=> $phone, 
 				'response_person'	=> $data['response_person'],
 				'status_id'			=> $data['status_id'],
+				'page'				=> $data['page']
 			);
 			
 			$resultData 	= $response->getLists($data_search);
 
-			foreach($resultData as $key => $value){
+			foreach($resultData->rows as $key => $value){
 				$data['lists'][] = array(
 					'case_code'			=> $value['case_code'],
 					'id' 				=> $value['id'],
@@ -65,7 +67,7 @@
 					'status_icon'			=> $value['status_icon'],
 				);
 			}
-
+			$data['page_limit'] = ceil($resultData->num_rows/DEFAULT_LIMIT_PAGE);
 	    	$this->view('appeal/home',$data);
 	    }
 	    public function add() {
@@ -149,6 +151,8 @@
 			$data['title']	= "บันทึกรับเรื่องร้องเรียน";
 
 			$id 		= $_GET['id'];
+			$data['agency'] = $this->model('agency')->getlists();
+			$data['appeal'] = $this->model('appeal')->getlists();
 			$response 	= $this->model('response');
 			$resultData = $response->getList($id);
 
@@ -170,6 +174,8 @@
 			$data['id_districts']		= $resultData['id_districts'];
 			$data['zipcode']			= $resultData['zipcode'];
 			$data['note_topic']			= $resultData['note_topic'];
+			$data['contacts']			= '';
+
 			$data['topic_address']		= "เลขที่ ".$resultData['t_address_no']." หมู่บ้าน ".$resultData['t_moo']." ซอย ".$resultData['t_soi']." ถนน ".$resultData['t_road']." ตำบล".$resultData['t_id_districts']." อำเภอ".$resultData['t_id_amphures']." จังหวัด".$resultData['t_id_provinces']."";
 			$data['place_landmarks']	= $resultData['place_landmarks'];
 			$data['response_person']	= $resultData['response_person'];

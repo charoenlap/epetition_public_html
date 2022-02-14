@@ -4,7 +4,8 @@
         <div class="col-md-12">
           <ul>
             <li><a href="<?php echo route('home'); ?>">หน้าหลัก</a></li>
-            <li class="active" aria-current="page">แจ้งเรื่องร้องเรียน</li>
+            <li><a href="">แจ้งเรื่องร้องเรียน</a></li>
+            <li class="active" aria-current="page"><?php echo $topic['topic_title'];?></li>
           </ul>
         </div> 
       </div>
@@ -17,31 +18,44 @@
                 <h5 class="text-theme font-weight-bold">ข้อมูลผู้ร้องเรียน</h5>
             </div>
         </div>
-        <form action="<?php echo route('home/form'); ?>" method="post">
+        <form action="<?php echo route('home/form'); ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="topic_id" value="<?php echo $topic_id;?>">
         <div class="row mb-3">
             <div class="col-md-12">
                 <label for="">เลขประจำตัวประชาชน <span class="text-danger">*</span></label>
-                <input type="text" name="id_card" id="id_card" class="form-control" placeholder="x-xxxxx-xxxxx-xx-x" required 
+                <input type="text" name="id_card" id="id_card" class="form-control" placeholder="x-xxxxx-xxxxx-xx-x" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+
+
                 size="30" onkeyup="idcard(this)"  minlength="15" maxlength="25" >
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-md-2">
                 <label for="">คำนำหน้า <span class="text-danger">*</span></label>
-                <select name="name_title" id="" class="form-control" required>
-                    <option value="นาย">นาย</option>
-                    <option value="นาง">นาง</option>
-                    <option value="นางสาว">นางสาว</option>
+                <select name="name_title" id="" class="form-control" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+                 >
+                    <?php foreach($prefix as $val){ ?>
+                    <option value="<?php echo $val['title'];?>"><?php echo $val['title'];?></option>
+                    <?php } ?>
                 </select>
             </div>
             <div class="col-md-5">
                 <label for="">ชื่อ <span class="text-danger">*</span></label>
-                <input type="text" name="name" class="form-control" placeholder="ชื่อ" required>
+                <input type="text" name="name" class="form-control" placeholder="ชื่อ" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+                 >
             </div>
             <div class="col-md-5">
                 <label for="">นามสกุล <span class="text-danger">*</span></label>
-                <input type="text" name="lastname" class="form-control" placeholder="นามสกุล" required>
+                <input type="text" name="lastname" class="form-control" placeholder="นามสกุล" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+                 >
             </div>
         </div>
         <div class="row mb-3">
@@ -60,6 +74,9 @@
             <div class="col-md-6">
                 <label for="">โทรศัพท์มือถือ <span class="text-danger">*</span></label>
                 <input type="text" name="phone" id="phone" class="form-control" placeholder="โทรศัพท์มือถือ" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+
                 size="25" onkeyup="phoneTab(this)"  minlength="10" maxlength="12" >
             </div>
             <div class="col-md-6">
@@ -213,7 +230,10 @@
         <div class="row mb-3">
             <div class="col-md-12">
                 <h5>ประเด็นที่ท่านต้องการร้องเรียน/แจ้งข้อเสนอแนะ <span class="text-danger">*</span></h5>
-                <textarea name="complain_name" id="" cols="30" rows="10" class="form-control" required></textarea>
+                <textarea name="complain_name" id="" cols="30" rows="10" class="form-control" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+                 ></textarea>
             </div>
         </div>
         <div class="row mb-3">
@@ -248,7 +268,10 @@
             </div>
             <div class="col-md-6">
                 <label for="">ภาค <span class="text-danger">*</span></label>
-                <select name="t_id_geographies" id="t_geographies" class="form-control" required>
+                <select name="t_id_geographies" id="t_geographies" class="form-control" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+                 >
                     <option value="">-- เลือก --</option>
                     <?php foreach($geographies as $key => $value){ ?>
                         <option value="<?php echo $value['name']; ?>" data-id="<?php echo $value['id'] ?>"><?php echo $value['name']; ?></option>
@@ -259,14 +282,20 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="">จังหวัด <span class="text-danger">*</span></label>
-                <select name="t_id_provinces" id="t_provinces" class="form-control" required>
+                <select name="t_id_provinces" id="t_provinces" class="form-control" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+                 >
                     <option value="">-- จังหวัด --</option>
                     <option value="">จังหวัด</option>
                 </select>
             </div>
             <div class="col-md-6">
                 <label for="">อำเภอ/เขต <span class="text-danger">*</span></label>
-                <select name="t_id_amphures" id="t_amphures" class="form-control" required>
+                <select name="t_id_amphures" id="t_amphures" class="form-control" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+                 >
                     <option value="">-- อำเภอ/เขต --</option>
                     <option value="">อำเภอ/เขต</option>
                 </select>
@@ -275,7 +304,10 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="">ตำบล/แขวง <span class="text-danger">*</span></label>
-                <select name="t_id_districts" id="t_districts" class="form-control" required>
+                <select name="t_id_districts" id="t_districts" class="form-control" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+                 >
                     <option value="">-- ตำบล/แขวง --</option>
                     <option value="">ตำบล/แขวง</option>   
                 </select>
@@ -294,7 +326,10 @@
         <div class="row mb-3">
             <div class="col-md-12">
                 <label for="">สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ <span class="text-danger">*</span></label>
-                <textarea name="response_person" id="" cols="30" rows="5" class="form-control" required></textarea>
+                <textarea name="response_person" id="" cols="30" rows="5" class="form-control" required
+                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                oninput="this.setCustomValidity('')"
+                 ></textarea>
             </div>
         </div>
         <div class="row mb-3">
@@ -492,6 +527,7 @@ $('#t_amphures').on("change",function(){
         }
     });
 });
+
 // document.getElementById("btnLoad").addEventListener("click", function showFileSize() {
 //     // (Can't use `typeof FileReader === "function"` because apparently it
 //     // comes back as "object" on some browsers. So just see if it's there
