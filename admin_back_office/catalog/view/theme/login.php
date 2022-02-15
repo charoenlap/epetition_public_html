@@ -14,7 +14,7 @@
   <div class="card">
     <div class="card-body login-card-body">
       <div class="text-center">
-        <img src="images/logo.jpg" alt="" style="width:250px;height:auto;">
+        <img src="../images/logo.jpg" alt="" style="width:250px;height:auto;">
       </div>
       <form action="<?php echo route('home');?>" method="post" id="form-login">
         <div class="input-group mb-3">
