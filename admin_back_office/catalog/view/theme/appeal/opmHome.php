@@ -62,11 +62,16 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <a href="<?php echo route('appeal');?>" class="btn btn-theme">เรื่องร้องเรียนที่ได้โดยตรง</a>
-                                    <a href="<?php echo route('appeal/opm');?>" class="btn btn-primary">เรื่องร้องเรียนที่ได้รับจาก สปน.</a>
+                                    <a href="<?php echo route('appeal/opm');?>" class="btn btn-primary">เรื่องร้องเรียนจาก สปน.</a>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a>
+                                    <!-- <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a> -->
                                     <a href="<?php echo route('appeal/opmAdd');?>" class="btn btn-info"><i class="fas fa-folder-plus"></i> แบบฟอร์มเรื่องร้องเรียน</a>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-12">
+                                    <a href="#" class="btn btn-primary disabled" id="btn-send-topic" role="button" aria-disabled="true">นำเรื่องส่งเข้ากระทรวงแรงงาน</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -74,6 +79,9 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
+                                                <th class="text-center">
+                                                    <input type="checkbox" id="checkAll"> ทั้งหมด
+                                                </th>
                                                 <th class="text-center"  style="width:45px;">ลำดับ</th>
                                                 <th  style="width:80px;">Ticket ID</th>
                                                 <th style="width:180px;">ชื่อผู้ร้องเรียน</th>
@@ -88,10 +96,13 @@
                                             <?php $i=1;foreach($result as $val){ 
                                                 $status = '';
                                                 if($val['main_status_text']=="อยู่ระหว่างดำเนินการ"){
-                                                    $status = '<i class="fas fa-hourglass-start status-yellow"></i>';
+                                                    $status = '<i class="fas fa-square-full status-yellow"></i>';
                                                 }
                                             ?>
                                             <tr>
+                                                <td class="text-center">
+                                                    <input type="checkbox" class="checkboxSend" value="<?php echo $val['case_code']; ?>">
+                                                </td>
                                                 <td class="text-center"><?php echo $i++;?></td>
                                                 <td><?php echo $val['case_code']; ?></td>
                                                 <td><?php echo $val['customer_name'];?></td>
@@ -151,6 +162,29 @@
         <!-- /.content -->
 </div>
 <script>
+    $(document).on('click','#checkAll',function(){
+        $('.checkboxSend').not(this).prop('checked', this.checked);
+        $('#btn-send-topic').addClass('disabled');
+        $('#btn-send-topic').attr('aria-disabled','true');
+        $('.checkboxSend').each(function() {
+             if($(this).is(':checked')){
+                $('#btn-send-topic').removeClass('disabled');
+                $('#btn-send-topic').attr('aria-disabled','false');
+                 return false;
+             }
+        });
+    });
+    $(document).on('click','.checkboxSend',function(e){
+        $('#btn-send-topic').addClass('disabled');
+        $('#btn-send-topic').attr('aria-disabled','true');
+        $('.checkboxSend').each(function() {
+             if($(this).is(':checked')){
+                $('#btn-send-topic').removeClass('disabled');
+                $('#btn-send-topic').attr('aria-disabled','false');
+                 return false;
+             }
+        });
+    });
     $('#appeal').addClass('active');
 
     $('.btn-del').click(function(event){

@@ -73,7 +73,7 @@
 	    public function add() {
 			$data['title'] 			= "แบบฟอร์มเรื่องร้องเรียน";
 			// ตัว script เลือก จังหวัด อำเภอ ตำบล ใช้ตัวเดียวกันกับหน้าเว็บแหละ controller ตัวเดียวกัน
-			$master 				= $this->model('master',"/home/charoenlap/domains/charoenlap.com/public_html/epetition/public_html/catalog/"); 
+			$master 				= $this->model('master'); 
 			$response				= $this->model('response');
 			$data['geographies']	= $master->getGeographies();
 			$data['title_topic']	= $response->getTopic();
@@ -100,7 +100,7 @@
 
 			$id 			= $_GET['id'];
 			$response 		= $this->model('response');
-			$master 		= $this->model('master',"/home/charoenlap/domains/charoenlap.com/public_html/epetition/public_html/catalog/"); 
+			$master 		= $this->model('master'); 
 
 			$data['data'] 			= $response->getList($id);
 			$data['title_topic']	= $response->getTopic();

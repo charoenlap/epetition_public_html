@@ -42,7 +42,7 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <button type="button" id="btn-opm" class="btn btn-default btn-block">เข้าสู่ระบบ OPM</button>
+            <a href="#" id="btn-opm" class="btn btn-default btn-block">เข้าสู่ระบบ OPM</a>
           </div>
           <div class="col-6">
             <button type="button" id="btn-open-id" class="btn btn-default btn-block">OpenID</button>
@@ -129,6 +129,7 @@
       })
       .done(function(json) {
         console.log(json);
+
         if(json.detail.token_id!=''){
           window.location = 'index.php?route=home';
         }
@@ -143,7 +144,7 @@
       .always(function() {
         console.log("complete");
       });
-      
+      e.preventDefault();
     });
   </script>
   <style>

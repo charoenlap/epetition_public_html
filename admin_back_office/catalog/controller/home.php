@@ -70,10 +70,11 @@
 						$this->setSession('default_language','');
 						$this->setSession('last_login',$resultLogin['last_login']);
 						$result = array(
-			    			'code' 	=> 200,
-			    			'status'=> 'success',
-			    			'desc'	=> 'Login complete',
-			    			'detail'=> $resultLogin
+			    			'code' 			=> 200,
+			    			'status'		=> 'success',
+			    			'desc'			=> 'Login complete',
+			    			'detail'		=> $resultLogin,
+			    			'last_login'	=> $resultLogin['last_login']
 			    		);
 					}
 				}else{
@@ -124,6 +125,7 @@
 						$this->setSession('org_name',$resultToken['org_name']);
 						$this->setSession('position',$resultToken['position']);
 						$this->setSession('default_language',$resultToken['default_language']);
+						$this->setSession('last_login',date('Y-m-d H:i:s'));
 						$result = array(
 			    			'code' 	=> 200,
 			    			'status'=> 'success',

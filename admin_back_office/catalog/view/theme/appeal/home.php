@@ -125,17 +125,17 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row mb-3">
+                            <div class="row mb-2">
                                 <div class="col-md-6">
                                     <a href="<?php echo route('appeal');?>" class="btn btn-theme">เรื่องร้องเรียนที่ได้โดยตรง</a>
-                                    <a href="<?php echo route('appeal/opm');?>" class="btn btn-primary">เรื่องร้องเรียนที่ได้รับจาก สปน.</a>
+                                    <a href="<?php echo route('appeal/opm');?>" class="btn btn-primary">เรื่องร้องเรียนจาก สปน.</a>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a>
+                                    <!-- <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a> -->
                                     <a href="<?php echo route('appeal/add');?>" class="btn btn-info"><i class="fas fa-folder-plus"></i> แบบฟอร์มเรื่องร้องเรียน</a>
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <table class="table">
                                         <tr>
@@ -155,11 +155,17 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="row mb-2">
+                                <div class="col-md-12">
+                                    <a href="#" class="btn btn-primary disabled" id="btn-send-topic" role="button" aria-disabled="true">นำเรื่องส่งให้สปน</a>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
+                                                <th><input type="checkbox" id="checkAll"></th>
                                                 <th class="text-center"  style="width:45px;">ลำดับ</th>
                                                 <th  style="width:80px;">Ticket ID</th>
                                                 <th style="width:180px;">ชื่อผู้ร้องเรียน</th>
@@ -177,6 +183,7 @@
                                                 foreach($lists as $key => $value){ 
                                             ?>
                                             <tr>
+                                                <td><input type="checkbox" class="checkboxSend" value="<?php echo $value['id']; ?>"></td>
                                                 <td class="text-center"><?php echo ++$i; ?></td>
                                                 <td><?php echo $value['case_code']; ?></td>
                                                 <td><?php echo $value['fullname']; ?></td>
@@ -195,76 +202,6 @@
                                                 </td>
                                             </tr>
                                             <?php } ?>
-                                            <!-- <tr>
-                                                <td class="text-center">1</td>
-                                                <td>65010001</td>
-                                                <td>นายสมชาย</td>
-                                                <td>แจ้งเรื่อง</td>
-                                                <td>12/10/2021</td>
-                                                <td class="text-center"><i class="fas fa-check status-green"></i></td>
-                                                <td class="text-center">
-                                                    <a href="<?php echo route('appeal/detail');?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
-                                                    <a href="<?php echo route('appeal/status');?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="รับเรื่องร้องเรียน"><i class="far fa-check-square"></i></a>
-                                                    <a href="<?php echo route('appeal/edit');?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"><i class="fas fa-edit"></i></a>
-                                                    <a href="" class="btn btn-danger btn-sm btn-del" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">2</td>
-                                                <td>65010002</td>
-                                                <td>นายสมชาย</td>
-                                                <td>แจ้งเรื่อง</td>
-                                                <td>12/10/2021</td>
-                                                <td class="text-center"><i class="fas fa-times-circle status-red"></i></td>
-                                                <td class="text-center">
-                                                    <a href="<?php echo route('appeal/detail');?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
-                                                    <a href="<?php echo route('appeal/status');?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="รับเรื่องร้องเรียน"><i class="far fa-check-square"></i></a>
-                                                    <a href="<?php echo route('appeal/edit');?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"><i class="fas fa-edit"></i></a>
-                                                    <a href="" class="btn btn-danger btn-sm btn-del" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">3</td>
-                                                <td>65010003</td>
-                                                <td>นายสมชาย</td>
-                                                <td>แจ้งเรื่อง</td>
-                                                <td>12/10/2021</td>
-                                                <td class="text-center"><i class="fas fa-hourglass-half status-orange"></i></td>
-                                                <td class="text-center">
-                                                    <a href="<?php echo route('appeal/detail');?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
-                                                    <a href="<?php echo route('appeal/status');?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="รับเรื่องร้องเรียน"><i class="far fa-check-square"></i></a>
-                                                    <a href="<?php echo route('appeal/edit');?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"><i class="fas fa-edit"></i></a>
-                                                    <a href="" class="btn btn-danger btn-sm btn-del" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">4</td>
-                                                <td>65010004</td>
-                                                <td>นายสมชาย</td>
-                                                <td>แจ้งเรื่อง</td>
-                                                <td>12/10/2021</td>
-                                                <td class="text-center"><i class="fas fa- status-yellow"></i></td>
-                                                <td class="text-center">
-                                                    <a href="<?php echo route('appeal/detail');?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
-                                                    <a href="<?php echo route('appeal/status');?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="รับเรื่องร้องเรียน"><i class="far fa-check-square"></i></a>
-                                                    <a href="<?php echo route('appeal/edit');?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"><i class="fas fa-edit"></i></a>
-                                                    <a href="" class="btn btn-danger btn-sm btn-del" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">5</td>
-                                                <td>65010005</td>
-                                                <td>นายสมชาย</td>
-                                                <td>แจ้งเรื่อง</td>
-                                                <td>12/10/2021</td>
-                                                <td class="text-center"><i class="fas fa-check status-green"></i></td>
-                                                <td class="text-center">
-                                                    <a href="<?php echo route('appeal/detail');?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
-                                                    <a href="<?php echo route('appeal/status');?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="รับเรื่องร้องเรียน"><i class="far fa-check-square"></i></a>
-                                                    <a href="<?php echo route('appeal/edit');?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"><i class="fas fa-edit"></i></a>
-                                                    <a href="" class="btn btn-danger btn-sm btn-del" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"><i class="far fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr> -->
                                         </tbody>
                                     </table>
                                     <nav aria-label="Page navigation example">
@@ -301,6 +238,29 @@
         <!-- /.content -->
 </div>
 <script>
+    $(document).on('click','#checkAll',function(){
+        $('.checkboxSend').not(this).prop('checked', this.checked);
+        $('#btn-send-topic').addClass('disabled');
+        $('#btn-send-topic').attr('aria-disabled','true');
+        $('.checkboxSend').each(function() {
+             if($(this).is(':checked')){
+                $('#btn-send-topic').removeClass('disabled');
+                $('#btn-send-topic').attr('aria-disabled','false');
+                 return false;
+             }
+        });
+    });
+    $(document).on('click','.checkboxSend',function(e){
+        $('#btn-send-topic').addClass('disabled');
+        $('#btn-send-topic').attr('aria-disabled','true');
+        $('.checkboxSend').each(function() {
+             if($(this).is(':checked')){
+                $('#btn-send-topic').removeClass('disabled');
+                $('#btn-send-topic').attr('aria-disabled','false');
+                 return false;
+             }
+        });
+    });
     $('#appeal').addClass('active');
 
     $('.btn-del').click(function(event){
