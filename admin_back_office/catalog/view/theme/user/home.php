@@ -52,8 +52,8 @@
                                              <td><?php echo $val['LASTNAME']; ?></td>
                                              <td><?php echo $val['DEPARTMENT_NAME']; ?></td>
                                              <td class="text-center">
-                                              <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
-                                              <a href="<?php echo route('user/edit'); ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="fas fa-edit"></i></a>
+                                              <!-- <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a> -->
+                                              <a href="<?php echo route('user/edit&id='.$val['AUT_USER_ID']); ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="fas fa-edit"></i></a>
                                               <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="ลบ"><i class="far fa-trash-alt"></i></a>
                                              </td>
                                            </tr>

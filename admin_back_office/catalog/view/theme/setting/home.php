@@ -30,11 +30,11 @@
                                 ตั้งค่าระบบ
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link active"  href="#tabs-3">
                                 ตั้งค่าเงื่อนไขเรื่องร้องเรียน
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link active"  href="#tabs-4">
                                 ตั้งค่าสถานะ
@@ -60,10 +60,10 @@
                             </div>
                             <div class="card-body">
                                 <div class="row mb-3">
-                                    <div class="col-md-12">
+                                    <div class="col-md-3">
                                         <label for="">เลือกขนาดไฟล์ MB</label>
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-9">
                                         <select name="" id="" class="form-control">
                                             <option value="">เลือกขนาดไฟล์ MB</option>
                                             <option value="">1</option>
@@ -73,9 +73,19 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        <label for="">อัพเดท จังหวัด อำเภอ ตำบล จาก สปน</label><br>
+                                        <small>*ต้องรอจนกว่าจะอัพเดทเสร็จสิ้น</small>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <a href="<?php echo route('appeal/getProvinces');?>" target="_blank" class="btn btn-primary">อัพเดท</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <?php /* ?>
                     <div id="tabs-3">
                         <div class="card">
                             <div class="card-header">
@@ -124,6 +134,7 @@
                             </div>
                         </div>
                     </div>
+                    <?php */?>
                     <div id="tabs-4">
                         <div class="card">
                             <div class="card-header">
@@ -171,6 +182,11 @@
         </section>
     </form>
 </div>
+<style>
+    /*.ui-tabs-active.ui-state-active a{
+        color:#007bff;
+    }*/
+</style>
 <script>
   $( function() {
     $( "#tabs" ).tabs();

@@ -1,13 +1,6 @@
 
 
-$('#districts').change(function(event){
-    let zipCode = $('option:selected', this).attr('zipcode');
-    $('#zipcode').val(zipCode);
-});
-$('#t_districts').change(function(event){
-    let zipCode_ = $('option:selected', this).attr('zipcode');
-    $('#t_zipcode').val(zipCode_);
-});
+
 
 $('input[name=name_topic]').change(function() {
     if (this.value == '1'){

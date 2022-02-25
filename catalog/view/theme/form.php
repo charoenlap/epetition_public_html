@@ -96,29 +96,19 @@
             </div>
         </div>
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="">ชื่อหมู่บ้าน</label>
                 <input type="text" name="housename" class="form-control" placeholder="ชื่อหมู่บ้าน">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="">ซอย</label>
                 <input type="text" name="soi" class="form-control" placeholder="ซอย">
             </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="">ถนน</label>
                 <input type="text" name="road" class="form-control" placeholder="ถนน">
             </div>
-            <div class="col-md-6">
-                <label for="">ภาค</label>
-                <select name="id_geographies" id="geographies" class="form-control">
-                    <option value="">-- เลือก --</option>
-                    <?php foreach($geographies as $key => $value){ ?>
-                        <option value="<?php echo $value['name']; ?>" data-id="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
-                    <?php } ?>
-                </select>
-            </div>
+            
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
@@ -252,32 +242,19 @@
             </div>
         </div>
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="">ชื่อหมู่บ้าน</label>
                 <input type="text" name="t_housename" class="form-control">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="">ซอย</label>
                 <input type="text" name="t_soi" class="form-control">
             </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="">ถนน</label>
                 <input type="text" name="t_road" class="form-control">
             </div>
-            <div class="col-md-6">
-                <label for="">ภาค <span class="text-danger">*</span></label>
-                <select name="t_id_geographies" id="t_geographies" class="form-control" required
-                oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
-                oninput="this.setCustomValidity('')"
-                 >
-                    <option value="">-- เลือก --</option>
-                    <?php foreach($geographies as $key => $value){ ?>
-                        <option value="<?php echo $value['name']; ?>" data-id="<?php echo $value['id'] ?>"><?php echo $value['name']; ?></option>
-                    <?php } ?>
-                </select>
-            </div>
+            
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
@@ -450,24 +427,24 @@ $(document).on('change','#fileinput',function(e){
         }
     }
 });
-$('#geographies').on("change",function(){
-    let value = $('option:selected', this).attr('data-id');
+$(function(e){
     $.ajax({
         type: "GET",
-        url: "index.php?route=home/form",
-        data: {idgeographies:value},
+        url: "index.php?route=get/provinces",
         success: function(data,response){
             console.log(response);
             $('#provinces').html(data);
+            $('#t_provinces').html(data);
         }
     });
 });
+    
 
 $('#provinces').on("change",function(){
     let value = $('option:selected', this).attr('data-id');
     $.ajax({
         type: "GET",
-        url: "index.php?route=home/form",
+        url: "index.php?route=get/amphures",
         data: {idprovinces:value},
         success: function(data,response){
             console.log(response);
@@ -478,26 +455,16 @@ $('#provinces').on("change",function(){
 
 $('#amphures').on("change",function(){
     let value = $('option:selected', this).attr('data-id');
+    let zipcode = $('option:selected', this).attr('zipcode');
     $.ajax({
         type: "GET",
-        url: "index.php?route=home/form",
+        url: "index.php?route=get/tambons",
         data: {idamphures:value},
         success: function(data,response){
+            $('#zipcode').val(zipcode);
             console.log(response);
+            console.log(data);
             $('#districts').html(data);
-        }
-    });
-});
-
-$('#t_geographies').on("change",function(){
-    let value = $('option:selected', this).attr('data-id');
-    $.ajax({
-        type: "GET",
-        url: "index.php?route=home/form",
-        data: {t_idgeographies:value},
-        success: function(data,response){
-            console.log(response);
-            $('#t_provinces').html(data);
         }
     });
 });
@@ -506,7 +473,7 @@ $('#t_provinces').on("change",function(){
     let value = $('option:selected', this).attr('data-id');
     $.ajax({
         type: "GET",
-        url: "index.php?route=home/form",
+        url: "index.php?route=get/amphures",
         data: {t_idprovinces:value},
         success: function(data,response){
             console.log(response);
@@ -517,11 +484,13 @@ $('#t_provinces').on("change",function(){
 
 $('#t_amphures').on("change",function(){
     let value = $('option:selected', this).attr('data-id');
+    let zipcode = $('option:selected', this).attr('zipcode');
     $.ajax({
         type: "GET",
-        url: "index.php?route=home/form",
+        url: "index.php?route=get/tambons",
         data: {t_idamphures:value},
         success: function(data,response){
+            $('#t_zipcode').val(zipcode);
             console.log(response);
             $('#t_districts').html(data);
         }

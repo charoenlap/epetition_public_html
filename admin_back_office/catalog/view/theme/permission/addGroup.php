@@ -5,13 +5,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">กำหนดสิทธ์การใช้งาน</h1>
+          <h1 class="m-0">เพิ่มกลุ่มผู้ใช้งาน</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="<?php echo route('home');?>">หน้าหลัก</a></li>
             <li class="breadcrumb-item"><a href="<?php echo route('user/group');?>">กำหนดสิทธิ์กลุ่มผู้ใช้งาน</a></li>
-            <li class="breadcrumb-item active">กำหนดสิทธ์การใช้งาน</li>
+            <li class="breadcrumb-item active">เพิ่มกลุ่มผู้ใช้งาน</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -21,51 +21,18 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    ตั้งค่าสิทธิ์การเข้าถึง
+                    ชื่อกลุ่มผู้ใช้งาน
                 </div>
                 <div class="card-body">
                     <form action="<?php echo $action;?>" method="POST">
-                        <input type="hidden" name="group_id" value="<?php echo $group_id;?>">
+                        <div class="row mb-2">
+                            <div class="col-md-12 text-right">
+                                <input type="text" value="" name="name" class="form-control" placeholder="ชื่อกลุ่มผู้ใช้งาน">
+                            </div>
+                        </div>
                         <div class="row mb-2">
                             <div class="col-md-12 text-right">
                                 <input type="submit" value="บันทึก" class="btn btn-primary">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table">
-                                    <thead>
-                                        <th width="100px;" class="text-center">เมนู<br><input type="checkbox" id="checkAll"></th>
-                                        <th>หัวข้อ</th>
-                                        <th>เพิ่ม</th>
-                                        <th>ลบ</th>
-                                        <th>แก้ไข</th>
-                                    </thead>
-                                    <tbody>
-                                    <?php foreach($menu->rows as $val){?>
-                                        <tr>
-                                            <td class="text-center"><input type="checkbox" 
-                                                name="menu_id[<?php echo $val['MENU_ID'];?>]" 
-                                                value="<?php echo $val['MENU_ID'];?>" 
-                                                class="checkboxSend"
-                                                <?php echo ($val['checkbox']?'checked':'');?>></td>
-                                            <td><?php echo $val['MENU-DESC'];?></td>
-                                            <td><input type="checkbox" 
-                                                name="user_add[<?php echo $val['MENU_ID'];?>]" 
-                                                value="1" 
-                                                <?php echo ($val['USER_ADD']?'checked':'');?>></td>
-                                            <td><input type="checkbox" 
-                                                name="user_edit[<?php echo $val['MENU_ID'];?>]" 
-                                                value="1" 
-                                                <?php echo ($val['USER_EDIT']?'checked':'');?>></td>
-                                            <td><input type="checkbox" 
-                                                name="user_del[<?php echo $val['MENU_ID'];?>]" 
-                                                value="1" 
-                                                <?php echo ($val['USER_DELETE']?'checked':'');?>></td>
-                                        </tr>
-                                    <?php }?>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </form>

@@ -44,68 +44,68 @@
 		}
 		public function getProvinces($data=array()){
 			$result = array();
-			$geography_id = (int)$data['geography_id'];
-			$path_json = PATH_JSON.'getProvinces_'.$geography_id.'.json';
-			if(!isset($data['db'])){
-				if($geography_id){
-					if(file_exists($path_json)){
-						$result = json_decode(file_get_contents($path_json), true);
-					}else{
-						$sql = "SELECT * FROM ep_address_provinces WHERE geography_id = '".$geography_id."'";
+			// $geography_id = (int)$data['geography_id'];
+			// $path_json = PATH_JSON.'getProvinces_'.$geography_id.'.json';
+			// if(!isset($data['db'])){
+			// 	if($geography_id){
+			// 		if(file_exists($path_json)){
+			// 			$result = json_decode(file_get_contents($path_json), true);
+			// 		}else{
+						$sql = "SELECT * FROM PROVINCE";
 						$result = $this->query($sql)->rows;
 
-						$fp = fopen($path_json, 'w');
-						fwrite($fp, json_encode($result));
-						fclose($fp);
-					}
-				}
-			}else{
-				$result = json_decode(file_get_contents($path_json), true);
-			}
+			// 			$fp = fopen($path_json, 'w');
+			// 			fwrite($fp, json_encode($result));
+			// 			fclose($fp);
+			// 		}
+			// 	}
+			// }else{
+			// 	$result = json_decode(file_get_contents($path_json), true);
+			// }
 			return $result;
 		}
 		public function getAmphures($data=array()){
 			$result = array();
 			$province_id = (int)$data['province_id'];
-			$path_json = PATH_JSON.'getAmphures_'.$province_id.'.json';
-			if(!isset($data['db'])){
-				if($province_id){
-					if(file_exists($path_json)){
-						$result = json_decode(file_get_contents($path_json), true);
-					}else{
-						$sql = "SELECT * FROM ep_address_amphures WHERE province_id = '".$province_id."'";
+			// $path_json = PATH_JSON.'getAmphures_'.$province_id.'.json';
+			// if(!isset($data['db'])){
+				// if($province_id){
+				// 	if(file_exists($path_json)){
+				// 		$result = json_decode(file_get_contents($path_json), true);
+				// 	}else{
+						$sql = "SELECT * FROM AMPHUR WHERE PROVINCE_ID = '".$province_id."'";
 						$result = $this->query($sql)->rows;
 
-						$fp = fopen($path_json, 'w');
-						fwrite($fp, json_encode($result));
-						fclose($fp);
-					}
-				}
-			}else{
-				$result = json_decode(file_get_contents($path_json), true);
-			}
+						// $fp = fopen($path_json, 'w');
+						// fwrite($fp, json_encode($result));
+						// fclose($fp);
+				// 	}
+				// }
+			// }else{
+			// 	$result = json_decode(file_get_contents($path_json), true);
+			// }
 			return $result;
 		}
-		public function getDistricts($data=array()){
+		public function getTambon($data=array()){
 			$result = array();
 			$amphure_id = (int)$data['amphure_id'];
-			$path_json = PATH_JSON.'getDistricts_'.$amphure_id.'.json';
-			if(!isset($data['db'])){
-				if($amphure_id){
-					if(file_exists($path_json)){
-						$result = json_decode(file_get_contents($path_json), true);
-					}else{
-						$sql = "SELECT * FROM ep_address_districts WHERE amphure_id = '".$amphure_id."'";
+			// $path_json = PATH_JSON.'getDistricts_'.$amphure_id.'.json';
+			// if(!isset($data['db'])){
+			// 	if($amphure_id){
+			// 		if(file_exists($path_json)){
+			// 			$result = json_decode(file_get_contents($path_json), true);
+			// 		}else{
+						$sql = "SELECT * FROM TAMBON WHERE AMPHUR_ID = '".$amphure_id."'";
 						$result = $this->query($sql)->rows;
 
-						$fp = fopen($path_json, 'w');
-						fwrite($fp, json_encode($result));
-						fclose($fp);
-					}
-				}
-			}else{
-				$result = json_decode(file_get_contents($path_json), true);
-			}
+			// 			$fp = fopen($path_json, 'w');
+			// 			fwrite($fp, json_encode($result));
+			// 			fclose($fp);
+			// 		}
+			// 	}
+			// }else{
+			// 	$result = json_decode(file_get_contents($path_json), true);
+			// }
 			return $result;
 		}
 		// public function getCategory($data=array()){

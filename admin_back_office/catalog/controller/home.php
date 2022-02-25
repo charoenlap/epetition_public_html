@@ -57,8 +57,12 @@
 			    			'desc'	=> 'Login error'
 			    		);
 					}else{
+						// echo "<pre>";
+						// var_dump($resultLogin);exit();
 						$officer_name = $resultLogin['detail']['FIRSTNAME'].' '.$resultLogin['detail']['LASTNAME'];
 						$this->setSession('token_id','');
+						$this->setSession('AUT_USER_ID',$resultLogin['detail']['AUT_USER_ID']);
+						$this->setSession('USER_GROUP_ID',$resultLogin['detail']['USER_GROUP_ID']);
 						$this->setSession('user_name',$resultLogin['detail']['AUT_USER_ID']);
 						$this->setSession('officer_id',$resultLogin['detail']['AUT_USERNAME']);
 						$this->setSession('officer_name',$officer_name);

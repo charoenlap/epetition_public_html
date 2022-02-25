@@ -139,6 +139,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column menu-left" data-widget="treeview" role="menu" data-accordion="false">
+          <?php if($menu[1]){ ?>
           <li class="nav-item">
             <a href="<?php echo route('home'); ?>" class="nav-link px-1" id="dashbord">
               <i class="nav-icon fas fa-home"></i>
@@ -147,15 +148,28 @@
               </p>
             </a>
           </li>
+          <?php } ?>
+          <?php if($menu[2]){ ?>
           <li class="nav-item">
             <a href="<?php echo route('appeal'); ?>" class="nav-link px-1" id="appeal">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 เรื่องร้องเรียน
-                <!-- <span class="badge badge-danger right">5</span> -->
               </p>
             </a>
           </li>
+          <?php } ?>
+          <?php if($menu[20]){ ?>
+          <li class="nav-item">
+            <a href="<?php echo route('appeal/opm'); ?>" class="nav-link px-1" id="appealOPM">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                เรื่องร้องเรียนที่ได้รับจากสปน
+              </p>
+            </a>
+          </li>
+          <?php } ?>
+          <?php if($menu[3]){ ?>
           <li class="nav-item">
             <a href="<?php echo route('topic'); ?>" class="nav-link px-1" id="pageTopic">
               <i class="nav-icon fas fa-copy"></i>
@@ -164,7 +178,9 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <?php } ?>
+          <?php if($menu[4]){ ?>
+            <li class="nav-item">
             <a href="<?php echo route('progress'); ?>" class="nav-link px-1" id="progress">
               <i class="nav-icon far fa-address-book"></i>
               <p>
@@ -172,6 +188,8 @@
               </p>
             </a>
           </li>
+          <?php } ?>
+          <?php if($menu[5]){ ?>
           <li class="nav-item">
             <a href="#" class="nav-link px-1" id="report">
               <i class="nav-icon fas fa-copy"></i>
@@ -181,74 +199,98 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <?php if($menu[6]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/department'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามหน่วยงาน</p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if($menu[7]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/way'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามช่องทางการร้องเรียน</p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if($menu[8]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/zone'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามพื้นที่เขตตรวจ</p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if($menu[9]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/mission'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามกลุ่มภารกิจ</p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if($menu[10]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/land'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามภูมิภาคและจังหวัด</p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if($menu[11]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/problem'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>รายงานเวลาเฉลี่ยของแต่ละประเภทปัญหา</p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if($menu[12]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/type'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามประเภทปัญหา</p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if($menu[13]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/progress'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>รายงานความก้าวหน้า</p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if($menu[14]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/topic'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามหัวข้อเรื่องร้องเรียน</p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if($menu[15]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/status'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>สรุปผลการดำเนินงาน</p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if($menu[16]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/satisfaction'); ?>" class="nav-link px-1">
                   <i class="far fa-circle nav-icon"></i>
                   <p>ข้อเสนอแนะการใช้งานเว็บไซต์ e-Petition</p>
                 </a>
               </li>
+              <?php } ?>
             </ul>
           </li>
+          <?php } ?>
+          <?php if($menu[17]){ ?>
           <li class="nav-item">
             <a href="<?php echo route('user'); ?>" class="nav-link px-1" id="pageUser">
               <i class="nav-icon fas fa-user"></i>
@@ -257,6 +299,8 @@
               </p>
             </a>
           </li>
+          <?php } ?>
+          <?php if($menu[18]){ ?>
           <li class="nav-item">
             <a href="<?php echo route('user/group'); ?>" class="nav-link px-1" id="pagePermission">
               <i class="nav-icon fas fa-user"></i>
@@ -265,6 +309,8 @@
               </p>
             </a>
           </li>
+          <?php } ?>
+          <?php if($menu[19]){ ?>
           <li class="nav-item">
             <a href="<?php echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
               <i class="nav-icon fas fa-cog"></i>
@@ -273,6 +319,7 @@
               </p>
             </a>
           </li>
+          <?php } ?>
           <li class="nav-item">
             <a href="<?php echo route('login'); ?>" class="nav-link px-1" id="">
               <i class="nav-icon fas fa-sign-out-alt"></i>

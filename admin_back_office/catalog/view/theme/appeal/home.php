@@ -127,8 +127,8 @@
                         <div class="card-body">
                             <div class="row mb-2">
                                 <div class="col-md-6">
-                                    <a href="<?php echo route('appeal');?>" class="btn btn-theme">เรื่องร้องเรียนที่ได้โดยตรง</a>
-                                    <a href="<?php echo route('appeal/opm');?>" class="btn btn-primary">เรื่องร้องเรียนจาก สปน.</a>
+                                    <!-- <a href="<?php echo route('appeal');?>" class="btn btn-theme">เรื่องร้องเรียนที่ได้โดยตรง</a>
+                                    <a href="<?php echo route('appeal/opm');?>" class="btn btn-primary">เรื่องร้องเรียนจาก สปน.</a> -->
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <!-- <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a> -->
@@ -183,7 +183,12 @@
                                                 foreach($lists as $key => $value){ 
                                             ?>
                                             <tr>
-                                                <td><input type="checkbox" class="checkboxSend" value="<?php echo $value['id']; ?>"></td>
+                                                <td>
+                                                    <input type="checkbox" class="checkboxSend" 
+                                                        value="<?php echo $value['id']; ?>"
+                                                        case_code="<?php echo $value['case_code']; ?>"
+                                                    >
+                                                </td>
                                                 <td class="text-center"><?php echo ++$i; ?></td>
                                                 <td><?php echo $value['case_code']; ?></td>
                                                 <td><?php echo $value['fullname']; ?></td>
@@ -237,7 +242,76 @@
     </section>
         <!-- /.content -->
 </div>
+<div class="modal fade" id="process" tabindex="-1" role="dialog" aria-labelledby="processTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">ส่งเรื่องไปยัง สปน</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+            <thead>
+                <th>Ticket ID</th>
+                <th>สถานะ</th>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div> -->
+      </div>
+    </div>
+</div>
 <script>
+    $(document).on('click','#btn-send-topic',function(e){
+        $('#process').modal('show');
+        var html = '';
+        $('#process .modal-body .table tbody').html('');
+        $('.checkboxSend').each(function() {
+            var ele = $(this);
+            
+             if(ele.is(':checked')){
+                var case_code = ele.attr('case_code');
+                html = "<tr id='process_case_code_"+case_code+"'>"+
+                            "<td class='text-case-code'>"+case_code+"</td>"+
+                            "<td class='process'>กำลังดำเนินการ"+
+                        "</tr>";
+                $('#process .modal-body .table tbody').append(html);
+                $.ajax({
+                    url: 'index.php?route=appeal/submitSendOPM',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        case_code: case_code
+                    },
+                })
+                .done(function(json) {
+                    $('#process_case_code_'+case_code+' .process').text(json.status);
+                    console.log("success");
+                })
+                .fail(function(a,b,c) {
+                    // 
+                    console.log(a);
+                    console.log(b);
+                    console.log(c);
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+             }
+        });
+        
+        
+        e.preventDefault();
+    });
     $(document).on('click','#checkAll',function(){
         $('.checkboxSend').not(this).prop('checked', this.checked);
         $('#btn-send-topic').addClass('disabled');

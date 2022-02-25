@@ -255,6 +255,115 @@
 	    	$data['token_id'] 	= $token_id = $this->getSession('token_id');
 	    	$this->view('appeal/opmAdd',$data);
 	    }
+	    public function getProvinces(){
+	    	$data = array();
+	    	$provinces = $this->model('opm')->getProvinces(array('is_thai'=>1));
+	    	// var_dump($result);
+	    	//Update provinces  to PROVINCE
+	    	// $this->model('opm')->updateProvince($provinces);
+	    	$data_subDistricts = array();
+	    	$data_districts = array();
+	    	$data_province = array();
+	    	$data_current = date('Y-m-d H:i:s');
+	    	foreach($provinces as $province){
+	    		$data_province[] = array(
+					'PROVINCE_NAME' 	=> $province['Name'],
+					'PROVINCE_ID'		=> $province['ID'],
+					'CREATE_USER'		=> '',
+					'UPDATE_USER'		=> '',
+					'CREATE_TIMESTAMP' 	=> $data_current,
+					'UPDATE_TIMESTAMP' 	=> $data_current
+				);
+	    		$districts = $this->model('opm')->getDistricts(array('province_id'=>$province['ID'],'is_thai'=>1));
+	    		foreach($districts as $district){
+	    			$data_districts[] = array(
+	    				'POSTCODE'			=> $district['Postcode'],
+    					'AMPHUR_ID' 		=> $district['ID'],
+    					'PROVINCE_id' 		=> $province['ID'],
+    					'AMPHUR_NAME'		=> $district['Name'],
+    					'ACTIVE_STATUS'		=> 1,
+    					'CREATE_USER_ID'	=> '',
+    					'UPDATE_USER_ID'	=> '',
+    					'CREATE_TIMESTAMP' 	=> $data_current,
+    					'UPDATE_TIMESTAMP' 	=> $data_current,
+    					'DELETE_FLAG'		=> 0
+    				);
+	    			$subDistricts = $this->model('opm')->GetSubDistricts(array('district_id'=>$district['ID'],'is_thai'=>1));
+	    			foreach($subDistricts as $subDistrict){
+	    				$data_subDistricts[] = array(
+	    					'TAMBON_ID' 		=> $subDistrict['ID'],
+	    					'AMPHUR_ID' 		=> $district['ID'],
+	    					'PROVINCE_ID' 		=> $province['ID'],
+	    					'TAMBON_NAME'		=> $subDistrict['Name'],
+	    					'ACTIVE_STATUS'		=> 1,
+	    					'CREATE_USER_ID'	=> '',
+	    					'UPDATE_USER_ID'	=> '',
+	    					'CREATE_TIMESTAMP' 	=> $data_current,
+	    					'UPDATE_TIMESTAMP' 	=> $data_current,
+    						'DELETE_FLAG'		=> 0
+	    				);
+	    			}
+	    		}
+	    	}
+	    	$this->model('opm')->updateDataAddress($data_province,$data_districts,$data_subDistricts);
+	    }
+	    public function submitSendOPM(){
+	    	$data = array();
+	    	$result = array(
+	    		'status' => 'fail'
+	    	);
+	    	$case_code 			= get('case_code');
+	    	$result_detail 		= $this->model('appeal')->getResponse(array('case_code'=>$case_code));
+	    	$data['token_id'] 	= $token_id = $this->getSession('token_id');
+	    	// echo "<pre>";
+	    	// var_dump($result_detail);
+	    	$type_id 			= get('type_id');
+			$status_id 			= get('status_id');
+			$organization_id 	= get('organization_id');
+			$channel_id 		= get('channel_id');
+
+	    	if(!empty($result_detail['case_code'])){
+	    		if($type_id AND $status_id AND $organization_id AND $channel_id){
+	    			$date 				= date('Y-m-d H:i:s');
+					$case_code 			= $result_detail['case_code'];
+					
+					$detail 			= $result_detail['response_person'];
+					$province_id 		= get('province_id');
+					$district_id 		= get('district_id');
+					$subdistrict_id 	= get('subdistrict_id');
+					$contact_citizen_id = $result_detail['id_card'];
+					$contact_name 		= $result_detail['name'];
+					$contact_lastname 	= $result_detail['lastname'];
+					$contact_telephone  = $result_detail['phone'];
+					$created_date 		= $date;
+					$updated_date 		= $date;
+					$dataInsert = array(
+						'token_id' 			=> $token_id,
+						'case_code'			=> $case_code,
+						'type_id'			=> $type_id, 
+						'status_id'			=> $status_id,
+						'organization_id'	=> $organization_id,
+						'channel_id'		=> $channel_id,
+						'detail'			=> $detail,
+						'province_id'		=> $province_id,
+						'district_id'		=> $district_id,
+						'subdistrict_id'	=> $subdistrict_id,
+						'contact_citizen_id'=> $contact_citizen_id,
+						'contact_name'		=> $contact_name,
+						'contact_lastname'	=> $contact_lastname,
+						'contact_telephone'	=> $contact_telephone,
+						'created_date'		=> $created_date,
+						'updated_date'		=> $updated_date,
+					);
+					$resultAddCase = $this->model('opm')->addCase($dataInsert);
+	    		}else{
+	    			$result = array(
+	    				'status' => 'fail'
+	    			);
+	    		}
+			}
+			echo json_encode($result);
+	    }
 	   	public function opmSaveAdd() {
 	   		$data = array();
 			

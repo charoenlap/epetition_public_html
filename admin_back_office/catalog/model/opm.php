@@ -105,7 +105,7 @@
 					'token_id' 			=> $token_id,
 					'case_id'			=> $case_id,
 				),
-				'url'		=> URL."Officer.asmx?WSDL",
+				'url'		=> URL."ManageCenter.asmx?WSDL",
 				'func'		=> "GetCase"
 			);
 			$result = soap($array);
@@ -383,7 +383,7 @@
 					'created_date'		=> $created_date,
 					'updated_date'		=> $updated_date,
 				),
-				'url'		=> URL."Officer.asmx?WSDL",
+				'url'		=> URL."ManageCenter.asmx?WSDL",
 				'func'		=> "AddCase"
 			);
 			$result = soap($array);
@@ -420,7 +420,7 @@
 					'skip' 				=> $skip,
 					'take' 				=> $take,
 				),
-				'url'		=> URL."Officer.asmx?WSDL",
+				'url'		=> URL."ManageCenter.asmx?WSDL",
 				'func'		=> "GetCases"
 			);
 			$result = soap($array);
@@ -437,9 +437,10 @@
 					'ref_id' 	=> $ref_id,
 					'is_thai'	=> $is_thai,
 				),
-				'url'		=> URL."Officer.asmx?WSDL",
+				'url'		=> URL."ListOfValues.asmx?WSDL",
 				'func'		=> "getCaseType"
 			);
+			//http://service.1111.go.th/SOAP/ListOfValues.asmx
 			$result = soap($array);
 			$result = json_decode($result->GetCaseTypeResult,true);
 			return $result;
@@ -454,7 +455,7 @@
 					'ref_id' 	=> $ref_id,
 					'is_thai'	=> $is_thai,
 				),
-				'url'		=> URL."Officer.asmx?WSDL",
+				'url'		=> URL."ListOfValues.asmx?WSDL",
 				'func'		=> "getCaseStatus"
 			);
 			$result = soap($array);
@@ -471,7 +472,7 @@
 					'ref_id' 	=> $ref_id,
 					'is_thai'	=> $is_thai,
 				),
-				'url'		=> URL."Officer.asmx?WSDL",
+				'url'		=> URL."ListOfValues.asmx?WSDL",
 				'func'		=> "GetOrganization"
 			);
 			$result = soap($array);
@@ -490,12 +491,29 @@
 					'org_id' 	=> $org_id,
 					'is_thai'	=> $is_thai,
 				),
-				'url'		=> URL."Officer.asmx?WSDL",
+				'url'		=> URL."ListOfValues.asmx?WSDL",
 				'func'		=> "GetChannelIn"
 			);
 			$result = soap($array);
 			$result = json_decode($result->GetOrganizationResult,true);
 			return $result;
+		}
+		public function updateDataAddress($data_province=array(),$data_districts=array(),$data_subDistricts=array()){
+			$sql_PROVINCE = "TRUNCATE PROVINCE;";
+			$this->query($sql_PROVINCE);
+			$sql_AMPHUR = "TRUNCATE AMPHUR;";
+			$this->query($sql_AMPHUR);
+			$sql_TAMBON = "TRUNCATE TAMBON;";
+			$this->query($sql_TAMBON);
+			foreach($data_province as $val){
+				$this->insert('PROVINCE',$val,false);
+			}
+			foreach($data_districts as $val){
+				$this->insert('AMPHUR',$val,false);
+			}
+			foreach($data_subDistricts as $val){
+				$this->insert('TAMBON',$val,false);
+			}
 		}
 		public function getProvinces($data = array()){
 			$result = "";
@@ -505,7 +523,7 @@
 				'params' 	=> array(
 					'is_thai'	=> $is_thai,
 				),
-				'url'		=> URL."Officer.asmx?WSDL",
+				'url'		=> URL."ListOfValues.asmx?WSDL",
 				'func'		=> "getProvinces"
 			);
 			$result = soap($array);
@@ -522,7 +540,7 @@
 					'province_id'	=> $province_id,
 					'is_thai'		=> $is_thai,
 				),
-				'url'		=> URL."Officer.asmx?WSDL",
+				'url'		=> URL."ListOfValues.asmx?WSDL",
 				'func'		=> "getDistricts"
 			);
 			$result = soap($array);
@@ -539,7 +557,7 @@
 					'district_id'	=> $district_id,
 					'is_thai'		=> $is_thai,
 				),
-				'url'		=> URL."Officer.asmx?WSDL",
+				'url'		=> URL."ListOfValues.asmx?WSDL",
 				'func'		=> "getSubDistricts"
 			);
 			$result = soap($array);

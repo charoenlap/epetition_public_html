@@ -61,8 +61,8 @@
                             <?php } ?>
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <a href="<?php echo route('appeal');?>" class="btn btn-theme">เรื่องร้องเรียนที่ได้โดยตรง</a>
-                                    <a href="<?php echo route('appeal/opm');?>" class="btn btn-primary">เรื่องร้องเรียนจาก สปน.</a>
+                                    <!-- <a href="<?php echo route('appeal');?>" class="btn btn-theme">เรื่องร้องเรียนที่ได้โดยตรง</a>
+                                    <a href="<?php echo route('appeal/opm');?>" class="btn btn-primary">เรื่องร้องเรียนจาก สปน.</a> -->
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <!-- <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a> -->
@@ -71,7 +71,7 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-12">
-                                    <a href="#" class="btn btn-primary disabled" id="btn-send-topic" role="button" aria-disabled="true">นำเรื่องส่งเข้ากระทรวงแรงงาน</a>
+                                    <a href="#" class="btn btn-primary disabled" id="btn-send-topic" role="button" aria-disabled="true">นำเรื่องส่งเข้ากระทรวงพลังงาน</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -185,7 +185,7 @@
              }
         });
     });
-    $('#appeal').addClass('active');
+    $('#appealOPM').addClass('active');
 
     $('.btn-del').click(function(event){
         if(confirm('ลบข้อมูล')==true){

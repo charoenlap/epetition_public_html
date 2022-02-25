@@ -26,9 +26,9 @@
                         <div class="card-body">
                             <form action="<?php echo route('topic/edit&id='.$data['id']); ?>" method="POST">
                             <div class="row mb-3">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                    <label for="">ประเภทเรื่องร้องเรียน</label>
-                                   <textarea name="topic_title" id="" rows="10" class="form-control"><?php echo $data['topic_title']; ?></textarea>
+                                   <textarea name="topic_title" id="" rows="5" class="form-control"><?php echo $data['topic_title']; ?></textarea>
                                 </div>
                             </div>
                             <div class="row">

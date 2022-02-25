@@ -34,10 +34,10 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th width="5%" class="text-center">#</th>
+                                                <th width="50px;" class="text-center">#</th>
                                                 <th>ชื่อ</th>
-                                                <th width="10%">ลำดับ</th>
-                                                <th></th>
+                                                <th class="text-center" width="100px;">ลำดับ</th>
+                                                <th width="100px;"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -50,7 +50,7 @@
                                                 <td><?php echo $value['topic_title']; ?></td>
                                                 <td>
                                                     <form name="frm<?php echo $value['id']; ?>" action="<?php echo route('topic/sort&id='.$value['id']); ?>" method="POST" class="mb-0">
-                                                        <input type="text" class="form-control mb-0" name="sort" value="<?php echo $value['sort']; ?>" onblur="frm<?php echo $value['id'] ?>.submit();">
+                                                        <input type="text" class="form-control mb-0 text-center" name="sort" value="<?php echo $value['sort']; ?>" onblur="frm<?php echo $value['id'] ?>.submit();">
                                                     </form>
                                                 </td>
                                                 <td class="text-center">
