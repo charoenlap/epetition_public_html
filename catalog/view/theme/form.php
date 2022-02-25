@@ -471,12 +471,14 @@ $('#amphures').on("change",function(){
 
 $('#t_provinces').on("change",function(){
     let value = $('option:selected', this).attr('data-id');
+    console.log(value);
     $.ajax({
         type: "GET",
         url: "index.php?route=get/amphures",
-        data: {t_idprovinces:value},
+        data: {idprovinces:value},
         success: function(data,response){
             console.log(response);
+            console.log(data);
             $('#t_amphures').html(data);
         }
     });
@@ -488,7 +490,7 @@ $('#t_amphures').on("change",function(){
     $.ajax({
         type: "GET",
         url: "index.php?route=get/tambons",
-        data: {t_idamphures:value},
+        data: {idamphures:value},
         success: function(data,response){
             $('#t_zipcode').val(zipcode);
             console.log(response);
