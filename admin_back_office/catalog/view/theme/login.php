@@ -41,10 +41,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-6">
+          <!-- <div class="col-6">
             <a href="#" id="btn-opm" class="btn btn-default btn-block">เข้าสู่ระบบ OPM</a>
-          </div>
-          <div class="col-6">
+          </div> -->
+          <div class="col-12">
             <button type="button" id="btn-open-id" class="btn btn-default btn-block">OpenID</button>
           </div>
         </div>
