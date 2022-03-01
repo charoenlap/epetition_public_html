@@ -7,19 +7,19 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img class="d-block w-100" src="images/beach.png" alt="First slide">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-none d-md-block" >
           <h1>ศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
       <div class="carousel-item">
         <img class="d-block w-100" src="images/beach1.png" alt="Second slide">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-none d-md-block" >
           <h1>ศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
       <div class="carousel-item">
         <img class="d-block w-100" src="images/beach2.png" alt="Third slide">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-none d-md-block" >
           <h1>ศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
@@ -70,3 +70,12 @@
 <script>
     $('.carousel').carousel();
 </script>
+<style>
+  .carousel-caption {
+    top:10px;
+    left:10px;
+  }
+  .carousel-caption h1{
+    text-align:left;
+  }
+</style>
