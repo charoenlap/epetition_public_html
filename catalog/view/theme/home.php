@@ -8,19 +8,19 @@
       <div class="carousel-item active">
         <img class="d-block w-100" src="images/beach.png" alt="First slide">
         <div class="carousel-caption d-none d-md-block" >
-          <h1>ศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน</h1>
+          <h1>ศูนย์รับข้อร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
       <div class="carousel-item">
         <img class="d-block w-100" src="images/beach1.png" alt="Second slide">
         <div class="carousel-caption d-none d-md-block" >
-          <h1>ศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน</h1>
+          <h1>ศูนย์รับข้อร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
       <div class="carousel-item">
         <img class="d-block w-100" src="images/beach2.png" alt="Third slide">
         <div class="carousel-caption d-none d-md-block" >
-          <h1>ศูนย์รับข้อเรื่องร้องเรียนกระทรวงพลังงาน</h1>
+          <h1>ศูนย์รับข้อร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
     </div>
