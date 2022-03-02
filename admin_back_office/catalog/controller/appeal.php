@@ -5,6 +5,8 @@
 			if(method_post()){
 				$input = $_POST;
 				$insert = array();
+				
+
 				foreach($input['id_appeal'] as $key => $val){
 					$insert[] = array(
 						'id_response'=> $input['id_response'],
@@ -23,7 +25,9 @@
 			if(method_post()){
 				$input = $_POST;
 				$insert = array();
-				// foreach($input['id_appeal'] as $key => $val){
+				$status = (int)$input['status'];
+				$this->model('response')->updateStatus($input['id_response'],$status);
+				if(!empty($input['note'])){
 					$insert = array(
 						'id_user'=> $this->getSession('AUT_USER_ID'),
 						'id_agency'	=> $this->getSession('DEPARTMENT_ID'),
@@ -31,8 +35,8 @@
 						'date_create'	=> date('Y-m-d H:i:s'),
 						'note'			=> $input['note']
 					);
-				// }
-				$this->model('response')->inputComment($insert);
+					$this->model('response')->inputComment($insert);
+				}
 			}
 			$this->json($result);
 		}
@@ -108,7 +112,7 @@
 					'text_class'		=> $value['text_class'],
 					'text_status'		=> $value['text_status'],
 					'status_id'			=> $value['status_id'],
-					'status_icon'			=> $value['status_icon'],
+					'status_icon'		=> $value['status_icon'],
 				);
 			}
 			$data['page_limit'] = ceil($resultData->num_rows/DEFAULT_LIMIT_PAGE);
@@ -185,6 +189,7 @@
 			$data['id_districts']		= $resultData['id_districts'];
 			$data['zipcode']			= $resultData['zipcode'];
 			$data['note_topic']			= $resultData['note_topic'];
+			$data['status']				= $resultData['status'];
 			$data['topic_address']		= "เลขที่ ".$resultData['t_address_no']." หมู่บ้าน ".$resultData['t_moo']." ซอย ".$resultData['t_soi']." ถนน ".$resultData['t_road']." ตำบล".$resultData['t_id_districts']." อำเภอ".$resultData['t_id_amphures']." จังหวัด".$resultData['t_id_provinces']."";
 			$data['place_landmarks']	= $resultData['place_landmarks'];
 			$data['response_person']	= $resultData['response_person'];

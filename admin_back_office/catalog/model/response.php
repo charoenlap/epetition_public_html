@@ -10,6 +10,11 @@
                 $this->insert('response_comment',$data);
             // }
         } 
+        public function updateStatus($id=0,$status=0){
+            // foreach($data as $val){
+                $this->query("UPDATE ep_response SET `status` = '".(int)$status."' WHERE id = '".(int)$id."'");
+            // }
+        } 
         public function delResponse($id=0){
             $this->delete('response_status',"id='".$id."'");
         }

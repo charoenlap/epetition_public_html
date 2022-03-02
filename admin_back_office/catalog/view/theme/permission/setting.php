@@ -38,8 +38,8 @@
                                         <th width="100px;" class="text-center">เมนู<br><input type="checkbox" id="checkAll"></th>
                                         <th>หัวข้อ</th>
                                         <th>เพิ่ม</th>
-                                        <th>ลบ</th>
                                         <th>แก้ไข</th>
+                                        <th>ปรับสถานะ</th>
                                     </thead>
                                     <tbody>
                                     <?php foreach($menu->rows as $val){?>

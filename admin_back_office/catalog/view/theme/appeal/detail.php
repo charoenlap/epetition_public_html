@@ -190,11 +190,25 @@
                                         <label for="">กรอกข้อมูล/ความเห็น</label>
                                         <textarea name="note" id="summernote" cols="30" rows="30"></textarea>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label for="file" class="btn btn-info">เอกสารแนบ</label>
                                         <input type="file" class="form-control d-none" id="file">
                                         รองรับไฟล์การอัพโหลด  word, pdf, excel , jpeg เท่านั้น
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <select name="status" id="status" class="form-control">
+                                            <option value="2" <?php echo ($status=="2"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างการดำเนินการ</option>
+                                            <option value="3" <?php echo ($status=="3"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์อีก 7 วันจะครบกำหนด</option>
+                                            <option value="4" <?php echo ($status=="4"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด</option>
+                                            <option value="1" <?php echo ($status=="1"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-12">
                                         <button class="btn btn-primary">บันทึก</button>  
                                         <a href="<?php echo route('appeal');?>" class="btn btn-danger">ยกเลิก</a>
