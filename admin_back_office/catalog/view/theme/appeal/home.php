@@ -65,9 +65,9 @@
                                         <label for="">หน่วยงานที่รับผิดชอบ</label>
                                         <select name="department_id" id="department_id" class="form-control">
                                             <option value=""></option>
-                                            <?php foreach($department as $val){?>
-                                            <option value="<?php echo $val['DEPARTMENT_ID'];?>" <?php echo ($department_id==$val['DEPARTMENT_ID']?'selected':'');?>>
-                                                <?php echo $val['DEPARTMENT_NAME'];?>
+                                            <?php foreach($department->rows as $val){?>
+                                            <option value="<?php echo $val['id'];?>" <?php echo ($department_id==$val['id']?'selected':'');?>>
+                                                <?php echo $val['agency_minor_title'];?>
                                             </option>
                                             <?php } ?>
                                         </select>

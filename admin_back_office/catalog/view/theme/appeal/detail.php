@@ -125,21 +125,29 @@
                                             <tr>
                                                 <th>ลำดับ</th>
                                                 <th>วันที่รายงาน</th>
-                                                <th>หน่วยงานระดับกรม</th>
+                                                <th>หัวข้อ</th>
                                                 <th>หน่วยงานระดับสำนัก</th>
                                                 <th>รายละเอียดความก้าวหน้า</th>
                                                 <th>ไฟล์แนบ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $i=1;foreach($getResponse as $val){ ?>
                                             <tr>
-                                                <td>1</td>
-                                                <td>2561-02-01</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><a href="#" class="btn btn-primary btn-xs">ไฟล์แนบ</a></td>
+                                                <td><?php echo $i; ?></td>
+                                                <td><?php echo $val['date_create']; ?></td>
+                                                <td><?php echo $val['appeal_title'];?></td>
+                                                <td><?php echo $val['agency_minor_title'];?></td>
+                                                <td><?php echo $val['note'];?></td>
+                                                <td>
+                                                    <?php if($val['file']){?>
+                                                        <a href="#" class="btn btn-primary btn-xs">ไฟล์แนบ</a>
+                                                    <?php }else{?>
+                                                        -
+                                                    <?php } ?>
+                                                </td>
                                             </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -153,80 +161,46 @@
                             <h4 class="card-title">ความคิดเห็น</h4>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header bg-primary">
-                                            <h4 class="card-title">เจ้าหน้าที่</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2 w-25 mb-2" alt="User Image">
-                                                    <p>เจ้าหน้าที่</p>
-                                                </div>
-                                                <div class="col-10">
-                                                    <small>วันที่ : 17/10/2564 15:49</small>
-                                                    <p>ประสานงาน</p>
+                            <form action="#" method="POST"  id="form-sender">
+                                <input type="hidden" name="id_response" value="<?php echo $id;?>">
+                                <?php foreach($getComment as $val){ ?>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header bg-primary">
+                                                <h4 class="card-title"><?php echo $val['agency_minor_title']; ?></h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <p><?php echo $val['FIRSTNAME'].' '.$val['LASTNAME']; ?></p>
+                                                    </div>
+                                                    <div class="col-10">
+                                                        <small>วันที่ : <?php echo $val['date_create']; ?></small>
+                                                        <?php echo $val['note']; ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header bg-warning">
-                                            <h4 class="card-title">สปน.</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2 w-25 mb-2" alt="User Image">
-                                                    <p>สปน.</p>
-                                                </div>
-                                                <div class="col-10">
-                                                    <small>วันที่ : 17/10/2564 15:49</small>
-                                                    <p>ประสานงาน</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <?php } ?>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">กรอกข้อมูล/ความเห็น</label>
+                                        <textarea name="note" id="summernote" cols="30" rows="30"></textarea>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="file" class="btn btn-info">เอกสารแนบ</label>
+                                        <input type="file" class="form-control d-none" id="file">
+                                        รองรับไฟล์การอัพโหลด  word, pdf, excel , jpeg เท่านั้น
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary">บันทึก</button>  
+                                        <a href="<?php echo route('appeal');?>" class="btn btn-danger">ยกเลิก</a>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header bg-theme">
-                                            <h4 class="card-title">ปกท.ทส/รอง ปทก.ทส</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-2">
-                                                    <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2 w-25 mb-2" alt="User Image">
-                                                    <p>รอง ปทก.ทส</p>
-                                                </div>
-                                                <div class="col-10">
-                                                    <small>วันที่ : 17/10/2564 15:49</small>
-                                                    <p>ประสานงาน</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="">กรอกข้อมูล/ความเห็น</label>
-                                    <textarea name="" id="summernote" cols="30" rows="30"></textarea>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="file" class="btn btn-info">เอกสารแนบ</label>
-                                    <input type="file" class="form-control d-none" id="file">
-                                    รองรับไฟล์การอัพโหลด  word, pdf, excel , jpeg เท่านั้น
-                                </div>
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary">บันทึก</button>  
-                                    <a href="<?php echo route('appeal');?>" class="btn btn-danger">ยกเลิก</a>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -260,6 +234,29 @@
   </div>
 
 <script>
+    $(document).on('submit','#form-sender',function(e){
+        var form = $(this);
+        $.ajax({
+            url: 'index.php?route=appeal/comment',
+            type: 'POST',
+            dataType: 'json',
+            data: form.serialize(),
+        })
+        .done(function(data) {
+            alert('บันทึกเข้าระบบเรียบร้อย');
+            console.log(data);
+            console.log("success");
+        })
+        .fail(function(a,b,c) {
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        e.preventDefault();
+    });
     $('#appeal').addClass('active');
 
 

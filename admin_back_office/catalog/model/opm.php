@@ -128,6 +128,7 @@
 				'url'		=> URL."ManageCenter.asmx?WSDL",
 				'func'		=> "GetCase"
 			);
+			// var_dump($array);
 			$result = soap($array);
 			$result = json_decode($result->GetCaseResult,true);
 			return $result;

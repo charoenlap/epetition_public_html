@@ -50,7 +50,7 @@
                                              <td class="text-center"><?php echo $i; ?></td>
                                              <td><?php echo $val['FIRSTNAME']; ?></td>
                                              <td><?php echo $val['LASTNAME']; ?></td>
-                                             <td><?php echo $val['DEPARTMENT_NAME']; ?></td>
+                                             <td><?php echo $val['agency_minor_title']; ?></td>
                                              <td class="text-center">
                                               <!-- <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a> -->
                                               <a href="<?php echo route('user/edit&id='.$val['AUT_USER_ID']); ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="fas fa-edit"></i></a>

@@ -38,8 +38,11 @@
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <label for="">หน่วยงาน</label>
-                                        <select class="form-control" name="DEPARTMENT_ID">
-                                            <option value=""></option>
+                                        <select name="" id="DEPARTMENT_ID" class="form-control">
+                                            <option value="">เลือกหน่วยงาน</option>
+                                            <?php foreach($agency->rows as $val){?>
+                                                <option value="<?php echo $val['id'];?>"><?php echo $val['agency_minor_title'];?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3 mb-3">

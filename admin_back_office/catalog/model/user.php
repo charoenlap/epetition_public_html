@@ -23,7 +23,7 @@
 				'result' => 'fail'
 			);
 			$sql = "SELECT * FROM AUT_USER 
-			LEFT JOIN DEPARTMENT ON DEPARTMENT.DEPARTMENT_ID=AUT_USER.DEPARTMENT_ID
+			LEFT JOIN ep_agency_minor ON ep_agency_minor.id=AUT_USER.DEPARTMENT_ID
 			ORDER by AUT_USER_ID DESC";
 			$result_user = $this->query($sql);
 			if($result_user->num_rows > 0){

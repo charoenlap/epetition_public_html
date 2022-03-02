@@ -1,9 +1,53 @@
 <?php 
 	class AppealController extends Controller {
+		public function sender(){
+			$result = array();
+			if(method_post()){
+				$input = $_POST;
+				$insert = array();
+				foreach($input['id_appeal'] as $key => $val){
+					$insert[] = array(
+						'id_response'=> $input['id_response'],
+						'id_agency_minor'	=> $input['id_agency'][$key],
+						'id_appeal'	=> $val,
+						'date_create'	=> date('Y-m-d H:i:s'),
+						'note'			=> 'ส่งเรื่องร้องเรียน'
+					);
+				}
+				$this->model('response')->inputResponse($insert);
+			}
+			$this->json($result);
+		}
+		public function comment(){
+			$result = array();
+			if(method_post()){
+				$input = $_POST;
+				$insert = array();
+				// foreach($input['id_appeal'] as $key => $val){
+					$insert = array(
+						'id_user'=> $this->getSession('AUT_USER_ID'),
+						'id_agency'	=> $this->getSession('DEPARTMENT_ID'),
+						'id_response'	=> $input['id_response'],
+						'date_create'	=> date('Y-m-d H:i:s'),
+						'note'			=> $input['note']
+					);
+				// }
+				$this->model('response')->inputComment($insert);
+			}
+			$this->json($result);
+		}
+		public function delSender(){
+			$result = array();
+			if(method_post()){
+				$id = (int)post('id');
+				$this->model('response')->delResponse($id);
+			}
+			$this->json($result);
+		}
 	    public function index() {
 			$data['title'] 	= "เรื่องที่ร้องเรียน/ร้องทุกข์"; 
 			$data['topic'] 			= $this->model('topic')->getLists();
-			$data['department'] 	= $this->model('department')->getLists();
+			$data['department'] 	= $this->model('agency')->getLists();
 			$data['status'] 		= $this->model('status')->getLists();
 			// var_dump($data['status']);
 			$response 		= $this->model('response');
@@ -60,7 +104,7 @@
 					'fullname'			=> $value['name_title']." ".$value['name']." ".$value['lastname'],
 					'dateadd'			=> date('d-m-Y',strtotime($value['dateadd'])),
 					'topicTitle'		=> $value['topic_title'],
-					't_id_provinces'	=> $value['t_id_provinces'],
+					't_id_provinces'	=> $value['PROVINCE_NAME'],
 					'text_class'		=> $value['text_class'],
 					'text_status'		=> $value['text_status'],
 					'status_id'			=> $value['status_id'],
@@ -119,7 +163,7 @@
 	    public function detail() {
 			$data['title'] 	= "รายละเอียดเรื่องร้องเรียน";
 
-			$id 		= $_GET['id'];
+			$id 		= (int)$_GET['id'];
 			$response 	= $this->model('response');
 			$resultData = $response->getList($id);
 
@@ -145,6 +189,10 @@
 			$data['place_landmarks']	= $resultData['place_landmarks'];
 			$data['response_person']	= $resultData['response_person'];
 
+			$data['getResponse'] = $this->model('response')->getResponse($id);
+			$data['getComment'] = $this->model('response')->getComment($id);
+			$data['id'] = $id;
+			// var_dump($data['getResponse']);
 	    	$this->view('appeal/detail',$data);
 	    }	
 	    public function status() {
@@ -156,7 +204,7 @@
 			$response 	= $this->model('response');
 			$resultData = $response->getList($id);
 
-			$data['ticket']				= "6510000".$resultData['id'];
+			$data['ticket']				= $resultData['case_code'];
 			$data['dateadd']			= $resultData['dateadd'];
 			$data['idCard']				= $resultData['id_card'];
 			$data['fullname']			= $resultData['name_title']." ".$resultData['name']." ".$resultData['lastname'];
@@ -179,7 +227,8 @@
 			$data['topic_address']		= "เลขที่ ".$resultData['t_address_no']." หมู่บ้าน ".$resultData['t_moo']." ซอย ".$resultData['t_soi']." ถนน ".$resultData['t_road']." ตำบล".$resultData['t_id_districts']." อำเภอ".$resultData['t_id_amphures']." จังหวัด".$resultData['t_id_provinces']."";
 			$data['place_landmarks']	= $resultData['place_landmarks'];
 			$data['response_person']	= $resultData['response_person'];
-
+			$data['id'] = $id = $resultData['id'];
+			$data['getResponse'] = $this->model('response')->getResponse($id);
 	    	$this->view('appeal/status',$data);
 	    }
 
@@ -210,12 +259,12 @@
 			$data['title'] 	= "รายละเอียดเรื่องร้องเรียน";
 			$data['case_id'] = $case_id = get('case_id');
 			$data['case_code']	= get('case_code');
-			$data['token_id'] = $token_id = $this->getSession('token_id');
+			// $data['token_id'] = $token_id = $this->getSession('token_id');
 			$data['error'] = '';
 			$data['result_TimelineOperating'] = array();
 			// echo "test";exit();
 			$dataSelectTimelineOperating = array(
-				'token_id' 	=>  $token_id,
+				// 'token_id' 	=>  $token_id,
 				'case_id'	=> $case_id,
 				'skip' 		=> '0',
 				'take' 		=> '10'
@@ -223,19 +272,22 @@
 			$result_TimelineOperating = $this->model('opm')->GetTimelineOperating($dataSelectTimelineOperating);
 
 			$dataSelectGetCase = array(
-				'token_id' 	=>  $token_id,
+				// 'token_id' 	=>  $token_id,
 				'case_id'	=> $case_id,
 			);
+			// echo "<pre>";
+			// var_dump($dataSelectGetCase);
 			$result_GetCase = $this->model('opm')->GetCase($dataSelectGetCase);
-
-			// $dataSelectgetOperatings = array(
-			// 	'token_id' 		=>  $token_id,
-			// 	'case_id'		=> $case_id,
-			// 	'select_org_id'	=> '',
-			// 	'skip' 			=> '0',
-			// 	'take' 			=> '10'
-			// );
-			// $result_getOperatings = $this->model('opm')->getOperatings($dataSelectgetOperatings);
+			// echo "<pre>";
+			// var_dump($result_GetCase);exit();
+			$dataSelectgetOperatings = array(
+				// 'token_id' 		=>  $token_id,
+				'case_id'		=> $case_id,
+				'select_org_id'	=> '',
+				'skip' 			=> '0',
+				'take' 			=> '10'
+			);
+			$result_getOperatings = $this->model('opm')->getOperatings($dataSelectgetOperatings);
 			// echo "<pre>";
 			// var_dump($result_getOperatings);exit();
 			if($result_TimelineOperating=="Err:Not found user!!!"){
@@ -243,9 +295,12 @@
 				$data['error'] .= '<a href="'.route('login').'">Token หมดอายุ กรุณาล็อคอินใหม่</a>';
 				$this->view('appeal/opmDetail',$data);
 			}else{
-				$data['result_TimelineOperating'] = $result_TimelineOperating;
+				$data['TimelineOperating'] = $result_TimelineOperating;
+				// echo "<pre>";
+				// var_dump($data['TimelineOperating']);exit();
 				$data['getCase'] = $result_GetCase;
-				// $data['getOperatings'] = $getOperatings;
+				// var_dump($data['getCase']);
+				$data['getOperatings'] = $result_getOperatings;
 				$this->view('appeal/opmDetail',$data);
 			}
 	    }

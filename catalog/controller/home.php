@@ -18,7 +18,7 @@
 	    	$data['descreption'] = "";
 
 			$topic = $this->model('topic');
-			$data['topic'] = $topic->getTopic();
+			$data['topic'] = $topic->getTopicSub();
 			
  	    	$this->view('topic',$data); 
 	    }

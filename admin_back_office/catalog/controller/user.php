@@ -9,6 +9,7 @@
             $data['title'] = "เพิ่มผู้ใช้งาน";
             $data['result'] = get('result');
             $data['getGroups'] = $this->model('user')->getGroups();
+            $data['agency'] = $this->model('agency')->getlists();
             $this->view('user/form',$data);
         }
         public function submitAdd(){
@@ -36,6 +37,7 @@
             $id = get('id');
             $data['getGroups'] = $this->model('user')->getGroups();
             $data['user'] = $this->model('user')->getUser($id);
+            $data['agency'] = $this->model('agency')->getlists();
             // var_dump($data['user']);
             $this->view('user/form',$data);
         }

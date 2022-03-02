@@ -1,5 +1,40 @@
 <?php 
     class ResponseModel extends db {
+        public function inputResponse($data = array()){
+            foreach($data as $val){
+                $this->insert('response_status',$val);
+            }
+        } 
+        public function inputComment($data = array()){
+            // foreach($data as $val){
+                $this->insert('response_comment',$data);
+            // }
+        } 
+        public function delResponse($id=0){
+            $this->delete('response_status',"id='".$id."'");
+        }
+        public function getResponse($id=0){
+            $result = array();
+            $sql = "SELECT *,ep_response_status.id AS id,ep_response_status.date_create AS date_create FROM ep_response_status 
+                    LEFT JOIN ep_agency_minor ON ep_agency_minor.id = ep_response_status.id_agency_minor
+                    LEFT JOIN ep_appeal ON ep_appeal.id = ep_response_status.id_appeal
+            WHERE id_response = ".(int)$id;
+            // echo $sql;exit();
+            $result = $this->query($sql);
+            return $result->rows;
+        }
+        public function getComment($id=0){
+            $result = array();
+            $sql = "SELECT *,ep_response_comment.id AS id,
+                ep_response_comment.date_create AS date_create 
+                FROM ep_response_comment 
+                LEFT JOIN AUT_USER ON AUT_USER.AUT_USER_ID = ep_response_comment.id_user 
+                LEFT JOIN ep_agency_minor ON AUT_USER.DEPARTMENT_ID = ep_agency_minor.id 
+            WHERE id_response = ".(int)$id;
+            // echo $sql;exit();
+            $result = $this->query($sql);
+            return $result->rows;
+        }
         public function getlists($data = array()){
             $where = '';
             $topic_id = (isset($data['topic_id'])?$data['topic_id']:'');
@@ -76,7 +111,8 @@
             `ep_status`.`id` as status_id  
             FROM ep_response a 
             LEFT JOIN ep_topic b ON a.topic_id = b.id 
-            LEFT JOIN ep_status ON a.`status` = ep_status.`id`
+            LEFT JOIN ep_status ON a.`status` = ep_status.`id` 
+            LEFT JOIN PROVINCE ON a.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
             WHERE a.del = 0 ".$where."
             ORDER BY a.id DESC  ";
             // echo $sql;exit();

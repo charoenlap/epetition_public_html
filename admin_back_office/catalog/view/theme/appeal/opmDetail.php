@@ -46,7 +46,7 @@
                                                 <td>Case code : <?php echo $case_code; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>วันที่เรื่องร้องเรียนเข้าระบบ : <?php echo $getCase['ShowDateTime'];?></td>
+                                                <td>วันที่เรื่องร้องเรียนเข้าระบบ : <?php echo (isset($getCase['ShowDateTime'])?$getCase['ShowDateTime']:'');?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -62,23 +62,26 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td colspan="2">เลขประจำตัวประชาชน : <?php echo $getCase['account']['citizen_id']; ?></td>
+                                                <td colspan="2">เลขประจำตัวประชาชน : <?php echo (isset($getCase['account']['citizen_id'])?$getCase['account']['citizen_id']:''); ?></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">ประเภทผู้ร้องเรียน : <?php echo $getCase['account']['account_type_text']; ?></td>
+                                                <td colspan="2">ประเภทผู้ร้องเรียน : <?php echo (isset($getCase['account']['account_type_text'])?$getCase['account']['account_type_text']:''); ?></td>
                                             </tr>
                                             <tr>
-                                                <td width="50%">ชื่อสกุล : <?php echo $getCase['account']['firstname_th'].' '.$getCase['account']['lastname_th']; ?></td>
+                                                <td width="50%">ชื่อสกุล : <?php echo (isset($getCase['account']['firstname_th'])?$getCase['account']['firstname_th']:'').' '.(isset($getCase['account']['lastname_th'])?$getCase['account']['lastname_th']:''); ?></td>
                                                 <td>อายุ :  ปี</td>
                                             </tr>
-                                            <?php foreach($getCase['account']['list_account_detail'] as $lcd){ ?>
+                                            <?php 
+                                            if(isset($getCase['account']['list_account_detail'])){
+                                            foreach($getCase['account']['list_account_detail'] as $lcd){ ?>
                                             <tr>
                                                 <td>รายละเอียดติดต่อเพิ่มเติม</td>
                                                 <td><?php echo $lcd['detail']; ?></td>
                                             </tr>
                                             <?php } ?>
+                                            <?php } ?>
                                             <tr>
-                                                <td>บ้านเลขที่ : <?php echo $getCase['account']['address']; ?></td>
+                                                <td>บ้านเลขที่ : <?php echo (isset($getCase['account']['address'])?$getCase['account']['address']:''); ?></td>
                                                 <td>หมู่ที่ : </td>
                                             </tr>
                                             <tr>
@@ -87,14 +90,14 @@
                                             </tr>
                                             <tr>
                                                 <td>ถนน : </td>
-                                                <td>จังหวัด : <?php echo $getCase['account']['province_text']; ?></td>
+                                                <td>จังหวัด : <?php echo (isset($getCase['account']['province_text'])?$getCase['account']['province_text']:''); ?></td>
                                             </tr>
                                             <tr>
-                                                <td>อำเภอ/เขต : <?php echo $getCase['account']['district_text']; ?></td>
-                                                <td>ตำบล/แขวง : <?php echo $getCase['account']['subdistrict_text']; ?></td>
+                                                <td>อำเภอ/เขต : <?php echo (isset($getCase['account']['district_text'])?$getCase['account']['district_text']:''); ?></td>
+                                                <td>ตำบล/แขวง : <?php echo (isset($getCase['account']['subdistrict_text'])?$getCase['account']['subdistrict_text']:''); ?></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">รหัสไปรษณีย์ : <?php echo $getCase['account']['postcode']; ?></td>
+                                                <td colspan="2">รหัสไปรษณีย์ : <?php echo (isset($getCase['account']['postcode'])?$getCase['account']['postcode']:''); ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -107,28 +110,29 @@
                                         <tbody>
                                             <tr>
                                                 <td>รหัสเรื่องร้องเรียน </td>
-                                                <td><?php echo $getCase['case_code'];?></td>
+                                                <td><?php echo (isset($getCase['case_code'])?$getCase['case_code']:'');?></td>
                                             </tr>
                                             <tr>
                                                 <td>บุคคล/หน่วยงาน/สถานที่ที่ต้องการร้องเรียน </td>
-                                                <td><?php echo $getCase['inform_to_text'];?></td>
+                                                <td><?php echo (isset($getCase['inform_to_text'])?$getCase['inform_to_text']:'');?></td>
                                             </tr>
                                             <tr>
                                                 <td>บริเวณที่เกิดเหตุ</td>
-                                                <td><?php echo $getCase['type_text'];?></td>
+                                                <td><?php echo (isset($getCase['type_text'])?$getCase['type_text']:'');?></td>
                                             </tr>
                                             <tr>
                                                 <td>หัวข้อเรื่องร้องเรียน</td>
-                                                <td><?php echo $getCase['summary'];?></td>
+                                                <td><?php echo (isset($getCase['summary'])?$getCase['summary']:'');?></td>
                                             </tr>
                                             <tr>
                                                 <td>สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ</td>
-                                                <td><?php echo $getCase['detail'];?></td>
+                                                <td><?php echo (isset($getCase['detail'])?$getCase['detail']:'');?></td>
                                             </tr>
                                             <tr>
                                                 <td>สถานะเรื่องร้องเรียน</td>
-                                                <td><?php echo $getCase['status_text'];?></td>
+                                                <td><?php echo (isset($getCase['status_text'])?$getCase['status_text']:'');?></td>
                                             </tr>
+                                            <?php if(isset($getCase['list_case_attachment'])){ ?>
                                             <tr>
                                                 <td>เอกสารแนบ</td>
                                                 <td>
@@ -137,6 +141,7 @@
                                                     <?php } ?>
                                                 </td>
                                             </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -201,7 +206,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <?php foreach($getCase['list_case_org_owner'] as $val){ ?>
+                                <?php /*foreach($getCaseaaaa['list_case_org_owner'] as $val){ ?>
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header bg-primary">
@@ -219,7 +224,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php } ?>
+                                <?php }*/ ?>
                             </div>
                             <!-- <div class="row">
                                 <div class="col-md-12">
@@ -287,7 +292,7 @@
                     <div class="row mt-2">
                         <div class="col-12">
                             <input type="button" class="btn btn-primary" value="บันทึกสถานะ" id="btn-save-status">
-                            <div class="alert alert-success mt-2" id="text-response"></div>
+                            <div class="alert alert-success mt-2 d-none" id="text-response"></div>
                         </div>
                     </div>
                 </div>
@@ -298,9 +303,6 @@
   </div>
 
 <script>
-    $(function(e){
-        $('#text-response').hide();
-    });
     $(document).on('click','#btn-save-status',function(e){
         $.ajax({
             url: 'index.php?route=home/setOrgSummaryResult',
@@ -314,7 +316,7 @@
             },
         })
         .done(function(json) {
-            $('#text-response').show();
+            $('#text-response').removeClass('d-none');
             console.log(json);
             $('#text-response').text('Response form OPM API: '+json);
             console.log("success");

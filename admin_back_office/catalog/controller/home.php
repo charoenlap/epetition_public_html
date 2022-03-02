@@ -62,6 +62,7 @@
 						$officer_name = $resultLogin['detail']['FIRSTNAME'].' '.$resultLogin['detail']['LASTNAME'];
 						$this->setSession('token_id','');
 						$this->setSession('AUT_USER_ID',$resultLogin['detail']['AUT_USER_ID']);
+						$this->setSession('DEPARTMENT_ID',$resultLogin['detail']['DEPARTMENT_ID']);
 						$this->setSession('USER_GROUP_ID',$resultLogin['detail']['USER_GROUP_ID']);
 						$this->setSession('user_name',$resultLogin['detail']['AUT_USER_ID']);
 						$this->setSession('officer_id',$resultLogin['detail']['AUT_USERNAME']);
@@ -70,7 +71,7 @@
 						$this->setSession('role_name',$resultLogin['detail']['GROUP_NAME']);
 						$this->setSession('org_id','');
 						$this->setSession('org_name','');
-						$this->setSession('position',$resultLogin['detail']['DEPARTMENT_NAME']);
+						// $this->setSession('position',$resultLogin['detail']['DEPARTMENT_NAME']);
 						$this->setSession('default_language','');
 						$this->setSession('last_login',$resultLogin['last_login']);
 						$result = array(
