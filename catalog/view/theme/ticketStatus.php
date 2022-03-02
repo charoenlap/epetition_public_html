@@ -32,7 +32,16 @@
                         </tr>
                         <tr>
                             <td><b>หน่วยงานดำเนินการ</b></td>
-                            <td><?php echo $ticket['agency_minor_title']; ?></td>
+                            <td>
+                                <?php 
+                                if($ticket['agency']){
+                                    foreach ($ticket['agency'] as $key => $value) {
+                                       echo $value['agency_minor_title'];
+                                    } ?>
+                                <?php }else{?>
+                                    <p>อยู่ระหว่างดำเนินการ</p>
+                                <?php } ?>
+                            </td>
                         </tr>
                         <tr>
                             <td><b>สถานะ</b></td>
