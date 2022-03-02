@@ -1,5 +1,25 @@
 <?php 
 	class OpmModel extends db {
+		public $token_id;
+		public function __construct(){
+			$username 			= USERNAME;
+			$password 			= PASSWORD;
+			$encryptPassword = $this->encodeString(array('txt'=>$password));
+			$array = array(
+				'params' 	=> array(
+				  "user"		=> $username,
+				  "password"	=> $encryptPassword,
+				  'authen_from'	=> 'S',
+				  'ip_address'	=> IP
+				),
+				'url'		=> URL."Officer.asmx?WSDL",
+				'func'		=> "GetToken"
+			);
+			$resultGetToken = soap($array);
+			$result = json_decode($resultGetToken->GetTokenResult,true);
+			// var_dump($result);
+			$this->token_id = $result['token_id'];
+		}
 		public function encodeString($data = array()){
 			$result = "";
 			$txt = (isset($data['txt'])?$data['txt']:'');
@@ -19,8 +39,8 @@
 		}
 		public function getToken($data = array()){
 			$result = "";
-			$username 			= (isset($data['username'])?$data['username']:'');
-			$password 			= (isset($data['password'])?$data['password']:'');
+			$username 			= USERNAME;
+			$password 			= PASSWORD;
 			$encryptPassword = $this->encodeString(array('txt'=>$password));
 			$array = array(
 				'params' 	=> array(
@@ -38,7 +58,7 @@
 		}
 		public function releaseToken($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$array = array(
 				'params' 	=> array(
 				  "token_id"	=> $token_id
@@ -53,7 +73,7 @@
 		}
 		public function getTimelineHeader($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$last_get_date_time = (isset($data['last_get_date_time'])?$data['last_get_date_time']:'');
 			$timeline_type 		= (isset($data['timeline_type'])?$data['timeline_type']:'');
 			$skip 				= (isset($data['skip'])?$data['skip']:'');
@@ -76,7 +96,7 @@
 		}
 		public function getTimelineOperating($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$case_id 			= (isset($data['case_id'])?$data['case_id']:'');
 			$skip 				= (isset($data['skip'])?$data['skip']:'');
 			$take 				= (isset($data['take'])?$data['take']:'');
@@ -97,7 +117,7 @@
 		}
 		public function getCase($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$case_id 			= (isset($data['case_id'])?$data['case_id']:'');
 
 			$array = array(
@@ -115,7 +135,7 @@
 		
 		public function getOperatings($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$case_id 			= (isset($data['case_id'])?$data['case_id']:'');
 			$select_org_id 		= (isset($data['select_org_id'])?$data['select_org_id']:'');
 			$skip 				= (isset($data['skip'])?$data['skip']:'');
@@ -138,7 +158,7 @@
 		}
 		public function getOperating($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$operating_id 		= (isset($data['operating_id'])?$data['operating_id']:'');
 
 			$array = array(
@@ -155,7 +175,7 @@
 		}
 		public function getContact($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$operating_id 		= (isset($data['operating_id'])?$data['operating_id']:'');
 
 			$array = array(
@@ -172,7 +192,7 @@
 		}
 		public function getAttachment($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$attachment_id 		= (isset($data['attachment_id'])?$data['attachment_id']:'');
 			$is_preview 		= (isset($data['is_preview'])?$data['is_preview']:'');
 
@@ -192,7 +212,7 @@
 		
 		public function getCaseCustomerProfile($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$case_id 		= (isset($data['case_id'])?$data['case_id']:'');
 
 			$array = array(
@@ -209,7 +229,7 @@
 		}
 		public function getCustomerProfile($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$customer_id 		= (isset($data['customer_id'])?$data['customer_id']:'');
 
 			$array = array(
@@ -226,7 +246,7 @@
 		}
 		public function getContactAccount($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$account_id 		= (isset($data['account_id'])?$data['account_id']:'');
 
 			$array = array(
@@ -243,7 +263,7 @@
 		}
 		public function setOrgSummaryResult($data = array()){
 			$result = "";
-			$token_id 		= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 		= $this->token_id;
 			$case_id 		= (isset($data['case_id'])?$data['case_id']:'');
 			$status_id 		= (isset($data['status_id'])?$data['status_id']:'');
 			$result 		= (isset($data['result'])?$data['result']:'');
@@ -264,7 +284,7 @@
 		}
 		public function addOperating($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$case_id 			= (isset($data['case_id'])?$data['case_id']:'');
 			$type_id 			= (isset($data['type_id'])?$data['type_id']:'');
 			$objective_id 		= (isset($data['objective_id'])?$data['objective_id']:'');
@@ -303,7 +323,7 @@
 		}
 		public function operatingAttachment($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$case_id 			= (isset($data['case_id'])?$data['case_id']:'');
 			$operating_id 		= (isset($data['operating_id'])?$data['operating_id']:'');
 			$file_name 			= (isset($data['file_name'])?$data['file_name']:'');
@@ -347,7 +367,7 @@
 
 		public function addCase($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$case_code 			= (isset($data['case_code'])?$data['case_code']:'');
 			$type_id 			= (isset($data['type_id'])?$data['type_id']:'');
 			$status_id 			= (isset($data['status_id'])?$data['status_id']:'');
@@ -392,7 +412,7 @@
 		}
 		// public function getCase($data = array()){
 		// 	$result = "";
-		// 	$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+		// 	$token_id 			= $this->token_id;
 		// 	$case_id 			= (isset($data['case_id'])?$data['case_id']:'');
 		// 	$array = array(
 		// 		'params' 	=> array(
@@ -408,7 +428,7 @@
 		// }
 		public function getCases($data = array()){
 			$result = "";
-			$token_id 			= (isset($data['token_id'])?$data['token_id']:'');
+			$token_id 			= $this->token_id;
 			$last_get_date_time = (isset($data['last_get_date_time'])?$data['last_get_date_time']:'');
 			$skip 				= (isset($data['skip'])?$data['skip']:'');
 			$take 				= (isset($data['take'])?$data['take']:'');
