@@ -109,17 +109,6 @@
                                         <label for="">ถนน</label>
                                         <input type="text" name="road" class="form-control" placeholder="ถนน">
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="">ภาค</label>
-                                        <select name="id_geographies" id="geographies" class="form-control">
-                                            <option value="">-- เลือก --</option>
-                                            <?php foreach($geographies as $key => $value){ ?>
-                                            <option value="<?php echo $value['name']; ?>"
-                                                data-id="<?php echo $value['id']; ?>"><?php echo $value['name']; ?>
-                                            </option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6">
@@ -278,18 +267,6 @@
                                         <label for="">ถนน</label>
                                         <input type="text" name="t_road" class="form-control">
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="">ภาค <span class="text-danger">*</span></label>
-                                        <select name="t_id_geographies" id="t_geographies" class="form-control"
-                                            required>
-                                            <option value="">-- เลือก --</option>
-                                            <?php foreach($geographies as $key => $value){ ?>
-                                            <option value="<?php echo $value['name']; ?>"
-                                                data-id="<?php echo $value['id'] ?>"><?php echo $value['name']; ?>
-                                            </option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6">
@@ -315,6 +292,10 @@
                                             <option value="">ตำบล/แขวง</option>
                                         </select>
                                     </div>
+                                     <div class="col-md-6">
+                                        <label for="">รหัสไปรษณีย์</label>
+                                        <input type="text" name="t_zipcode" id="t_zipcode" class="form-control" placeholder="รหัสไปรษณีย์">
+                                    </div> 
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
@@ -333,8 +314,13 @@
                                 <div class="row mb-3">
                                     <div class="col-md-12">
                                         <h5>เอกสารหรือภาพประกอบการร้องเรียน</h5>
-                                        <label for="actual-btn" class="btn btn-upload"><i class="fas fa-folder-plus"></i> แนบไพล์</label>
-                                        <input type="file" id="actual-btn" hidden />
+                                        <!-- <label for="actual-btn" class="btn btn-upload"><i class="fas fa-folder-plus"></i> แนบไพล์</label> -->
+                                        <!-- <input type="file" id="actual-btn" hidden/> -->
+                                        <div class="file-upload-wrapper" data-text="Select your file!">
+                                          <input name="file-upload-field" type="file" 
+                                          class="file-upload-field" id="fileinput" value="">
+                                        </div>
+                                        <div id="showFileSize"></div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -356,8 +342,164 @@
     </section>
     <!-- /.content -->
 </div>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">แจ้งเตือน</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ขนาดไฟล์ภาพเกินที่กำหนด
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 <script>
+    function idcard(obj){  
+    var pattern=new String("_-____-_____-__-_"); // กำหนดรูปแบบในนี้  
+    var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  
+    var returnText=new String("");  
+    var obj_l=obj.value.length;  
+    var obj_l2=obj_l-1;  
+    for(i=0;i<pattern.length;i++){             
+        if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){  
+            returnText+=obj.value+pattern_ex;  
+            obj.value=returnText;  
+        }  
+    }  
+    if(obj_l>=pattern.length){  
+        obj.value=obj.value.substr(0,pattern.length);             
+    }  
+}  
+function phoneTab(obj){  
+    var pattern=new String("___-___-____"); // กำหนดรูปแบบในนี้  
+    var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  
+    var returnText=new String("");  
+    var obj_l=obj.value.length;  
+    var obj_l2=obj_l-1;  
+    for(i=0;i<pattern.length;i++){             
+        if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){  
+            returnText+=obj.value+pattern_ex;  
+            obj.value=returnText;  
+        }  
+    }  
+    if(obj_l>=pattern.length){  
+        obj.value=obj.value.substr(0,pattern.length);             
+    }  
+}  
+function home(obj){  
+    var pattern=new String("__-___-____"); // กำหนดรูปแบบในนี้  
+    var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  
+    var returnText=new String("");  
+    var obj_l=obj.value.length;  
+    var obj_l2=obj_l-1;  
+    for(i=0;i<pattern.length;i++){             
+        if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){  
+            returnText+=obj.value+pattern_ex;  
+            obj.value=returnText;  
+        }  
+    }  
+    if(obj_l>=pattern.length){  
+        obj.value=obj.value.substr(0,pattern.length);             
+    }  
+}  
+$(document).on('change','#fileinput',function(e){
+    $(this).parent(".file-upload-wrapper").attr("data-text",$(this).val().replace(/.*(\/|\\)/, '') );
+    var input = document.getElementById('fileinput');
+    if (!input.files) { // This is VERY unlikely, browser support is near-universal
+        console.error("This browser doesn't seem to support the `files` property of file inputs.");
+    } else {
+        var file = input.files[0];
+        var bytes = parseFloat(file.size);
+        var kb = bytes/1024;
+        var mb = bytes/1024/1024;
+        $('#showFileSize').html(  mb + " mb in size");
+        if(mb >= 2){
+            $('#exampleModal').modal('show');
+            $('#fileinput').val('');
+            $('#showFileSize').html('');
+            $(this).parent(".file-upload-wrapper").attr("data-text",''.replace(/.*(\/|\\)/, '') );
+        }
+    }
+});
     $('#appeal').addClass('active');
+    $(function(e){
+        $.ajax({
+            type: "GET",
+            url: "../index.php?route=get/provinces",
+            success: function(data,response){
+                console.log(response);
+                $('#provinces').html(data);
+                $('#t_provinces').html(data);
+            }
+        });
+    });
+        
+
+    $('#provinces').on("change",function(){
+        let value = $('option:selected', this).attr('data-id');
+        $.ajax({
+            type: "GET",
+            url: "../index.php?route=get/amphures",
+            data: {idprovinces:value},
+            success: function(data,response){
+                console.log(response);
+                $('#amphures').html(data);
+            }
+        });
+    });
+
+    $('#amphures').on("change",function(){
+        let value = $('option:selected', this).attr('data-id');
+        let zipcode = $('option:selected', this).attr('zipcode');
+        $.ajax({
+            type: "GET",
+            url: "../index.php?route=get/tambons",
+            data: {idamphures:value},
+            success: function(data,response){
+                $('#zipcode').val(zipcode);
+                console.log(response);
+                console.log(data);
+                $('#districts').html(data);
+            }
+        });
+    });
+
+    $('#t_provinces').on("change",function(){
+        let value = $('option:selected', this).attr('data-id');
+        console.log(value);
+        $.ajax({
+            type: "GET",
+            url: "../index.php?route=get/amphures",
+            data: {idprovinces:value},
+            success: function(data,response){
+                console.log(response);
+                console.log(data);
+                $('#t_amphures').html(data);
+            }
+        });
+    });
+
+    $('#t_amphures').on("change",function(){
+        let value = $('option:selected', this).attr('data-id');
+        let zipcode = $('option:selected', this).attr('zipcode');
+        $.ajax({
+            type: "GET",
+            url: "../index.php?route=get/tambons",
+            data: {idamphures:value},
+            success: function(data,response){
+                $('#t_zipcode').val(zipcode);
+                console.log(response);
+                $('#t_districts').html(data);
+            }
+        });
+    });
 </script>
 <script src="../assets/js/form.js"></script>

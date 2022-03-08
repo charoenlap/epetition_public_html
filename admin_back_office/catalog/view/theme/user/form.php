@@ -34,17 +34,40 @@
                                     <p><?php echo $result; ?></p>
                                 </div>
                             <?php } ?>
-                            <form action="<?php echo route('user/submitAdd');?>" method="POST">
+                            <form action="<?php echo $action;?>" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $id;?>">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <label for="">หน่วยงาน</label>
-                                        <select name="" id="DEPARTMENT_ID" class="form-control">
+                                        <select name="id_agency" id="id_agency" class="form-control">
                                             <option value="">เลือกหน่วยงาน</option>
                                             <?php foreach($agency->rows as $val){?>
+                                                <option value="<?php echo $val['id'];?>"><?php echo $val['agency_title'];?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="">หน่วยงานระดับส่วน</label>
+                                        <select name="id_agency_minor" id="id_agency_minor" class="form-control">
+                                            <option value="">เลือกหน่วยงานระดับส่วน</option>
+                                            <?php foreach($agencyMinor->rows as $val){?>
                                                 <option value="<?php echo $val['id'];?>"><?php echo $val['agency_minor_title'];?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="">กลุ่มผู้ใช้งาน</label>
+                                        <select name="USER_GROUP_ID" id="USER_GROUP_ID" class="form-control">
+                                            <?php foreach($getGroups->rows as $val){?>
+                                                <option value="<?php echo $val['USER_GROUP_ID'];?>">
+                                                    <?php echo $val['GROUP_NAME'];?>
+                                                </option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <?php if($title!="แก้ไขผู้ใช้งาน"){ ?>
                                     <div class="col-md-3 mb-3">
                                         <label for="">ชื่อผู้ใช้</label>
                                         <input type="text" class="form-control" name="AUT_USERNAME" value="<?php echo (isset($user['AUT_USERNAME'])?$user['AUT_USERNAME']:'');?>">
@@ -53,21 +76,12 @@
                                         <label for="">รหัสผ่าน</label>
                                         <input type="password" class="form-control" name="AUT_PASSWORD">
                                     </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="">กลุ่มผู้ใช้งาน</label>
-                                        <select name="USER_GROUP_ID" id="" class="form-control">
-                                            <?php foreach($getGroups->rows as $val){?>
-                                                <option value="<?php echo $val['USER_GROUP_ID'];?>">
-                                                    <?php echo $val['GROUP_NAME'];?>
-                                                </option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
+                                    <?php } ?>
+                                    <div class="col-md-4 mb-3">
                                         <label for="">ชื่อ</label>
                                         <input type="text" class="form-control" name="FIRSTNAME"  value="<?php echo (isset($user['FIRSTNAME'])?$user['FIRSTNAME']:'');?>">
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label for="">นามสกุล</label>
                                         <input type="text" class="form-control" name="LASTNAME"  value="<?php echo (isset($user['LASTNAME'])?$user['LASTNAME']:'');?>">
                                     </div>
@@ -93,4 +107,37 @@
 
 <script>
     $('#pageUser').addClass('active');
+    $(document).on('change','#id_agency',function(e){
+        var ele = $(this);
+        var val = ele.val();
+        $.ajax({
+            url: 'index.php?route=user/getAgencyMinor',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                id_agency: val
+            },
+        })
+        .done(function(json) {
+            $('#id_agency_minor option').each(function() {
+                $(this).remove();
+            });
+            $.each(json, function(index, val) {
+                 $('#id_agency_minor').append($('<option>', {
+                    value: val.id_agency,
+                    text: val.agency_minor_title
+                }));
+            });
+            console.log("success");
+        })
+        .fail(function(a,b,c) {
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+    });
 </script>

@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <!-- <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a> -->
-                                    <a href="<?php echo route('appeal/opmAdd');?>" class="btn btn-info"><i class="fas fa-folder-plus"></i> แบบฟอร์มเรื่องร้องเรียน</a>
+                                    <!-- <a href="<?php echo route('appeal/opmAdd');?>" class="btn btn-info"><i class="fas fa-folder-plus"></i> แบบฟอร์มเรื่องร้องเรียน</a> -->
                                 </div>
                             </div>
                             <div class="row mb-2">

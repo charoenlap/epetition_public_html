@@ -40,7 +40,8 @@
                                                <th style="width:70px;" class="text-center">#</th>
                                                <th>ชื่อ</th>
                                                <th>นามสกุล</th>
-                                               <th style="width:130px;">ตำแหน่ง</th>
+                                               <th style="width:250px;">สำนัก</th>
+                                               <th style="width:250px;">ฝ่าย</th>
                                                <th style="width:220px;"></th>
                                            </tr>
                                        </thead>
@@ -50,6 +51,7 @@
                                              <td class="text-center"><?php echo $i; ?></td>
                                              <td><?php echo $val['FIRSTNAME']; ?></td>
                                              <td><?php echo $val['LASTNAME']; ?></td>
+                                             <td><?php echo $val['agency_title']; ?></td>
                                              <td><?php echo $val['agency_minor_title']; ?></td>
                                              <td class="text-center">
                                               <!-- <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a> -->

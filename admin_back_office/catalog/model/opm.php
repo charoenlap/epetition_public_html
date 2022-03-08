@@ -125,12 +125,14 @@
 					'token_id' 			=> $token_id,
 					'case_id'			=> $case_id,
 				),
+				// http://service.1111.go.th/SOAP/ManageCenter.asmx
 				'url'		=> URL."ManageCenter.asmx?WSDL",
 				'func'		=> "GetCase"
 			);
-			// var_dump($array);
+			// var_dump($array);exit();
 			$result = soap($array);
 			$result = json_decode($result->GetCaseResult,true);
+			// var_dump($result);exit();
 			return $result;
 		}
 		

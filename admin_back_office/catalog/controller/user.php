@@ -4,12 +4,19 @@
             $data['lists'] = $this->model('user')->getLists();
             $this->view('user/home',$data);
         }
+        public function getAgencyMinor(){
+            $id_agency = get('id_agency');
+            $agencyMinor = $this->model('agency')->getlistsAgencyMinor($id_agency);
+            $this->json($agencyMinor->rows);
+        }
         public function add(){
             $data = array();
             $data['title'] = "เพิ่มผู้ใช้งาน";
             $data['result'] = get('result');
             $data['getGroups'] = $this->model('user')->getGroups();
-            $data['agency'] = $this->model('agency')->getlists();
+            $data['agency'] = $this->model('agency')->getlistsAgency();
+            $data['agencyMinor'] = $this->model('agency')->getlistsAgencyMinor();
+            $data['action'] = route('user/submitAdd');
             $this->view('user/form',$data);
         }
         public function submitAdd(){
@@ -18,6 +25,7 @@
                 if($this->model('user')->checkUser($input['AUT_USERNAME'])){
                     redirect('user/form&result=ไม่สามารถใช้ชื่อผู้ใช้นี้ได้ ชื่อผู้ใช้ซ้ำระบบ');
                 }else{
+                    unset($input['id']);
                     $user_id = (int)$this->getSession('AUT_USER_ID');
                     $date_current = date('Y-m-d H:i:s');
                     $input['CREATE_USER_ID'] = $user_id;
@@ -30,6 +38,25 @@
                 }
             }
         }
+        public function submitEdit(){
+            if(method_post()){
+                $input = $_POST;
+                // if($this->model('user')->checkUser($input['AUT_USERNAME'])){
+                //     redirect('user/form&result=ไม่สามารถใช้ชื่อผู้ใช้นี้ได้ ชื่อผู้ใช้ซ้ำระบบ');
+                // }else{
+                    $user_id = (int)$this->getSession('AUT_USER_ID');
+                    $date_current = date('Y-m-d H:i:s');
+                    // $input['CREATE_USER_ID'] = $user_id;
+                    $input['UPDATE_USER_ID'] = $user_id;
+                    // $input['CREATE_TIMESTAMP'] = $date_current;
+                    $input['UPDATE_TIMESTAMP'] = $date_current;
+                    $input['DELETE_FLAG'] = 0;
+                    $id = (int)$input['id'];
+                    $this->model('user')->updateUser($id,$input);
+                    redirect('user');
+                // }
+            }
+        }
         public function edit(){
             $data = array();
             $data['title'] = "แก้ไขผู้ใช้งาน";
@@ -37,8 +64,11 @@
             $id = get('id');
             $data['getGroups'] = $this->model('user')->getGroups();
             $data['user'] = $this->model('user')->getUser($id);
-            $data['agency'] = $this->model('agency')->getlists();
+            $data['agency'] = $this->model('agency')->getlistsAgency();
+            $data['agencyMinor'] = $this->model('agency')->getlistsAgencyMinor();
             // var_dump($data['user']);
+            $data['action'] = route('user/submitEdit');
+            $data['id'] = $id;
             $this->view('user/form',$data);
         }
         public function group() {

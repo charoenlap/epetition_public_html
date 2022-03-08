@@ -23,7 +23,8 @@
 				'result' => 'fail'
 			);
 			$sql = "SELECT * FROM AUT_USER 
-			LEFT JOIN ep_agency_minor ON ep_agency_minor.id=AUT_USER.DEPARTMENT_ID
+			LEFT JOIN ep_agency ON ep_agency.id=AUT_USER.id_agency
+            LEFT JOIN ep_agency_minor ON ep_agency_minor.id=AUT_USER.id_agency_minor
 			ORDER by AUT_USER_ID DESC";
 			$result_user = $this->query($sql);
 			if($result_user->num_rows > 0){
@@ -78,9 +79,25 @@
             // echo $sql;exit();
             return $query;
         }
-        public function updateUser($id,$data=array()){
-            $query = $this->update('AUT_USER',$data,'AUT_USER_ID='.$id,false);
-            return $query;
+        public function updateUser($id=0,$data=array()){
+            // if($id){
+                $USER_GROUP_ID = $data['USER_GROUP_ID'];
+                unset($data['USER_GROUP_ID']);
+                // $user_id=$this->insert('AUT_USER',$insert,false);
+                
+
+                unset($data['id']);
+                $query = $this->update('AUT_USER',$data,'AUT_USER_ID='.(int)$id,false);
+
+                $this->query("DELETE FROM AUT_USER_GROUP WHERE AUT_USER_ID = ".$id);
+                $insert_user_group = array(
+                    'AUT_USER_ID' => $id,
+                    'USER_GROUP_ID' => $USER_GROUP_ID
+                );
+                $this->insert('AUT_USER_GROUP',$insert_user_group,false);
+
+                return $query;
+            // }
         }
 	}
 ?>

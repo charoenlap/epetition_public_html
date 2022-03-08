@@ -6,15 +6,18 @@
 				$input = $_POST;
 				$insert = array();
 				
-
-				foreach($input['id_appeal'] as $key => $val){
-					$insert[] = array(
-						'id_response'=> $input['id_response'],
-						'id_agency_minor'	=> $input['id_agency'][$key],
-						'id_appeal'	=> $val,
-						'date_create'	=> date('Y-m-d H:i:s'),
-						'note'			=> 'ส่งเรื่องร้องเรียน'
-					);
+				if(isset($input['id_appeal'])){
+					if($input['id_appeal']){
+						foreach($input['id_appeal'] as $key => $val){
+							$insert[] = array(
+								'id_response'=> $input['id_response'],
+								'id_agency_minor'	=> $input['id_agency'][$key],
+								'id_appeal'	=> $val,
+								'date_create'	=> date('Y-m-d H:i:s'),
+								'note'			=> 'ส่งเรื่องร้องเรียน'
+							);
+						}
+					}
 				}
 				$this->model('response')->inputResponse($insert);
 			}
@@ -128,9 +131,16 @@
 
 			if($_SERVER['REQUEST_METHOD'] == "POST"){
 				$post 				= $_POST;
-				$post['dateadd']	= date('Y-m-d H:i:s');
-				$insert				= $response->addResponse($post);
-				if($insert){
+				$post['topic_id'] 	= post('topic_id');
+				unset($post['file-upload-field']);
+				if(isset($_FILES['file-upload-field'])){
+					$upload_name = time().$_FILES['file-upload-field']['name'];
+					upload($_FILES['file-upload-field'],'uploads/files/',$upload_name);
+					$post['file'] = $upload_name;
+				}
+				// exit();
+				$add = $master->addResponse($post);
+				if($add){
 					redirect('appeal');
 				}
 			}
@@ -293,8 +303,15 @@
 				'take' 			=> '10'
 			);
 			$result_getOperatings = $this->model('opm')->getOperatings($dataSelectgetOperatings);
+
+			$dataGetCases = array(
+				'skip' 			=> '0',
+				'take' 			=> '10'
+			);
+			// $result_GetCases = $this->model('opm')->GetCases($dataGetCases);
 			// echo "<pre>";
-			// var_dump($result_getOperatings);exit();
+			// var_dump($result_GetCases);exit();
+
 			if($result_TimelineOperating=="Err:Not found user!!!"){
 				$data['error'] = "Err:Not found user!!!";
 				$data['error'] .= '<a href="'.route('login').'">Token หมดอายุ กรุณาล็อคอินใหม่</a>';
@@ -303,7 +320,7 @@
 				$data['TimelineOperating'] = $result_TimelineOperating;
 				// echo "<pre>";
 				// var_dump($data['TimelineOperating']);exit();
-				$data['getCase'] = $result_GetCase;
+				// $data['getCase'] = $result_GetCase;
 				// var_dump($data['getCase']);
 				$data['getOperatings'] = $result_getOperatings;
 				$this->view('appeal/opmDetail',$data);

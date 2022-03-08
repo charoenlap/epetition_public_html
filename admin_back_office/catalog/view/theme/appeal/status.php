@@ -184,6 +184,7 @@
         })
         .done(function(data) {
             console.log(data);
+            alert('บันทึกเรียบร้อย');
             console.log("success");
         })
         .fail(function(a,b,c) {
@@ -198,7 +199,7 @@
     });
     $('#appeal').addClass('active');
     $(document).on('click','#addFrom',function (e) { 
-        alert('บันทึกเรียบร้อย')
+        // alert('บันทึกเรียบร้อย');
         var id_appeal = $( "#id_appeal" );
         var id_agency = $( "#id_agency" );
         if(id_appeal.val()!='' && id_agency.val()!=''){
@@ -207,7 +208,7 @@
                                 '<input type="hidden" name="id_appeal[]" value="'+id_appeal.val()+'">'+
                             '</td>'+
                             '<td>'+$( "#id_agency option:selected" ).text()+
-                                '<input type="hidden" name="id_agency[]" value="'+id_appeal.val()+'">'+
+                                '<input type="hidden" name="id_agency[]" value="'+id_agency.val()+'">'+
                             '</td>'+
                              '<td>'+
                                 '<a href="#" class="btn btn-danger delForm">ลบ</a>'+

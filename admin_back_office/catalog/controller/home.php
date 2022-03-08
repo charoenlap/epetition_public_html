@@ -49,6 +49,7 @@
 		    			'username' 	=> $username,
 		    			'password' 	=> $password
 					);
+					// var_dump($selectToken);exit();
 					$resultLogin = $this->model('login')->auth($selectToken);
 					if($resultLogin['result']=="fail"){
 						$result = array(
@@ -61,6 +62,9 @@
 						// var_dump($resultLogin);exit();
 						$officer_name = $resultLogin['detail']['FIRSTNAME'].' '.$resultLogin['detail']['LASTNAME'];
 						$this->setSession('token_id','');
+						$this->setSession('id_agency',$resultLogin['detail']['id_agency']);
+						$this->setSession('id_agency_minor',$resultLogin['detail']['id_agency_minor']);
+
 						$this->setSession('AUT_USER_ID',$resultLogin['detail']['AUT_USER_ID']);
 						$this->setSession('DEPARTMENT_ID',$resultLogin['detail']['DEPARTMENT_ID']);
 						$this->setSession('USER_GROUP_ID',$resultLogin['detail']['USER_GROUP_ID']);

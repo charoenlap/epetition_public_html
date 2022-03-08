@@ -3,6 +3,7 @@
         public function index(){
             $data['title']  = "ประเภทเรื่องร้องเรียน";
             $data['lists']  = $this->model('topic')->getLists();
+
             $this->view('topic/home',$data);
         }
         public function add(){
@@ -22,15 +23,23 @@
             $id             = $_GET['id'];
             $topic          = $this->model('topic');
             $data['data']   = $topic->getList($id);
-
+            $data['lists_sub']  = $this->model('topic')->getListsSub($id);
             if($_SERVER['REQUEST_METHOD'] == "POST"){
-               $post    = array(
+                $post    = array(
                    'topic_title' => $_POST['topic_title']
-               );
-               $update  = $topic->updateTopic($id,$post);
-               if($update){
-                   redirect('topic');
-               }
+                );
+                $update  = $topic->updateTopic($id,$post);
+
+
+                $sub = post('sub');
+
+                $topic->delSubTopic($id);
+                foreach($sub as $key => $val){
+                    $topic->addSubTopic($id,$val);
+                }
+                if($update){
+                   redirect('topic/edit&id='.$id);
+                }
             }
             $this->view('topic/edit',$data);
         }

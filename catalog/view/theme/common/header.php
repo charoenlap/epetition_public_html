@@ -34,9 +34,9 @@
             <li class="nav-item">
               <a class="nav-link" href="#">แผนที่หน่วยงาน</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" href="<?php echo route('member/signin'); ?>">เข้าสู่ระบบ</a>
-            </li>
+            </li> -->
           </ul>
         </div>
         </div>

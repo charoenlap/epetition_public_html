@@ -19,33 +19,73 @@
 
     <!-- Main content -->
     <section class="content">
+      <form action="<?php echo route('topic/edit&id='.$data['id']); ?>" method="POST">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="<?php echo route('topic/edit&id='.$data['id']); ?>" method="POST">
-                            <div class="row mb-3">
+                            
+                            <div class="row">
                                 <div class="col-md-12">
                                    <label for="">ประเภทเรื่องร้องเรียน</label>
                                    <textarea name="topic_title" id="" rows="5" class="form-control"><?php echo $data['topic_title']; ?></textarea>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary" type="submit">บันทึก</button>
-                                    <a href="<?php echo route('topic'); ?>" class="btn btn-secondary">ยกเลิก</a>
-                                </div>
+                            
+                            
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-11">
+                              <h3>หัวข้อย่อย</h3>
                             </div>
-                            </form>
+                            <div class="col-1">
+                              <a href="#" class="btn btn-primary btn-block" id="btn-add">+ เพิ่ม</a>
+                            </div>
+                          </div>
+                          <div id="panel-sub">
+                            <?php foreach($lists_sub as $val){?>
+                            <div class="row mb-2 row-sub">
+                              <div class="col-md-11">
+                                <input type="text" name="sub[]" value="<?php echo $val['title'];?>" class="form-control">
+                              </div>
+                              <div class="col-md-1">
+                                <a href="#" class="btn btn-danger btn-block btn-del-sub">ลบ</a>
+                              </div>
+                            </div>
+                            <?php }?>
+                          </div>
+                          <div class="row mt-4">
+                            <div class="col-md-12">
+                              <button class="btn btn-primary" type="submit">บันทึก</button>
+                              <a href="<?php echo route('topic'); ?>" class="btn btn-secondary">ยกเลิก</a>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
+      </form>
     </section>
         <!-- /.content -->
 </div>
 <script>
     $('#pageTopic').addClass('active');
+    $(document).on('click','#btn-add',function(e){
+      var html = '<div class="row mb-2 row-sub">'+
+                    '<div class="col-md-11">'+
+                      '<input type="text" name="sub[]" value="" class="form-control">'+
+                    '</div>'+
+                    '<div class="col-md-1">'+
+                      '<a href="#" class="btn btn-danger btn-block btn-del-sub">ลบ</a>'+
+                    '</div>'+
+                  '</div>';
+      $('#panel-sub').append(html);
+    });
+    $(document).on('click','.btn-del-sub',function(e){
+      $(this).parents('.row-sub').remove();
+    });
 </script>
