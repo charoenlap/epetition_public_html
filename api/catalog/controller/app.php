@@ -22,21 +22,41 @@
 			
 			$this->json($result);
 		}
-		public function getTopicSub(){
+		public function addResponse(){
 			$result = $result = array(
 				'code'		=>200,
 				'status' 	=> 'failed',
 				'desc' 		=> ''
 			);
 			if(method_post()){
-				$data['topic'] = $this->model('master')->getTopicSub();
-				$data['case_code'] = $case_code;
+				$post 				= $_POST;
+				$post['topic_id'] 	= post('topic_id');
+				// unset($post['file-upload-field']);
+				// if(isset($_FILES['file-upload-field'])){
+				// 	$upload_name = time().$_FILES['file-upload-field']['name'];
+				// 	upload($_FILES['file-upload-field'],'uploads/files/',$upload_name);
+				// 	$post['file'] = $upload_name;
+				// }
+				// exit();
+				$add = $master->addResponse($post);
+				
 				$result = array(
 					'code'		=> 200,
 					'status' 	=> 'success',
 					'desc' 		=> $data
 				);
 			}
+			
+			$this->json($result);
+		}
+		public function getTopicSub(){
+			$data['topic'] = $this->model('master')->getTopicSub();
+			$data['case_code'] = $case_code;
+			$result = array(
+				'code'		=> 200,
+				'status' 	=> 'success',
+				'desc' 		=> $data
+			);
 			
 			$this->json($result);
 			
