@@ -19,7 +19,9 @@
 
   <!-- Main content -->
   <section class="content">
-      <div class="container-fluid">
+      
+      <?php if($active_view){ ?>
+         <div class="container-fluid">
           <div class="row">
               <div class="col-md-12">
                 <div class="card">
@@ -122,7 +124,16 @@
                     </div>
               </div>
           </div>
-      </div>
+      </div>   
+        <?php }else{?>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                กลุ่มผู้ใช้งานของท่านไม่สามารถดูได้
+              </div>
+            </div>
+          </div>
+        <?php } ?>
   </section>
   <!-- /.content -->
 </div>

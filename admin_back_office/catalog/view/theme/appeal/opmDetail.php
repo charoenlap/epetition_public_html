@@ -1,27 +1,24 @@
-
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0"><?php echo $title; ?></h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-              <li class="breadcrumb-item active"><?php echo $title; ?></li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0"><?php echo $title; ?></h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
+                        <li class="breadcrumb-item active"><?php echo $title; ?></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
     <section class="content">
+        <?php if($active_view){ ?>
         <div class="container-fluid">
             <?php if($error){ ?>
             <div class="row">
@@ -71,7 +68,7 @@
                                                 <td width="50%">ชื่อสกุล : <?php echo (isset($getCase['account']['firstname_th'])?$getCase['account']['firstname_th']:'').' '.(isset($getCase['account']['lastname_th'])?$getCase['account']['lastname_th']:''); ?></td>
                                                 <td>อายุ :  ปี</td>
                                             </tr>
-                                            <?php 
+                                            <?php
                                             if(isset($getCase['account']['list_account_detail'])){
                                             foreach($getCase['account']['list_account_detail'] as $lcd){ ?>
                                             <tr>
@@ -137,7 +134,7 @@
                                                 <td>เอกสารแนบ</td>
                                                 <td>
                                                     <?php foreach($getCase['list_case_attachment'] as $attach){?>
-                                                        <p><a href="<?php echo $attach['attachment_id'];?>"><?php echo $attach['file_name'];?></a></p>
+                                                    <p><a href="<?php echo $attach['attachment_id'];?>"><?php echo $attach['file_name'];?></a></p>
                                                     <?php } ?>
                                                 </td>
                                             </tr>
@@ -161,36 +158,42 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $i=1;
-                                                foreach($result_TimelineOperating as $val){ 
-                                                    //$val['id']
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $i++;?></td>
-                                                <td>
-                                                    <?php echo $val['operating_date'];?><br>
+                                            <?php 
+                                            if($result_TimelineOperating){
+                                                $i=1;
+                                                foreach($result_TimelineOperating as $val){
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $i++;?></td>
+                                                    <td>
+                                                        <?php echo $val['operating_date'];?><br>
                                                     <?php echo $val['operating_code']; ?></td>
-                                                
-                                                <td>
-                                                    <p><img src="<?php echo $val['image_base_64'];?>" class="img-circle " alt="" width="30px;"height="auto"> <?php echo $val['officer_text'];?></p>
-                                                </td>
-                                                <td>
-                                                    <p><?php echo $val['org_text'];?></p>
-                                                </td>
-                                                <td>
-                                                    <p><?php echo $val['operating_objective_text']; ?></p>
-                                                    <p><?php echo $val['status_text'];?></p>
-</p>                                                <p><?php echo $val['operating_type_text']; ?></p>
-                                                    <?php echo $val['detail'];?>
-                                                </td>
-                                                <td>
-                                                    <?php if($val['attachments']){ ?>
-                                                    <?php foreach($val['attachments'] as $att){?>
+                                                    
+                                                    <td>
+                                                        <p><img src="<?php echo $val['image_base_64'];?>" class="img-circle " alt="" width="30px;"height="auto"> <?php echo $val['officer_text'];?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?php echo $val['org_text'];?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?php echo $val['operating_objective_text']; ?></p>
+                                                        <p><?php echo $val['status_text'];?></p>
+                                                        </p>                                                <p><?php echo $val['operating_type_text']; ?></p>
+                                                        <?php echo $val['detail'];?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if($val['attachments']){ ?>
+                                                        <?php foreach($val['attachments'] as $att){?>
                                                         <a href="<?php echo $att['attachment_id'];?>"><?php echo $att['file_name'];?></a>
-                                                    <?php } ?>
-                                                    <?php } ?>
-                                                </td>
-                                            </tr>
+                                                        <?php } ?>
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                                <?php } ?>
+                                            <?php }else{?>
+                                                <tr>
+                                                    <td colspan="100">ไม่พบความก้าวหน้า</td>
+                                                </tr>
                                             <?php } ?>
                                         </tbody>
                                     </table>
@@ -206,7 +209,8 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <?php /*foreach($getCaseaaaa['list_case_org_owner'] as $val){ ?>
+                                <?php if(isset($getCase['list_case_org_owner'])){ ?>
+                                <?php /*foreach($getCase['list_case_org_owner'] as $val){ ?>
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header bg-primary">
@@ -225,6 +229,9 @@
                                     </div>
                                 </div>
                                 <?php }*/ ?>
+                                <?php }else{?>
+                                    <div class="col-12">ไม่มีความคิดเห็น</div>
+                                <?php } ?>
                             </div>
                             <!-- <div class="row">
                                 <div class="col-md-12">
@@ -237,14 +244,13 @@
                                     รองรับไฟล์การอัพโหลด  word, pdf, excel , jpeg เท่านั้น
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary">บันทึก</button>  
+                                    <button class="btn btn-primary">บันทึก</button>
                                     <a href="" class="btn btn-danger">ยกเลิก</a>
                                 </div>
                             </div> -->
                         </div>
                     </div>
                 </div>
-
                 <!-- <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
@@ -261,7 +267,7 @@
                                     <input type="file" class="form-control d-none" id="file">
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary">บันทึก</button>  
+                                    <button class="btn btn-primary">บันทึก</button>
                                     <a href="" class="btn btn-danger">ยกเลิก</a>
                                 </div>
                             </div>
@@ -269,7 +275,7 @@
                     </div>
                 </div> -->
             </div>
-            
+            <?php if($active_add){?>
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">บันทึกผลสรุปการปฏิบัติงานของหน่วยงาน</h4>
@@ -282,12 +288,12 @@
                             <option value="2">รับทราบไว้ชั้นต้น</option>
                             <option value="3">ไม่อยู่ในอำนาจหน้าที่</option>
                         </select>
-                    </div>     
+                    </div>
                     <div class="row mt-2">
                         <div class="col-md-12">
                             <label for="">ผลกํารปฏิบัติงานแจ้งผู้ร้อง</label>
                             <textarea name="" id="result" cols="10" rows="5" class="form-control"></textarea>
-                        </div> 
+                        </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-12">
@@ -297,43 +303,48 @@
                     </div>
                 </div>
             </div>
+            <?php } ?>
         </div>
+        <?php }else{?>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                กลุ่มผู้ใช้งานของท่านไม่สามารถดูได้
+              </div>
+            </div>
+          </div>
+        <?php } ?>
     </section>
-    <!-- /.content -->
-  </div>
-
-<script>
-    $(document).on('click','#btn-save-status',function(e){
-        $.ajax({
-            url: 'index.php?route=home/setOrgSummaryResult',
-            type: 'GET',
-            dataType: 'json',
-            data: {
+</div>
+                <script>
+                $(document).on('click','#btn-save-status',function(e){
+                $.ajax({
+                url: 'index.php?route=home/setOrgSummaryResult',
+                type: 'GET',
+                dataType: 'json',
+                data: {
                 token_id: '<?php echo $token_id;?>',
                 case_id: '<?php echo $case_id;?>',
                 status_id: $('#status_id').val(),
                 result: $('#result').val()
-            },
-        })
-        .done(function(json) {
-            $('#text-response').removeClass('d-none');
-            console.log(json);
-            $('#text-response').text('Response form OPM API: '+json);
-            console.log("success");
-        })
-        .fail(function() {
-            console.log("error");
-        })
-        .always(function() {
-            console.log("complete");
-        });
-        
-    });
-
-    $('#appeal').addClass('active');
-
-
-    $('#summernote').summernote({
-        height: 300
-    });
-</script>
+                },
+                })
+                .done(function(json) {
+                $('#text-response').removeClass('d-none');
+                console.log(json);
+                $('#text-response').text('Response form OPM API: '+json);
+                console.log("success");
+                })
+                .fail(function() {
+                console.log("error");
+                })
+                .always(function() {
+                console.log("complete");
+                });
+                
+                });
+                $('#appeal').addClass('active');
+                $('#summernote').summernote({
+                height: 300
+                });
+                </script>

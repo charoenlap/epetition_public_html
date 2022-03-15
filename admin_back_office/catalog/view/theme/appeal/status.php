@@ -117,6 +117,7 @@
                         <h4 class="card-title">ข้อเสนอแนวทางการพิจารณาดําเนินการ</h4>
                     </div>
                     <div class="card-body">
+                        <?php if($active_add){ ?>
                         <div class="row mb-3">
                             <div class="col-md-5">
                                 <label for="">ประเด็นเรื่องร้องเรียน</label>
@@ -140,6 +141,7 @@
                                 <a class="btn btn-primary" id="addFrom"><i class="fas fa-folder-plus"></i> <br>เพิ่ม</a>
                             </div>
                         </div>
+                        <?php }?>
                         <table class="table-striped table" id="sender">
                             <thead></thead>
                             <tbody class="body">
@@ -147,7 +149,11 @@
                                     <tr>
                                         <td><?php echo $val['appeal_title'];?></td>
                                         <td><?php echo $val['agency_minor_title'];?></td>
-                                        <td><a href="#" class="btn btn-danger delForm" data-id="<?php echo $val['id'];?>">ลบ</a></td>
+                                        <td>
+                                            <?php if($active_del){ ?>
+                                            <a href="#" class="btn btn-danger delForm" data-id="<?php echo $val['id'];?>">ลบ</a>
+                                            <?php } ?>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
@@ -161,12 +167,14 @@
                                 </select>
                             </div> 
                         </div> -->
+                        <?php if($active_add){ ?>
                         <div class="row mt-2">
                             <div class="col-md-12">
                                 <button class="btn btn-dark" style="width:150px;" id="btn-sender" type="submit">ส่งเรื่อง</button>
                                 <a href="<?php echo route('appeal');?>" class="btn btn-light">ยกเลิก</a>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

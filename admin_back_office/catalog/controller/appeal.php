@@ -52,6 +52,7 @@
 			$this->json($result);
 		}
 	    public function index() {
+	    	// var_dump($_SESSION);exit();
 			$data['title'] 	= "เรื่องที่ร้องเรียน/ร้องทุกข์"; 
 			$data['topic'] 			= $this->model('topic')->getLists();
 			$data['department'] 	= $this->model('agency')->getLists();
@@ -84,6 +85,11 @@
 				$phone 	= $data['phone'];
 			}
 			$data['page'] = (get('page')?get('page'):1);
+			$USER_GROUP_ID = (int)$this->getSession('USER_GROUP_ID');
+			$id_agency_minor = 0;
+			if($USER_GROUP_ID>1){
+				$id_agency_minor = (int)$this->getSession('id_agency_minor');
+			}
 			$data_search = array(
 				'topic_id' 			=> $data['topic_id'],
 				'dateadd'			=> $data['dateadd'],
@@ -99,7 +105,8 @@
 				'phone'				=> $phone, 
 				'response_person'	=> $data['response_person'],
 				'status_id'			=> $data['status_id'],
-				'page'				=> $data['page']
+				'page'				=> $data['page'],
+				'id_agency_minor'	=> $id_agency_minor
 			);
 			
 			$resultData 	= $response->getLists($data_search);
@@ -119,6 +126,30 @@
 				);
 			}
 			$data['page_limit'] = ceil($resultData->num_rows/DEFAULT_LIMIT_PAGE);
+
+			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
+			$data['menu'] = array();
+			$data['active_del'] = 0;
+			$data['active_add'] = 0;
+			$data['active_view'] = 0;
+			$data['active_edit'] = 0;
+			foreach($menu as $val){
+				if($val['MENU_ID']=="2"){
+					if($val['USER_DELETE']=="1"){
+						$data['active_del'] = 1;
+					}
+					if($val['USER_ADD']=="1"){
+						$data['active_add'] = 1;
+					}
+					if($val['USER_VIEW']=="1"){
+						$data['active_view'] = 1;
+					}
+					if($val['USER_EDIT']=="1"){
+						$data['active_edit'] = 1;
+					}
+				}
+			}
 	    	$this->view('appeal/home',$data);
 	    }
 	    public function add() {
@@ -211,8 +242,25 @@
 	    	$this->view('appeal/detail',$data);
 	    }	
 	    public function status() {
+	    	$data = array();
 			$data['title']	= "บันทึกรับเรื่องร้องเรียน";
-
+			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
+			$data['menu'] = array();
+			$data['active_del'] = 0;
+			$data['active_add'] = 0;
+			foreach($menu as $val){
+				if($val['MENU_ID']=="2"){
+					if($val['USER_DELETE']=="1"){
+						$data['active_del'] = 1;
+					}
+					if($val['USER_ADD']=="1"){
+						$data['active_add'] = 1;
+					}
+				}
+			}
+			// echo "<pre>";
+			// var_dump($menu);exit();
 			$id 		= $_GET['id'];
 			$data['agency'] = $this->model('agency')->getlists();
 			$data['appeal'] = $this->model('appeal')->getlists();
@@ -252,21 +300,47 @@
 			$data['token_id'] = $token_id = $this->getSession('token_id');
 			$data['error'] = '';
 			$data['result'] = array();
-			$data['timeline_type'] = (get('timeline_type')?get('timeline_type'):'A');
-			$dataSelect = array(
-				'token_id' =>  $token_id,
-				'last_get_date_time' =>  '',
-				'timeline_type' => $data['timeline_type'],
-				'skip' => '0',
-				'take' => '10'
-			);
-			$result = $this->model('opm')->getTimelineHeader($dataSelect);
+
+			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
+			$data['menu'] = array();
+			$data['active_del'] = 0;
+			$data['active_add'] = 0;
+			$data['active_view'] = 0;
+			$data['active_edit'] = 0;
+			foreach($menu as $val){
+				if($val['MENU_ID']=="20"){
+					if($val['USER_DELETE']=="1"){
+						$data['active_del'] = 1;
+					}
+					if($val['USER_ADD']=="1"){
+						$data['active_add'] = 1;
+					}
+					if($val['USER_VIEW']=="1"){
+						$data['active_view'] = 1;
+					}
+					if($val['USER_EDIT']=="1"){
+						$data['active_edit'] = 1;
+					}
+				}
+			}
+			$result = '';
+			if($data['active_view']){
+				$data['timeline_type'] = (get('timeline_type')?get('timeline_type'):'A');
+				$dataSelect = array(
+					'token_id' =>  $token_id,
+					'last_get_date_time' =>  '',
+					'timeline_type' => $data['timeline_type'],
+					'skip' => '0',
+					'take' => '10'
+				);
+				$data['result'] = $result = $this->model('opm')->getTimelineHeader($dataSelect);
+			}
 			if($result=="Err:Not found user!!!"){
 				$data['error'] = "Err:Not found user!!!";
 				$data['error'] .= '<a href="'.route('login').'">Token หมดอายุ กรุณาล็อคอินใหม่</a>';
 				$this->view('appeal/opmHome',$data);
 			}else{
-				$data['result'] = $result;
 				$this->view('appeal/opmHome',$data);
 			}
 	    }
@@ -277,52 +351,79 @@
 			// $data['token_id'] = $token_id = $this->getSession('token_id');
 			$data['error'] = '';
 			$data['result_TimelineOperating'] = array();
-			// echo "test";exit();
-			$dataSelectTimelineOperating = array(
-				// 'token_id' 	=>  $token_id,
-				'case_id'	=> $case_id,
-				'skip' 		=> '0',
-				'take' 		=> '10'
-			);
-			$result_TimelineOperating = $this->model('opm')->GetTimelineOperating($dataSelectTimelineOperating);
+			
+			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
+			$data['menu'] = array();
+			$data['active_del'] = 0;
+			$data['active_add'] = 0;
+			$data['active_view'] = 0;
+			$data['active_edit'] = 0;
+			foreach($menu as $val){
+				if($val['MENU_ID']=="20"){
+					if($val['USER_DELETE']=="1"){
+						$data['active_del'] = 1;
+					}
+					if($val['USER_ADD']=="1"){
+						$data['active_add'] = 1;
+					}
+					if($val['USER_VIEW']=="1"){
+						$data['active_view'] = 1;
+					}
+					if($val['USER_EDIT']=="1"){
+						$data['active_edit'] = 1;
+					}
+				}
+			}
+			if($data['active_view']){
+				$dataSelectTimelineOperating = array(
+					// 'token_id' 	=>  $token_id,
+					'case_id'	=> $case_id,
+					'skip' 		=> '0',
+					'take' 		=> '10'
+				);
+				$result_TimelineOperating = $this->model('opm')->GetTimelineOperating($dataSelectTimelineOperating);
 
-			$dataSelectGetCase = array(
-				// 'token_id' 	=>  $token_id,
-				'case_id'	=> $case_id,
-			);
-			// echo "<pre>";
-			// var_dump($dataSelectGetCase);
-			$result_GetCase = $this->model('opm')->GetCase($dataSelectGetCase);
-			// echo "<pre>";
-			// var_dump($result_GetCase);exit();
-			$dataSelectgetOperatings = array(
-				// 'token_id' 		=>  $token_id,
-				'case_id'		=> $case_id,
-				'select_org_id'	=> '',
-				'skip' 			=> '0',
-				'take' 			=> '10'
-			);
-			$result_getOperatings = $this->model('opm')->getOperatings($dataSelectgetOperatings);
-
-			$dataGetCases = array(
-				'skip' 			=> '0',
-				'take' 			=> '10'
-			);
-			// $result_GetCases = $this->model('opm')->GetCases($dataGetCases);
-			// echo "<pre>";
-			// var_dump($result_GetCases);exit();
-
-			if($result_TimelineOperating=="Err:Not found user!!!"){
-				$data['error'] = "Err:Not found user!!!";
-				$data['error'] .= '<a href="'.route('login').'">Token หมดอายุ กรุณาล็อคอินใหม่</a>';
-				$this->view('appeal/opmDetail',$data);
-			}else{
-				$data['TimelineOperating'] = $result_TimelineOperating;
+				$dataSelectGetCase = array(
+					// 'token_id' 	=>  $token_id,
+					'case_id'	=> $case_id,
+				);
 				// echo "<pre>";
-				// var_dump($data['TimelineOperating']);exit();
-				// $data['getCase'] = $result_GetCase;
-				// var_dump($data['getCase']);
-				$data['getOperatings'] = $result_getOperatings;
+				// var_dump($dataSelectGetCase);
+				$result_GetCase = $this->model('opm')->GetCase($dataSelectGetCase);
+				// echo "<pre>";
+				// var_dump($result_GetCase);exit();
+				$dataSelectgetOperatings = array(
+					// 'token_id' 		=>  $token_id,
+					'case_id'		=> $case_id,
+					'select_org_id'	=> '',
+					'skip' 			=> '0',
+					'take' 			=> '10'
+				);
+				$result_getOperatings = $this->model('opm')->getOperatings($dataSelectgetOperatings);
+
+				$dataGetCases = array(
+					'skip' 			=> '0',
+					'take' 			=> '10'
+				);
+				// $result_GetCases = $this->model('opm')->GetCases($dataGetCases);
+				// echo "<pre>";
+				// var_dump($result_GetCases);exit();
+
+				if($result_TimelineOperating=="Err:Not found user!!!"){
+					$data['error'] = "Err:Not found user!!!";
+					$data['error'] .= '<a href="'.route('login').'">Token หมดอายุ กรุณาล็อคอินใหม่</a>';
+					$this->view('appeal/opmDetail',$data);
+				}else{
+					$data['TimelineOperating'] = $result_TimelineOperating;
+					// echo "<pre>";
+					// var_dump($data['TimelineOperating']);exit();
+					// $data['getCase'] = $result_GetCase;
+					// var_dump($data['getCase']);
+					$data['getOperatings'] = $result_getOperatings;
+					$this->view('appeal/opmDetail',$data);
+				}
+			}else{
 				$this->view('appeal/opmDetail',$data);
 			}
 	    }

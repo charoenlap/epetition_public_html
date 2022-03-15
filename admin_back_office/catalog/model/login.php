@@ -7,8 +7,8 @@
 			$username		= $this->escape($data['username']);
 			$password		= $this->escape($data['password']);
 			$sql = "SELECT * FROM AUT_USER 
-						JOIN AUT_USER_GROUP ON AUT_USER.AUT_USER_ID = AUT_USER_GROUP.AUT_USER_ID 
-						JOIN AUT_GROUP ON AUT_USER_GROUP.AUT_USER_ID = AUT_GROUP.USER_GROUP_ID
+						LEFT JOIN AUT_USER_GROUP ON AUT_USER.AUT_USER_ID = AUT_USER_GROUP.AUT_USER_ID 
+						LEFT JOIN AUT_GROUP ON AUT_USER_GROUP.USER_GROUP_ID = AUT_GROUP.USER_GROUP_ID
 					WHERE 
 						AUT_USER.AUT_USERNAME ='".$username."' 
 						AND AUT_USER.AUT_PASSWORD = MD5('".$password."') 

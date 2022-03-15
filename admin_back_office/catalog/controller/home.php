@@ -18,7 +18,29 @@
 				$data['total_case_process'] = $total_case_process;
 				$data['total_report'] 		= 11;
 				$data['total_user'] 		= $total_user;
-
+				$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+				$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
+				$data['menu'] = array();
+				$data['active_del'] = 0;
+				$data['active_add'] = 0;
+				$data['active_view'] = 0;
+				$data['active_edit'] = 0;
+				foreach($menu as $val){
+					if($val['MENU_ID']=="1"){
+						if($val['USER_DELETE']=="1"){
+							$data['active_del'] = 1;
+						}
+						if($val['USER_ADD']=="1"){
+							$data['active_add'] = 1;
+						}
+						if($val['USER_VIEW']=="1"){
+							$data['active_view'] = 1;
+						}
+						if($val['USER_EDIT']=="1"){
+							$data['active_edit'] = 1;
+						}
+					}
+				}
 		    	$this->view('home',$data);
 		    }else{
 		    	redirect('login');

@@ -17,6 +17,7 @@
     </div>
     <form action="<?php echo route('setting'); ?>" method="POST">
         <section class="content">
+            <?php if($active_view){ ?>
             <div class="container-fluid">
                 <div id="tabs">
                     <ul class="nav nav-tabs" role="tablist">
@@ -173,12 +174,23 @@
                         </div>
                     </div>
                 </div>
+                <?php if($active_edit){ ?>
                 <div class="row">
                     <div class="col-12">
                         <input class="btn btn-primary btn-block" type="submit" value="บันทึกการตั้งค่า">
                     </div>
                 </div>
+                <?php } ?>
             </div>
+            <?php }else{?>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-12">
+                    กลุ่มผู้ใช้งานของท่านไม่สามารถดูได้
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
         </section>
     </form>
 </div>

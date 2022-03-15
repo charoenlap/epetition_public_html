@@ -42,6 +42,7 @@
         }
         public function getlists($data = array()){
             $where = '';
+            $id_agency_minor = (isset($data['id_agency_minor'])?$data['id_agency_minor']:'');
             $topic_id = (isset($data['topic_id'])?$data['topic_id']:'');
             $dateadd = (isset($data['dateadd'])?trim($data['dateadd']):'');
             $dateadd_time = (isset($data['dateadd_time'])?trim($data['dateadd_time']):'');
@@ -108,19 +109,26 @@
                 $limit = $limit_start.','.$limit_end;
             }
             $limit = " LIMIT ".$limit;
-
+            $left_join = '';
+            if($id_agency_minor){
+                $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
+                $where = " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
+            }
             $sql    = "SELECT *,a.id as id, 
             `ep_status`.`status_class` as text_class,
             `ep_status`.`status_text` as text_status,
             `ep_status`.`status_icon` as status_icon,
             `ep_status`.`id` as status_id  
             FROM ep_response a 
+            ".$left_join."
             LEFT JOIN ep_topic b ON a.topic_id = b.id 
             LEFT JOIN ep_status ON a.`status` = ep_status.`id` 
             LEFT JOIN PROVINCE ON a.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+            
             WHERE a.del = 0 ".$where."
             ORDER BY a.id DESC  ";
             // echo $sql;exit();
+
             $query  = $this->query($sql.$limit);
             $query_row  = $this->query($sql)->num_rows;
             $query->num_rows = $query_row;

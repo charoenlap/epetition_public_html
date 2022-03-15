@@ -1,0 +1,8 @@
+RewriteEngine On 
+
+RewriteCond %{HTTPS_HOST} ^charoenlap\.com [NC]
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://www.charoenlap.com/epetition/public_html/api/$1 [R,L]
+
+RewriteRule ^request_callback(.*)$ /index.php?route=qr/callback [L,QSA]
+RewriteRule ^request_qr(.*)$ /index.php?route=qr [L,QSA]

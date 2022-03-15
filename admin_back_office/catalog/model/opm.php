@@ -129,9 +129,13 @@
 				'url'		=> URL."ManageCenter.asmx?WSDL",
 				'func'		=> "GetCase"
 			);
-			// var_dump($array);exit();
+			// echo "Param".'<br>';
+			// echo "<pre>";
+			// var_dump($array);
 			$result = soap($array);
 			$result = json_decode($result->GetCaseResult,true);
+			// echo "result<br>";
+			// echo "<pre>";
 			// var_dump($result);exit();
 			return $result;
 		}

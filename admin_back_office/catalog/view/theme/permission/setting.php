@@ -37,31 +37,99 @@
                                     <thead>
                                         <th width="100px;" class="text-center">เมนู<br><input type="checkbox" id="checkAll"></th>
                                         <th>หัวข้อ</th>
+                                        <th>ดู</th>
                                         <th>เพิ่ม</th>
                                         <th>แก้ไข</th>
-                                        <th>ปรับสถานะ</th>
+                                        <th>ลบ</th>
                                     </thead>
                                     <tbody>
-                                    <?php foreach($menu->rows as $val){?>
+                                    <?php foreach($menu->rows as $val){
+                                            $display_none = false;
+                                            $user_view = true;
+                                            $user_add = true;
+                                            $user_edit = true;
+                                            $user_del = true;
+                                            // หน้าหลัก
+                                            if($val['MENU_ID']==1){
+                                                $user_view = true;
+                                                $user_add = false;
+                                                $user_edit = false;
+                                                $user_del = false;
+                                            }
+                                            if($val['MENU_ID']==20){
+                                                $user_view = true;
+                                                $user_add = true;
+                                                $user_edit = false;
+                                                $user_del = false;
+                                            }
+                                            if($val['MENU_ID']==4){
+                                                $user_view = true;
+                                                $user_add = false;
+                                                $user_edit = false;
+                                                $user_del = false;
+                                            }
+                                            if($val['MENU_ID']==5){
+                                                $user_view = false;
+                                                $user_add = false;
+                                                $user_edit = false;
+                                                $user_del = false;
+                                            }
+                                            if($val['MENU_ID']>=6 AND $val['MENU_ID']<=16){
+                                                $user_view = true;
+                                                $user_add = false;
+                                                $user_edit = false;
+                                                $user_del = false;
+                                            }
+                                            if($val['MENU_ID']==19){
+                                                $user_view = true;
+                                                $user_add = false;
+                                                $user_edit = true;
+                                                $user_del = false;
+                                            }
+                                            
+                                    ?>
                                         <tr>
-                                            <td class="text-center"><input type="checkbox" 
+                                            <td class="text-center">
+
+                                                <input type="checkbox" 
                                                 name="menu_id[<?php echo $val['MENU_ID'];?>]" 
                                                 value="<?php echo $val['MENU_ID'];?>" 
-                                                class="checkboxSend"
-                                                <?php echo ($val['checkbox']?'checked':'');?>></td>
+                                                class="checkboxSend " 
+                                                <?php echo ($val['checkbox']?'checked':'');?>>
+                                            </td>
                                             <td><?php echo $val['MENU-DESC'];?></td>
-                                            <td><input type="checkbox" 
+                                            <td>
+                                                <?php if($user_view){?>
+                                                <input type="checkbox" 
+                                                name="user_view[<?php echo $val['MENU_ID'];?>]" 
+                                                value="1" 
+                                                <?php echo ($val['USER_VIEW']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if($user_add){?>
+                                                <input type="checkbox" 
                                                 name="user_add[<?php echo $val['MENU_ID'];?>]" 
                                                 value="1" 
-                                                <?php echo ($val['USER_ADD']?'checked':'');?>></td>
-                                            <td><input type="checkbox" 
+                                                <?php echo ($val['USER_ADD']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if($user_edit){?>
+                                                <input type="checkbox" 
                                                 name="user_edit[<?php echo $val['MENU_ID'];?>]" 
                                                 value="1" 
-                                                <?php echo ($val['USER_EDIT']?'checked':'');?>></td>
-                                            <td><input type="checkbox" 
+                                                <?php echo ($val['USER_EDIT']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if($user_del){?>
+                                                <input type="checkbox" 
                                                 name="user_del[<?php echo $val['MENU_ID'];?>]" 
                                                 value="1" 
-                                                <?php echo ($val['USER_DELETE']?'checked':'');?>></td>
+                                                <?php echo ($val['USER_DELETE']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
                                         </tr>
                                     <?php }?>
                                     </tbody>

@@ -19,6 +19,7 @@
 
   <!-- Main content -->
   <section class="content">
+    <?php if($active_view){ ?>
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
       <div class="row">
@@ -27,7 +28,6 @@
           <div class="small-box bg-info">
             <div class="inner">
               <h3><?php echo $total_case;?></h3>
-
               <p>เรื่องร้องเรียน</p>
             </div>
             <div class="icon">
@@ -82,18 +82,7 @@
         </div>
         <!-- ./col -->
       </div>
-      <!-- /.row -->
-      <!-- <div class="row mb-3">
-          <div class="col-md-4">
-              <div id="piechart_3d" style="height: 500px;"></div>
-          </div>
-          <div class="col-md-4">
-            <div id="chart_div" style="height: 500px;"></div>
-          </div>
-          <div class="col-md-4">
-            <div id="chart_div_combo" style="height: 500px;"></div>
-          </div>
-      </div> -->
+
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -110,7 +99,16 @@
           </div>
         </div>
       </div> 
-    </div><!-- /.container-fluid -->
+    </div>
+    <?php }else{?>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            กลุ่มผู้ใช้งานของท่านไม่สามารถดูได้
+          </div>
+        </div>
+      </div>
+    <?php } ?>
   </section>
   <!-- /.content -->
 </div>

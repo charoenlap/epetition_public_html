@@ -18,14 +18,63 @@
             );
             $this->insert('AUT_USER_GROUP',$insert_user_group,false);
         }
+        public function updateUser($id=0,$data=array()){
+            // if($id){
+                $return = array(
+                    'result' => false
+                );
+                $flag_update = false;
+                $AUT_USERNAME = $data['AUT_USERNAME'];
+                $password = trim($data['AUT_PASSWORD']);
+
+                if(empty($password)){
+                    unset($data['AUT_PASSWORD']);
+                }else{
+                    $data['AUT_PASSWORD'] = md5($password);
+                }
+                $sql_check_user = "SELECT * FROM AUT_USER WHERE AUT_USERNAME='".$AUT_USERNAME."' LIMIT 0,1";
+                $result_check_user = $this->query($sql_check_user);
+                if($result_check_user->num_rows>1){
+                    if($result_check_user->row['AUT_USER_ID']==$id){
+                        $flag_update = true;
+                    }else{
+                        $return = array(
+                            'result' => false,
+                            'desc'  => "User Dupplicate"
+                        );
+                    }
+                }else{
+                    $flag_update = true;
+                }
+                if($flag_update){
+                    $USER_GROUP_ID = $data['USER_GROUP_ID'];
+                    unset($data['USER_GROUP_ID']);
+                    unset($data['id']);
+                    $query = $this->update('AUT_USER',$data,'AUT_USER_ID='.(int)$id,false);
+
+                    $this->query("DELETE FROM AUT_USER_GROUP WHERE AUT_USER_ID = ".(int)$id);
+                    $insert_user_group = array(
+                        'AUT_USER_ID' => $id,
+                        'USER_GROUP_ID' => $USER_GROUP_ID
+                    );
+                    $this->insert('AUT_USER_GROUP',$insert_user_group,false);
+                    $return = array(
+                        'result' => true
+                    );
+                }
+                return $return;
+            // }
+        }
 		public function getLists($data = array()){
 			$result = array(
 				'result' => 'fail'
 			);
 			$sql = "SELECT * FROM AUT_USER 
-			LEFT JOIN ep_agency ON ep_agency.id=AUT_USER.id_agency
+            LEFT JOIN ep_agency ON ep_agency.id=AUT_USER.id_agency
             LEFT JOIN ep_agency_minor ON ep_agency_minor.id=AUT_USER.id_agency_minor
-			ORDER by AUT_USER_ID DESC";
+            LEFT JOIN AUT_USER_GROUP ON AUT_USER_GROUP.AUT_USER_ID = AUT_USER.AUT_USER_ID
+            LEFT JOIN AUT_GROUP ON AUT_GROUP.USER_GROUP_ID = AUT_USER_GROUP.USER_GROUP_ID 
+            ORDER by AUT_USER.AUT_USER_ID DESC";
 			$result_user = $this->query($sql);
 			if($result_user->num_rows > 0){
 				$result = $result_user->rows;
@@ -37,7 +86,15 @@
             return $query->row;
         }
         public function getUser($id){
-            $query = $this->query('SELECT * FROM AUT_USER WHERE AUT_USER_ID='.$id);
+            $sql = "SELECT * FROM AUT_USER 
+            LEFT JOIN ep_agency ON ep_agency.id=AUT_USER.id_agency
+            LEFT JOIN ep_agency_minor ON ep_agency_minor.id=AUT_USER.id_agency_minor
+            LEFT JOIN AUT_USER_GROUP ON AUT_USER_GROUP.AUT_USER_ID = AUT_USER.AUT_USER_ID
+            LEFT JOIN AUT_GROUP ON AUT_GROUP.USER_GROUP_ID = AUT_USER_GROUP.USER_GROUP_ID 
+            WHERE AUT_USER.AUT_USER_ID=".$id."
+            ORDER by AUT_USER.AUT_USER_ID DESC";
+
+            $query = $this->query($sql);
             return $query->row;
         }
         public function getGroups(){
@@ -79,25 +136,6 @@
             // echo $sql;exit();
             return $query;
         }
-        public function updateUser($id=0,$data=array()){
-            // if($id){
-                $USER_GROUP_ID = $data['USER_GROUP_ID'];
-                unset($data['USER_GROUP_ID']);
-                // $user_id=$this->insert('AUT_USER',$insert,false);
-                
-
-                unset($data['id']);
-                $query = $this->update('AUT_USER',$data,'AUT_USER_ID='.(int)$id,false);
-
-                $this->query("DELETE FROM AUT_USER_GROUP WHERE AUT_USER_ID = ".$id);
-                $insert_user_group = array(
-                    'AUT_USER_ID' => $id,
-                    'USER_GROUP_ID' => $USER_GROUP_ID
-                );
-                $this->insert('AUT_USER_GROUP',$insert_user_group,false);
-
-                return $query;
-            // }
-        }
+        
 	}
 ?>

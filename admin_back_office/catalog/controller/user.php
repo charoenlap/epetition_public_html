@@ -1,7 +1,33 @@
 <?php
     class UserController extends Controller {
         public function index() {
-            $data['lists'] = $this->model('user')->getLists();
+            $data = array();
+            $USER_GROUP_ID      = $this->getSession('USER_GROUP_ID');
+            $menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
+            $data['menu'] = array();
+            $data['active_del'] = 0;
+            $data['active_add'] = 0;
+            $data['active_view'] = 0;
+            $data['active_edit'] = 0;
+            foreach($menu as $val){
+                if($val['MENU_ID']=="17"){
+                    if($val['USER_DELETE']=="1"){
+                        $data['active_del'] = 1;
+                    }
+                    if($val['USER_ADD']=="1"){
+                        $data['active_add'] = 1;
+                    }
+                    if($val['USER_VIEW']=="1"){
+                        $data['active_view'] = 1;
+                    }
+                    if($val['USER_EDIT']=="1"){
+                        $data['active_edit'] = 1;
+                    }
+                }
+            }
+            if($data['active_view']){
+                $data['lists'] = $this->model('user')->getLists();
+            }
             $this->view('user/home',$data);
         }
         public function getAgencyMinor(){
@@ -73,7 +99,32 @@
         }
         public function group() {
             $data = array();
-            $data['getGroups'] = $this->model('user')->getGroups();
+            $USER_GROUP_ID      = $this->getSession('USER_GROUP_ID');
+            $menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
+            $data['menu'] = array();
+            $data['active_del'] = 0;
+            $data['active_add'] = 0;
+            $data['active_view'] = 0;
+            $data['active_edit'] = 0;
+            foreach($menu as $val){
+                if($val['MENU_ID']=="18"){
+                    if($val['USER_DELETE']=="1"){
+                        $data['active_del'] = 1;
+                    }
+                    if($val['USER_ADD']=="1"){
+                        $data['active_add'] = 1;
+                    }
+                    if($val['USER_VIEW']=="1"){
+                        $data['active_view'] = 1;
+                    }
+                    if($val['USER_EDIT']=="1"){
+                        $data['active_edit'] = 1;
+                    }
+                }
+            }
+            if($data['active_view']){
+                $data['getGroups'] = $this->model('user')->getGroups();
+            }
             $this->view('permission/home',$data);
         }
         public function addGroup() {
@@ -119,6 +170,7 @@
 
                 $group_id = (int)post('group_id');
                 $menu_id = post('menu_id');
+                $user_view = post('user_view');
                 $user_add = post('user_add');
                 $user_edit = post('user_edit');
                 $user_del = post('user_del');
@@ -128,6 +180,7 @@
                         $insert[] = array(
                             'AUT_GROUP_MENU_ID' => $group_id,
                             'MENU_ID'           => $menu_id[$key],
+                            'USER_VIEW'         => $user_view[$key],
                             'USER_ADD'          => $user_add[$key],
                             'USER_EDIT'         => $user_edit[$key],
                             'USER_DELETE'       => $user_del[$key]

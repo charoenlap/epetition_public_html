@@ -41,8 +41,14 @@
                                         <label for="">หน่วยงาน</label>
                                         <select name="id_agency" id="id_agency" class="form-control">
                                             <option value="">เลือกหน่วยงาน</option>
-                                            <?php foreach($agency->rows as $val){?>
-                                                <option value="<?php echo $val['id'];?>"><?php echo $val['agency_title'];?></option>
+                                            <?php foreach($agency->rows as $val){
+                                                $id_agency = (isset($user['id_agency'])?$user['id_agency']:'');
+                                            ?>
+                                                <option value="<?php echo $val['id'];?>"
+                                                    <?php echo ($id_agency==$val['id']?'SELECTED':'');?>
+                                                >
+                                                    <?php echo $val['agency_title'];?>
+                                                </option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -50,8 +56,14 @@
                                         <label for="">หน่วยงานระดับส่วน</label>
                                         <select name="id_agency_minor" id="id_agency_minor" class="form-control">
                                             <option value="">เลือกหน่วยงานระดับส่วน</option>
-                                            <?php foreach($agencyMinor->rows as $val){?>
-                                                <option value="<?php echo $val['id'];?>"><?php echo $val['agency_minor_title'];?></option>
+                                            <?php foreach($agencyMinor->rows as $val){ 
+                                                $id_agency_minor = (isset($user['id_agency_minor'])?$user['id_agency_minor']:'');
+                                            ?>
+                                                <option value="<?php echo $val['id'];?>"
+                                                     <?php echo ($id_agency_minor==$val['id']?'SELECTED':'');?>
+                                                >
+                                                    <?php echo $val['agency_minor_title'];?>
+                                                </option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -60,14 +72,17 @@
                                     <div class="col-md-4 mb-3">
                                         <label for="">กลุ่มผู้ใช้งาน</label>
                                         <select name="USER_GROUP_ID" id="USER_GROUP_ID" class="form-control">
-                                            <?php foreach($getGroups->rows as $val){?>
-                                                <option value="<?php echo $val['USER_GROUP_ID'];?>">
+                                            <?php foreach($getGroups->rows as $val){
+                                                $USER_GROUP_ID = (isset($user['USER_GROUP_ID'])?$user['USER_GROUP_ID']:'');
+                                            ?>
+                                                <option value="<?php echo $val['USER_GROUP_ID'];?>"
+                                                    <?php echo ($USER_GROUP_ID==$val['USER_GROUP_ID']?'SELECTED':'');?>>
                                                     <?php echo $val['GROUP_NAME'];?>
                                                 </option>
                                             <?php } ?>
                                         </select>
                                     </div>
-                                    <?php if($title!="แก้ไขผู้ใช้งาน"){ ?>
+                                    
                                     <div class="col-md-3 mb-3">
                                         <label for="">ชื่อผู้ใช้</label>
                                         <input type="text" class="form-control" name="AUT_USERNAME" value="<?php echo (isset($user['AUT_USERNAME'])?$user['AUT_USERNAME']:'');?>">
@@ -76,7 +91,7 @@
                                         <label for="">รหัสผ่าน</label>
                                         <input type="password" class="form-control" name="AUT_PASSWORD">
                                     </div>
-                                    <?php } ?>
+                                    
                                     <div class="col-md-4 mb-3">
                                         <label for="">ชื่อ</label>
                                         <input type="text" class="form-control" name="FIRSTNAME"  value="<?php echo (isset($user['FIRSTNAME'])?$user['FIRSTNAME']:'');?>">

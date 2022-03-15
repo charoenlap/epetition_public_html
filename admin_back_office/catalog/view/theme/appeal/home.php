@@ -132,7 +132,9 @@
                                 </div>
                                 <div class="col-md-6 text-right">
                                     <!-- <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a> -->
+                                    <?php if($active_add){ ?>
                                     <a href="<?php echo route('appeal/add');?>" class="btn btn-info"><i class="fas fa-folder-plus"></i> แบบฟอร์มเรื่องร้องเรียน</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="row">
@@ -157,7 +159,9 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-12">
-                                    <a href="#" class="btn btn-primary disabled" id="btn-send-topic" role="button" aria-disabled="true">นำเรื่องส่งให้สปน</a>
+                                    <?php if($active_view AND $active_add){ ?>
+                                        <a href="#" class="btn btn-primary disabled" id="btn-send-topic" role="button" aria-disabled="true" data-toggle="tooltip" data-placement="top" title="ต้องมีสิทธิ์ ดู และเพิ่มเท่านั้น">นำเรื่องส่งให้สปน</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="row">
@@ -200,10 +204,16 @@
                                                     <i class="fas fa-square-full status-<?php echo $value['status_icon']; ?>"></i>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="<?php echo route('appeal/detail&id='.$value['id']);?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
-                                                    <a href="<?php echo route('appeal/status&id='.$value['id']);?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="รับเรื่องร้องเรียน"><i class="far fa-check-square"></i></a>
-                                                    <a href="<?php echo route('appeal/edit&id='.$value['id']);?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"><i class="fas fa-edit"></i></a>
-                                                    <a href="<?php echo route('appeal/del&id='.$value['id']); ?>" class="btn btn-danger btn-sm btn-del" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"><i class="far fa-trash-alt"></i></a>
+                                                    <?php if($active_view){ ?>
+                                                        <a href="<?php echo route('appeal/detail&id='.$value['id']);?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
+                                                        <a href="<?php echo route('appeal/status&id='.$value['id']);?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="รับเรื่องร้องเรียน"><i class="far fa-check-square"></i></a>
+                                                    <?php }?>
+                                                    <?php if($active_edit){ ?>
+                                                        <a href="<?php echo route('appeal/edit&id='.$value['id']);?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"><i class="fas fa-edit"></i></a>
+                                                    <?php } ?>
+                                                    <?php if($active_del){ ?>
+                                                        <a href="<?php echo route('appeal/del&id='.$value['id']); ?>" class="btn btn-danger btn-sm btn-del" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"><i class="far fa-trash-alt"></i></a>
+                                                    <?php }?>
                                                 </td>
                                             </tr>
                                             <?php } ?>
@@ -271,6 +281,9 @@
     </div>
 </div>
 <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
     $(document).on('click','#btn-send-topic',function(e){
         $('#process').modal('show');
         var html = '';

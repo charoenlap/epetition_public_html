@@ -21,15 +21,17 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
+        <?php if($active_view){ ?>
+          <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title d-flex"></h4> 
+                          <?php if($active_add){ ?>
                             <p class="d-flex float-right mb-0">
                               <a href="<?php echo route('user/add'); ?>" class="btn btn-success">เพิ่มผู้ใช้งาน</a>
                             </p>
+                          <?php } ?>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -40,26 +42,38 @@
                                                <th style="width:70px;" class="text-center">#</th>
                                                <th>ชื่อ</th>
                                                <th>นามสกุล</th>
+                                               <th>กลุ่มผู้ใช้งาน</th>
                                                <th style="width:250px;">สำนัก</th>
                                                <th style="width:250px;">ฝ่าย</th>
-                                               <th style="width:220px;"></th>
+                                               <th style="width:130px;"></th>
                                            </tr>
                                        </thead>
                                        <tbody>
+                                        <?php if($lists){ ?>
                                          <?php $i=1;foreach($lists as $val){?>
                                           <tr>
                                              <td class="text-center"><?php echo $i; ?></td>
                                              <td><?php echo $val['FIRSTNAME']; ?></td>
                                              <td><?php echo $val['LASTNAME']; ?></td>
+                                             <td><?php echo $val['GROUP_NAME']; ?></td>
                                              <td><?php echo $val['agency_title']; ?></td>
                                              <td><?php echo $val['agency_minor_title']; ?></td>
                                              <td class="text-center">
                                               <!-- <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a> -->
+                                              <?php if($active_edit){ ?>
                                               <a href="<?php echo route('user/edit&id='.$val['AUT_USER_ID']); ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="fas fa-edit"></i></a>
-                                              <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="ลบ"><i class="far fa-trash-alt"></i></a>
+                                              <?php } ?>
+                                              <?php if($active_del){ ?>
+                                                <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="ลบ"><i class="far fa-trash-alt"></i></a>
+                                              <?php } ?>
                                              </td>
                                            </tr>
                                          <?php $i++;} ?>
+                                       <?php }else{?>
+                                          <tr>
+                                            <td colspan="20">ไม่พบผู้ใช้งาน</td>
+                                          </tr>
+                                       <?php } ?>
                                        </tbody>
                                     </table>
                                 </div> 
@@ -90,6 +104,16 @@
                 </div>
             </div>
         </div>
+        <?php }else{?>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                กลุ่มผู้ใช้งานของท่านไม่สามารถดูได้
+              </div>
+            </div>
+          </div>
+        <?php } ?>
+        
     </section>
     <!-- /.content -->
   </div>

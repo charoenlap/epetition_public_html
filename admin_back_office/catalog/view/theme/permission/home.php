@@ -20,13 +20,16 @@
 
   <!-- Main content -->
   <section class="content">
+    <?php if($active_view){ ?>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
               <h4 class="card-title">กลุ่มผู้ใช้งาน</h4>
-              <a href="<?php echo route('user/addGroup');?>" class="btn btn-primary float-right">เพิ่มกลุ่มผู้ใช้งาน</a>
+              <?php if($active_add){ ?>
+                <a href="<?php echo route('user/addGroup');?>" class="btn btn-primary float-right">เพิ่มกลุ่มผู้ใช้งาน</a>
+              <?php } ?>
             </div>
             <div class="card-body">
               <div class="row">
@@ -40,17 +43,26 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <?php if($getGroups){ ?>
                       <?php $i=1;foreach($getGroups->rows as $val){ ?>
                       <tr>
                         <td class="text-center"><?php echo $i++; ?></td>
                         <td><?php echo $val['GROUP_NAME'];?></td>
                         <td class="text-right">
-                          <a href="<?php echo route('user/setting&group_id='.$val['USER_GROUP_ID']);?>" class="btn btn-primary"><i class="fas fa-cog"></i></a>
-                          <!-- <a href="" class="btn btn-warning"><i class="fas fa-edit"></i></a> -->
-                          <a href="<?php echo route('user/delGroup&group_id='.$val['USER_GROUP_ID']);?>" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                          <?php if($active_edit){ ?>
+                            <a href="<?php echo route('user/setting&group_id='.$val['USER_GROUP_ID']);?>" class="btn btn-primary"><i class="fas fa-cog"></i></a>
+                          <?php }?>
+                          <?php if($active_del){ ?>
+                            <a href="<?php echo route('user/delGroup&group_id='.$val['USER_GROUP_ID']);?>" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                          <?php }?>
                         </td>
                       </tr>
                       <?php } ?>
+                      <?php }else{?>
+                          <tr>
+                            <td colspan="20">ไม่พบผู้ใช้งาน</td>
+                          </tr>
+                       <?php } ?>
                     </tbody>
                   </table>
                 </div>
@@ -60,6 +72,15 @@
         </div>
       </div>
     </div>
+    <?php }else{?>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                กลุ่มผู้ใช้งานของท่านไม่สามารถดูได้
+              </div>
+            </div>
+          </div>
+        <?php } ?>
   </section>
   <!-- /.content -->
 </div>
