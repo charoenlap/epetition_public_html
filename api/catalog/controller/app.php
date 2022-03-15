@@ -22,5 +22,25 @@
 			
 			$this->json($result);
 		}
+		public function getTopicSub(){
+			$result = $result = array(
+				'code'		=>200,
+				'status' 	=> 'failed',
+				'desc' 		=> ''
+			);
+			if(method_post()){
+				$data['topic'] = $this->model('master')->getTopicSub();
+				$data['case_code'] = $case_code;
+				$result = array(
+					'code'		=> 200,
+					'status' 	=> 'success',
+					'desc' 		=> $data
+				);
+			}
+			
+			$this->json($result);
+			
+		}
+
 	}
 ?>
