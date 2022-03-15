@@ -11,14 +11,13 @@
 				$dataSelect = array(
 					'case_code' => $case_code
 				);
-				$data['ticket'] = $this->model('ticket')->getTicket($dataSelect);
+				$data['ticket'] = $this->model('master')->getTicket($dataSelect);
 				$data['case_code'] = $case_code;
 				$result = array(
-					'code'		=>200,
-					'status' 	=> 'failed',
-					'desc' 		=> ''
+					'code'		=> 200,
+					'status' 	=> 'success',
+					'desc' 		=> $data
 				);
-				// $this->view('ticketStatus',$data);
 			}
 			
 			$this->json($result);
