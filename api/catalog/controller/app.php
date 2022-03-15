@@ -53,7 +53,6 @@
 		}
 		public function getTopicSub(){
 			$data['topic'] = $this->model('master')->getTopicSub();
-			$data['case_code'] = $case_code;
 			$result = array(
 				'code'		=> 200,
 				'status' 	=> 'success',

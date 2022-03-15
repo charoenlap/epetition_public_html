@@ -262,7 +262,8 @@
 			// echo "<pre>";
 			// var_dump($menu);exit();
 			$id 		= $_GET['id'];
-			$data['agency'] = $this->model('agency')->getlists();
+			$data['agency'] = $this->model('agency')->getlistsAgency();
+			$data['agencyMinor'] = $this->model('agency')->getlists();
 			$data['appeal'] = $this->model('appeal')->getlists();
 			$response 	= $this->model('response');
 			$resultData = $response->getList($id);
@@ -281,13 +282,16 @@
 			$data['soi']				= $resultData['soi'];
 			$data['road']				= $resultData['road'];
 			$data['id_provinces']		= $resultData['id_provinces'];
+			$data['PROVINCE_NAME']		= $resultData['PROVINCE_NAME'];
 			$data['id_amphures']		= $resultData['id_amphures'];
+			$data['AMPHUR_NAME']		= $resultData['AMPHUR_NAME'];
 			$data['id_districts']		= $resultData['id_districts'];
+			$data['TAMBON_NAME']		= $resultData['TAMBON_NAME'];
 			$data['zipcode']			= $resultData['zipcode'];
 			$data['note_topic']			= $resultData['note_topic'];
 			$data['contacts']			= '';
 
-			$data['topic_address']		= "เลขที่ ".$resultData['t_address_no']." หมู่บ้าน ".$resultData['t_moo']." ซอย ".$resultData['t_soi']." ถนน ".$resultData['t_road']." ตำบล".$resultData['t_id_districts']." อำเภอ".$resultData['t_id_amphures']." จังหวัด".$resultData['t_id_provinces']."";
+			$data['topic_address']		= "เลขที่ ".$resultData['t_address_no']." หมู่บ้าน ".$resultData['t_moo']." ซอย ".$resultData['t_soi']." ถนน ".$resultData['t_road']." ตำบล".$resultData['t_TAMBON_NAME']." อำเภอ".$resultData['t_AMPHUR_NAME']." จังหวัด".$resultData['t_PROVINCE_NAME']."";
 			$data['place_landmarks']	= $resultData['place_landmarks'];
 			$data['response_person']	= $resultData['response_person'];
 			$data['id'] = $id = $resultData['id'];

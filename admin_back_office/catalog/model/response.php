@@ -20,9 +20,11 @@
         }
         public function getResponse($id=0){
             $result = array();
-            $sql = "SELECT *,ep_response_status.id AS id,ep_response_status.date_create AS date_create FROM ep_response_status 
+            $sql = "SELECT *,ep_response_status.id AS id,ep_response_status.date_create AS date_create 
+                    FROM ep_response_status 
                     LEFT JOIN ep_agency_minor ON ep_agency_minor.id = ep_response_status.id_agency_minor
                     LEFT JOIN ep_appeal ON ep_appeal.id = ep_response_status.id_appeal
+
             WHERE id_response = ".(int)$id;
             // echo $sql;exit();
             $result = $this->query($sql);
@@ -135,8 +137,24 @@
             return $query;
         }
         public function getList($id){
-            $sql    = "SELECT * FROM ep_response WHERE id = '".$id."'";
-            $query  = $this->query($sql);  
+            $sql    = "SELECT *,
+            tp.PROVINCE_NAME AS t_PROVINCE_NAME,
+            PROVINCE.PROVINCE_NAME AS PROVINCE_NAME, 
+            ap.AMPHUR_NAME AS t_AMPHUR_NAME,
+            AMPHUR.AMPHUR_NAME AS AMPHUR_NAME,
+            t.TAMBON_NAME AS t_TAMBON_NAME,
+            TAMBON.TAMBON_NAME AS TAMBON_NAME 
+            FROM ep_response 
+            LEFT JOIN PROVINCE ON ep_response.`id_provinces` = PROVINCE.`PROVINCE_id` 
+            LEFT JOIN PROVINCE tp ON ep_response.`t_id_provinces` = tp.`PROVINCE_id` 
+
+            LEFT JOIN AMPHUR ON ep_response.`id_amphures` = AMPHUR.`AMPHUR_ID` 
+            LEFT JOIN AMPHUR ap ON ep_response.`t_id_amphures` = ap.`AMPHUR_ID` 
+
+            LEFT JOIN TAMBON ON ep_response.`id_districts` = TAMBON.`TAMBON_ID` 
+            LEFT JOIN TAMBON t ON ep_response.`t_id_districts` = t.`TAMBON_ID` 
+            WHERE id = '".$id."'";
+            $query  = $this->query($sql); 
             return $query->row;
         }
         public function del($id){

@@ -68,11 +68,11 @@
                                         </tr>
                                         <tr>
                                             <td>ถนน : <?php echo $road; ?></td>
-                                            <td>จังหวัด : <?php echo $id_provinces; ?></td>
+                                            <td>จังหวัด : <?php echo $PROVINCE_NAME; ?></td>
                                         </tr>
                                         <tr>
-                                            <td>อำเภอ/เขต : <?php echo $id_amphures; ?></td>
-                                            <td>ตำบล/แขวง : <?php echo $id_districts; ?></td>
+                                            <td>อำเภอ/เขต : <?php echo $AMPHUR_NAME; ?></td>
+                                            <td>ตำบล/แขวง : <?php echo $TAMBON_NAME; ?></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">รหัสไปรษณีย์ : <?php echo $zipcode; ?></td>
@@ -128,16 +128,25 @@
                                     <?php } ?>
                                 </select>
                             </div>  
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <label for="">เลือกหน่วยงาน</label>
                                 <select name="id_agency" id="id_agency" class="form-control">
                                     <option value="">เลือกหน่วยงาน</option>
                                     <?php foreach($agency->rows as $val){?>
+                                        <option value="<?php echo $val['id'];?>"><?php echo $val['agency_title'];?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="">เลือกหน่วยงานระดับส่วน</label>
+                                <select name="id_agency_minor" id="id_agency_minor" class="form-control">
+                                    <option value="">ทั้งหมด</option>
+                                    <?php foreach($agencyMinor->rows as $val){?>
                                         <option value="<?php echo $val['id'];?>"><?php echo $val['agency_minor_title'];?></option>
                                     <?php } ?>
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <a class="btn btn-primary" id="addFrom"><i class="fas fa-folder-plus"></i> <br>เพิ่ม</a>
                             </div>
                         </div>
