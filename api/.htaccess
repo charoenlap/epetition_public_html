@@ -2,5 +2,5 @@ RewriteEngine On
 
 
 
-RewriteRule ^rc(.*)$ /index.php?route=qr/callback [L,QSA]
-RewriteRule ^a(.*)$ /index.php?route=qr [L,QSA]
+RewriteRule ^rc(.*)$ https://charoenlap.com/epetition/public_html/api/index.php?route=qr/callback [L,QSA]
+RewriteRule ^a(.*)$ https://charoenlap.com/epetition/public_html/api/index.php?route=qr [L,QSA]
