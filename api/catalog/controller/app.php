@@ -46,7 +46,7 @@
 						'status' 	=> 'success',
 						'desc' 		=> $add
 					);
-				}
+				} 
 			}
 			
 			$this->json($result);
