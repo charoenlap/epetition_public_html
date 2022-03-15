@@ -44,7 +44,7 @@
 					$result = array(
 						'code'		=> 200,
 						'status' 	=> 'success',
-						'desc' 		=> $data
+						'desc' 		=> $add
 					);
 				}
 			}
@@ -52,6 +52,7 @@
 			$this->json($result);
 		}
 		public function getTopicSub(){
+			$data = array();
 			$data['topic'] = $this->model('master')->getTopicSub();
 			$result = array(
 				'code'		=> 200,
