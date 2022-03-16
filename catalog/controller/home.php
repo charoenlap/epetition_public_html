@@ -40,7 +40,7 @@
 		// }
 	    public function form(){
 	    	$data = array();
-	    	$topic_id = (int)$data['topic_id'];
+	    	$topic_id = (int)get('topic_id');
 	    	if(empty($topic_id)){
 	    		redirect('home/topic&result=Not found topic id');
 	    	}
