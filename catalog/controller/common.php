@@ -14,6 +14,11 @@
 			$data['link_deposit'] = route('member/deposit'); 
 			$data['link_password'] = route('member/password'); 
 			$data['link_logout'] = route('member/logout'); 
+			$AUT_USERNAME = '';
+			$AUT_USER_ID = (int)decrypt($this->getSession('AUT_USER_ID'));
+			if($AUT_USER_ID){
+				$data['AUT_USERNAME'] = $this->getSession('AUT_USERNAME');
+			}
 	    	$this->render('common/header',$data);
 	    }
 	    public function footer($data=array()){

@@ -18,12 +18,11 @@
                         'sub'       => $result_sub->rows
                     );
                 }
-
             }
             return $result;
         }
         public function getTopicDetail($id){
-            $sql = "SELECT * FROM ep_topic WHERE id = ".$id;
+            $sql = "SELECT * FROM ep_topic WHERE id = ".(int)$id;
             $result = $this->query($sql)->row;
             return $result;
         }

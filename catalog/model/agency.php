@@ -7,7 +7,7 @@
 				$sql = "SELECT * FROM ep_agency";
 				$agency = $this->query($sql)->rows;
 				foreach($agency as $key => $val){
-					$sql_minor = "SELECT * FROM ep_agency_minor WHERE id_agency = '".$val['id']."'";
+					$sql_minor = "SELECT * FROM ep_agency_minor WHERE id_agency = '".(int)$val['id']."'";
 					$agency_minor = $this->query($sql_minor)->rows;
 					$result[] = array(
 						'id'=> $val['id'],

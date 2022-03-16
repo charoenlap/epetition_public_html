@@ -1,5 +1,44 @@
 <?php 
 	class MasterModel extends db {
+		public function getTicketByID($id=0){
+        	$result = array();
+            $sql = "SELECT *,
+                    `ep_status`.`status_class` as text_class,
+                    `ep_status`.`status_text` as text_status,
+                    `ep_response`.`id` as id  
+                        FROM ep_response 
+    	            LEFT JOIN ep_agency_minor ON ep_response.`id_angency_minor` = ep_agency_minor.`id` 
+                    LEFT JOIN ep_status ON ep_response.`status` = ep_status.`id`
+    	            WHERE AUT_USER_ID = '".(int)$id."'";
+            $result_response = $this->query($sql); 
+            foreach($result_response->rows as $key => $val){
+	            $id_response = $val['id'];
+	            $sql_agency = "SELECT *,ep_response_status.id AS id,ep_response_status.date_create AS date_create FROM ep_response_status 
+	                LEFT JOIN ep_agency_minor ON ep_agency_minor.id = ep_response_status.id_agency_minor
+	            WHERE id_response = ".(int)$id_response;
+
+	            $result[] = array(
+					'text_status'		=> $val['text_status'],
+					'text_class'		=> $val['text_class'],
+					'case_code'			=> $val['case_code'],
+					'response_person'	=> $val['response_person'],
+	            	'agency' 			=> $this->query($sql_agency)->rows
+	            );
+	        }
+            return $result;
+        }
+		public function login($user='', $pass=''){
+			$result = array();
+			$pass = md5($pass);
+			$sql = "SELECT * FROM AUT_USER 
+			WHERE AUT_USERNAME = '".$this->escape($user)."' AND AUT_PASSWORD='".$this->escape($pass)."'
+			AND id_agency = 5 
+			AND id_agency_minor=12
+			AND ACTIVE_STATUS = 1
+			AND DELETE_FLAG = 0";
+			$result = $this->query($sql);
+			return $result;
+		}
 		public function getPrefix($data=array()){
 			$result = array();
 			$sql = "SELECT * FROM ep_prefix";
@@ -73,7 +112,7 @@
 				// 	if(file_exists($path_json)){
 				// 		$result = json_decode(file_get_contents($path_json), true);
 				// 	}else{
-						$sql = "SELECT * FROM AMPHUR WHERE PROVINCE_ID = '".$province_id."'";
+						$sql = "SELECT * FROM AMPHUR WHERE PROVINCE_ID = '".(int)$province_id."'";
 						$result = $this->query($sql)->rows;
 
 						// $fp = fopen($path_json, 'w');
@@ -95,7 +134,7 @@
 			// 		if(file_exists($path_json)){
 			// 			$result = json_decode(file_get_contents($path_json), true);
 			// 		}else{
-						$sql = "SELECT * FROM TAMBON WHERE AMPHUR_ID = '".$amphure_id."'";
+						$sql = "SELECT * FROM TAMBON WHERE AMPHUR_ID = '".(int)$amphure_id."'";
 						$result = $this->query($sql)->rows;
 
 			// 			$fp = fopen($path_json, 'w');

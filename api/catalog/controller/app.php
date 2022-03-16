@@ -1,5 +1,51 @@
 <?php 
 	class AppController extends Controller {
+		public function getTicketByID(){
+			$result = $result = array(
+				'code'		=>200,
+				'status' 	=> 'failed',
+				'desc' 		=> ''
+			);
+			if(method_post()){
+				$token = post('token');
+				$id = decrypt($token);
+				$dataResult = $this->model('master')->getTicketByID($id);
+				$result = array(
+					'code'		=> 200,
+					'status' 	=> 'success',
+					'desc' 		=> $dataResult
+				);
+			}
+			
+			$this->json($result);
+		}
+		public function login(){
+			$result = $result = array(
+				'code'		=>200,
+				'status' 	=> 'failed',
+				'desc' 		=> ''
+			);
+			if(method_post()){
+				$user = post('user');
+				$pass = post('pass');
+				$dataResult = $this->model('master')->login($user,$pass);
+				if($dataResult->num_rows){
+					$data = array(
+						'token' => encrypt($dataResult->row['AUT_USER_ID']),
+						'FIRSTNAME' => $dataResult->row['FIRSTNAME'],
+						'LASTNAME'	=> $dataResult->row['LASTNAME']
+					);
+
+					$result = array(
+						'code'		=> 200,
+						'status' 	=> 'success',
+						'desc' 		=> $data
+					);
+				}
+			}
+			
+			$this->json($result);
+		}
 		public function findTicket(){
 			$result = $result = array(
 				'code'		=>200,

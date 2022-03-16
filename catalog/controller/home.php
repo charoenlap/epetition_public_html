@@ -1,5 +1,17 @@
 <?php 
 	class HomeController extends Controller {
+	    public function about() {
+	    	$data = array();
+	    	$data['title'] = "เกี่ยวกับหน่วยงาน";
+	    	$data['descreption'] = "เกี่ยวกับหน่วยงาน";
+ 	    	$this->view('about',$data); 
+	    }
+	    public function map() {
+	    	$data = array();
+	    	$data['title'] = "แผนที่หน่วยงาน";
+	    	$data['descreption'] = "แผนที่หน่วยงาน";
+ 	    	$this->view('map',$data); 
+	    }
 	    public function index() {
 	    	$data = array();
 	    	$data['title'] = "";
@@ -37,7 +49,8 @@
 					upload($_FILES['file-upload-field'],'uploads/files/',$upload_name);
 					$post['file'] = $upload_name;
 				}
-				// exit();
+				$post['AUT_USER_ID'] = (int)decrypt($this->getSession('AUT_USER_ID'));
+
 				$add = $master->addResponse($post);
 				if($add){
 					redirect('home/formComplate&case_code='.$add);
