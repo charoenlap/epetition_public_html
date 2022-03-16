@@ -72,7 +72,6 @@
 				$data['prefix']			= $master->getPrefix();
 			}
 			
-			if()
  	    	$this->view('form',$data); 
 	    }
 	    public function status(){
