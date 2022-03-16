@@ -2,6 +2,7 @@
 	class HomeController extends Controller {
 	    public function index() {
 	    	$data = array(); 
+	    	
 			$last_login = $this->getSession('last_login');
 			if($last_login){
 		    	// $id_admin = $this->getSession('id_admin');
