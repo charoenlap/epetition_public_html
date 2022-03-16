@@ -59,12 +59,11 @@
 				$data = array();
 		    	$data['title'] = "";
 		    	$data['descreption'] = "";
-
+		    	$data['limit_mb'] 		= $master->getConfigDay();
 				
 				$data['geographies'] 	= $master->getGeographies();
 				$data['topic_id'] 		= get('topic_id');
 				$data['topic'] 			= $this->model('topic')->getTopicDetail($data['topic_id']);
-				// var_dump($data['topic']);
 				$data['prefix']			= $master->getPrefix();
 			}
 			

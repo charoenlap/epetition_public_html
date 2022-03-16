@@ -348,7 +348,7 @@
         </button>
       </div>
       <div class="modal-body">
-        ขนาดไฟล์ภาพเกินที่กำหนด
+        ขนาดไฟล์เกินที่กำหนด <?php echo $limit_mb;?> MB
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -419,7 +419,7 @@ $(document).on('change','#fileinput',function(e){
         var kb = bytes/1024;
         var mb = bytes/1024/1024;
         $('#showFileSize').html(  mb + " mb in size");
-        if(mb >= 2){
+        if(mb >= <?php echo $limit_mb;?>){
             $('#exampleModal').modal('show');
             $('#fileinput').val('');
             $('#showFileSize').html('');

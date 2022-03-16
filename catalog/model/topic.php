@@ -7,7 +7,7 @@
         }
         public function getTopicSub(){
             $result = array();
-            $sql = "SELECT * FROM ep_topic order by sort ASC";
+            $sql = "SELECT * FROM ep_topic WHERE topic_title !='' order by sort ASC";
             $result_topic = $this->query($sql);
             if($result_topic->num_rows){
                 foreach($result_topic->rows as $val){
@@ -18,6 +18,7 @@
                         'sub'       => $result_sub->rows
                     );
                 }
+
             }
             return $result;
         }
