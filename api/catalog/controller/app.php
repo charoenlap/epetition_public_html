@@ -59,10 +59,34 @@
 				'status' 	=> 'success',
 				'desc' 		=> $data
 			);
-			
 			$this->json($result);
-			
 		}
-
+		public function provinces() {
+	    	$master = $this->model('master');
+			$province = $master->getProvinces();
+ 	    	$this->json($province); 
+	    }
+	    public function amphures() {
+	    	$data = array(
+				'province_id' => get('idprovinces')
+			);
+			$master = $this->model('master');
+			$amphures = $master->getAmphures($data);
+ 	    	$this->json($amphures); 
+	    }
+	    public function tambons() {
+	    	$data = array(
+				'amphure_id' => get('idamphures')
+			);
+			$master = $this->model('master');
+			$tambon = $master->getTambon($data);
+ 	    	$this->json($tambon); 
+	    }
+	    public function getPrefix(){
+	    	$data = array();
+			$master = $this->model('master');
+			$data = $master->getPrefix($data);
+ 	    	$this->json($data); 
+	    }
 	}
 ?>

@@ -1,5 +1,31 @@
 <?php 
 	class MasterModel extends db {
+        public function getPrefix($data=array()){
+            $result = array();
+            $sql = "SELECT * FROM ep_prefix";
+            $query = $this->query($sql);
+            return $query->rows;
+        }
+        public function getProvinces($data=array()){
+            $result = array();
+            $sql = "SELECT * FROM PROVINCE";
+            $result = $this->query($sql)->rows;
+            return $result;
+        }
+        public function getAmphures($data=array()){
+            $result = array();
+            $province_id = (int)$data['province_id'];
+            $sql = "SELECT * FROM AMPHUR WHERE PROVINCE_ID = '".$province_id."'";
+            $result = $this->query($sql)->rows;
+            return $result;
+        }
+        public function getTambon($data=array()){
+            $result = array();
+            $amphure_id = (int)$data['amphure_id'];
+            $sql = "SELECT * FROM TAMBON WHERE AMPHUR_ID = '".$amphure_id."'";
+            $result = $this->query($sql)->rows;
+            return $result;
+        }
 		public function getTicket($data = array()){
         	$result = array();
         	$case_code = (isset($data['case_code'])?$this->escape($data['case_code']):'');
