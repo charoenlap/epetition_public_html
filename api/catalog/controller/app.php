@@ -78,6 +78,12 @@
 				$post 				= $_POST;
 				if(isset($post['topic_id'])){
 					$post['topic_id'] 	= post('topic_id');
+					$AUT_USER_ID 	= post('AUT_USER_ID');
+					if($AUT_USER_ID){
+						$post['AUT_USER_ID'] = (int)decrypt($AUT_USER_ID);
+					}else{
+						unset($post['AUT_USER_ID']);
+					}
 					// unset($post['file-upload-field']);
 					// if(isset($_FILES['file-upload-field'])){
 					// 	$upload_name = time().$_FILES['file-upload-field']['name'];
