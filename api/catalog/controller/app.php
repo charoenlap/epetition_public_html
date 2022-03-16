@@ -84,19 +84,18 @@
 					}else{
 						unset($post['AUT_USER_ID']);
 					}
-					$files = post('files');
-					if(!empty($files)){
-						$arr = explode(';base64',$files);
+					$file = post('file');
+					if(!empty($file)){
+						$arr = explode(';base64',$file);
 						$type = explode('/',$arr[0]);
-
-						$post['files'] = time().'_'.rand(100,999);
+						$post['file'] = time().'_'.rand(100,999);
 						if(!empty($type[1])){
-							convert_base64($str,'../uploads/files/'.$file_name.'.'.$type[1]);
+							convert_base64($file,'../uploads/files/'.$post['file'].'.'.$type[1]);
 						}else{
-							$post['files'] = 'File mistake';
+							$post['file'] = 'File mistake';
 						}
 					}else{
-						$post['files'] = '';
+						$post['file'] = '';
 					}
 					// unset($post['file-upload-field']);
 					// if(isset($_FILES['file-upload-field'])){
