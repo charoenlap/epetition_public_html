@@ -39,6 +39,11 @@
 		// 	redirect('home/form');
 		// }
 	    public function form(){
+	    	$data = array();
+	    	$topic_id = (int)$data['topic_id'];
+	    	if(empty($topic_id)){
+	    		redirect('home/topic&result=Not found topic id');
+	    	}
 	    	$master 				= $this->model('master');
 			if(method_post()){
 				$post 				= $_POST;
@@ -62,12 +67,12 @@
 		    	$data['limit_mb'] 		= $master->getConfigDay();
 				
 				$data['geographies'] 	= $master->getGeographies();
-				$data['topic_id'] 		= get('topic_id');
+				$data['topic_id'] 		= (int)get('topic_id');
 				$data['topic'] 			= $this->model('topic')->getTopicDetail($data['topic_id']);
 				$data['prefix']			= $master->getPrefix();
 			}
 			
-			
+			if()
  	    	$this->view('form',$data); 
 	    }
 	    public function status(){
