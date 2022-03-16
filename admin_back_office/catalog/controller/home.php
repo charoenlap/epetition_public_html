@@ -43,6 +43,7 @@
 							$data['active_edit'] = 1;
 						}
 					}
+					exit();
 				}
 		    	$this->view('home',$data);
 		    }else{
