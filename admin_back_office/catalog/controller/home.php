@@ -2,7 +2,7 @@
 	class HomeController extends Controller {
 	    public function index() {
 	    	$data = array(); 
-	    	
+
 			$last_login = $this->getSession('last_login');
 			if($last_login){
 		    	// $id_admin = $this->getSession('id_admin');
@@ -26,6 +26,7 @@
 				$data['active_add'] = 0;
 				$data['active_view'] = 0;
 				$data['active_edit'] = 0;
+				var_dump($menu);exit();
 				foreach($menu as $val){
 					if($val['MENU_ID']=="1"){
 						if($val['USER_DELETE']=="1"){
