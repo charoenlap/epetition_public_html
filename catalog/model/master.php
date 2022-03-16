@@ -2,7 +2,7 @@
 	class MasterModel extends db {
 		public function getConfigDay(){
 			$result = 2;
-			$sql = "SEELCT * FROM ep_config WHERE `name`='limit_mb'";
+			$sql = "SELECT * FROM ep_config WHERE `name`='limit_mb'";
 			$result_query = $this->query($sql);
 			if($result_query->num_rows){
 				$result = $result_query->row['val'];
