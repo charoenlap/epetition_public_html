@@ -84,6 +84,20 @@
 					}else{
 						unset($post['AUT_USER_ID']);
 					}
+					$files = post('files');
+					if(!empty($files)){
+						$arr = explode(';base64',$files);
+						$type = explode('/',$arr[0]);
+
+						$post['files'] = time().'_'.rand(100,999);
+						if(!empty($type[1])){
+							convert_base64($str,'../uploads/files/'.$file_name.'.'.$type[1]);
+						}else{
+							$post['files'] = 'File mistake';
+						}
+					}else{
+						$post['files'] = '';
+					}
 					// unset($post['file-upload-field']);
 					// if(isset($_FILES['file-upload-field'])){
 					// 	$upload_name = time().$_FILES['file-upload-field']['name'];
@@ -140,5 +154,16 @@
 			$data = $master->getPrefix($data);
  	    	$this->json($data); 
 	    }
+	}
+	function convert_base64($base64_string, $output_file) {
+	    $ifp = fopen( $output_file, 'wb' ); 
+
+	    // split the string on commas
+	    // $data[ 0 ] == "data:image/png;base64"
+	    // $data[ 1 ] == <actual base64 string>
+	    $data = explode( ',', $base64_string );
+	    fwrite( $ifp, base64_decode( $data[ 1 ] ) );
+	    fclose( $ifp ); 
+	    return $output_file; 
 	}
 ?>
