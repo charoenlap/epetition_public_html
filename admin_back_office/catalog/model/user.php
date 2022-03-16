@@ -103,7 +103,10 @@
         }
         public function getMenu($data=array()){
         	$group_menu_id = (int)(isset($data['group_menu_id'])?$data['group_menu_id']:0);
-        	$sql = "SELECT *,AGM.MENU_ID AS checkbox,AUT_MENU_SETTING.MENU_ID AS MENU_ID 
+        	$sql = "SELECT *,
+                AGM.USER_VIEW AS USER_VIEW,
+                AGM.MENU_ID AS checkbox,
+                AUT_MENU_SETTING.MENU_ID AS MENU_ID 
         			FROM AUT_MENU_SETTING 
         			LEFT JOIN (
         				SELECT * FROM AUT_GROUP_MENU 
