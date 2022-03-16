@@ -26,8 +26,8 @@
 				$data['active_add'] = 0;
 				$data['active_view'] = 0;
 				$data['active_edit'] = 0;
-				echo "<pre>";
-				var_dump($menu);exit();
+				// echo "<pre>";
+				// var_dump($menu);exit();
 				foreach($menu as $val){
 					if($val['MENU_ID']=="1"){
 						if($val['USER_DELETE']=="1"){
