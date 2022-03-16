@@ -44,6 +44,10 @@
 	    	if(empty($topic_id)){
 	    		redirect('home/topic&result=Not found topic id');
 	    	}
+	    	$sub_topic_id = (int)get('sub_topic_id');
+	    	if(empty($sub_topic_id)){
+	    		redirect('home/topic&result=Not found topic id');
+	    	}
 	    	$master 				= $this->model('master');
 			if(method_post()){
 				$post 				= $_POST;
