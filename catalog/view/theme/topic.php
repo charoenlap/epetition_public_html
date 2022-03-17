@@ -44,3 +44,8 @@
     $( "#accordion" ).accordion();
   });
 </script>
+<style>
+ .col-md-12.ui-accordion-content.ui-corner-bottom.ui-widget-content{
+height:100% !important;
+ } 
+</style>
