@@ -12,7 +12,7 @@ $OpenIdProviderUrl = 'https://govid.egov.go.th';
 //หน้าที่จะให้ส่งกลับ
 // $eServiceUrl = "http://127.0.0.1:8090/OpenID/"; 
 // $eServiceUrl = "https://e-petition.energy.go.th/openid/"; 
-echo '>'.$_SERVER['SERVER_NAME'].'<';
+echo '>'.$_SERVER['SERVER_NAME'].'<<br>';
 if($_SERVER['SERVER_NAME'] == 'e-petition.energy.go.th'){
 	$eServiceUrl = "https://e-petition.energy.go.th/admin_back_office/openid/"; 
 }else{
