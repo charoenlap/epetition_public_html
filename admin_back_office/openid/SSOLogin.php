@@ -12,11 +12,13 @@ $OpenIdProviderUrl = 'https://govid.egov.go.th';
 //หน้าที่จะให้ส่งกลับ
 // $eServiceUrl = "http://127.0.0.1:8090/OpenID/"; 
 // $eServiceUrl = "https://e-petition.energy.go.th/openid/"; 
-if($_SERVER['SERVER_NAME'] == 'e-petition.energy.go.th'){
-	$eServiceUrl = "https://e-petition.energy.go.th/admin_back_office/openid/"; 
-}else{
-	$eServiceUrl = "http://localhost/epetition/public_html/admin_back_office/openid/"; 
-}
+
+// if($_SERVER['SERVER_NAME'] == 'e-petition.energy.go.th'){
+// 	$eServiceUrl = "https://e-petition.energy.go.th/admin_back_office/openid/"; 
+// }else{
+// 	$eServiceUrl = "http://localhost/epetition/public_html/admin_back_office/openid/"; 
+// }
+$eServiceUrl = "http://localhost/epetition/public_html/admin_back_office/openid/"; 
 include "common.php";
 
 
