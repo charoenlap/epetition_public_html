@@ -185,6 +185,73 @@
 	    	}
 	    	$this->json($result);
 	    }
+	    public function loginLdap(){
+	    	$result_login = false;
+	    	if(method_post()){
+	    		$result = array(
+	    			'code' 	=> 200,
+	    			'status'=> 'failed',
+	    			'desc'	=> 'Connect'
+	    		);
+	    		$username = post('username');
+	    		$password = post('password');
+	    		if(!empty($password)){
+		    		$selectToken = array(
+		    			'username' 	=> $username,
+		    			'password' 	=> $password
+					);
+					// $resultToken = $this->model('opm')->GetToken($selectToken);
+		    		$server = "172.18.0.7";
+		    		$user = "bitzldap@energy.local";
+		    		$pass = "4P3MKK*t9";
+
+		    		$ad = ldap_connect($server);
+		    		if(!$ad)   {
+		    			die("Connect not connect to ".$server);
+		    			exit();
+		    		}
+		    		$b = @ldap_bind($ad,$user,$pass);
+					if($b){
+						$result = array(
+			    			'code' 	=> 200,
+			    			'status'=> 'failed',
+			    			'desc'	=> 'Login Ldap error'
+			    		);
+					}else{
+						// $this->setSession('token_id',$resultToken['token_id']);
+						// $this->setSession('user_name',$resultToken['user_name']);
+						// $this->setSession('officer_id',$resultToken['officer_id']);
+						// $this->setSession('officer_name',$resultToken['officer_name']);
+						// $this->setSession('role_id',$resultToken['role_id']);
+						// $this->setSession('role_name',$resultToken['role_name']);
+						// $this->setSession('org_id',$resultToken['org_id']);
+						// $this->setSession('org_name',$resultToken['org_name']);
+						// $this->setSession('position',$resultToken['position']);
+						// $this->setSession('default_language',$resultToken['default_language']);
+						$this->setSession('last_login',date('Y-m-d H:i:s'));
+						$result = array(
+			    			'code' 	=> 200,
+			    			'status'=> 'success',
+			    			'desc'	=> 'Login Ldap complete',
+			    			'detail'=> $result_login
+			    		);
+					}
+				}else{
+					$result = array(
+		    			'code' 	=> 200,
+		    			'status'=> 'failed',
+		    			'desc'	=> 'Password empty'
+		    		);
+				}
+	    	}else{
+	    		$result = array(
+	    			'code' 	=> 200,
+	    			'status'=> 'failed',
+	    			'desc'	=> 'Method not allow'
+	    		);
+	    	}
+	    	$this->json($result);
+	    }
 	    public function releaseToken(){
 	    	$result = array();
 	    	$token_id = get('token_id');

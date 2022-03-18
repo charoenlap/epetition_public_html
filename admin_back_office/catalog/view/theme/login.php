@@ -40,19 +40,23 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <!-- <div class="col-6">
-            <a href="#" id="btn-opm" class="btn btn-default btn-block">เข้าสู่ระบบ OPM</a>
-          </div> -->
-          <div class="col-12">
-            <button type="button" id="btn-open-id" class="btn btn-default btn-block">OpenID</button>
-          </div>
-        </div>
-        <div class="row mt-2">
+        <div class="row mb-2">
           <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">เข้าสู่ระบบ</button>
           </div>
         </div>
+        <div class="row">
+          <!-- <div class="col-6">
+            <a href="#" id="btn-opm" class="btn btn-default btn-block">เข้าสู่ระบบ OPM</a>
+          </div> -->
+          <div class="col-6">
+            <button type="button" id="btn-open-id" class="btn btn-default btn-block">เข้าสู่ระบบด้วย OpenID</button>
+          </div>
+          <div class="col-6">
+            <button type="button" id="btn-ldap" class="btn btn-default btn-block">เข้าสู่ระบบด้วย AD</button>
+          </div>
+        </div>
+        
       </form>
 
       <!-- <div class="social-auth-links text-center mb-3">
@@ -120,6 +124,35 @@
     $(document).on('click','#btn-opm',function(e){
       $.ajax({
         url: 'index.php?route=home/loginOPM',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          username: $('#username').val(),
+          password: $('#password').val()
+        },
+      })
+      .done(function(json) {
+        console.log(json);
+
+        if(json.detail.token_id!=''){
+          window.location = 'index.php?route=home';
+        }
+        console.log("success");
+      })
+      .fail(function(a,b,c) {
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        console.log("error");
+      })
+      .always(function() {
+        console.log("complete");
+      });
+      e.preventDefault();
+    });
+    $(document).on('click','#btn-ldap',function(e){
+      $.ajax({
+        url: 'index.php?route=home/loginLdap',
         type: 'POST',
         dataType: 'json',
         data: {
