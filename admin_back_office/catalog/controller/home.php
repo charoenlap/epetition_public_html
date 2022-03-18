@@ -204,12 +204,13 @@
 		    		$server = "172.18.0.7";
 		    		$user = "bitzldap@energy.local";
 		    		$pass = "4P3MKK*t9";
-
+		    		$result_connect_ldap = false;
 		    		$ad = ldap_connect($server);
-		    		var_dump($ad);
 		    		if(!$ad)   {
 		    			die("Connect not connect to ".$server);
 		    			exit();
+		    		}else{
+		    			$result_connect_ldap = true;
 		    		}
 		    		$b = @ldap_bind($ad,$user,$pass);
 					if(!$b){
@@ -220,7 +221,7 @@
 			    			'return' => $b,
 			    			'user'	=> $user,
 			    			'pass'	=> $pass,
-			    			'connect'	=> $ad
+			    			'connect'	=> $result_connect_ldap
 			    		);
 					}else{
 						// $this->setSession('token_id',$resultToken['token_id']);
