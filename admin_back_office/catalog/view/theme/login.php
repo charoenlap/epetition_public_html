@@ -155,19 +155,19 @@
       $.ajax({
         url: 'index.php?route=home/loginLdap',
         type: 'POST',
-        dataType: 'json',
+        // dataType: 'json',
         data: {
           username: $('#username').val(),
           password: $('#password').val()
         },
       })
       .done(function(json) {
-        console.log(json);
-        $('#alert').html(json.desc);
+        $('#alert').html(json);
           // window.location = 'index.php?route=home';
         console.log("success");
       })
       .fail(function(a,b,c) {
+        $('#alert').html('เข้าสู่ระบบด้วย ldap ไม่สำเร็จ<br>'+a.responseText);
         console.log(a);
         console.log(b);
         console.log(c);

@@ -267,32 +267,39 @@
 					);
 					// $resultToken = $this->model('opm')->GetToken($selectToken);
 		    		$server = "172.18.0.7";
-		    		$ldaprdn = "bitzldap@energy.local";
-		    		$ldappass = "4P3MKK*t9";
+		    		$ldaprdn = $username;//"bitzldap@energy.local";
+		    		$ldappass = $password;//"4P3MKK*t9";
 		    		$result_connect_ldap = false;
-		    		$ldapconn = ldap_connect('ldaps://'.$server.':636');
-		    		ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3) or die ("Could not set LDAP Protocol version");
-		    		ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+		    		$ldapconn = ldap_connect('ldaps://'.$server);
+		    		ldap_set_option($ldapconn , LDAP_OPT_PROTOCOL_VERSION, 3);
+					ldap_set_option($ldapconn , LDAP_OPT_REFERRALS, 0);
 
 		    		if(!$ldapconn)   {
 		    			die("Connect not connect to ".$server);
 		    			exit();
 		    		}else{
-		    			$result_connect_ldap = true;
+		    			echo "Connect server ldap<br>";
 		    		}
 		    		// $b = ldap_bind($ldapconn, $server.'\\'.$user , $pass);
 		    		// $lb=ldap_bind($ldap,"uid=xxx,ou=something,o=hostname.com","password");
 		    		// $b = ldap_bind($ldapconn,$user,$pass);
 		    		// $ldapbind = @ldap_bind($ldapconn, $ldaprdn, $ldappass);
-		    		$ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass);
-		    		var_dump($ldapbind);
-		    		if ($ldapbind) {
-					    if (ldap_get_option($handle, LDAP_OPT_DIAGNOSTIC_MESSAGE, $extended_error)) {
+
+		    		$error_bind= "<br>server: ".'ldaps://'.$server;
+		    		$error_bind.= "<br>user: ".$ldaprdn;
+		    		$error_bind.= "<br>pass: ".$ldappass;
+
+		    		$ldapbind = @ldap_bind($ldapconn,$ldaprdn,$ldappass)  or die ("Error trying to bind: ".ldap_error($ldapconn).$error_bind);
+		    		// var_dump($ldapbind);
+		    		if (!$ldapbind) {
+		    			echo " ldap_bind() problem!<br>";
+					    if (ldap_get_option($ldapconn, LDAP_OPT_DIAGNOSTIC_MESSAGE, $extended_error)) {
 					        echo "Error Binding to LDAP: $extended_error";
 					    } else {
 					        echo "Error Binding to LDAP: No additional information is available.";
 					    }
 					}
+					ldap_close($ldapconn);
 					if(!$ldapbind){
 						$result = array(
 			    			'code' 	=> 200,
@@ -315,6 +322,7 @@
 						// $this->setSession('position',$resultToken['position']);
 						// $this->setSession('default_language',$resultToken['default_language']);
 						$this->setSession('last_login',date('Y-m-d H:i:s'));
+						echo "Login ldap complete";
 						$result = array(
 			    			'code' 	=> 200,
 			    			'status'=> 'success',
