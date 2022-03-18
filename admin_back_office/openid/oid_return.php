@@ -6,7 +6,15 @@
 require_once "Auth/OpenID/Consumer.php";
 require_once "Auth/OpenID/FileStore.php";
 require_once "Auth/OpenID/AX.php";
-require_once($_SERVER['DOCUMENT_ROOT'].'/epetition/lib/function/main_function.php');
+
+if($_SERVER['SERVER_NAME'] == 'e-petition.energy.go.th'){
+  $url_complete = 'https://e-petition.energy.go.th/admin_back_office/openid/oid_return.php';
+  require_once('/var/www/html/e-petition.energy.go.th/lib/function/main_function.php');
+}else{
+  $url_complete = 'http://localhost/epetition/public_html/admin_back_office/openid/oid_return.php';
+  require_once($_SERVER['DOCUMENT_ROOT'].'/epetition/lib/function/main_function.php');
+}
+
 // echo $_SERVER['DOCUMENT_ROOT'].'/epetition/lib/function/main_function.php';
 session_start();
 
@@ -17,7 +25,7 @@ $store = new Auth_OpenID_FileStore('./oid_store');
 $consumer = new Auth_OpenID_Consumer($store);
 
 // ตรวจสอบค่าที่ได้รับมา (input เป็น URL ที่ให้ Server ส่งค่ากลับมา)
-$response = $consumer->complete('https://e-petition.energy.go.th/openid/oid_return.php');
+$response = $consumer->complete($url_complete);
 
 
 if ($response->status == Auth_OpenID_SUCCESS) {
@@ -63,7 +71,7 @@ if ($response->status == Auth_OpenID_SUCCESS) {
     // $openid_claimed_id = $obj->data->
     if($email){
         $email = str_replace('https://govid.egov.go.th/user.aspx/','',$email);
-        header('location: ../admin_back_office/index.php?route=home/loginopenid&id_key='.encrypt($email));
+        header('location: ../index.php?route=home/loginopenid&id_key='.encrypt($email));
     }
 
     // Print me raw

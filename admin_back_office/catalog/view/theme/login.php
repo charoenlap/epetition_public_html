@@ -121,7 +121,7 @@
       e.preventDefault();
     });
     $(document).on('click','#btn-open-id',function(e){
-      window.location = '../openid/SSOLogin.php';
+      window.location = 'openid/SSOLogin.php';
       // $.ajax({
       //   url: 'index.php?route=home/loginLdap',
       //   type: 'POST',
