@@ -206,6 +206,7 @@
 		    		$pass = "4P3MKK*t9";
 
 		    		$ad = ldap_connect($server);
+		    		var_dump($ad);
 		    		if(!$ad)   {
 		    			die("Connect not connect to ".$server);
 		    			exit();
