@@ -7,7 +7,7 @@
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
-
+	echo $_SERVER['SERVER_NAME'];exit();
 	if($_SERVER['SERVER_NAME'] == 'localhost'){
 		require_once($_SERVER['DOCUMENT_ROOT'].'/epetition/config/domains/epetition/config.php'); 
 		require_once($_SERVER['DOCUMENT_ROOT'].'/epetition/lib/function/main_function.php');
