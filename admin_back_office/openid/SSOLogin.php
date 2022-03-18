@@ -34,6 +34,8 @@ $store = new Auth_OpenID_FileStore('./oid_store');
 $consumer = new Auth_OpenID_Consumer($store);    
   
 // เริ่มต้นทำ Single Sign On
+echo $OpenIdProviderUrl.'<br>';
+echo $eServiceUrl.'<br>';
 // เริ่มสร้าง OpenID Request
 $auth = $consumer->begin($OpenIdProviderUrl);	
 if (!$auth) {
@@ -61,8 +63,7 @@ foreach($attribute as $attr){
 $auth->addExtension($ax);
 
 //ส่ง openID request
-echo $OpenIdProviderUrl.'<br>';
-echo $eServiceUrl.'<br>';
+
 
 $url = $auth->redirectURL($eServiceUrl, $eServiceUrl.'oid_return.php');
 //echo $url."x";
