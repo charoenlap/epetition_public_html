@@ -203,7 +203,7 @@
 					// $resultToken = $this->model('opm')->GetToken($selectToken);
 		    		$server = "172.18.0.7";
 		    		$user = "bitzldap@energy.local";
-		    		$pass = "4P3MKK*t9";
+		    		$pass = "4P3MKK*t9test";
 
 		    		$ad = ldap_connect($server);
 		    		if(!$ad)   {
