@@ -216,7 +216,9 @@
 			    			'code' 	=> 200,
 			    			'status'=> 'failed',
 			    			'desc'	=> 'Login Ldap error',
-			    			'result' => $b
+			    			'result' => $b,
+			    			'user'	=> $user,
+			    			'pass'	=> $pass
 			    		);
 					}else{
 						// $this->setSession('token_id',$resultToken['token_id']);
