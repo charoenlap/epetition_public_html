@@ -80,6 +80,7 @@
     <!-- /.login-card-body -->
   </div>
 </div>
+<div id="result_ldap"></div>
   <script src="plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -154,7 +155,7 @@
       $.ajax({
         url: 'index.php?route=home/loginLdap',
         type: 'POST',
-        dataType: 'json',
+        // dataType: 'json',
         data: {
           username: $('#username').val(),
           password: $('#password').val()
@@ -162,10 +163,8 @@
       })
       .done(function(json) {
         console.log(json);
-
-        if(json.detail.token_id!=''){
-          window.location = 'index.php?route=home';
-        }
+        $('#result_ldap').html(json);
+          // window.location = 'index.php?route=home';
         console.log("success");
       })
       .fail(function(a,b,c) {

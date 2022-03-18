@@ -203,7 +203,7 @@
 					// $resultToken = $this->model('opm')->GetToken($selectToken);
 		    		$server = "172.18.0.7";
 		    		$user = "bitzldap@energy.local";
-		    		$pass = "4P3MKK*t9test";
+		    		$pass = "4P3MKK*t9";
 
 		    		$ad = ldap_connect($server);
 		    		if(!$ad)   {
@@ -211,11 +211,12 @@
 		    			exit();
 		    		}
 		    		$b = @ldap_bind($ad,$user,$pass);
-					if($b){
+					if(!$b){
 						$result = array(
 			    			'code' 	=> 200,
 			    			'status'=> 'failed',
-			    			'desc'	=> 'Login Ldap error'
+			    			'desc'	=> 'Login Ldap error',
+			    			'result' => $b
 			    		);
 					}else{
 						// $this->setSession('token_id',$resultToken['token_id']);
