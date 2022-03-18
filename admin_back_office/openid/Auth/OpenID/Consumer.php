@@ -97,7 +97,7 @@ class Auth_OpenID_Consumer {
      * when creating the internal consumer object.  This is used for
      * testing.
      */
-    function __construct()($store, $session = null,
+    function __construct($store, $session = null,
                                   $consumer_cls = null)
     {
         if ($session === null) {
@@ -295,7 +295,7 @@ class Auth_OpenID_DiffieHellmanSHA1ConsumerSession {
     var $secret_size = 20;
     var $allowed_assoc_types = array('HMAC-SHA1');
 
-    function Auth_OpenID_DiffieHellmanSHA1ConsumerSession($dh = null)
+    function __construct($dh = null)
     {
         if ($dh === null) {
             $dh = new Auth_OpenID_DiffieHellman();
@@ -450,7 +450,7 @@ class Auth_OpenID_GenericConsumer {
      * in the module description.  The default value is False, which
      * disables immediate mode.
      */
-    function Auth_OpenID_GenericConsumer($store)
+    function __construct($store)
     {
         $this->store = $store;
         $this->negotiator = Auth_OpenID_getDefaultNegotiator();
@@ -1591,7 +1591,7 @@ class Auth_OpenID_AuthRequest {
      * class.  Instances of this class are created by the library when
      * needed.
      */
-    function Auth_OpenID_AuthRequest($endpoint, $assoc)
+    function __construct($endpoint, $assoc)
     {
         $this->assoc = $assoc;
         $this->endpoint = $endpoint;
@@ -1870,7 +1870,7 @@ class Auth_OpenID_SuccessResponse extends Auth_OpenID_ConsumerResponse {
     /**
      * @access private
      */
-    function Auth_OpenID_SuccessResponse($endpoint, $message, $signed_args=null)
+    function __construct($endpoint, $message, $signed_args=null)
     {
         $this->endpoint = $endpoint;
         $this->identity_url = $endpoint->claimed_id;
@@ -1973,7 +1973,7 @@ class Auth_OpenID_SuccessResponse extends Auth_OpenID_ConsumerResponse {
 class Auth_OpenID_FailureResponse extends Auth_OpenID_ConsumerResponse {
     var $status = Auth_OpenID_FAILURE;
 
-    function Auth_OpenID_FailureResponse($endpoint, $message = null,
+    function __construct($endpoint, $message = null,
                                          $contact = null, $reference = null)
     {
         $this->setEndpoint($endpoint);
@@ -1998,7 +1998,7 @@ class Auth_OpenID_TypeURIMismatch extends Auth_OpenID_FailureResponse {
  * @package OpenID
  */
 class Auth_OpenID_ServerErrorContainer {
-    function Auth_OpenID_ServerErrorContainer($error_text,
+    function __construct($error_text,
                                               $error_code,
                                               $message)
     {
@@ -2036,7 +2036,7 @@ class Auth_OpenID_ServerErrorContainer {
 class Auth_OpenID_CancelResponse extends Auth_OpenID_ConsumerResponse {
     var $status = Auth_OpenID_CANCEL;
 
-    function Auth_OpenID_CancelResponse($endpoint)
+    function __construct($endpoint)
     {
         $this->setEndpoint($endpoint);
     }
@@ -2062,7 +2062,7 @@ class Auth_OpenID_CancelResponse extends Auth_OpenID_ConsumerResponse {
 class Auth_OpenID_SetupNeededResponse extends Auth_OpenID_ConsumerResponse {
     var $status = Auth_OpenID_SETUP_NEEDED;
 
-    function Auth_OpenID_SetupNeededResponse($endpoint,
+    function __construct($endpoint,
                                              $setup_url = null)
     {
         $this->setEndpoint($endpoint);
