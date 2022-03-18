@@ -795,7 +795,7 @@ class Auth_OpenID_AX_FetchResponse extends Auth_OpenID_AX_KeyValueMessage {
 
     function __construct($update_url=null)
     {
-        $this->Auth_OpenID_AX_KeyValueMessage();
+        // $this->Auth_OpenID_AX_KeyValueMessage();
         $this->update_url = $update_url;
     }
 
