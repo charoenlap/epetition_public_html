@@ -61,6 +61,9 @@ foreach($attribute as $attr){
 $auth->addExtension($ax);
 
 //ส่ง openID request
+echo $OpenIdProviderUrl.'<br>';
+echo $eServiceUrl.'<br>';
+
 $url = $auth->redirectURL($eServiceUrl, $eServiceUrl.'oid_return.php');
 //echo $url."x";
 header('Location: ' . $url);
