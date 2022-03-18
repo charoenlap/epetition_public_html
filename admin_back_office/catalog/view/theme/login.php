@@ -35,9 +35,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <div id="alert" class="">
-              
-            </div>
+            <div id="alert" class=""></div>
           </div>
         </div>
         <div class="row mb-2">
@@ -122,9 +120,40 @@
       
       e.preventDefault();
     });
-    $(document).on('click','#btn-opm',function(e){
+    $(document).on('click','#btn-open-id',function(e){
+      window.location = '../openid/SSOLogin.php';
+      // $.ajax({
+      //   url: 'index.php?route=home/loginLdap',
+      //   type: 'POST',
+      //   dataType: 'json',
+      //   data: {
+      //     username: $('#username').val(),
+      //     password: $('#password').val()
+      //   },
+      // })
+      // .done(function(json) {
+      //   console.log(json);
+
+      //   if(json.detail.token_id!=''){
+      //     window.location = 'index.php?route=home';
+      //   }
+      //   console.log("success");
+      // })
+      // .fail(function(a,b,c) {
+      //   console.log(a);
+      //   console.log(b);
+      //   console.log(c);
+      //   console.log("error");
+      // })
+      // .always(function() {
+      //   console.log("complete");
+      // });
+      // e.preventDefault();
+    });
+    $(document).on('click','#btn-ldap',function(e){
+      $('#alert').html('เริ่มการเข้าสู่ระบบด้วย LDAP');
       $.ajax({
-        url: 'index.php?route=home/loginOPM',
+        url: 'index.php?route=home/loginLdap',
         type: 'POST',
         dataType: 'json',
         data: {
@@ -134,36 +163,7 @@
       })
       .done(function(json) {
         console.log(json);
-
-        if(json.detail.token_id!=''){
-          window.location = 'index.php?route=home';
-        }
-        console.log("success");
-      })
-      .fail(function(a,b,c) {
-        console.log(a);
-        console.log(b);
-        console.log(c);
-        console.log("error");
-      })
-      .always(function() {
-        console.log("complete");
-      });
-      e.preventDefault();
-    });
-    $(document).on('click','#btn-ldap',function(e){
-      $.ajax({
-        url: 'index.php?route=home/loginLdap',
-        type: 'POST',
-        // dataType: 'json',
-        data: {
-          username: $('#username').val(),
-          password: $('#password').val()
-        },
-      })
-      .done(function(json) {
-        console.log(json);
-        $('#result_ldap').html(json);
+        $('#alert').html(json.desc);
           // window.location = 'index.php?route=home';
         console.log("success");
       })

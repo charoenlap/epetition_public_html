@@ -258,7 +258,7 @@ class Auth_OpenID_Consumer {
      * when creating the internal consumer object.  This is used for
      * testing.
      */
-    public function __construct($store, $session = null,
+    function Auth_OpenID_Consumer($store, $session = null,
                                   $consumer_cls = null)
     {
         if ($session === null) {
@@ -334,11 +334,7 @@ class Auth_OpenID_Consumer {
                                      serialize($loader->toSession($m)));
             }
         }
-        // echo '<br>discoverMethod: <br>';
-        // var_dump($this->discoverMethod);
-        // echo '<br>fetcher: <br>';
-        // var_dump($this->consumer->fetcher);
-        // exit();
+
         $endpoint = $disco->getNextService($this->discoverMethod,
                                            $this->consumer->fetcher);
 
@@ -353,7 +349,6 @@ class Auth_OpenID_Consumer {
         if ($endpoint === null) {
             return null;
         } else {
-
             return $this->beginWithoutDiscovery($endpoint,
                                                 $anonymous);
         }
@@ -461,7 +456,7 @@ class Auth_OpenID_DiffieHellmanSHA1ConsumerSession {
     var $secret_size = 20;
     var $allowed_assoc_types = array('HMAC-SHA1');
 
-    public function __construct($dh = null)
+    function Auth_OpenID_DiffieHellmanSHA1ConsumerSession($dh = null)
     {
         if ($dh === null) {
             $dh = new Auth_OpenID_DiffieHellman();
@@ -616,7 +611,7 @@ class Auth_OpenID_GenericConsumer {
      * in the module description.  The default value is False, which
      * disables immediate mode.
      */
-    public function __construct($store)
+    function Auth_OpenID_GenericConsumer($store)
     {
         $this->store = $store;
         $this->negotiator = Auth_OpenID_getDefaultNegotiator();
@@ -1757,7 +1752,7 @@ class Auth_OpenID_AuthRequest {
      * class.  Instances of this class are created by the library when
      * needed.
      */
-    public function __construct($endpoint, $assoc)
+    function Auth_OpenID_AuthRequest($endpoint, $assoc)
     {
         $this->assoc = $assoc;
         $this->endpoint = $endpoint;
@@ -2036,7 +2031,7 @@ class Auth_OpenID_SuccessResponse extends Auth_OpenID_ConsumerResponse {
     /**
      * @access private
      */
-    public function __construct($endpoint, $message, $signed_args=null)
+    function Auth_OpenID_SuccessResponse($endpoint, $message, $signed_args=null)
     {
         $this->endpoint = $endpoint;
         $this->identity_url = $endpoint->claimed_id;
@@ -2139,7 +2134,7 @@ class Auth_OpenID_SuccessResponse extends Auth_OpenID_ConsumerResponse {
 class Auth_OpenID_FailureResponse extends Auth_OpenID_ConsumerResponse {
     var $status = Auth_OpenID_FAILURE;
 
-    public function __construct($endpoint, $message = null,
+    function Auth_OpenID_FailureResponse($endpoint, $message = null,
                                          $contact = null, $reference = null)
     {
         $this->setEndpoint($endpoint);
@@ -2164,7 +2159,7 @@ class Auth_OpenID_TypeURIMismatch extends Auth_OpenID_FailureResponse {
  * @package OpenID
  */
 class Auth_OpenID_ServerErrorContainer {
-    public function __construct($error_text,
+    function Auth_OpenID_ServerErrorContainer($error_text,
                                               $error_code,
                                               $message)
     {
@@ -2202,7 +2197,7 @@ class Auth_OpenID_ServerErrorContainer {
 class Auth_OpenID_CancelResponse extends Auth_OpenID_ConsumerResponse {
     var $status = Auth_OpenID_CANCEL;
 
-    public function __construct($endpoint)
+    function Auth_OpenID_CancelResponse($endpoint)
     {
         $this->setEndpoint($endpoint);
     }
@@ -2228,7 +2223,7 @@ class Auth_OpenID_CancelResponse extends Auth_OpenID_ConsumerResponse {
 class Auth_OpenID_SetupNeededResponse extends Auth_OpenID_ConsumerResponse {
     var $status = Auth_OpenID_SETUP_NEEDED;
 
-    public function __construct($endpoint,
+    function Auth_OpenID_SetupNeededResponse($endpoint,
                                              $setup_url = null)
     {
         $this->setEndpoint($endpoint);

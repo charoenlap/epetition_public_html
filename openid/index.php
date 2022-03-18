@@ -2,7 +2,6 @@
 require_once "common.php";
 
 global $pape_policy_uris;
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -53,12 +52,9 @@ global $pape_policy_uris;
 
     <div id="verify-form">
 		<ul>
-			<li>ทดสอบการทำงานของ OpenID <a href="SSOLogin.php" target="_blank">SSOLogin.php</a></li>
-			<li>ทดสอบการทำงานของ OAuth <a href="OAuthConsumer.php" target="_blank">OAuthConsumer.php</a></li>
+			<li>ทดสอบการทำงานของ OpenID <a href="http://localhost/epetition/public_html/openid/SSOLogin.php" target="_blank">SSOLogin.php</a></li>
+			<li>ทดสอบการทำงานของ OAuth <a href="http://localhost/epetition/public_html/openid/OAuthConsumer.php" target="_blank">OAuthConsumer.php</a></li>
 		</ul>
-    </div>
-    <div>
-    	<?php echo "<pre>";var_dump($pape_policy_uris);?>
     </div>
   </body>
 </html>

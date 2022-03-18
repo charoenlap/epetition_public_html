@@ -215,7 +215,7 @@ class Auth_OpenID {
             if ($parent_dir == $dir_name) {
                 return true;
             }
-            // echo 'parent_dir:'.$parent_dir.'|'.$dir_name.'<br><br>';
+
             return (Auth_OpenID::ensureDir($parent_dir) && @mkdir($dir_name));
         }
     }

@@ -1,9 +1,9 @@
 <?php
 //////////////////// config OAuth//////////////////////////////
 
-$OpenIdProviderUrl = "http://testopenid.ega.or.th/"; 
-$eServiceUrl = "https://charoenlap.com/epetition/public_html/openid/";
-$xmlUrl = "http://testopenid.ega.or.th/XmlUserInfo.aspx";  
+$OpenIdProviderUrl = "http://govid.ega.or.th/"; 
+$eServiceUrl = "http://127.0.0.1:8090/OpenID/";
+$xmlUrl = "http://govid.ega.or.th/XmlUserInfo.aspx";  
 
 
 $key = 'sampleconsumer';

@@ -1,15 +1,14 @@
 <?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
 header ('Content-type: text/html; charset=utf-8');
 ob_start();
+session_start();
+session_destroy();
 // สรอ. OpenID Provider
-$OpenIdProviderUrl = 'http://testopenid.ega.or.th/';
-//govid.ega.or.th
-  
+$OpenIdProviderUrl = 'https://govid.egov.go.th';  
 //หน้าที่จะให้ส่งกลับ
-$eServiceUrl = "https://charoenlap.com/epetition/public_html/openid/"; 
+// $eServiceUrl = "http://127.0.0.1:8090/OpenID/"; 
+// $eServiceUrl = "https://e-petition.energy.go.th/openid/"; 
+$eServiceUrl = "https://e-petition.energy.go.th/openid/"; 
 include "common.php";
 
 
@@ -18,7 +17,7 @@ require_once "Auth/OpenID/Consumer.php";
 require_once "Auth/OpenID/FileStore.php";
 require_once "Auth/OpenID/AX.php";  
   
-session_start();
+
 
 // สร้าง file ไว้เก็บค่า OpenID 
 $store = new Auth_OpenID_FileStore('./oid_store');  

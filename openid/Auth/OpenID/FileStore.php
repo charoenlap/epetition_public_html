@@ -46,7 +46,7 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
      * @param string $directory This is the directory to put the store
      * directories in.
      */
-    public function __construct($directory)
+    function Auth_OpenID_FileStore($directory)
     {
         if (!Auth_OpenID::ensureDir($directory)) {
             trigger_error('Not a directory and failed to create: '
@@ -69,7 +69,8 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
         $this->max_nonce_age = 6 * 60 * 60; // Six hours, in seconds
 
         if (!$this->_setup()) {
-            trigger_error('Failed to initialize OpenID file store in ' . $directory, E_USER_ERROR);
+            trigger_error('Failed to initialize OpenID file store in ' .
+                          $directory, E_USER_ERROR);
         }
     }
 
@@ -87,15 +88,9 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
      */
     function _setup()
     {
-        // echo 'nonce_dir:'.Auth_OpenID::ensureDir($this->nonce_dir).'<br>';
-        // echo 'association_dir:'.Auth_OpenID::ensureDir($this->association_dir).'<br>';
-        // echo 'temp_dir:'.Auth_OpenID::ensureDir($this->temp_dir).'<br>';
-        $result = (Auth_OpenID::ensureDir($this->nonce_dir) &&
+        return (Auth_OpenID::ensureDir($this->nonce_dir) &&
                 Auth_OpenID::ensureDir($this->association_dir) &&
                 Auth_OpenID::ensureDir($this->temp_dir));
-
-        return $result;
-        // return 1;
     }
 
     /**

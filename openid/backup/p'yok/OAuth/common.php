@@ -2,7 +2,7 @@
 ///////////////////// config OprnID////////////////////////////
 
 $OpenIdProviderUrl = "http://testopenid.ega.or.th/"; 
-$eServiceUrl = "https://charoenlap.com/epetition/public_html/openid/";
+$eServiceUrl = "http://127.0.0.1:8090/OpenID/";
 
 
 //////////////////// config OAuth//////////////////////////////

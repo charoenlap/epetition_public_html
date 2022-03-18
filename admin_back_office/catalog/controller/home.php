@@ -185,6 +185,71 @@
 	    	}
 	    	$this->json($result);
 	    }
+	    public function loginOpenID(){
+	    	// if(method_post()){
+	    		$result = array(
+	    			'code' 	=> 200,
+	    			'status'=> 'failed',
+	    			'desc'	=> 'Connect'
+	    		);
+	    		$id_key = get('id_key');
+	    		if(!empty($id_key)){
+	    			$open_id_email = decrypt($id_key);
+	    			// echo $open_id_email;exit();
+		    		$selectOpenIDEmail = array(
+		    			'open_id_email' 	=> $open_id_email,
+					);
+					$resultLogin = $this->model('login')->authOpenID($selectOpenIDEmail);
+					if($resultLogin['result']=="fail"){
+						$result = array(
+			    			'code' 	=> 200,
+			    			'status'=> 'failed',
+			    			'desc'	=> 'Login error '.$open_id_email.'key not match'
+			    		);
+					}else{
+						$officer_name = $resultLogin['detail']['FIRSTNAME'].' '.$resultLogin['detail']['LASTNAME'];
+						$this->setSession('token_id','');
+						$this->setSession('id_agency',$resultLogin['detail']['id_agency']);
+						$this->setSession('id_agency_minor',$resultLogin['detail']['id_agency_minor']);
+
+						$this->setSession('AUT_USER_ID',$resultLogin['detail']['AUT_USER_ID']);
+						$this->setSession('DEPARTMENT_ID',$resultLogin['detail']['DEPARTMENT_ID']);
+						$this->setSession('USER_GROUP_ID',$resultLogin['detail']['USER_GROUP_ID']);
+						$this->setSession('user_name',$resultLogin['detail']['AUT_USER_ID']);
+						$this->setSession('officer_id',$resultLogin['detail']['AUT_USERNAME']);
+						$this->setSession('officer_name',$officer_name);
+						$this->setSession('role_id',$resultLogin['detail']['USER_GROUP_ID']);
+						$this->setSession('role_name',$resultLogin['detail']['GROUP_NAME']);
+						$this->setSession('org_id','');
+						$this->setSession('org_name','');
+						// $this->setSession('position',$resultLogin['detail']['DEPARTMENT_NAME']);
+						$this->setSession('default_language','');
+						$this->setSession('last_login',$resultLogin['last_login']);
+						$result = array(
+			    			'code' 			=> 200,
+			    			'status'		=> 'success',
+			    			'desc'			=> 'Login complete',
+			    			'detail'		=> $resultLogin,
+			    			'last_login'	=> $resultLogin['last_login']
+			    		);
+			    		redirect('home');
+					}
+				}else{
+					$result = array(
+		    			'code' 	=> 200,
+		    			'status'=> 'failed',
+		    			'desc'	=> 'Password empty'
+		    		);
+				}
+	    	// }else{
+	    	// 	$result = array(
+	    	// 		'code' 	=> 200,
+	    	// 		'status'=> 'failed',
+	    	// 		'desc'	=> 'Method not allow'
+	    	// 	);
+	    	// }
+	    	$this->json($result);
+	    }
 	    public function loginLdap(){
 	    	$result_login = false;
 	    	if(method_post()){
@@ -202,26 +267,41 @@
 					);
 					// $resultToken = $this->model('opm')->GetToken($selectToken);
 		    		$server = "172.18.0.7";
-		    		$user = "bitzldap@energy.local";
-		    		$pass = "4P3MKK*t9";
+		    		$ldaprdn = "bitzldap@energy.local";
+		    		$ldappass = "4P3MKK*t9";
 		    		$result_connect_ldap = false;
-		    		$ad = ldap_connect($server);
-		    		if(!$ad)   {
+		    		$ldapconn = ldap_connect('ldaps://'.$server.':636');
+		    		ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3) or die ("Could not set LDAP Protocol version");
+		    		ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+
+		    		if(!$ldapconn)   {
 		    			die("Connect not connect to ".$server);
 		    			exit();
 		    		}else{
 		    			$result_connect_ldap = true;
 		    		}
-		    		$b = @ldap_bind($ad,$user,$pass);
-					if(!$b){
+		    		// $b = ldap_bind($ldapconn, $server.'\\'.$user , $pass);
+		    		// $lb=ldap_bind($ldap,"uid=xxx,ou=something,o=hostname.com","password");
+		    		// $b = ldap_bind($ldapconn,$user,$pass);
+		    		// $ldapbind = @ldap_bind($ldapconn, $ldaprdn, $ldappass);
+		    		$ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass);
+		    		var_dump($ldapbind);
+		    		if ($ldapbind) {
+					    if (ldap_get_option($handle, LDAP_OPT_DIAGNOSTIC_MESSAGE, $extended_error)) {
+					        echo "Error Binding to LDAP: $extended_error";
+					    } else {
+					        echo "Error Binding to LDAP: No additional information is available.";
+					    }
+					}
+					if(!$ldapbind){
 						$result = array(
 			    			'code' 	=> 200,
 			    			'status'=> 'failed',
-			    			'desc'	=> 'Login Ldap error',
-			    			'return' => $b,
-			    			'user'	=> $user,
-			    			'pass'	=> $pass,
-			    			'connect'	=> $result_connect_ldap
+			    			'desc'	=> 'Login Ldap error ',
+			    			'return' => $ldapbind,
+			    			'user'	=> $ldaprdn,
+			    			'pass'	=> $ldappass,
+			    			'connect'	=> $ldapconn
 			    		);
 					}else{
 						// $this->setSession('token_id',$resultToken['token_id']);
