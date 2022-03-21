@@ -17,7 +17,8 @@ $OpenIdProviderUrl = 'https://govid.egov.go.th';
 // $eServiceUrl = "https://e-petition.energy.go.th/openid/"; 
 // echo '>'.$_SERVER['SERVER_NAME'].'<<br>';
 if($_SERVER['SERVER_NAME'] == 'e-petition.energy.go.th'){
-	$eServiceUrl = "https://e-petition.energy.go.th/admin_back_office/openid/"; 
+	// $eServiceUrl = "https://e-petition.energy.go.th/admin_back_office/openid/"; 
+	$eServiceUrl = "http://localhost/epetition/public_html/admin_back_office/openid/"; 
 }else{
 	$eServiceUrl = "http://localhost/epetition/public_html/admin_back_office/openid/"; 
 }
@@ -38,8 +39,8 @@ $store = new Auth_OpenID_FileStore('./oid_store');
 $consumer = new Auth_OpenID_Consumer($store);    
   
 // เริ่มต้นทำ Single Sign On
-echo $OpenIdProviderUrl.'<br>';
-echo $eServiceUrl.'<br>';
+echo 'OpenIdProviderUrl:'.$OpenIdProviderUrl.'<br>';
+echo 'eServiceUrl:'.$eServiceUrl.'<br>';
 // เริ่มสร้าง OpenID Request
 $auth = $consumer->begin($OpenIdProviderUrl);	
 if (!$auth) {
