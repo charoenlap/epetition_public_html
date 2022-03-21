@@ -162,8 +162,16 @@
         },
       })
       .done(function(json) {
-        $('#alert').html(json);
+        // $('#alert').html(json);
           // window.location = 'index.php?route=home';
+          if(json.status=='success'){
+            $('#alert').text(json.desc);
+            $('#alert').addClass('alert-success');
+            window.location='index.php?route=home';
+          }else{
+            $('#alert').text(json.desc);
+            $('#alert').addClass('alert-danger');
+          }
         console.log("success");
       })
       .fail(function(a,b,c) {

@@ -5,6 +5,7 @@
 
 			$last_login = $this->getSession('last_login');
 			if($last_login){
+				$province_id = get('province_id');
 		    	// $id_admin = $this->getSession('id_admin');
 		    	// if($id_admin){
 		    	// 	$this->view('home');
@@ -46,6 +47,7 @@
 					}
 					// exit();
 				}
+				$data['report'] = $this->model('report')->getDashboardHome($province_id);
 		    	$this->view('home',$data);
 		    }else{
 		    	redirect('login');
@@ -258,19 +260,23 @@
 	    			'status'=> 'failed',
 	    			'desc'	=> 'Connect'
 	    		);
-	    		$username = post('username');
-	    		$password = post('password');
+	    		// $username = post('username');
+	    		// $password = post('password');
+	    		$username = 'bitzldap@energy.local';
+	    		$password = '4P3MKK*t9';
 	    		if(!empty($password)){
 		    		$selectToken = array(
 		    			'username' 	=> $username,
 		    			'password' 	=> $password
 					);
 					// $resultToken = $this->model('opm')->GetToken($selectToken);
-		    		$server = "172.18.0.7";
+		    		// $server = "172.18.0.7";
+		    		// $server = "172.19.0.105";
+		    		$server = "172.19.0.105";
 		    		$ldaprdn = $username;//"bitzldap@energy.local";
 		    		$ldappass = $password;//"4P3MKK*t9";
 		    		$result_connect_ldap = false;
-		    		$ldapconn = ldap_connect('ldaps://'.$server);
+		    		$ldapconn = ldap_connect('ldap://'.$server);
 		    		ldap_set_option($ldapconn , LDAP_OPT_PROTOCOL_VERSION, 3);
 					ldap_set_option($ldapconn , LDAP_OPT_REFERRALS, 0);
 
@@ -278,7 +284,7 @@
 		    			die("Connect not connect to ".$server);
 		    			exit();
 		    		}else{
-		    			echo "Connect server ldap<br>";
+		    			// echo "Connect server ldap<br>";
 		    		}
 		    		// $b = ldap_bind($ldapconn, $server.'\\'.$user , $pass);
 		    		// $lb=ldap_bind($ldap,"uid=xxx,ou=something,o=hostname.com","password");
@@ -289,7 +295,7 @@
 		    		$error_bind.= "<br>user: ".$ldaprdn;
 		    		$error_bind.= "<br>pass: ".$ldappass;
 
-		    		$ldapbind = @ldap_bind($ldapconn,$ldaprdn,$ldappass)  or die ("Error trying to bind: ".ldap_error($ldapconn).$error_bind);
+		    		$ldapbind = @ldap_bind($ldapconn,$ldaprdn,$ldappass)  or die ("Bind Error : ".ldap_error($ldapconn).$error_bind);
 		    		// var_dump($ldapbind);
 		    		if (!$ldapbind) {
 		    			echo " ldap_bind() problem!<br>";
@@ -311,24 +317,44 @@
 			    			'connect'	=> $ldapconn
 			    		);
 					}else{
-						// $this->setSession('token_id',$resultToken['token_id']);
-						// $this->setSession('user_name',$resultToken['user_name']);
-						// $this->setSession('officer_id',$resultToken['officer_id']);
-						// $this->setSession('officer_name',$resultToken['officer_name']);
-						// $this->setSession('role_id',$resultToken['role_id']);
-						// $this->setSession('role_name',$resultToken['role_name']);
-						// $this->setSession('org_id',$resultToken['org_id']);
-						// $this->setSession('org_name',$resultToken['org_name']);
-						// $this->setSession('position',$resultToken['position']);
-						// $this->setSession('default_language',$resultToken['default_language']);
-						$this->setSession('last_login',date('Y-m-d H:i:s'));
-						echo "Login ldap complete";
-						$result = array(
-			    			'code' 	=> 200,
-			    			'status'=> 'success',
-			    			'desc'	=> 'Login Ldap complete',
-			    			'detail'=> $result_login
-			    		);
+						$select_user_ldap = array(
+							'user_ldap' => $ldaprdn
+						);
+						$resultLogin = $this->model('login')->authLdap($select_user_ldap);
+						if($resultLogin['result']=="fail"){
+							$result = array(
+				    			'code' 	=> 200,
+				    			'status'=> 'failed',
+				    			'desc'	=> 'Login error '.$ldaprdn.'key not match'
+				    		);
+						}else{
+							$officer_name = $resultLogin['detail']['FIRSTNAME'].' '.$resultLogin['detail']['LASTNAME'];
+							$this->setSession('token_id','');
+							$this->setSession('id_agency',$resultLogin['detail']['id_agency']);
+							$this->setSession('id_agency_minor',$resultLogin['detail']['id_agency_minor']);
+
+							$this->setSession('AUT_USER_ID',$resultLogin['detail']['AUT_USER_ID']);
+							$this->setSession('DEPARTMENT_ID',$resultLogin['detail']['DEPARTMENT_ID']);
+							$this->setSession('USER_GROUP_ID',$resultLogin['detail']['USER_GROUP_ID']);
+							$this->setSession('user_name',$resultLogin['detail']['AUT_USER_ID']);
+							$this->setSession('officer_id',$resultLogin['detail']['AUT_USERNAME']);
+							$this->setSession('officer_name',$officer_name);
+							$this->setSession('role_id',$resultLogin['detail']['USER_GROUP_ID']);
+							$this->setSession('role_name',$resultLogin['detail']['GROUP_NAME']);
+							$this->setSession('org_id','');
+							$this->setSession('org_name','');
+							$this->setSession('default_language','');
+							$this->setSession('last_login',$resultLogin['last_login']);
+							$result = array(
+				    			'code' 			=> 200,
+				    			'status'		=> 'success',
+				    			'desc'			=> 'Login complete',
+				    			'detail'		=> $resultLogin,
+				    			'last_login'	=> $resultLogin['last_login'],
+				    			'detail'		=> $ldapbind,
+			    				'user'			=> $ldaprdn
+				    		);
+						}
 					}
 				}else{
 					$result = array(

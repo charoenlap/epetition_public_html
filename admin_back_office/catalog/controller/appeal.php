@@ -10,11 +10,12 @@
 					if($input['id_appeal']){
 						foreach($input['id_appeal'] as $key => $val){
 							$insert[] = array(
-								'id_response'=> $input['id_response'],
-								'id_agency_minor'	=> $input['id_agency'][$key],
-								'id_appeal'	=> $val,
-								'date_create'	=> date('Y-m-d H:i:s'),
-								'note'			=> 'ส่งเรื่องร้องเรียน'
+								'id_response'		=> $input['id_response'],
+								'id_agency'			=> $input['id_agency'][$key],
+								'id_agency_minor'	=> $input['id_agency_minor'][$key],
+								'id_appeal'			=> $val,
+								'date_create'		=> date('Y-m-d H:i:s'),
+								'note'				=> 'ส่งเรื่องร้องเรียน'
 							);
 						}
 					}

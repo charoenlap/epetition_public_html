@@ -23,7 +23,7 @@
         <?php if($active_view){ ?>
           <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">ข้อมูลที่ต้องการค้นหา</h4>
@@ -57,12 +57,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">รายงานสรุปผลการดำเนินงาน</h3>
-                            <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export excel</a>
+                            <!-- <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export excel</a> -->
                         </div>
                         <div class="card-body">
                             <div class="row mb-3">
@@ -83,14 +83,14 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="text-center">3,739</td>
-                                                <td class="text-center">0</td>
-                                                <td class="text-center">3,735</td>
-                                                <td class="text-center">7,052</td>
+                                                <td class="text-center"><?php echo $listStatus['process'];?></td>
+                                                <td class="text-center"><?php echo $listStatus['7day'];?></td>
+                                                <td class="text-center"><?php echo $listStatus['over'];?></td>
+                                                <td class="text-center"><?php echo $listStatus['complete'];?></td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <h5>ได้รับเรื่องร้องเรียนทั้งหมด 10,791 เรื่อง</h5>
+                                    <h5>ได้รับเรื่องร้องเรียนทั้งหมด <?php echo $listStatus['count_all'];?> เรื่อง</h5>
                                 </div>
                             </div>
                         </div>
@@ -123,10 +123,10 @@
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
             ['หัวข้อเรื่องร้องเรียน', 'ช่องทาง'],
-            ['อยู่ระหว่างการดำเนินการ', 3739],
-            ['อีก 7 วันครบกำหนด', 0],
-            ['ดำเนินการล่าช้ากว่ากำหนด', 3735],
-            ['ดำเนินการแล้วเสร็จ', 7052],
+            ['อยู่ระหว่างการดำเนินการ', <?php echo $listStatus['process'];?>],
+            ['อีก 7 วันครบกำหนด', <?php echo $listStatus['7day'];?>],
+            ['ดำเนินการล่าช้ากว่ากำหนด', <?php echo $listStatus['over'];?>],
+            ['ดำเนินการแล้วเสร็จ', <?php echo $listStatus['complete'];?>],
         ]);
 
         var options = {

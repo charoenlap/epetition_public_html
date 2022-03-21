@@ -23,7 +23,7 @@
       <?php if($active_view){ ?>
         <div class="container-fluid">
           <div class="row">
-              <div class="col-md-12">
+              <!-- <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">ข้อมูลที่ต้องการค้นหา</h4>
@@ -51,50 +51,44 @@
                         </div>
                     </div>
                 </div>
-              </div>
+              </div> -->
               <div class="col-md-12">
                   <div class="card">
-                      <div class="card-header">
-                          <h3 class="card-title">แยกตามช่องทางการร้องเรียน</h3>
-                          <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export excel</a>
-                          <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export pdf</a>
-                          <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export word</a>
-                      </div>
                       <div class="card-body">
-                            <div class="row mb-3">
-                                <div class="col-md-6">
+                          <div class="row mb-3">
+                                <div class="col-md-12">
                                     <div id="columnchart_material" style="width: 100%; height: 300px;"></div>
                                 </div>
                             </div>
                           <div class="row">
                               <div class="col-md-12">
-                                  <table class="table table-bordered">
+                                  <table class="table table-bordered" id="datatable">
                                       <thead class="bg-primary">
                                             <tr>
-                                                <th class="text-center align-middle" width="10%" rowspan="2">ลำดับ</th>
-                                                <th class="text-center align-middle" rowspan="2">ช่องทางการร้องเรียน</th>
-                                                <th class="text-center align-middle" rowspan="2">ได้รับเรื่องร้องเรียน</th>
-                                                <th colspan="3" class="text-center">สถานะการดำเนินการเรื่องร้องเรียน</th>
-                                            </tr>
-                                            <tr>
+                                                <th class="text-center align-middle" width="10%" >ลำดับ</th>
+                                                <th class="text-center align-middle" >ช่องทางการร้องเรียน</th>
+                                                <th class="text-center align-middle" >ได้รับเรื่องร้องเรียน</th>
                                                 <th class="text-center">ดำเนินการแล้วเสร็จ</th>
                                                 <th class="text-center">อยู่ระหว่างการดำเนินการ</th>
                                                 <th class="text-center">ยังไม่เริ่มดำเนินการ</th>
                                             </tr>
                                       </thead>
                                       <tbody>
+                                        <?php $i=1;foreach($reportWay as $val){ ?>
                                         <tr>
-                                            <td class="text-center">1</td>
-                                            <td>เว็บไซต์</td>
-                                            <td class="text-center">736</td>
-                                            <td class="text-center">495</td>
-                                            <td class="text-center">165</td>
-                                            <td class="text-center">10</td>
+                                            <td class="text-center"><?php echo $i++;?></td>
+                                            <td><?php echo $val['addBy']; ?></td>
+                                            <td class="text-center"><?php echo $val['count_all'] ?></td>
+                                            <td class="text-center"><?php echo $val['complete'] ?></td>
+                                            <td class="text-center"><?php echo $val['process'] ?></td>
+                                            <td class="text-center"><?php echo $val['over'] ?></td>
                                         </tr>
+                                        <?php } ?>
                                       </tbody>
                                   </table>
                               </div>
                           </div>
+
                       </div>
                   </div>
               </div>
@@ -115,6 +109,7 @@
   
 <script>
   $('#report').addClass('active');
+  $('#way').addClass('active');
   $('#report').parent().addClass('menu-is-opening menu-open');
 </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -125,13 +120,9 @@
     function drawChart() {
     var data = google.visualization.arrayToDataTable([
         ['Year', 'ช่องทาง'],
-        ['เว็บไซต์', 22],
-        ['E-mail', 33],
-        ['หนังสือ', 60],
-        ['ยื่นเรื่อง', 14],
-        ['สายด่วย 1310', 18],
-        ['โทรสาร', 27],
-        ['แอพพลิเคชั่น', 53],
+        <?php $i=1;foreach($reportWay as $val){ ?>
+        ['<?php echo $val['addBy']; ?>', <?php echo $val['count_all'] ?>],
+        <?php } ?>
     ]);
 
     var options = {
@@ -145,4 +136,13 @@
 
     chart.draw(data, google.charts.Bar.convertOptions(options));
     }
+
+      $(document).ready(function() {
+    $('#datatable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
 </script>

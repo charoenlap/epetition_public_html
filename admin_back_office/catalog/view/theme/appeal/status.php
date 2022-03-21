@@ -219,6 +219,7 @@
         // alert('บันทึกเรียบร้อย');
         var id_appeal = $( "#id_appeal" );
         var id_agency = $( "#id_agency" );
+        var id_agency_minor = $( "#id_agency_minor" );
         if(id_appeal.val()!='' && id_agency.val()!=''){
             var html = '<tr>'+
                             '<td>'+$( "#id_appeal option:selected" ).text()+
@@ -226,6 +227,9 @@
                             '</td>'+
                             '<td>'+$( "#id_agency option:selected" ).text()+
                                 '<input type="hidden" name="id_agency[]" value="'+id_agency.val()+'">'+
+                            '</td>'+
+                            '<td>'+$( "#id_agency_minor option:selected" ).text()+
+                                '<input type="hidden" name="id_agency_minor[]" value="'+id_agency_minor.val()+'">'+
                             '</td>'+
                              '<td>'+
                                 '<a href="#" class="btn btn-danger delForm">ลบ</a>'+

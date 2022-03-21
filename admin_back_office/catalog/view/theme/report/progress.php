@@ -22,7 +22,7 @@
         <?php if($active_view){ ?>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">ข้อมูลที่ต้องการค้นหา</h4>
@@ -64,17 +64,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">รายงานความก้าวหน้า</h3>
-                            <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export excel</a>
+                            <!-- <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export excel</a> -->
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered" id="datatable">
                                         <thead class="bg-primary">
                                             <tr>
                                                 <th>ลำดับ</th>
@@ -84,12 +84,27 @@
                                                 <th>หน่วยงาน</th>
                                                 <th>หน่วยงานระดับสำนัก/กอง/ศูนย์ ที่ได้รับมอบหมาย</th>
                                                 <th>หน่วยงานระดับส่วน/ฝ่าย/กลุ่ม ที่ได้รับมอบหมาย</th>
-                                                <th>เจ้าหน้าที่ของส่วน/ฝ่าย/กลุ่ม ที่ได้รับมอบหมาย(2 คน)</th>
                                                 <th>เบอร์โทรศัพท์สำนักงาน/มือถือ</th>
                                                 <th>ความก้าวหน้าผลการดำเนินงาน</th>
                                                 <th>ปัญหาอุปสรรคในการดำเนินงาน</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            <?php $i=1;foreach($listProgress as $val){ ?>
+                                            <tr>
+                                                <td><?php echo $i++;?></td>
+                                                <td><?php echo $val['case_code']; ?></td>
+                                                <td><?php echo $val['topic_title']; ?></td>
+                                                <td><?php echo $val['PROVINCE_NAME']; ?></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <?php } ?>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -114,5 +129,6 @@
 
 <script>
     $('#report').addClass('active');
+    $('#progressReport').addClass('active');
     $('#report').parent().addClass('menu-is-opening menu-open');
 </script>

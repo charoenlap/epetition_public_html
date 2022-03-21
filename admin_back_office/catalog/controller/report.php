@@ -52,6 +52,7 @@
 					}
 				}
 			}
+			$data['gencyMinor'] = $this->model('report')->getagencyMinorDepartment();
 			$this->view('report/department',$data);
 		}
 		public function way(){
@@ -79,6 +80,7 @@
 					}
 				}
 			}
+			$data['reportWay'] = $this->model('report')->getReportWay();
 			$this->view('report/way',$data);
 		}
 		public function zone(){
@@ -106,6 +108,7 @@
 					}
 				}
 			}
+			$data['reportWay'] = $this->model('report')->getReportWay();
 			$this->view('report/zone',$data);
 		}
 		public function mission(){
@@ -133,6 +136,7 @@
 					}
 				}
 			}
+			$data['reportMission'] = $this->model('report')->getReportMission();
 			$this->view('report/mission',$data);
 		}
 		public function land(){
@@ -160,6 +164,9 @@
 					}
 				}
 			}
+			$data['reportLand'] 		= $this->model('report')->getReportLand();
+			// var_dump($data['reportLand']);
+			$data['reportLandLimit5'] 	= $this->model('report')->getReportLandLimit5();
 			$this->view('report/land',$data);
 		}
 		public function problem(){
@@ -187,6 +194,7 @@
 					}
 				}
 			}
+			$data['reportProblem'] 		= $this->model('report')->getReportProblem();
 			$this->view('report/problem',$data);
 		}
 		public function type(){
@@ -214,6 +222,7 @@
 					}
 				}
 			}
+			$data['reportType'] 		= $this->model('report')->getReportType();
 			$this->view('report/type',$data);
 		}
 		public function progress(){
@@ -241,6 +250,8 @@
 					}
 				}
 			}
+			// $data['reportProgress'] 		= $this->model('report')->getReportProgress();
+			$data['listProgress'] = $this->model('report')->getListsDetail();
 			$this->view('report/progress',$data);
 		}
 		public function topic(){
@@ -295,6 +306,7 @@
 					}
 				}
 			}
+			$data['listStatus'] = $this->model('report')->getStatus();
 			$this->view('report/status',$data);
 		}
 		public function  satisfaction(){

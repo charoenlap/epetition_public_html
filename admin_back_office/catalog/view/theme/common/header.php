@@ -34,12 +34,25 @@
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
   <!-- css theme -->
   <link rel="stylesheet" href="dist/css/theme.css">
+  <link href="assets/datetimepicker-master/build/jquery.datetimepicker.min.css" rel="stylesheet">
+  <link href="plugins/jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
   <?php if(isset($style)){ 
       foreach ($style as $key => $value) { ?>
     <link rel="stylesheet" href="<?php echo $value;?>">
   <?php } } ?>
-  <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
 
@@ -71,7 +84,7 @@
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
 <!-- thailand -->
-<link href="plugins/jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+
 <script src="plugins/jqvmap-thai-stable/jqvmap/jquery.vmap.js"></script>
 <script src="plugins/jqvmap-thai-stable/jqvmap/maps/jquery.vmap.world.js"></script>
 <script src="plugins/jqvmap-thai-stable/jqvmap/maps/jquery.vmap.thai.js"></script>
@@ -81,8 +94,8 @@
     <script src="<?php echo $value;?>"></script>
   <?php } } ?>
   
-  <link href="assets/datetimepicker-master/build/jquery.datetimepicker.min.css" rel="stylesheet">
-<script src="assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+  
+  <script src="assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -201,7 +214,7 @@
             <ul class="nav nav-treeview">
               <?php if($menu[6]){ ?>
               <li class="nav-item">
-                <a href="<?php echo route('report/department'); ?>" class="nav-link px-1">
+                <a href="<?php echo route('report/department'); ?>" class="nav-link px-1" id="department">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามหน่วยงาน</p>
                 </a>
@@ -209,23 +222,23 @@
               <?php } ?>
               <?php if($menu[7]){ ?>
               <li class="nav-item">
-                <a href="<?php echo route('report/way'); ?>" class="nav-link px-1">
+                <a href="<?php echo route('report/way'); ?>" class="nav-link px-1" id="way">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามช่องทางการร้องเรียน</p>
                 </a>
               </li>
               <?php } ?>
               <?php if($menu[8]){ ?>
-              <li class="nav-item">
-                <a href="<?php echo route('report/zone'); ?>" class="nav-link px-1">
+              <!-- <li class="nav-item">
+                <a href="<?php echo route('report/zone'); ?>" class="nav-link px-1" id="zone">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามพื้นที่เขตตรวจ</p>
                 </a>
-              </li>
+              </li> -->
               <?php } ?>
               <?php if($menu[9]){ ?>
               <li class="nav-item">
-                <a href="<?php echo route('report/mission'); ?>" class="nav-link px-1">
+                <a href="<?php echo route('report/mission'); ?>" class="nav-link px-1" id="mission">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามกลุ่มภารกิจ</p>
                 </a>
@@ -233,7 +246,7 @@
               <?php } ?>
               <?php if($menu[10]){ ?>
               <li class="nav-item">
-                <a href="<?php echo route('report/land'); ?>" class="nav-link px-1">
+                <a href="<?php echo route('report/land'); ?>" class="nav-link px-1" id="land">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามภูมิภาคและจังหวัด</p>
                 </a>
@@ -241,7 +254,7 @@
               <?php } ?>
               <?php if($menu[11]){ ?>
               <li class="nav-item">
-                <a href="<?php echo route('report/problem'); ?>" class="nav-link px-1">
+                <a href="<?php echo route('report/problem'); ?>" class="nav-link px-1" id="problem">
                   <i class="far fa-circle nav-icon"></i>
                   <p>รายงานเวลาเฉลี่ยของแต่ละประเภทปัญหา</p>
                 </a>
@@ -249,43 +262,43 @@
               <?php } ?>
               <?php if($menu[12]){ ?>
               <li class="nav-item">
-                <a href="<?php echo route('report/type'); ?>" class="nav-link px-1">
+                <a href="<?php echo route('report/type'); ?>" class="nav-link px-1" id="type">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>แยกตามประเภทปัญหา</p>
+                  <p>แยกตามประเภทปัญหาตามหัวข้อเรื่องร้องเรียน</p>
                 </a>
               </li>
               <?php } ?>
               <?php if($menu[13]){ ?>
               <li class="nav-item">
-                <a href="<?php echo route('report/progress'); ?>" class="nav-link px-1">
+                <a href="<?php echo route('report/progress'); ?>" class="nav-link px-1" id="progressReport">
                   <i class="far fa-circle nav-icon"></i>
                   <p>รายงานความก้าวหน้า</p>
                 </a>
               </li>
               <?php } ?>
               <?php if($menu[14]){ ?>
-              <li class="nav-item">
-                <a href="<?php echo route('report/topic'); ?>" class="nav-link px-1">
+              <!-- <li class="nav-item">
+                <a href="<?php echo route('report/topic'); ?>" class="nav-link px-1" id="topic">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามหัวข้อเรื่องร้องเรียน</p>
                 </a>
-              </li>
+              </li> -->
               <?php } ?>
               <?php if($menu[15]){ ?>
               <li class="nav-item">
-                <a href="<?php echo route('report/status'); ?>" class="nav-link px-1">
+                <a href="<?php echo route('report/status'); ?>" class="nav-link px-1" id="status">
                   <i class="far fa-circle nav-icon"></i>
                   <p>สรุปผลการดำเนินงาน</p>
                 </a>
               </li>
               <?php } ?>
               <?php if($menu[16]){ ?>
-              <li class="nav-item">
-                <a href="<?php echo route('report/satisfaction'); ?>" class="nav-link px-1">
+              <!-- <li class="nav-item">
+                <a href="<?php echo route('report/satisfaction'); ?>" class="nav-link px-1" id="satisfaction">
                   <i class="far fa-circle nav-icon"></i>
                   <p>ข้อเสนอแนะการใช้งานเว็บไซต์ e-Petition</p>
                 </a>
-              </li>
+              </li> -->
               <?php } ?>
             </ul>
           </li>

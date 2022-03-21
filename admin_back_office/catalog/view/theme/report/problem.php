@@ -23,7 +23,7 @@
       <?php if($active_view){ ?>
         <div class="container-fluid">
           <div class="row">
-              <div class="col-md-12">
+              <!-- <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">ข้อมูลที่ต้องการค้นหา</h4>
@@ -51,12 +51,12 @@
                         </div>
                     </div>
                 </div>
-              </div>
+              </div> -->
               <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">รายงานเวลาเฉลี่ยของแต่ละประเภทปัญหา</h3>
-                            <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export excel</a>
+                            <!-- <a href="" class="btn btn-info btn-sm float-right"><i class="fas fa-file"></i> export excel</a> -->
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -69,46 +69,28 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered" id="datatable">
                                         <thead class="bg-primary">
                                             <tr>
-                                                <th width="10%" class="text-center">ลำดับ</th>
-                                                <th width="50%">ประเภทปัญหา</th>
-                                                <th class="text-center">จำนวนวันดำเนินการ</th>
-                                                <th class="text-center">จำนวนวันเฉลี่ยที่ใช้ในการดำเนินการ</th>
+                                              <th class="text-center align-middle" width="10%">ลำดับ</th>
+                                              <th class="text-center align-middle">หน่วยงาน</th>
+                                              <th class="text-center align-middle">ได้รับเรื่องร้องเรียน</th>
+                                              <th class="text-center">ดำเนินการแล้วเสร็จ</th>
+                                              <th class="text-center">อยู่ระหว่างการดำเนินการ</th>
+                                              <th class="text-center">ยังไม่เริ่มดำเนินการ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="text-center">1</td>
-                                                <td>ขยะ/ของเสียอันตราย</td>
-                                                <td class="text-center">45</td>
-                                                <td class="text-center">96.64</td>
+                                            <?php $i=1;foreach($reportProblem as $val){ ?>
+                                              <tr>
+                                                <td class="text-center"><?php echo $i++;?></td>
+                                                <td><?php echo $val['title']; ?></td>
+                                                <td class="text-center"><?php echo $val['count_all'] ?></td>
+                                                <td class="text-center"><?php echo $val['complete'] ?></td>
+                                                <td class="text-center"><?php echo $val['process'] ?></td>
+                                                <td class="text-center"><?php echo $val['over'] ?></td>
                                             </tr>
-                                            <tr>
-                                                <td class="text-center">2</td>
-                                                <td>ฝุ่นละออง/ควัน</td>
-                                                <td class="text-center">45</td>
-                                                <td class="text-center">70.49</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">3</td>
-                                                <td>กลิ่น</td>
-                                                <td class="text-center">45</td>
-                                                <td class="text-center">78.74</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">4</td>
-                                                <td>เสียง</td>
-                                                <td class="text-center">45</td>
-                                                <td class="text-center">89.23</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">5</td>
-                                                <td>น้ำเสีย</td>
-                                                <td class="text-center">45</td>
-                                                <td class="text-center">94.40</td>
-                                            </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -133,7 +115,16 @@
   
 <script>
   $('#report').addClass('active');
+  $('#problem').addClass('active');
   $('#report').parent().addClass('menu-is-opening menu-open');
+  $(document).ready(function() {
+    $('#datatable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
 </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -144,11 +135,9 @@
 
     var data = google.visualization.arrayToDataTable([
         ['Task', 'Hours per Day'],
-        ['ขยะ/ของเสียอันตราย', 96.64],
-        ['ฝุ่นละออง/ควัน', 70.49],
-        ['กลิ่น', 78.74],
-        ['เสียง', 89.23],
-        ['น้ำเสีย', 94.40]
+         <?php $i=1;foreach($reportProblem as $val){ ?>
+        ['<?php echo $val['title']?>', <?php echo $val['count_all'] ?>],
+        <?php } ?>
     ]);
 
     var options = {
@@ -165,11 +154,9 @@
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
             ['Task', 'persen'],
-            ['ขยะ/ของเสียอันตราย', 96.64],
-            ['ฝุ่นละออง/ควัน', 70.49],
-            ['กลิ่น', 78.74],
-            ['เสียง', 89.23],
-            ['น้ำเสีย', 94.40]
+            <?php $i=1;foreach($reportProblem as $val){ ?>
+            ['<?php echo $val['title']?>', <?php echo $val['count_all'] ?>],
+            <?php } ?>
         ]);
 
         var options = {

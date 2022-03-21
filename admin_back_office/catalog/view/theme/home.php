@@ -88,10 +88,10 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col-md-5">
+                <!-- <div class="col-md-5">
                   <div id="vmap" style="width: 100%; height: 800px;"></div>
-                </div>
-                <div class="col-md-7">
+                </div> -->
+                <div class="col-md-12">
                   <div id="chart_div_combo" style="height: 500px;"></div>
                 </div>
               </div>
@@ -122,11 +122,9 @@
   function drawVisualization() {
     var data = google.visualization.arrayToDataTable([
       ['หน่วยงาน', 'ได้รับเรื่องร้องเรียน', 'ดำเนินการแล้วเสร็จ', 'อยู่ระหว่างการดำเนินการ', 'ยังไม่เริ่มดำเนินการ'],
-      ['สำนักงานรัฐมนตรี',165,938,522,998],
-      ['สำนักงานปลัดกระทรวงพลังงาน',135,1120,599,1268],
-      ['กรมเชื้อเพลิงธรรมชาติ',157,1167,587,807],
-      ['กรมธุรกิจพลังงาน',139,1110,615,968],
-      ['กรมพัฒนาพลังงานทดแทนและอนุรักษ์พลังงาน',136,691,629,1026]
+        <?php foreach($report as $val){ ?>
+          ['<?php echo $val['title'];?>',<?php echo $val['count_all'];?>,<?php echo $val['complete'];?>,<?php echo $val['process'];?>,<?php echo $val['over'];?>],
+        <?php } ?>
     ]);
 
     var options = {
@@ -147,27 +145,28 @@
   }
 </style>  
 <script type="text/javascript">
-	jQuery('#vmap').vectorMap(
-  {
-      map: 'thai_en',
-      backgroundColor: '#fff',
-      borderColor: '#F3F0D7',
-      borderOpacity: 0.25,
-      borderWidth: 1,
-      color: '#CEE5D0',
-      enableZoom: true,
-      hoverColor: '#FF7878',
-      hoverOpacity: null,
-      normalizeFunction: 'linear',
-      scaleColors: ['#b6d6ff', '#005ace'],
-      selectedColor: '#c9dfaf',
-      selectedRegion: true,
-      showTooltip: true,
-      showLabels: true,
-      onRegionClick: function(element, code, region)
-      {
-          var message = 'จังหวัด "'+region+'" เรื่องร้องเรียนทั้งหมด 0 เรื่อง' 
-          alert(message);
-      }
-  });
+	// jQuery('#vmap').vectorMap(
+ //  {
+ //      map: 'thai_en',
+ //      backgroundColor: '#fff',
+ //      borderColor: '#F3F0D7',
+ //      borderOpacity: 0.25,
+ //      borderWidth: 1,
+ //      color: '#CEE5D0',
+ //      enableZoom: true,
+ //      hoverColor: '#FF7878',
+ //      hoverOpacity: null,
+ //      normalizeFunction: 'linear',
+ //      scaleColors: ['#b6d6ff', '#005ace'],
+ //      selectedColor: '#c9dfaf',
+ //      selectedRegion: true,
+ //      showTooltip: true,
+ //      showLabels: true,
+ //      onRegionClick: function(element, code, region)
+ //      {
+ //        console.log(element);
+ //          var message = 'จังหวัด "'+region+' '+code+' ' +'" เรื่องร้องเรียนทั้งหมด 0 เรื่อง' 
+ //          alert(message);
+ //      }
+ //  });
 </script>
