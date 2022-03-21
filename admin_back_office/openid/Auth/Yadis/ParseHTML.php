@@ -82,8 +82,8 @@ class Auth_Yadis_ParseHTML {
 
         // Replace numeric entities because html_entity_decode doesn't
         // do it for us.
-        $str = preg_replace('~&#x([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $str);
-        $str = preg_replace('~&#([0-9]+);~e', 'chr(\\1)', $str);
+        $str = @preg_replace('~&#x([0-9a-f]+);~ei', 'chr(hexdec("\\1"))', $str);
+        $str = @preg_replace('~&#([0-9]+);~e', 'chr(\\1)', $str);
 
         return $str;
     }
