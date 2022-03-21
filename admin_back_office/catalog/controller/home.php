@@ -18,7 +18,7 @@
 
 				$data['total_case'] 		= $total_case;
 				$data['total_case_process'] = $total_case_process;
-				$data['total_report'] 		= 11;
+				$data['total_report'] 		= 8;
 				$data['total_user'] 		= $total_user;
 				$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
 				$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;

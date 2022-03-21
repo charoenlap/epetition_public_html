@@ -131,4 +131,12 @@
     $('#report').addClass('active');
     $('#progressReport').addClass('active');
     $('#report').parent().addClass('menu-is-opening menu-open');
+    $(document).ready(function() {
+    $('#datatable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
 </script>

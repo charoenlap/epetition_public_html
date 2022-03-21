@@ -72,7 +72,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered" id="datatable">
                                         <thead class="bg-primary">
                                             <tr>
                                                 <th class="text-center">อยู่ระหว่างการดำเนินการ</th>
@@ -113,7 +113,16 @@
 
 <script>
     $('#report').addClass('active');
+    $('#status').addClass('active');
     $('#report').parent().addClass('menu-is-opening menu-open');
+    $(document).ready(function() {
+    $('#datatable').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
 </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
