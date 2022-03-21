@@ -260,10 +260,10 @@
 	    			'status'=> 'failed',
 	    			'desc'	=> 'Connect'
 	    		);
-	    		// $username = post('username');
-	    		// $password = post('password');
-	    		$username = 'bitzldap@energy.local';
-	    		$password = '4P3MKK*t9';
+	    		$username = post('username');
+	    		$password = post('password');
+	    		// $username = 'bitzldap@energy.local';
+	    		// $password = '4P3MKK*t9';
 	    		if(!empty($password)){
 		    		$selectToken = array(
 		    			'username' 	=> $username,
