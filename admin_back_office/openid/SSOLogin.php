@@ -17,8 +17,8 @@ $OpenIdProviderUrl = 'https://govid.egov.go.th';
 // $eServiceUrl = "https://e-petition.energy.go.th/openid/"; 
 // echo '>'.$_SERVER['SERVER_NAME'].'<<br>';
 if($_SERVER['SERVER_NAME'] == 'e-petition.energy.go.th'){
-	// $eServiceUrl = "https://e-petition.energy.go.th/admin_back_office/openid/"; 
-	$eServiceUrl = "http://localhost/epetition/public_html/admin_back_office/openid/"; 
+	$eServiceUrl = "https://e-petition.energy.go.th/admin_back_office/openid/"; 
+	// $eServiceUrl = "http://localhost/epetition/public_html/admin_back_office/openid/"; 
 }else{
 	$eServiceUrl = "http://localhost/epetition/public_html/admin_back_office/openid/"; 
 }
