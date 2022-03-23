@@ -51,7 +51,9 @@
 				if(post('id_card')){
 					$post['topic_id'] 		= post('topic_id');
 					$post['sub_topic_id'] 	= post('sub_topic_id');
-					unset($post['file-upload-field']);
+					echo "<pre>";
+					var_dump($post);
+					unset($post['file-upload-field'],$post['g-recaptcha-response']);
 					if(isset($_FILES['file-upload-field'])){
 						$upload_name = time().$_FILES['file-upload-field']['name'];
 						upload($_FILES['file-upload-field'],'uploads/files/',$upload_name);
