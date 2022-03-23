@@ -81,7 +81,7 @@
 						$msg .= "<tr><td>อายุ</td><td>".post('age')."</td></tr>";
 						$msg .= "<tr><td>โทรศัพท์บ้าน</td><td>".post('tel')."</td></tr>";
 						$msg .= "<tr><td>โทรศัพท์มือถือ</td><td>".post('phone')."</td></tr>";
-						$msg .= "<tr><td>e</td><td>".post('email')."</td></tr>";
+						$msg .= "<tr><td>E-Mail</td><td>".post('email')."</td></tr>";
 						$msg .= "<tr><td>บ้านเลขที่</td><td>".post('address_no')."</td></tr>";
 						$msg .= "<tr><td>หมู่ที่</td><td>".post('moo')."</td></tr>";
 						$msg .= "<tr><td>ชื่อหมู่บ้าน</td><td>".post('housename')."</td></tr>";
