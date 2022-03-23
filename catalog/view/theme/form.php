@@ -26,8 +26,6 @@
                 <input type="text" name="id_card" id="id_card" class="form-control" placeholder="x-xxxxx-xxxxx-xx-x" required
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
-
-
                 size="30" onkeyup="idcard(this)"  minlength="15" maxlength="25" >
             </div>
         </div>

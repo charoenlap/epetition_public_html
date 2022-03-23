@@ -55,22 +55,27 @@
 	    	$master 				= $this->model('master');
 			if(method_post()){
 				$post 				= $_POST;
-				$post['topic_id'] 	= post('topic_id');
-				unset($post['file-upload-field']);
-				if(isset($_FILES['file-upload-field'])){
-					$upload_name = time().$_FILES['file-upload-field']['name'];
-					upload($_FILES['file-upload-field'],'uploads/files/',$upload_name);
-					$post['file'] = $upload_name;
-				}
-				$post['AUT_USER_ID'] = (int)decrypt($this->getSession('AUT_USER_ID'));
+				if(!empty($post['id_card'])){
+					$post['topic_id'] 	= post('topic_id');
+					unset($post['file-upload-field']);
+					if(isset($_FILES['file-upload-field'])){
+						$upload_name = time().$_FILES['file-upload-field']['name'];
+						upload($_FILES['file-upload-field'],'uploads/files/',$upload_name);
+						$post['file'] = $upload_name;
+					}
+					$post['AUT_USER_ID'] = (int)decrypt($this->getSession('AUT_USER_ID'));
 
-				$add = $master->addResponse($post);
-				if($add){
-					redirect('home/formComplate&case_code='.$add);
+					$add = $master->addResponse($post);
+					if($add){
+						redirect('home/formComplate&case_code='.$add);
+					}
+				}else{
+					redirect('home/form&result=fail&rdetail=id_card');
 				}
 			}else{
-		    	$data['title'] = "";
-		    	$data['descreption'] = "";
+				$data['rdetail'] 		= get('rdetail');
+		    	$data['title'] 			= "";
+		    	$data['descreption'] 	= "";
 		    	$data['limit_mb'] 		= $master->getConfigDay();
 				$data['geographies'] 	= $master->getGeographies();
 				$data['topic_id'] 		= (int)get('topic_id');
