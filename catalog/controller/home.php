@@ -69,7 +69,6 @@
 					redirect('home/formComplate&case_code='.$add);
 				}
 			}else{
-				$data = array();
 		    	$data['title'] = "";
 		    	$data['descreption'] = "";
 		    	$data['limit_mb'] 		= $master->getConfigDay();
