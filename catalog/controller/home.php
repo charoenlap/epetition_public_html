@@ -55,7 +55,7 @@
 	    	$master 				= $this->model('master');
 			if(method_post()){
 				$post 				= $_POST;
-				if(!empty($post['id_card'])){
+				if(post('id_card')){
 					$post['topic_id'] 	= post('topic_id');
 					unset($post['file-upload-field']);
 					if(isset($_FILES['file-upload-field'])){
@@ -66,6 +66,13 @@
 					$post['AUT_USER_ID'] = (int)decrypt($this->getSession('AUT_USER_ID'));
 
 					$add = $master->addResponse($post);
+
+					$email = post('email');
+			    	$to_email=$email;
+			    	$msg="หมายเลขเรื่องร้องเรียน: ".$add;
+			    	$subject="ระบบแจ้งเรื่องร้องเรียน กระทรวงพลังงาน";
+			    	sendmailSmtp($to_email,$msg,$subject);
+
 					if($add){
 						redirect('home/formComplate&case_code='.$add);
 					}
