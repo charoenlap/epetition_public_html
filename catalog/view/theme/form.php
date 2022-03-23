@@ -328,16 +328,16 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
+                <?php if($production){ ?>
+                    <div class="g-recaptcha" data-sitekey="6LeEVQIfAAAAAO7mj5F76RKroMqtd5k3PErjiexu" id="reCAPTCHA"></div>
+                <?php } ?>
                 <button type="submit" class="btn btn-theme  g-recaptcha" style="min-width:180px;">ส่งเรื่อง</button>
             </div>
         </div>
         </form>
     </div>
 </section>
-<?php if($production){ ?>
-<div class="mockup-recapcha">
-    <div class="g-recaptcha" data-sitekey="6LeEVQIfAAAAAO7mj5F76RKroMqtd5k3PErjiexu" id="reCAPTCHA"></div>
-</div>
+
 <?php } ?>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
