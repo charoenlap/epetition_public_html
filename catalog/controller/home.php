@@ -82,15 +82,8 @@
 						$msg .= "<tr><td>โทรศัพท์บ้าน</td><td>".post('tel')."</td></tr>";
 						$msg .= "<tr><td>โทรศัพท์มือถือ</td><td>".post('phone')."</td></tr>";
 						$msg .= "<tr><td>E-Mail</td><td>".post('email')."</td></tr>";
-						$msg .= "<tr><td>บ้านเลขที่</td><td>".post('address_no')."</td></tr>";
-						$msg .= "<tr><td>หมู่ที่</td><td>".post('moo')."</td></tr>";
-						$msg .= "<tr><td>ชื่อหมู่บ้าน</td><td>".post('housename')."</td></tr>";
-						$msg .= "<tr><td>ซอย</td><td>".post('soi')."</td></tr>";
-						$msg .= "<tr><td>ถนน</td><td>".post('road')."</td></tr>";
-						$msg .= "<tr><td>จังหวัด</td><td>".post('id_provinces')."</td></tr>";
-						$msg .= "<tr><td>อำเภอ</td><td>".post('id_amphures')."</td></tr>";
-						$msg .= "<tr><td>ตำบล</td><td>".post('id_districts')."</td></tr>";
-						$msg .= "<tr><td>รหัสไปรษณีย์</td><td>".post('zipcode')."</td></tr>";
+						$msg .= "<tr><td>ประเด็นที่ท่านต้องการร้องเรียน/แจ้งข้อเสนอแนะ</td><td>".post('complain_name')."</td></tr>";
+
 						$msg.="</table>";
 				    	$subject="ระบบแจ้งเรื่องร้องเรียน กระทรวงพลังงาน";
 				    	sendmailSmtp($to_email,$msg,$subject);
