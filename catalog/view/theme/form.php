@@ -327,7 +327,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <?php if($production){ ?>
-                    <div class="g-recaptcha" data-sitekey="6LeEVQIfAAAAAO7mj5F76RKroMqtd5k3PErjiexu" id="reCAPTCHA"></div>
+                    <div class="g-recaptcha mb-2" data-sitekey="6LeEVQIfAAAAAO7mj5F76RKroMqtd5k3PErjiexu" id="reCAPTCHA"></div>
                 <?php } ?>
                 <button type="submit" class="btn btn-theme  g-recaptcha" style="min-width:180px;">ส่งเรื่อง</button>
             </div>
@@ -594,5 +594,8 @@ $('#t_amphures').on("change",function(){
   display: block;
   cursor: pointer;
   width: 100%;
+}
+.g-recaptcha > div {
+    margin:0px auto;
 }
 </style>
