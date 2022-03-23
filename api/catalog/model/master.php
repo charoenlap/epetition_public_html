@@ -111,9 +111,19 @@
 			if($query_config_day->num_rows){
 				$day_end = $query_config_day->row['val'];
 			}
+
+            $sql_title = "SELECT * FROM ep_prefix WHERE `id` = '".(int)$data['name_title']."'";
+            $query_title = $this->query($sql_title);
+            if($query_title->num_rows){
+                $data['name_title'] = $query_title->row['title'];
+            }
+
 			$dateadd=date('Y-m-d');
 			$date_end = date('Y-m-d', strtotime($dateadd. ' + '.$day_end.' days'));
-
+            $data['id_provinces'] = $data['provinces'];
+            $data['id_amphures'] = $data['amphures'];
+            $data['id_districts'] = $data['districts'];
+            
 			$data['day_end']	= $day_end;
 			$data['dateadd']	= $dateadd; 
 			$data['date_end']	= $date_end;

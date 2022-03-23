@@ -102,12 +102,10 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="">ช่องทางการร้องเรียน</label>
-                                        <select name="type" id="type" class="form-control">
-                                            <option value="1">เว็บไซต์ และ อีเมล์ </option>
-                                            <option value="">Call center </option>
-                                            <option value="">ยื่นหนังสือด้วยตนเอง</option>
-                                            <option value="">facebook </option>
-                                            <option value="">ส่วนด่วน</option>
+                                        <select name="addBy" id="addBy" class="form-control">
+                                            <option value="">ทั้งหมด</option>
+                                            <option value="0" <?php echo ($addBy==0?'selected':'');?>>เว็บไซต์</option>
+                                            <option value="1" <?php echo ($addBy==1?'selected':'');?>>แอฟพิเคชั่น</option>
                                         </select>
                                     </div>
                                 </div>
@@ -197,8 +195,8 @@
                                                 <td><?php echo $value['case_code']; ?></td>
                                                 <td><?php echo $value['fullname']; ?></td>
                                                 <td><?php echo $value['topicTitle']; ?></td>
-                                                <td>จากเว็บไซต์</td>
-                                                <td><?php echo $value['t_id_provinces']; ?></td>
+                                                <td><?php echo $value['topicTitle']; ?></td>
+                                                <td><?php echo $value['addBy']; ?></td>
                                                 <td><?php echo $value['dateadd']; ?></td>
                                                 <td>
                                                     <i class="fas fa-square-full status-<?php echo $value['status_icon']; ?>"></i>

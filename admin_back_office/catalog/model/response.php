@@ -61,6 +61,7 @@
             $status_id = (isset($data['status_id'])?$data['status_id']:'');
             $date_respect = (isset($data['date_respect'])?$data['date_respect']:'');
             $page = (isset($data['page'])?$data['page']:'');
+            $addBy = (isset($data['addBy'])?$data['addBy']:'');
 
             if(!empty($topic_id)){
                 $where .= " AND topic_id = '".$topic_id."'";
@@ -104,6 +105,9 @@
             if(!empty($status_id)){
                 $where .= " AND status = '".$status_id."'";
             }
+            if(!empty($addBy)){
+                $where .= " AND addBy = '".$addBy."'";
+            }
             $limit = "0,".DEFAULT_LIMIT_PAGE;
             if($page){
                 $limit_start    = ($page-1)*DEFAULT_LIMIT_PAGE;
@@ -126,7 +130,6 @@
             LEFT JOIN ep_topic b ON a.topic_id = b.id 
             LEFT JOIN ep_status ON a.`status` = ep_status.`id` 
             LEFT JOIN PROVINCE ON a.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
-            
             WHERE a.del = 0 ".$where."
             ORDER BY a.id DESC  ";
             // echo $sql;exit();

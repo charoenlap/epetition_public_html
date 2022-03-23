@@ -1,5 +1,111 @@
 <?php 
 	class AppealController extends Controller {
+		public function index() {
+	    	// var_dump($_SESSION);exit();
+			$data['title'] 	= "เรื่องที่ร้องเรียน/ร้องทุกข์"; 
+			$data['topic'] 			= $this->model('topic')->getLists();
+			$data['department'] 	= $this->model('agency')->getLists();
+			$data['status'] 		= $this->model('status')->getLists();
+			// var_dump($data['status']);
+			$response 		= $this->model('response');
+			$data['lists'] = array();
+			
+			$chkTypePhone 	= get('chkTypePhone');
+			$data['phone'] = get('phone');
+			$data['chkTypePhone']= get('chkTypePhone');
+			$data['topic_id'] = get('topic_id');
+			$data['dateadd'] = get('dateadd');
+			$data['dateadd_time'] = get('dateadd_time');
+			$data['dateadd_end'] = get('dateadd_end');
+			$data['case_code'] = get('case_code');
+			$data['department_id'] = get('department_id');
+			$data['t_id_provinces'] = get('t_id_provinces');
+			$data['date_end'] = get('date_end');
+			$data['id_card'] = get('id_card');
+			$data['name_lastname'] = get('name_lastname');
+			$data['response_person'] = get('response_person');
+			$data['date_respect'] = get('date_respect');
+			$data['status_id'] = get('status_id');
+			$data['addBy'] = get('addBy');
+			$tel 	= '';
+			$phone 	= '';
+			if($chkTypePhone==1){
+				$tel 	= $data['phone'];
+			}else{
+				$phone 	= $data['phone'];
+			}
+			$data['page'] = (get('page')?get('page'):1);
+			$USER_GROUP_ID = (int)$this->getSession('USER_GROUP_ID');
+			$id_agency_minor = 0;
+			if($USER_GROUP_ID>1){
+				$id_agency_minor = (int)$this->getSession('id_agency_minor');
+			}
+			$data_search = array(
+				'topic_id' 			=> $data['topic_id'],
+				'dateadd'			=> $data['dateadd'],
+				'dateadd_time'		=> $data['dateadd_time'],
+				'dateadd_end'		=> $data['dateadd_end'],
+				'case_code'			=> $data['case_code'],
+				'department_id'		=> $data['department_id'], 
+				't_id_provinces'	=> $data['t_id_provinces'], 
+				'date_end'			=> $data['date_end'], 
+				'id_card'			=> $data['id_card'], 
+				'name_lastname'		=> $data['name_lastname'], 
+				'tel'				=> $tel, 
+				'phone'				=> $phone, 
+				'response_person'	=> $data['response_person'],
+				'status_id'			=> $data['status_id'],
+				'page'				=> $data['page'],
+				'addBy'				=> $data['addBy'],
+				'id_agency_minor'	=> $id_agency_minor
+			);
+			
+			$resultData 	= $response->getLists($data_search);
+			// echo "<pre>";
+			// var_dump($resultData);
+			// exit();
+			foreach($resultData->rows as $key => $value){
+				$data['lists'][] = array(
+					'case_code'			=> $value['case_code'],
+					'id' 				=> $value['id'],
+					'fullname'			=> $value['name_title']." ".$value['name']." ".$value['lastname'],
+					'dateadd'			=> date('d-m-Y',strtotime($value['dateadd'])),
+					'topicTitle'		=> $value['topic_title'],
+					't_id_provinces'	=> $value['PROVINCE_NAME'],
+					'text_class'		=> $value['text_class'],
+					'text_status'		=> $value['text_status'],
+					'status_id'			=> $value['status_id'],
+					'status_icon'		=> $value['status_icon'],
+					'addBy'				=> ($value['addBy']==0?'จากเว็บไซต์':'จาก Application'),
+				);
+			}
+			$data['page_limit'] = ceil($resultData->num_rows/DEFAULT_LIMIT_PAGE);
+
+			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
+			$data['menu'] = array();
+			$data['active_del'] = 0;
+			$data['active_add'] = 0;
+			$data['active_view'] = 0;
+			$data['active_edit'] = 0;
+			foreach($menu as $val){
+				if($val['MENU_ID']=="2"){
+					if($val['USER_DELETE']=="1"){
+						$data['active_del'] = 1;
+					}
+					if($val['USER_ADD']=="1"){
+						$data['active_add'] = 1;
+					}
+					if($val['USER_VIEW']=="1"){
+						$data['active_view'] = 1;
+					}
+					if($val['USER_EDIT']=="1"){
+						$data['active_edit'] = 1;
+					}
+				}
+			}
+	    	$this->view('appeal/home',$data);
+	    }
 		public function sender(){
 			$result = array();
 			if(method_post()){
@@ -52,107 +158,6 @@
 			}
 			$this->json($result);
 		}
-	    public function index() {
-	    	// var_dump($_SESSION);exit();
-			$data['title'] 	= "เรื่องที่ร้องเรียน/ร้องทุกข์"; 
-			$data['topic'] 			= $this->model('topic')->getLists();
-			$data['department'] 	= $this->model('agency')->getLists();
-			$data['status'] 		= $this->model('status')->getLists();
-			// var_dump($data['status']);
-			$response 		= $this->model('response');
-			$data['lists'] = array();
-			
-			$chkTypePhone 	= get('chkTypePhone');
-			$data['phone'] = get('phone');
-			$data['chkTypePhone']= get('chkTypePhone');
-			$data['topic_id'] = get('topic_id');
-			$data['dateadd'] = get('dateadd');
-			$data['dateadd_time'] = get('dateadd_time');
-			$data['dateadd_end'] = get('dateadd_end');
-			$data['case_code'] = get('case_code');
-			$data['department_id'] = get('department_id');
-			$data['t_id_provinces'] = get('t_id_provinces');
-			$data['date_end'] = get('date_end');
-			$data['id_card'] = get('id_card');
-			$data['name_lastname'] = get('name_lastname');
-			$data['response_person'] = get('response_person');
-			$data['date_respect'] = get('date_respect');
-			$data['status_id'] = get('status_id');
-			$tel 	= '';
-			$phone 	= '';
-			if($chkTypePhone==1){
-				$tel 	= $data['phone'];
-			}else{
-				$phone 	= $data['phone'];
-			}
-			$data['page'] = (get('page')?get('page'):1);
-			$USER_GROUP_ID = (int)$this->getSession('USER_GROUP_ID');
-			$id_agency_minor = 0;
-			if($USER_GROUP_ID>1){
-				$id_agency_minor = (int)$this->getSession('id_agency_minor');
-			}
-			$data_search = array(
-				'topic_id' 			=> $data['topic_id'],
-				'dateadd'			=> $data['dateadd'],
-				'dateadd_time'		=> $data['dateadd_time'],
-				'dateadd_end'		=> $data['dateadd_end'],
-				'case_code'			=> $data['case_code'],
-				'department_id'		=> $data['department_id'], 
-				't_id_provinces'	=> $data['t_id_provinces'], 
-				'date_end'			=> $data['date_end'], 
-				'id_card'			=> $data['id_card'], 
-				'name_lastname'		=> $data['name_lastname'], 
-				'tel'				=> $tel, 
-				'phone'				=> $phone, 
-				'response_person'	=> $data['response_person'],
-				'status_id'			=> $data['status_id'],
-				'page'				=> $data['page'],
-				'id_agency_minor'	=> $id_agency_minor
-			);
-			
-			$resultData 	= $response->getLists($data_search);
-
-			foreach($resultData->rows as $key => $value){
-				$data['lists'][] = array(
-					'case_code'			=> $value['case_code'],
-					'id' 				=> $value['id'],
-					'fullname'			=> $value['name_title']." ".$value['name']." ".$value['lastname'],
-					'dateadd'			=> date('d-m-Y',strtotime($value['dateadd'])),
-					'topicTitle'		=> $value['topic_title'],
-					't_id_provinces'	=> $value['PROVINCE_NAME'],
-					'text_class'		=> $value['text_class'],
-					'text_status'		=> $value['text_status'],
-					'status_id'			=> $value['status_id'],
-					'status_icon'		=> $value['status_icon'],
-				);
-			}
-			$data['page_limit'] = ceil($resultData->num_rows/DEFAULT_LIMIT_PAGE);
-
-			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
-			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
-			$data['menu'] = array();
-			$data['active_del'] = 0;
-			$data['active_add'] = 0;
-			$data['active_view'] = 0;
-			$data['active_edit'] = 0;
-			foreach($menu as $val){
-				if($val['MENU_ID']=="2"){
-					if($val['USER_DELETE']=="1"){
-						$data['active_del'] = 1;
-					}
-					if($val['USER_ADD']=="1"){
-						$data['active_add'] = 1;
-					}
-					if($val['USER_VIEW']=="1"){
-						$data['active_view'] = 1;
-					}
-					if($val['USER_EDIT']=="1"){
-						$data['active_edit'] = 1;
-					}
-				}
-			}
-	    	$this->view('appeal/home',$data);
-	    }
 	    public function add() {
 			$data['title'] 			= "แบบฟอร์มเรื่องร้องเรียน";
 			// ตัว script เลือก จังหวัด อำเภอ ตำบล ใช้ตัวเดียวกันกับหน้าเว็บแหละ controller ตัวเดียวกัน
