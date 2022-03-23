@@ -334,10 +334,11 @@
         </form>
     </div>
 </section>
-
+<?php if($production){ ?>
 <div class="mockup-recapcha">
     <div class="g-recaptcha" data-sitekey="6LeEVQIfAAAAAO7mj5F76RKroMqtd5k3PErjiexu" id="reCAPTCHA"></div>
 </div>
+<?php } ?>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -359,6 +360,7 @@
 </div>
 <!-- script -->
 <script src="assets/js/form.js?time=<?php echo time();?>"></script>
+<?php if($production){ ?>
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
     async defer>
 </script>
@@ -369,6 +371,7 @@
     });
   };
 </script>
+<?php } ?>
 <script>
 function idcard(obj){  
     var pattern=new String("_-____-_____-__-_"); // กำหนดรูปแบบในนี้  

@@ -40,6 +40,10 @@
 		// }
 	    public function form(){
 	    	$data = array();
+	    	$data['production'] = true;
+	    	if($_SERVER['HTTP_HOST']=='localhost'){
+	    		$data['production'] = false;
+	    	}
 	    	$topic_id = (int)get('topic_id');
 	    	if(empty($topic_id)){
 	    		redirect('home/topic&result=Not found topic id');
@@ -69,7 +73,6 @@
 		    	$data['title'] = "";
 		    	$data['descreption'] = "";
 		    	$data['limit_mb'] 		= $master->getConfigDay();
-				
 				$data['geographies'] 	= $master->getGeographies();
 				$data['topic_id'] 		= (int)get('topic_id');
 				$data['topic'] 			= $this->model('topic')->getTopicDetail($data['topic_id']);
