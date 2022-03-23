@@ -56,7 +56,8 @@
 			if(method_post()){
 				$post 				= $_POST;
 				if(post('id_card')){
-					$post['topic_id'] 	= post('topic_id');
+					$post['topic_id'] 		= post('topic_id');
+					$post['sub_topic_id'] 	= post('sub_topic_id');
 					unset($post['file-upload-field']);
 					if(isset($_FILES['file-upload-field'])){
 						$upload_name = time().$_FILES['file-upload-field']['name'];

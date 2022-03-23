@@ -20,6 +20,7 @@
         </div>
         <form action="<?php echo route('home/form'); ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="topic_id" value="<?php echo $topic_id;?>">
+            <input type="hidden" name="sub_topic_id" value="<?php echo $sub_topic_id;?>">
         <div class="row mb-3">
             <div class="col-md-12">
                 <label for="">เลขประจำตัวประชาชน <span class="text-danger">*</span></label>
