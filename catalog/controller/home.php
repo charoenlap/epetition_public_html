@@ -48,11 +48,16 @@
 	    	$master 				= $this->model('master');
 			if(method_post()){
 				$post 				= $_POST;
+				if($_SERVER['HTTP_HOST']!='localhost'){
+		    		if(!$post['g-recaptcha-response']){
+		    			redirect('home/form&result=fail&rdetail=g-recaptcha-response');
+		    		}
+		    	}
 				if(post('id_card')){
 					$post['topic_id'] 		= post('topic_id');
 					$post['sub_topic_id'] 	= post('sub_topic_id');
-					echo "<pre>";
-					var_dump($post);
+					// echo "<pre>";
+					// var_dump($post);
 					unset($post['file-upload-field'],$post['g-recaptcha-response']);
 					if(isset($_FILES['file-upload-field'])){
 						$upload_name = time().$_FILES['file-upload-field']['name'];
@@ -90,6 +95,7 @@
 		    	$data['limit_mb'] 		= $master->getConfigDay();
 				$data['geographies'] 	= $master->getGeographies();
 				$data['topic_id'] 		= (int)get('topic_id');
+				$data['sub_topic_id'] 	= (int)get('sub_topic_id');
 				$data['topic'] 			= $this->model('topic')->getTopicDetail($data['topic_id']);
 				$data['prefix']			= $master->getPrefix();
 			}
