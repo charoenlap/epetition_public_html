@@ -83,7 +83,7 @@
 						$msg .= "<tr><td>โทรศัพท์มือถือ</td><td>".post('phone')."</td></tr>";
 						$msg .= "<tr><td>E-Mail</td><td>".post('email')."</td></tr>";
 						$msg .= "<tr><td>ประเด็นที่ท่านต้องการร้องเรียน/แจ้งข้อเสนอแนะ</td><td>".post('complain_name')."</td></tr>";
-
+						$msg .= "<tr><td>สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ</td><td>".post('response_person')."</td></tr>";
 						$msg.="</table>";
 				    	$subject="ระบบแจ้งเรื่องร้องเรียน กระทรวงพลังงาน";
 				    	sendmailSmtp($to_email,$msg,$subject);
