@@ -71,7 +71,27 @@
 					$email = post('email');
 					if($email){
 				    	$to_email=$email;
-				    	$msg="หมายเลขเรื่องร้องเรียน: ".$add;
+				    	$msg='<img src="https://e-petition.energy.go.th/images/logo.jpg">';
+				    	$msg.='<table style="width:100%;">';
+				    	$msg .= "<tr><td>หมายเลขเรื่องร้องเรียน: ".$add."</td></tr>";
+						$msg .= "<tr><td>คำนำหน้า</td><td>".post('id_card')."</td></tr>";
+						$msg .= "<tr><td>เลขประจำตัวประชาชน</td><td>".post('name_title')."</td></tr>";
+						$msg .= "<tr><td>ชื่อ</td><td>".post('name')."</td></tr>";
+						$msg .= "<tr><td>นามสกุล</td><td>".post('lastname')."</td></tr>";
+						$msg .= "<tr><td>อายุ</td><td>".post('age')."</td></tr>";
+						$msg .= "<tr><td>โทรศัพท์บ้าน</td><td>".post('tel')."</td></tr>";
+						$msg .= "<tr><td>โทรศัพท์มือถือ</td><td>".post('phone')."</td></tr>";
+						$msg .= "<tr><td>e</td><td>".post('email')."</td></tr>";
+						$msg .= "<tr><td>บ้านเลขที่</td><td>".post('address_no')."</td></tr>";
+						$msg .= "<tr><td>หมู่ที่</td><td>".post('moo')."</td></tr>";
+						$msg .= "<tr><td>ชื่อหมู่บ้าน</td><td>".post('housename')."</td></tr>";
+						$msg .= "<tr><td>ซอย</td><td>".post('soi')."</td></tr>";
+						$msg .= "<tr><td>ถนน</td><td>".post('road')."</td></tr>";
+						$msg .= "<tr><td>จังหวัด</td><td>".post('id_provinces')."</td></tr>";
+						$msg .= "<tr><td>อำเภอ</td><td>".post('id_amphures')."</td></tr>";
+						$msg .= "<tr><td>ตำบล</td><td>".post('id_districts')."</td></tr>";
+						$msg .= "<tr><td>รหัสไปรษณีย์</td><td>".post('zipcode')."</td></tr>";
+						$msg.="</table>";
 				    	$subject="ระบบแจ้งเรื่องร้องเรียน กระทรวงพลังงาน";
 				    	sendmailSmtp($to_email,$msg,$subject);
 				    }
