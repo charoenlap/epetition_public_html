@@ -1,3 +1,4 @@
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <div class="breadcrumb-theme">
     <div class="container">
       <div class="row">
@@ -18,7 +19,7 @@
                 <h5 class="text-theme font-weight-bold">ข้อมูลผู้ร้องเรียน</h5>
             </div>
         </div>
-        <form action="<?php echo route('home/form'); ?>" method="post" enctype="multipart/form-data">
+        <form action="<?php echo route('home/form'); ?>" method="post" id="demo-form" enctype="multipart/form-data">
             <input type="hidden" name="topic_id" value="<?php echo $topic_id;?>">
         <div class="row mb-3">
             <div class="col-md-12">
@@ -328,7 +329,11 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-theme  g-recaptcha" style="min-width:180px;">ส่งเรื่อง</button>
+                <button class="g-recaptcha" 
+                data-sitekey="6LfYUwIfAAAAAE1PHksMhrcHi5cHDcyD2Ceoz8Po" 
+                data-callback='onSubmit' 
+                data-action='submit'>Submit</button>
+                <!-- <button type="submit" class="btn btn-theme  g-recaptcha" style="min-width:180px;">ส่งเรื่อง</button> -->
             </div>
         </div>
         </form>
@@ -359,6 +364,11 @@
 </div>
 <!-- script -->
 <script src="assets/js/form.js?time=<?php echo time();?>"></script>
+<script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+ </script>
 <script>
 function idcard(obj){  
     var pattern=new String("_-____-_____-__-_"); // กำหนดรูปแบบในนี้  
