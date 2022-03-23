@@ -8,4 +8,4 @@
 	    	sendmail($to_email,$msg,$subject);
 	    }
 	}
-}
+?>
