@@ -210,7 +210,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <?php if(isset($getCase['list_case_org_owner'])){ ?>
-                                <?php /*foreach($getCase['list_case_org_owner'] as $val){ ?>
+                                <?php foreach($getCase['list_case_org_owner'] as $val){ ?>
                                 <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header bg-primary">
@@ -228,7 +228,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php }*/ ?>
+                                <?php } ?>
                                 <?php }else{?>
                                     <div class="col-12">ไม่มีความคิดเห็น</div>
                                 <?php } ?>

@@ -126,7 +126,8 @@
 					'case_id'			=> $case_id,
 				),
 				// http://service.1111.go.th/SOAP/ManageCenter.asmx
-				'url'		=> URL."ManageCenter.asmx?WSDL",
+				// http://203.113.25.98/CoreService/SOAP/Officer.asmx
+				'url'		=> URL."Officer.asmx?WSDL",
 				'func'		=> "GetCase"
 			);
 			// echo "Param".'<br>';

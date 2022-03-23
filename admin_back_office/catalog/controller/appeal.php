@@ -388,7 +388,7 @@
 					'take' 		=> '10'
 				);
 				$result_TimelineOperating = $this->model('opm')->GetTimelineOperating($dataSelectTimelineOperating);
-
+				// var_dump($result_TimelineOperating);exit();
 				$dataSelectGetCase = array(
 					// 'token_id' 	=>  $token_id,
 					'case_id'	=> $case_id,
@@ -411,19 +411,18 @@
 					'skip' 			=> '0',
 					'take' 			=> '10'
 				);
-				// $result_GetCases = $this->model('opm')->GetCases($dataGetCases);
-				// echo "<pre>";
-				// var_dump($result_GetCases);exit();
+				$result_GetCases = $this->model('opm')->GetCases($dataGetCases);
+				
 
 				if($result_TimelineOperating=="Err:Not found user!!!"){
 					$data['error'] = "Err:Not found user!!!";
 					$data['error'] .= '<a href="'.route('login').'">Token หมดอายุ กรุณาล็อคอินใหม่</a>';
 					$this->view('appeal/opmDetail',$data);
 				}else{
-					$data['TimelineOperating'] = $result_TimelineOperating;
+					$data['result_TimelineOperating'] = $result_TimelineOperating;
 					// echo "<pre>";
 					// var_dump($data['TimelineOperating']);exit();
-					// $data['getCase'] = $result_GetCase;
+					$data['getCase'] = $result_GetCase;
 					// var_dump($data['getCase']);
 					$data['getOperatings'] = $result_getOperatings;
 					$this->view('appeal/opmDetail',$data);

@@ -72,7 +72,9 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-12">
-                                    <a href="#" class="btn btn-primary disabled" id="btn-send-topic" role="button" aria-disabled="true">นำเรื่องส่งเข้ากระทรวงพลังงาน</a>
+                                    <?php if($active_view AND $active_add){ ?>
+                                        <a href="#" class="btn btn-primary disabled" id="btn-send-topic" role="button" aria-disabled="true" data-toggle="tooltip" data-placement="top" title="ต้องมีสิทธิ์ ดู และเพิ่มเท่านั้น">นำเรื่องส่งเข้ากระทรวงพลังงาน</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="row">
@@ -102,7 +104,8 @@
                                             ?>
                                             <tr>
                                                 <td class="text-center">
-                                                    <input type="checkbox" class="checkboxSend" value="<?php echo $val['case_code']; ?>">
+                                                    <input type="checkbox" class="checkboxSend" value="<?php echo $val['case_code']; ?>"
+                                                    case_code="<?php echo $val['case_code'];?>">
                                                 </td>
                                                 <td class="text-center"><?php echo $i++;?></td>
                                                 <td><?php echo $val['case_code']; ?></td>
@@ -171,7 +174,77 @@
     </section>
         <!-- /.content -->
 </div>
+<div class="modal fade" id="process" tabindex="-1" role="dialog" aria-labelledby="processTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">ส่งเรื่องไปยัง กระทรวงพลังงาน</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+            <thead>
+                <th>Ticket ID</th>
+                <th>สถานะ</th>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div> -->
+      </div>
+    </div>
+</div>
 <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    $(document).on('click','#btn-send-topic',function(e){
+        $('#process').modal('show');
+        var html = '';
+        $('#process .modal-body .table tbody').html('');
+        $('.checkboxSend').each(function() {
+            var ele = $(this);
+            
+             if(ele.is(':checked')){
+                var case_code = ele.attr('case_code');
+                html = "<tr id='process_case_code_"+case_code+"'>"+
+                            "<td class='text-case-code'>"+case_code+"</td>"+
+                            "<td class='process'>กำลังดำเนินการ"+
+                        "</tr>";
+                $('#process .modal-body .table tbody').append(html);
+                // $.ajax({
+                //     url: 'index.php?route=appeal/submitSendOPM',
+                //     type: 'GET',
+                //     dataType: 'json',
+                //     data: {
+                //         case_code: case_code
+                //     },
+                // })
+                // .done(function(json) {
+                //     $('#process_case_code_'+case_code+' .process').text(json.status);
+                //     console.log("success");
+                // })
+                // .fail(function(a,b,c) {
+                //     // 
+                //     console.log(a);
+                //     console.log(b);
+                //     console.log(c);
+                // })
+                // .always(function() {
+                //     console.log("complete");
+                // });
+             }
+        });
+        e.preventDefault();
+    });
     $(document).on('click','#checkAll',function(){
         $('.checkboxSend').not(this).prop('checked', this.checked);
         $('#btn-send-topic').addClass('disabled');
