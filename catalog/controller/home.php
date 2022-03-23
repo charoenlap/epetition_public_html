@@ -69,11 +69,12 @@
 					$add = $master->addResponse($post);
 
 					$email = post('email');
-			    	$to_email=$email;
-			    	$msg="หมายเลขเรื่องร้องเรียน: ".$add;
-			    	$subject="ระบบแจ้งเรื่องร้องเรียน กระทรวงพลังงาน";
-			    	sendmailSmtp($to_email,$msg,$subject);
-
+					if($email){
+				    	$to_email=$email;
+				    	$msg="หมายเลขเรื่องร้องเรียน: ".$add;
+				    	$subject="ระบบแจ้งเรื่องร้องเรียน กระทรวงพลังงาน";
+				    	sendmailSmtp($to_email,$msg,$subject);
+				    }
 					if($add){
 						redirect('home/formComplate&case_code='.$add);
 					}
