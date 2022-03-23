@@ -9,8 +9,8 @@ session_start();
 session_destroy();
 // สรอ. OpenID Provider
 
-// $OpenIdProviderUrl = 'https://testopenid2.ega.or.th';  
-$OpenIdProviderUrl = 'https://govid.egov.go.th';  
+$OpenIdProviderUrl = 'https://testopenid2.ega.or.th';  
+// $OpenIdProviderUrl = 'https://govid.egov.go.th';  
 
 //หน้าที่จะให้ส่งกลับ
 // $eServiceUrl = "http://127.0.0.1:8090/OpenID/"; 
