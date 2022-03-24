@@ -386,7 +386,13 @@ function idcard(obj){
     if(obj_l>=pattern.length){  
         obj.value=obj.value.substr(0,pattern.length);             
     }  
+    
 }  
+function chkNumber(ele){
+    var vchar = String.fromCharCode(event.keyCode);
+    if ((vchar<'0' || vchar>'9') && (vchar != '.')) return false;
+    ele.onKeyPress=vchar;
+}
 function phoneTab(obj){  
     var pattern=new String("___-___-____"); // กำหนดรูปแบบในนี้  
     var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  

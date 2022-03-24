@@ -82,10 +82,19 @@
                                             <?php } ?>
                                         </select>
                                     </div>
-                                    
+                                </div>
+                                <div class="row">    
                                     <div class="col-md-3 mb-3">
                                         <label for="">ชื่อผู้ใช้</label>
                                         <input type="text" class="form-control" name="AUT_USERNAME" value="<?php echo (isset($user['AUT_USERNAME'])?$user['AUT_USERNAME']:'');?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="">ชื่อผู้ใช้ Open ID</label>
+                                        <input type="text" class="form-control" name="open_id_email" value="<?php echo (isset($user['open_id_email'])?$user['open_id_email']:'');?>">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="">ชื่อผู้ใช้ AD</label>
+                                        <input type="text" class="form-control" name="user_ldap" value="<?php echo (isset($user['user_ldap'])?$user['user_ldap']:'');?>">
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="">รหัสผ่าน</label>
