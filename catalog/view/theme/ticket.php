@@ -16,7 +16,11 @@
             <div class="col-md-6">
                 <h3>ติดตามเรื่องร้องเรียน</h3>
                 <form action="<?php echo route('ticket/ticketStatus');?>" method="POST">
-                  <input type="text" class="form-control form-control-lg mb-3" placeholder="กรอก Ticket ID สำหรับค้นหา" name="case_code">
+                  <input type="text" class="form-control form-control-lg mb-3" placeholder="กรอกข้อมูลสำหรับค้นหา" name="case_code">
+                  <input type="radio" name="rdoType" value="ticket" id="ticket" checked>
+                  <label for="ticket">รหัสเรื่องร้องเรียน</label>
+                  <input type="radio" name="rdoType" value="idno" id="idno">
+                  <label for="idno">เลขบัตรประจำตัวประชาชน</label>
                   <button class="btn btn-theme btn-lg btn-block"  type="submit">ค้นหา</button>
                 </form>
             </div>

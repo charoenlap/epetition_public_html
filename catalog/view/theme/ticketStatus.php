@@ -13,29 +13,35 @@
 <section class="py-5 mb-5">
     <div class="container">
         <div class="row">
+            <div class="col-12">
+                <h3 class="text-theme font-weight-bold">รายละเอียดเรื่องร้องเรียน</h3>
+            </div>
+        </div>
+        <?php foreach($ticket as $val){ ?>
+        <div class="row">
             <div class="col-md-12">
                 <?php 
-                    if(isset($ticket['case_code'])){ 
-                        $txt_status = $ticket['text_status'];
-                        $color = $ticket['text_class'];
+                    if(isset($val['detail']['case_code'])){ 
+                        $txt_status = $val['detail']['text_status'];
+                        $color = $val['detail']['text_class'];
                 ?>
-                <h3 class="text-theme font-weight-bold">รายละเอียดเรื่องร้องเรียน</h3>
+                
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
                             <td width="200px;"><b>รหัสเรื่อง (Case ID)</b></td>
-                            <td><?php echo $ticket['case_code']; ?></td>
+                            <td><?php echo $val['detail']['case_code']; ?></td>
                         </tr>
                         <tr>
                             <td><b>ชื่อเรื่อง</b></td>
-                            <td><?php echo $ticket['response_person']; ?></td>
+                            <td><?php echo $val['detail']['response_person']; ?></td>
                         </tr>
                         <tr>
                             <td><b>หน่วยงานดำเนินการ</b></td>
                             <td>
                                 <?php 
-                                if($ticket['agency']){
-                                    foreach ($ticket['agency'] as $key => $value) {
+                                if($val['agency']){
+                                    foreach ($val['agency'] as $key => $value) {
                                        echo $value['agency_minor_title'];
                                     } ?>
                                 <?php }else{?>
@@ -54,6 +60,11 @@
                 <?php }else{?>
                 <h4 class="text-center">ไม่พบเลขร้องเรียน " <?php echo $case_code;?> " บนระบบ</h4>
                 <?php } ?>
+            </div>
+        </div>
+        <?php } ?>
+        <div class="row">
+            <div class="col-12">
                 <div class="text-center">
                     <a href="<?php echo route('home');?>">กลับหน้าหลัก</a>
                 </div>

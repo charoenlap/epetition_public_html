@@ -10,7 +10,7 @@
                             <input type="text" class="form-control mb-3" name="user" value="test01">
                             <label for="">รหัสผ่าน</label>
                             <input type="password" class="form-control mb-3" name="pass" value="test01">
-                            <button class="btn btn-theme" type="submit">เข้าสู่ระบบ</button>
+                            <button class="btn btn-theme btn-block" type="submit" >เข้าสู่ระบบ</button>
                             </form>
                         </div>
                     </div>
