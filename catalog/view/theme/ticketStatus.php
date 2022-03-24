@@ -12,12 +12,15 @@
 </div>
 <section class="py-5 mb-5">
     <div class="container">
+        <?php if($ticket){ ?>
         <div class="row">
             <div class="col-12">
-                <h3 class="text-theme font-weight-bold">รายละเอียดเรื่องร้องเรียน</h3>
+                <h3 class="text-theme font-weight-bold ">รายละเอียดเรื่องร้องเรียน</h3>
             </div>
         </div>
-        <?php foreach($ticket as $val){ ?>
+        <?php 
+        
+        foreach($ticket as $val){ ?>
         <div class="row">
             <div class="col-md-12">
                 <?php 
@@ -57,16 +60,24 @@
                         </tr>
                     </tbody>
                 </table>
-                <?php }else{?>
-                <h4 class="text-center">ไม่พบเลขร้องเรียน " <?php echo $case_code;?> " บนระบบ</h4>
                 <?php } ?>
             </div>
         </div>
         <?php } ?>
+    <?php }else{?>
+        <div class="row">
+            <div class="col-12">
+                <h4 class="text-center text-danger">ไม่พบเลขร้องเรียน บนระบบ</h4>
+                <p class="text-center">สามารถติดต่อขอรับข้อมูลเพิ่มเติมได้ที่</p>
+                <p class="text-center">จดหมายอิเล็กทรอนิกส์ (E-Mail) : inspector_g@energy.go.th</p>
+                <p class="text-center">ข้อมูลการติดต่อ : โทรศัพท์ 0 2140 6080 - 82</p>
+            </div>
+        </div>
+    <?php } ?>
         <div class="row">
             <div class="col-12">
                 <div class="text-center">
-                    <a href="<?php echo route('home');?>">กลับหน้าหลัก</a>
+                    <a href="<?php echo route('ticket');?>">กลับไปค้นหาใหม่อีกครั้ง</a>
                 </div>
             </div>
         </div>

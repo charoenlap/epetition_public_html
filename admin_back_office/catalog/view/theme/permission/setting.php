@@ -35,12 +35,25 @@
                             <div class="col-md-12">
                                 <table class="table">
                                     <thead>
-                                        <th width="100px;" class="text-center">เมนู<br><input type="checkbox" id="checkAll"></th>
-                                        <th>หัวข้อ</th>
-                                        <th>ดู</th>
-                                        <th>เพิ่ม</th>
-                                        <th>แก้ไข</th>
-                                        <th>ลบ</th>
+                                        <tr>
+                                            <th width="100px;" class="text-center" rowspan="2">
+                                                <input type="checkbox" id="checkAll">
+                                            </th>
+                                            <th rowspan="2">หัวข้อ</th>
+                                            <th rowspan="2">ดู</th>
+                                            <th rowspan="2">เพิ่ม</th>
+                                            <th rowspan="2">แก้ไข</th>
+                                            <th rowspan="2">ลบ</th>
+                                            <th colspan="4" class="text-center">
+                                                เรื่องร้องเรียน
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>อนุมัติเรื่อง</th>
+                                            <th>ปรับสถานะ</th>
+                                            <th>ส่งต่อ</th>
+                                            <th>ส่งเรื่อง</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                     <?php foreach($menu->rows as $val){
@@ -49,12 +62,27 @@
                                             $user_add = true;
                                             $user_edit = true;
                                             $user_del = true;
+
+                                            $user_accept = false;
+                                            $user_change = false;
+                                            $user_send = false;
+                                            $user_topic = false;
                                             // หน้าหลัก
                                             if($val['MENU_ID']==1){
                                                 $user_view = true;
                                                 $user_add = false;
                                                 $user_edit = false;
                                                 $user_del = false;
+                                            }
+                                            if($val['MENU_ID']==2){
+                                                $user_view = true;
+                                                $user_add = false;
+                                                $user_edit = false;
+                                                $user_del = false;
+                                                $user_accept = true;
+                                                $user_change = true;
+                                                $user_send = true;
+                                                $user_topic = true;
                                             }
                                             if($val['MENU_ID']==20){
                                                 $user_view = true;
@@ -128,6 +156,38 @@
                                                 name="user_del[<?php echo $val['MENU_ID'];?>]" 
                                                 value="1" 
                                                 <?php echo ($val['USER_DELETE']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if($user_accept){ ?>
+                                                <input type="checkbox" 
+                                                name="user_accept[<?php echo $val['MENU_ID'];?>]" 
+                                                value="1" 
+                                                <?php // echo ($val['USER_DELETE']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if($user_change){ ?>
+                                                <input type="checkbox" 
+                                                name="user_change[<?php // echo $val['MENU_ID'];?>]" 
+                                                value="1" 
+                                                <?php // echo ($val['USER_DELETE']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if($user_send){ ?>
+                                                <input type="checkbox" 
+                                                name="user_send[<?php // echo $val['MENU_ID'];?>]" 
+                                                value="1" 
+                                                <?php // echo ($val['USER_DELETE']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if($user_topic){ ?>
+                                                <input type="checkbox" 
+                                                name="user_topic[<?php // echo $val['MENU_ID'];?>]" 
+                                                value="1" 
+                                                <?php // echo ($val['USER_DELETE']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
                                         </tr>

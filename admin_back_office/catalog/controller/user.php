@@ -76,7 +76,7 @@
                     $input['UPDATE_USER_ID'] = $user_id;
                     // $input['CREATE_TIMESTAMP'] = $date_current;
                     $input['UPDATE_TIMESTAMP'] = $date_current;
-                    $input['DELETE_FLAG'] = 0;
+                    $input['DELETE_FLAG'] = '0';
                     $id = (int)$input['id'];
                     $this->model('user')->updateUser($id,$input);
                     redirect('user');

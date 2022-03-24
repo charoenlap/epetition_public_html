@@ -32,8 +32,6 @@
                                    <textarea name="topic_title" id="" rows="5" class="form-control"><?php echo $data['topic_title']; ?></textarea>
                                 </div>
                             </div>
-                            
-                            
                         </div>
                         <div class="card-body">
                           <div class="row">
@@ -47,8 +45,11 @@
                           <div id="panel-sub">
                             <?php foreach($lists_sub as $val){?>
                             <div class="row mb-2 row-sub">
-                              <div class="col-md-11">
+                              <div class="col-md-10">
                                 <input type="text" name="sub[]" value="<?php echo $val['title'];?>" class="form-control">
+                              </div>
+                              <div class="col-md-1">
+                                <input type="text" class="form-control" value="" placeholder="parent">
                               </div>
                               <div class="col-md-1">
                                 <a href="#" class="btn btn-danger btn-block btn-del-sub">ลบ</a>

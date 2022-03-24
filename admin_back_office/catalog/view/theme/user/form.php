@@ -82,6 +82,12 @@
                                             <?php } ?>
                                         </select>
                                     </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="">ตำแหน่ง</label>
+                                        <select name="" id="" class="form-control">
+                                            <option value="">เลือกตำแหน่ง</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="row">    
                                     <div class="col-md-3 mb-3">
@@ -108,6 +114,19 @@
                                     <div class="col-md-4 mb-3">
                                         <label for="">นามสกุล</label>
                                         <input type="text" class="form-control" name="LASTNAME"  value="<?php echo (isset($user['LASTNAME'])?$user['LASTNAME']:'');?>">
+                                    </div>
+                                    
+                                    <div class="col-md-2 mb-3">
+                                        <label for="">สิทธิ์การเข้าใช้งาน</label>
+                                        <select name="" id="" class="form-control">
+                                            <option value="">กำหนดตามกลุ่ม</option>
+                                            <option value="">สิทธิ์รายบุคคล</option>
+                                            <option value="">สิทธิ์รายตำแหน่ง</option>
+                                            <option value="">สิทธิ์รายหน่วยงาน</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <a href="#">กำหนดสิทธิ์รายบุคคล</a>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="">สถานะ</label>

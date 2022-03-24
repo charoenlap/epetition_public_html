@@ -241,9 +241,67 @@
 			$data['place_landmarks']	= $resultData['place_landmarks'];
 			$data['response_person']	= $resultData['response_person'];
 
-			$data['getResponse'] = $this->model('response')->getResponse($id);
 			$data['getComment'] = $this->model('response')->getComment($id);
 			$data['id'] = $id;
+
+
+			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
+			$data['menu'] = array();
+			$data['active_del'] = 0;
+			$data['active_add'] = 0;
+			$data['active_view'] = 0;
+			$data['active_edit'] = 0;
+			foreach($menu as $val){
+				if($val['MENU_ID']=="2"){
+					if($val['USER_DELETE']=="1"){
+						$data['active_del'] = 1;
+					}
+					if($val['USER_ADD']=="1"){
+						$data['active_add'] = 1;
+					}
+					if($val['USER_VIEW']=="1"){
+						$data['active_view'] = 1;
+					}
+					if($val['USER_EDIT']=="1"){
+						$data['active_edit'] = 1;
+					}
+				}
+			}
+			$data['agency'] = $this->model('agency')->getlistsAgency();
+			$data['agencyMinor'] = $this->model('agency')->getlists();
+			$data['appeal'] = $this->model('appeal')->getlists();
+			$response 	= $this->model('response');
+			$resultData = $response->getList($id);
+
+			$data['ticket']				= $resultData['case_code'];
+			$data['dateadd']			= $resultData['dateadd'];
+			$data['idCard']				= $resultData['id_card'];
+			$data['fullname']			= $resultData['name_title']." ".$resultData['name']." ".$resultData['lastname'];
+			$data['age']				= $resultData['age'];
+			$data['tel']				= $resultData['tel'];
+			$data['phone']				= $resultData['phone'];
+			$data['email']				= $resultData['email'];
+			$data['address_no']			= $resultData['address_no'];
+			$data['moo']				= $resultData['moo'];
+			$data['housename']			= $resultData['housename'];
+			$data['soi']				= $resultData['soi'];
+			$data['road']				= $resultData['road'];
+			$data['id_provinces']		= $resultData['id_provinces'];
+			$data['PROVINCE_NAME']		= $resultData['PROVINCE_NAME'];
+			$data['id_amphures']		= $resultData['id_amphures'];
+			$data['AMPHUR_NAME']		= $resultData['AMPHUR_NAME'];
+			$data['id_districts']		= $resultData['id_districts'];
+			$data['TAMBON_NAME']		= $resultData['TAMBON_NAME'];
+			$data['zipcode']			= $resultData['zipcode'];
+			$data['note_topic']			= $resultData['note_topic'];
+			$data['contacts']			= '';
+
+			$data['topic_address']		= "เลขที่ ".$resultData['t_address_no']." หมู่บ้าน ".$resultData['t_moo']." ซอย ".$resultData['t_soi']." ถนน ".$resultData['t_road']." ตำบล".$resultData['t_TAMBON_NAME']." อำเภอ".$resultData['t_AMPHUR_NAME']." จังหวัด".$resultData['t_PROVINCE_NAME']."";
+			$data['place_landmarks']	= $resultData['place_landmarks'];
+			$data['response_person']	= $resultData['response_person'];
+			$data['id'] = $id = $resultData['id'];
+			$data['getResponse'] = $this->model('response')->getResponse($id);
 			// var_dump($data['getResponse']);
 	    	$this->view('appeal/detail',$data);
 	    }	

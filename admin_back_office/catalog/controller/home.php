@@ -325,7 +325,7 @@
 							$result = array(
 				    			'code' 	=> 200,
 				    			'status'=> 'failed',
-				    			'desc'	=> 'Login error '.$ldaprdn.'key not match'
+				    			'desc'	=> 'เข้าสู่ระบบผิดพลาด '.$ldaprdn.' ไม่มีชื่อบัญชีนี้ในระบบ'
 				    		);
 						}else{
 							$officer_name = $resultLogin['detail']['FIRSTNAME'].' '.$resultLogin['detail']['LASTNAME'];

@@ -29,20 +29,14 @@
               <a class="nav-link" href="<?php echo route('home'); ?>">หน้าหลัก</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo route('home/about'); ?>">เกี่ยวกับหน่วยงาน</a>
+              <a class="nav-link" href="https://www2.energy.go.th/th/#1" target="_blank">เกี่ยวกับกระทรวง</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo route('home/map'); ?>">แผนที่หน่วยงาน</a>
+              <a class="nav-link" href="<?php echo route('home/map'); ?>">แผนที่กระทรวง</a>
             </li>
-            <?php if(empty($AUT_USERNAME)){ ?>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo route('member/signin'); ?>">เข้าสู่ระบบ</a>
+              <a class="nav-link" href="https://e-petition.energy.go.th/admin_back_office/" target="_blank">เข้าสู่ระบบ</a>
             </li>
-            <?php }else{?>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo route('member/profile'); ?>"><?php echo $AUT_USERNAME; ?></a>
-            </li>
-            <?php } ?>
           </ul>
         </div>
         </div>

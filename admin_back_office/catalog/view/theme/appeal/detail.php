@@ -21,7 +21,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title"><?php echo $title; ?></h4>
-                            <a href="<?php echo route('appeal'); ?>" class="float-right btn btn-dark btn-sm">ย้อนกลับ</a>
+                            <a href="<?php echo route('appeal'); ?>" class="float-right btn btn-dark btn-sm ml-2">ย้อนกลับ</a> 
+                            <a href="#" class="float-right btn btn-danger btn-sm ml-2">ลบ</a> 
+                            <a href="#" class="float-right btn btn-warning btn-sm ml-2">แก้ไข</a> 
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -190,6 +192,7 @@
                                         <label for="">อนุมัติเรื่อง</label>
                                     </div>
                                 </div>
+                                <hr>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <input type="checkbox">
@@ -229,6 +232,82 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <form action="" method="post" id="form-sender">
+                        <input type="hidden" name="id_response" value="<?php echo $id;?>">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">ข้อเสนอแนวทางการพิจารณาดําเนินการ</h4>
+                            </div>
+                            <div class="card-body">
+                                <?php if($active_add){ ?>
+                                <div class="row mb-3">
+                                    <div class="col-md-5">
+                                        <label for="">ประเด็นเรื่องร้องเรียน</label>
+                                        <select name="id_appeal" id="id_appeal" class="form-control">
+                                            <option value="">เลือกประเด็นเรื่องร้องเรียน</option>
+                                            <?php foreach($appeal->rows as $val){?>
+                                                <option value="<?php echo $val['id'];?>"><?php echo $val['appeal_title'];?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>  
+                                    <div class="col-md-3">
+                                        <label for="">เลือกหน่วยงาน</label>
+                                        <select name="id_agency" id="id_agency" class="form-control">
+                                            <option value="">เลือกหน่วยงาน</option>
+                                            <?php foreach($agency->rows as $val){?>
+                                                <option value="<?php echo $val['id'];?>"><?php echo $val['agency_title'];?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">เลือกหน่วยงานระดับส่วน</label>
+                                        <select name="id_agency_minor" id="id_agency_minor" class="form-control">
+                                            <option value="">ทั้งหมด</option>
+                                            <?php foreach($agencyMinor->rows as $val){?>
+                                                <option value="<?php echo $val['id'];?>"><?php echo $val['agency_minor_title'];?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a class="btn btn-primary" id="addFrom"><i class="fas fa-folder-plus"></i> <br>เพิ่ม</a>
+                                    </div>
+                                </div>
+                                <?php }?>
+                                <table class="table-striped table" id="sender">
+                                    <thead></thead>
+                                    <tbody class="body">
+                                        <?php foreach($getResponse as $val){?>
+                                            <tr>
+                                                <td><?php echo $val['appeal_title'];?></td>
+                                                <td><?php echo $val['agency_minor_title'];?></td>
+                                                <td>
+                                                    <?php if($active_del){ ?>
+                                                    <a href="#" class="btn btn-danger delForm" data-id="<?php echo $val['id'];?>">ลบ</a>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                                <?php if($active_add){ ?>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <input type="checkbox" id="chkSendEmail" checked>
+                                        <label for="chkSendEmail">ส่งอีเมลแจ้งเตือนให้หน่วยงาน</label>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-12 text-center">
+                                        <button class="btn btn-dark" style="width:150px;" id="btn-sender" type="submit">ส่งเรื่อง</button>
+                                        <a href="<?php echo route('appeal');?>" class="btn btn-light">กลับหน้าหลัก</a>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </form>
+                </div>  
                 <!-- <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
@@ -259,6 +338,76 @@
   </div>
 
 <script>
+    $(document).on('submit','#form-sender',function(e){
+        var form = $(this);
+        $.ajax({
+            url: 'index.php?route=appeal/sender',
+            type: 'POST',
+            dataType: 'json',
+            data: form.serialize(),
+        })
+        .done(function(data) {
+            console.log(data);
+            // alert('บันทึกเรียบร้อย');
+            console.log("success");
+        })
+        .fail(function(a,b,c) {
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        e.preventDefault();
+    });
+    $(document).on('click','#addFrom',function (e) { 
+        // alert('บันทึกเรียบร้อย');
+        var id_appeal = $( "#id_appeal" );
+        var id_agency = $( "#id_agency" );
+        var id_agency_minor = $( "#id_agency_minor" );
+        if(id_appeal.val()!='' && id_agency.val()!=''){
+            var html = '<tr>'+
+                            '<td>'+$( "#id_appeal option:selected" ).text()+
+                                '<input type="hidden" name="id_appeal[]" value="'+id_appeal.val()+'">'+
+                            '</td>'+
+                            '<td>'+$( "#id_agency option:selected" ).text()+
+                                '<input type="hidden" name="id_agency[]" value="'+id_agency.val()+'">'+
+                            '</td>'+
+                            '<td>'+$( "#id_agency_minor option:selected" ).text()+
+                                '<input type="hidden" name="id_agency_minor[]" value="'+id_agency_minor.val()+'">'+
+                            '</td>'+
+                             '<td>'+
+                                '<a href="#" class="btn btn-danger delForm">ลบ</a>'+
+                            '</td>'+
+                        '</tr>';
+            $('#sender').append(html);
+        }
+    });
+    $(document).on( "click",".delForm", function(e) {
+        if($(this).attr('data-id')!=''){
+            $.ajax({
+                url: 'index.php?route=appeal/delSender',
+                type: 'POST',
+                dataType: 'json',
+                data: {id: $(this).attr('data-id')},
+            })
+            .done(function() {
+                console.log("success");
+            })
+            .fail(function(a,b,c) {
+                console.log(a);
+                console.log(b);
+                console.log(c);
+            })
+            .always(function() {
+                console.log("complete");
+            });
+            
+        }
+        $(this).parent().parent().remove();
+        e.preventDefault();
+    });
     $(document).on('submit','#form-sender',function(e){
         var form = $(this);
         $.ajax({

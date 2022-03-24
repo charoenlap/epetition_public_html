@@ -49,7 +49,7 @@
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" language="javascript" src="<?php echo 'assets/vfs_fonts.js';?>"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
 
@@ -167,7 +167,7 @@
             <a href="<?php echo route('appeal'); ?>" class="nav-link px-1" id="appeal">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                เรื่องร้องเรียน
+                เรื่องร้องเรียน <i class="fas fa-circle text-danger"></i>
               </p>
             </a>
           </li>
@@ -178,16 +178,6 @@
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 เรื่องร้องเรียนที่ได้รับจากสปน
-              </p>
-            </a>
-          </li>
-          <?php } ?>
-          <?php if($menu[3]){ ?>
-          <li class="nav-item">
-            <a href="<?php echo route('topic'); ?>" class="nav-link px-1" id="pageTopic">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                ประเภทเรื่องร้องเรียน
               </p>
             </a>
           </li>
@@ -325,12 +315,67 @@
           <?php } ?>
           <?php if($menu[19]){ ?>
           <li class="nav-item">
-            <a href="<?php echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
-              <i class="nav-icon fas fa-cog"></i>
+            <a href="#" class="nav-link px-1" id="report">
+              <i class="nav-icon fas fa-copy"></i>
               <p>
-                ตั้งค่าระบบ
+                ตั้งค่า
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                  <i class="nav-icon fas fa-cog"></i>
+                  <p>ตั้งค่าระบบ</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                  <i class="nav-icon fas fa-cog"></i>
+                  <p>ตั้งค่าส่วนตัว</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                  <i class="nav-icon fas fa-cog"></i>
+                  <p>คำนำหน้า</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                  <i class="nav-icon fas fa-cog"></i>
+                  <p>เขตที่ตรวจ</p>
+                </a>
+              </li>
+              <?php if($menu[3]){ ?>
+              <li class="nav-item">
+                <a href="<?php echo route('topic'); ?>" class="nav-link px-1" id="pageTopic">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    ประเภทเรื่องร้องเรียน
+                  </p>
+                </a>
+              </li>
+              <?php } ?>
+              <li class="nav-item">
+                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                  <i class="nav-icon fas fa-cog"></i>
+                  <p>จังหวัด</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                  <i class="nav-icon fas fa-cog"></i>
+                  <p>ตำแหน่ง</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                  <i class="nav-icon fas fa-cog"></i>
+                  <p>หน่วยงาน</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <?php } ?>
           <li class="nav-item">

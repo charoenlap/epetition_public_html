@@ -175,6 +175,7 @@
                                                 <th>ช่องทางการร้องเรียน</th>
                                                 <th>สถานที่เกิดเหตุ</th>
                                                 <th style="width:130px;">วันที่ร้องเรียน</th>
+                                                <th style="width:130px;">จำนวนวันที่ผ่านมา</th>
                                                 <th class="text-center" style="width:50px;">สถานะ</th>
                                                 <th class="text-center" style="width:200px;">การจัดการ</th>
                                             </tr>
@@ -195,20 +196,23 @@
                                                 <td><?php echo $value['case_code']; ?></td>
                                                 <td><?php echo $value['fullname']; ?></td>
                                                 <td><?php echo $value['topicTitle']; ?></td>
-                                                <td><?php echo $value['topicTitle']; ?></td>
                                                 <td><?php echo $value['addBy']; ?></td>
+                                                <td><?php //echo $value['topicTitle']; ?></td>
                                                 <td><?php echo $value['dateadd']; ?></td>
+                                                <td></td>
                                                 <td>
                                                     <i class="fas fa-square-full status-<?php echo $value['status_icon']; ?>"></i>
                                                 </td>
                                                 <td class="text-center">
                                                     <?php if($active_view){ ?>
                                                         <a href="<?php echo route('appeal/detail&id='.$value['id']);?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a>
+                                                        <?php /* ?>
                                                         <a href="<?php echo route('appeal/status&id='.$value['id']);?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="รับเรื่องร้องเรียน"><i class="far fa-check-square"></i></a>
+                                                        <?php */?>
                                                     <?php }?>
-                                                    <?php if($active_edit){ ?>
+                                                    <?php /*if($active_edit){ ?>
                                                         <a href="<?php echo route('appeal/edit&id='.$value['id']);?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"><i class="fas fa-edit"></i></a>
-                                                    <?php } ?>
+                                                    <?php }*/ ?>
                                                     <?php if($active_del){ ?>
                                                         <a href="<?php echo route('appeal/del&id='.$value['id']); ?>" class="btn btn-danger btn-sm btn-del" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"><i class="far fa-trash-alt"></i></a>
                                                     <?php }?>

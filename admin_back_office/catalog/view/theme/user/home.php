@@ -44,7 +44,7 @@
                                                <th>นามสกุล</th>
                                                <th>กลุ่มผู้ใช้งาน</th>
                                                <th style="width:250px;">สำนัก</th>
-                                               <th style="width:250px;">ฝ่าย</th>
+                                               <th >สิทธิ์ผู้ใช้งาน</th>
                                                <th style="width:130px;"></th>
                                            </tr>
                                        </thead>
@@ -57,7 +57,7 @@
                                              <td><?php echo $val['LASTNAME']; ?></td>
                                              <td><?php echo $val['GROUP_NAME']; ?></td>
                                              <td><?php echo $val['agency_title']; ?></td>
-                                             <td><?php echo $val['agency_minor_title']; ?></td>
+                                             <td>กำหนดตามกลุ่ม</td>
                                              <td class="text-center">
                                               <!-- <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="รายละเอียด"><i class="fas fa-eye"></i></a> -->
                                               <?php if($active_edit){ ?>

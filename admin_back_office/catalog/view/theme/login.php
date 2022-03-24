@@ -54,8 +54,12 @@
             <button type="button" id="btn-ldap" class="btn btn-default btn-block">เข้าสู่ระบบด้วย AD</button>
           </div>
         </div>
-        
-      </form>
+        <div class="row mt-2">
+          <div class="col-12 text-right">
+            <a href="#">ลืมรหัสผ่าน</a>
+          </div>
+        </div>
+      </form> 
 
       <!-- <div class="social-auth-links text-center mb-3">
         <p>- OR -</p>

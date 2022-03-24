@@ -27,7 +27,7 @@
                 <input type="text" name="id_card" id="id_card" class="form-control" placeholder="x-xxxxx-xxxxx-xx-x" required
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
-                size="30" onkeyup="idcard(this)"  minlength="15" maxlength="25" >
+                size="30"  onkeyup="idcard(this);"  minlength="15" maxlength="25" >
             </div>
         </div>
         <div class="row mb-3">
@@ -60,11 +60,11 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="">อายุ</label>
-                <input type="text" name="age" class="form-control" placeholder="อายุ">
+                <input type="text" name="age" id="age" class="form-control" placeholder="อายุ">
             </div>
             <div class="col-md-6">
                 <label for="">โทรศัพท์บ้าน</label>
-                <input type="text" name="tel" class="form-control" placeholder="โทรศัพท์บ้าน" 
+                <input type="text" name="tel" id="tel" class="form-control" placeholder="โทรศัพท์บ้าน" 
                 size="25" onkeyup="home(this)"  minlength="9" maxlength="11"
                 >
             </div>
@@ -371,7 +371,33 @@
 </script>
 <?php } ?>
 <script>
+$(function(e){
+    $("#id_card,#tel,#phone,#age").keydown("keypress keydown blur", function (event) { 
+        var key = event.charCode || event.keyCode || 0;
+        if ((key == 110 || key == 190) && $(this).val().split(",").length == 1) { //checks whether input is a full stop and lets only 1 through
+            return;
+        }
+        else
+            return ( // check if it is a number, only allows numbers through
+                key == 8 ||
+                key == 9 ||
+                key == 13 ||
+                key == 46 ||
+                (key >= 35 && key <= 40) ||
+                (key >= 48 && key <= 57) ||
+                (key >= 96 && key <= 105));                           
+    });
+});
 function idcard(obj){  
+    // var txtbox = obj;
+    // obj.value = a;
+    // console.log(a);
+    // var vchar = String.fromCharCode(obj.keyCode);
+    // console.log(vchar);
+    // if ((vchar<'0' || vchar>'9') && (vchar != '-')) return false;
+    // obj.onKeyPress=vchar;
+
+
     var pattern=new String("_-____-_____-__-_"); // กำหนดรูปแบบในนี้  
     var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  
     var returnText=new String("");  
@@ -379,20 +405,14 @@ function idcard(obj){
     var obj_l2=obj_l-1;  
     for(i=0;i<pattern.length;i++){             
         if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){  
-            returnText+=obj.value+pattern_ex;  
+            returnText+= obj.value+pattern_ex;  
             obj.value=returnText;  
         }  
     }  
     if(obj_l>=pattern.length){  
         obj.value=obj.value.substr(0,pattern.length);             
     }  
-    
 }  
-function chkNumber(ele){
-    var vchar = String.fromCharCode(event.keyCode);
-    if ((vchar<'0' || vchar>'9') && (vchar != '.')) return false;
-    ele.onKeyPress=vchar;
-}
 function phoneTab(obj){  
     var pattern=new String("___-___-____"); // กำหนดรูปแบบในนี้  
     var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  
