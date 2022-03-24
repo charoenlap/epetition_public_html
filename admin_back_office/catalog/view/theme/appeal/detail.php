@@ -185,6 +185,24 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="checkbox">
+                                        <label for="">อนุมัติเรื่อง</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <input type="checkbox">
+                                        <label for="">ส่งต่อไปยังกรม</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" placeholder="Email">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" placeholder="ข้อความเพิ่มเติม">
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label for="file" class="btn btn-info">เอกสารแนบ</label>
                                         <input type="file" class="form-control d-none" id="file" accept="image/*,video/*">
