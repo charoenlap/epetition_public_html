@@ -16,7 +16,6 @@
 					'desc' 		=> $dataResult
 				);
 			}
-			
 			$this->json($result);
 		}
 		public function login(){
@@ -43,7 +42,6 @@
 					);
 				}
 			}
-			
 			$this->json($result);
 		}
 		public function findTicket(){
