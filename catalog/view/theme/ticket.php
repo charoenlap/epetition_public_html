@@ -22,8 +22,8 @@
                   <input type="radio" name="rdoType" value="idno" id="idno">
                   <label for="idno">เลขบัตรประจำตัวประชาชน</label>
 
-                  <input type="text" class="form-control form-control-lg mt-2 mb-3" id="case_code" onkeyup="idcard(this);" placeholder="รหัสเรื่องร้องเรียน" name="case_code" id="case_code">
-                  <input type="text" class="form-control form-control-lg mb-3" id="phone" onkeyup="phoneTab(this);" placeholder="กรอกข้อมูลเบอร์โทรศัพท์" name="phone">
+                  <input type="text" class="form-control form-control-lg mt-2 mb-3" id="case_code" onkeyup="idcard(this);" placeholder="รหัสเรื่องร้องเรียน" name="case_code" id="case_code" required>
+                  <input type="text" class="form-control form-control-lg mb-3" id="phone" onkeyup="phoneTab(this);" placeholder="กรอกข้อมูลเบอร์โทรศัพท์" name="phone" required>
                   <?php if($production){ ?>
                       <div class="g-recaptcha mb-2" data-sitekey="6LeEVQIfAAAAAO7mj5F76RKroMqtd5k3PErjiexu" id="reCAPTCHA"></div>
                   <?php } ?>

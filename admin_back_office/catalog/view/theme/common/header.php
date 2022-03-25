@@ -145,6 +145,7 @@
         <div class="info">
           <a href="#" class="d-block"><?php echo $name; ?></a>
           <a href="#" class="d-block"><small><?php echo $role_name; ?></small></a>
+          <a href="#" class="d-block"><small>หน่วยงาน: </small></a>
           <a href="#" class="d-block"><small>เข้าใช้งานเมื่อ: <?php echo $last_login; ?></small></a>
         </div>
       </div>
@@ -219,12 +220,12 @@
               </li>
               <?php } ?>
               <?php if($menu[8]){ ?>
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a href="<?php echo route('report/zone'); ?>" class="nav-link px-1" id="zone">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามพื้นที่เขตตรวจ</p>
                 </a>
-              </li> -->
+              </li>
               <?php } ?>
               <?php if($menu[9]){ ?>
               <li class="nav-item">
@@ -267,12 +268,12 @@
               </li>
               <?php } ?>
               <?php if($menu[14]){ ?>
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a href="<?php echo route('report/topic'); ?>" class="nav-link px-1" id="topic">
                   <i class="far fa-circle nav-icon"></i>
                   <p>แยกตามหัวข้อเรื่องร้องเรียน</p>
                 </a>
-              </li> -->
+              </li>
               <?php } ?>
               <?php if($menu[15]){ ?>
               <li class="nav-item">
@@ -303,16 +304,7 @@
             </a>
           </li>
           <?php } ?>
-          <?php if($menu[18]){ ?>
-          <li class="nav-item">
-            <a href="<?php echo route('user/group'); ?>" class="nav-link px-1" id="pagePermission">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                กำหนดสิทธิ์ผู้ใช้งาน
-              </p>
-            </a>
-          </li>
-          <?php } ?>
+          
           <?php if($menu[19]){ ?>
           <li class="nav-item">
             <a href="#" class="nav-link px-1" id="report">
@@ -332,7 +324,7 @@
               <li class="nav-item">
                 <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
                   <i class="nav-icon fas fa-cog"></i>
-                  <p>ตั้งค่าส่วนตัว</p>
+                  <p>ตั้งค่าส่วนตัว การอนุมัติ</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -375,6 +367,16 @@
                   <p>หน่วยงาน</p>
                 </a>
               </li>
+              <?php if($menu[18]){ ?>
+              <li class="nav-item">
+                <a href="<?php echo route('user/group'); ?>" class="nav-link px-1" id="pagePermission">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>
+                    กำหนดสิทธิ์ผู้ใช้งาน
+                  </p>
+                </a>
+              </li>
+              <?php } ?>
             </ul>
           </li>
           <?php } ?>
