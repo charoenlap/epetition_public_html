@@ -1,7 +1,7 @@
 RewriteEngine On 
 
-RewriteRule ^getToken(.*)$ http://e-petition.energy.go.th/api/index.php?route=home/getToken [L,QSA]
-RewriteRule ^getCases(.*)$ http://e-petition.energy.go.th/api/index.php?route=home/getCases [L,QSA]
-RewriteRule ^getCase(.*)$ http://e-petition.energy.go.th/api/index.php?route=home/getCase [L,QSA]
-RewriteRule ^getOperation(.*)$ http://e-petition.energy.go.th/api/index.php?route=home/getOperation [L,QSA]
-RewriteRule ^sendCase(.*)$ http://e-petition.energy.go.th/api/index.php?route=home/SendCase [L,QSA]
+RewriteRule ^getToken(.*)$ http://e-petition.energy.go.th/api/index.php?route=api/getToken [L,QSA]
+RewriteRule ^getCases(.*)$ http://e-petition.energy.go.th/api/index.php?route=api/getCases [L,QSA]
+RewriteRule ^getCase(.*)$ http://e-petition.energy.go.th/api/index.php?route=api/getCase [L,QSA]
+RewriteRule ^getOperation(.*)$ http://e-petition.energy.go.th/api/index.php?route=api/getOperation [L,QSA]
+RewriteRule ^sendCase(.*)$ http://e-petition.energy.go.th/api/index.php?route=api/SendCase [L,QSA]
