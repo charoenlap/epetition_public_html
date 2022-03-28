@@ -19,7 +19,6 @@
             </div>
         </div>
         <?php 
-        
         foreach($ticket as $val){ ?>
         <div class="row">
             <div class="col-md-12">

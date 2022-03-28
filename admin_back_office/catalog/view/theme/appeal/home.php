@@ -155,13 +155,6 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <?php if($active_view AND $active_add){ ?>
-                                        <a href="#" class="btn btn-primary disabled" id="btn-send-topic" role="button" aria-disabled="true" data-toggle="tooltip" data-placement="top" title="ต้องมีสิทธิ์ ดู และเพิ่มเท่านั้น">นำเรื่องส่งให้สปน</a>
-                                    <?php } ?>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table table-bordered table-striped">

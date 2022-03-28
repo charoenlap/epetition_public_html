@@ -51,8 +51,9 @@
                                         <tr>
                                             <th>อนุมัติเรื่อง</th>
                                             <th>ปรับสถานะ</th>
-                                            <th>ส่งต่อ</th>
-                                            <th>ส่งเรื่อง</th>
+                                            <th>ส่งต่อหน่วยงาน</th>
+                                            <th>ส่งต่อไปยังกรม</th>
+                                            <th>ส่งต่อไปยังสปน</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,6 +68,7 @@
                                             $user_change = false;
                                             $user_send = false;
                                             $user_topic = false;
+                                            $user_opm = false;
                                             // หน้าหลัก
                                             if($val['MENU_ID']==1){
                                                 $user_view = true;
@@ -76,13 +78,14 @@
                                             }
                                             if($val['MENU_ID']==2){
                                                 $user_view = true;
-                                                $user_add = false;
-                                                $user_edit = false;
-                                                $user_del = false;
+                                                $user_add = true;
+                                                $user_edit = true;
+                                                $user_del = true;
                                                 $user_accept = true;
                                                 $user_change = true;
                                                 $user_send = true;
                                                 $user_topic = true;
+                                                $user_opm = true;
                                             }
                                             if($val['MENU_ID']==20){
                                                 $user_view = true;
@@ -163,31 +166,39 @@
                                                 <input type="checkbox" 
                                                 name="user_accept[<?php echo $val['MENU_ID'];?>]" 
                                                 value="1" 
-                                                <?php // echo ($val['USER_DELETE']?'checked':'');?>>
+                                                <?php echo ($val['user_accept']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
                                             <td>
                                                 <?php if($user_change){ ?>
                                                 <input type="checkbox" 
-                                                name="user_change[<?php // echo $val['MENU_ID'];?>]" 
+                                                name="user_change[<?php echo $val['MENU_ID'];?>]" 
                                                 value="1" 
-                                                <?php // echo ($val['USER_DELETE']?'checked':'');?>>
+                                                <?php echo ($val['user_change']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
                                             <td>
                                                 <?php if($user_send){ ?>
                                                 <input type="checkbox" 
-                                                name="user_send[<?php // echo $val['MENU_ID'];?>]" 
+                                                name="user_send[<?php echo $val['MENU_ID'];?>]" 
                                                 value="1" 
-                                                <?php // echo ($val['USER_DELETE']?'checked':'');?>>
+                                                <?php echo ($val['user_send']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
                                             <td>
                                                 <?php if($user_topic){ ?>
                                                 <input type="checkbox" 
-                                                name="user_topic[<?php // echo $val['MENU_ID'];?>]" 
+                                                name="user_topic[<?php echo $val['MENU_ID'];?>]" 
                                                 value="1" 
-                                                <?php // echo ($val['USER_DELETE']?'checked':'');?>>
+                                                <?php echo ($val['user_topic']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if($user_opm){ ?>
+                                                <input type="checkbox" 
+                                                name="user_opm[<?php echo $val['MENU_ID'];?>]" 
+                                                value="1" 
+                                                <?php echo ($val['user_opm']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
                                         </tr>

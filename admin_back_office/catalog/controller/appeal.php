@@ -65,8 +65,17 @@
 			// var_dump($resultData);
 			// exit();
 			foreach($resultData->rows as $key => $value){
+				$addBy = '';
+				if($value['addBy']==0){
+					$addBy = 'จากเว็บไซต์';
+				}elseif($value['addBy']==1){
+					$addBy = 'จากเว็บไซต์';
+				}elseif($value['addBy']==2){
+					$addBy = 'จากสปน.';
+				}
 				$data['lists'][] = array(
 					'case_code'			=> $value['case_code'],
+					'approve_topic'		=> $value['approve_topic'],
 					'id' 				=> $value['id'],
 					'fullname'			=> $value['name_title']." ".$value['name']." ".$value['lastname'],
 					'dateadd'			=> date('d-m-Y',strtotime($value['dateadd'])),
@@ -76,7 +85,7 @@
 					'text_status'		=> $value['text_status'],
 					'status_id'			=> $value['status_id'],
 					'status_icon'		=> $value['status_icon'],
-					'addBy'				=> ($value['addBy']==0?'จากเว็บไซต์':'จาก Application'),
+					'addBy'				=> $addBy,
 				);
 			}
 			$data['page_limit'] = ceil($resultData->num_rows/DEFAULT_LIMIT_PAGE);
@@ -114,7 +123,12 @@
 				
 				if(isset($input['id_appeal'])){
 					if($input['id_appeal']){
+						$find_email = array();
 						foreach($input['id_appeal'] as $key => $val){
+							$find_email[] = array(
+								'id_agency' 		=> $input['id_agency'][$key],
+								'id_agency_minor' 	=> $input['id_agency_minor'][$key]
+							);
 							$insert[] = array(
 								'id_response'		=> $input['id_response'],
 								'id_agency'			=> $input['id_agency'][$key],
@@ -123,6 +137,30 @@
 								'date_create'		=> date('Y-m-d H:i:s'),
 								'note'				=> 'ส่งเรื่องร้องเรียน'
 							);
+						}
+
+						if(post('chkSendEmailTo')){
+							// send email to
+							$templateEmail = '';
+							$resultTemplateEmail = $this->model('email')->agency();
+							if($resultTemplateEmail){
+								$templateEmail 	= $resultTemplateEmail['template_email'];
+								$subject 		= $resultTemplateEmail['subject'];
+							}
+							$bodytag = str_replace("{{subject}}", $subject, $templateEmail);
+							$result['bodytag'] = $bodytag;
+							$result['find_email'] = $find_email;
+							foreach($find_email as $val){
+								$listEmailUser = $this->model('user')->listEmailUser($val);
+								$result['listEmailUser'] = $listEmailUser;
+								foreach($listEmailUser->rows as $email){
+									if(!empty($email)){
+										sendmailSmtp($email,$templateEmail,$subject);
+										$result['email'][] = $email['email'];
+										// $result['templateEmail'][] = $email;
+									}
+								}
+							}
 						}
 					}
 				}
@@ -135,12 +173,75 @@
 			if(method_post()){
 				$input = $_POST;
 				$insert = array();
-				$status = (int)$input['status'];
-				$this->model('response')->updateStatus($input['id_response'],$status);
+
+				$status = (int)post('status');
+				$approve_topic = (int)post('approve_topic');
+				$id_response = (int)post('id_response');
+				$send_opm 	= (int)post('send_opm');
+
+				$update = array(
+					'id' 				=> $id_response,
+					'status' 			=> $status,
+					'approve_topic'		=> $approve_topic,
+					'approve_user_id' 	=> $this->getSession('AUT_USER_ID'),
+					'send_opm'			=> $send_opm
+				);
+				$this->model('response')->updateStatus($update);
+
+				$send_sub_agency 	= (int)post('send_sub_agency');
+				$email_send 		= post('email_send');
+				$comment_send 		= post('comment_send');
+				if($send_sub_agency){
+					if($email_send){
+						// send email to
+						$templateEmail = '';
+						$resultTemplateEmail = $this->model('email')->agencySub();
+						if($resultTemplateEmail){
+							$templateEmail 	= $resultTemplateEmail['template_email'];
+							$subject 		= $resultTemplateEmail['subject'];
+						}
+						$bodytag = str_replace("{{subject}}", $subject, $templateEmail);
+						$result['bodytag'] = $bodytag;
+
+						foreach($email_send as $key => $val){
+							$insertDataSend = array(
+								'id_response' 	=> $id_response,
+								'email'			=> $val,
+								'comment'		=> $comment_send[$key],
+								'status'		=> 0,
+								'type'			=> 0,
+								'date_create'	=> date('Y-m-d h:i:s')
+							);
+							$this->model('response')->insertResponseSend($insertDataSend);
+							if(!empty($val)){
+								//endmailSmtp($email,$templateEmail,$subject);
+								$result['email'][] = $val;
+								// $result['templateEmail'][] = $email;
+							}
+						}
+					}
+				}
+				// echo $send_opm;
+				if($send_opm){
+					$status_opm = post('status_opm');
+					$comment_opm = post('comment_opm');
+					$case_id 	= post('case_id_opm'); 
+					$status_id 	= post('status_opm'); 
+					$result 	= post('comment_opm'); 
+			    	
+			    		$selectSetOrgSummaryResult = array(
+							'case_id'	=> $case_id,
+							'status_id'	=> $status_id,
+							'result'	=> $result,
+			    		);
+			    		$result_opm = $this->model('opm')->setOrgSummaryResult( $selectSetOrgSummaryResult );
+			    		$result['result_opm'] = $result_opm;
+			    	
+				}
 				if(!empty($input['note'])){
 					$insert = array(
-						'id_user'=> $this->getSession('AUT_USER_ID'),
-						'id_agency'	=> $this->getSession('DEPARTMENT_ID'),
+						'id_user'		=> $this->getSession('AUT_USER_ID'),
+						'id_agency'		=> $this->getSession('DEPARTMENT_ID'),
 						'id_response'	=> $input['id_response'],
 						'date_create'	=> date('Y-m-d H:i:s'),
 						'note'			=> $input['note']
@@ -148,6 +249,13 @@
 					$this->model('response')->inputComment($insert);
 				}
 			}
+			$this->json($result);
+		}
+		public function getMinorAgency(){
+			$result = array();
+			// $input = $_GET;
+			$id_agency = (int)get('id_agency');
+			$result = $this->model('agency')->getlistsAgencyMinor($id_agency)->rows;
 			$this->json($result);
 		}
 		public function delSender(){
@@ -191,9 +299,10 @@
 			}
 		}
 	    public function edit() {
-			$data['title']	= "แก้ไขแบบฟอร์มเรื่องร้องเรียน";
+	    	$data = array();
 
-			$id 			= $_GET['id'];
+			$data['title']	= "แก้ไขแบบฟอร์มเรื่องร้องเรียน";
+			$data['id'] 	= $id 			= (int)$_GET['id'];
 			$response 		= $this->model('response');
 			$master 		= $this->model('master'); 
 
@@ -216,30 +325,6 @@
 
 			$id 		= (int)$_GET['id'];
 			$response 	= $this->model('response');
-			$resultData = $response->getList($id);
-
-			$data['ticket']				= "6510000".$resultData['id'];
-			$data['dateadd']			= $resultData['dateadd'];
-			$data['idCard']				= $resultData['id_card'];
-			$data['fullname']			= $resultData['name_title']." ".$resultData['name']." ".$resultData['lastname'];
-			$data['age']				= $resultData['age'];
-			$data['tel']				= $resultData['tel'];
-			$data['phone']				= $resultData['phone'];
-			$data['email']				= $resultData['email'];
-			$data['address_no']			= $resultData['address_no'];
-			$data['moo']				= $resultData['moo'];
-			$data['housename']			= $resultData['housename'];
-			$data['soi']				= $resultData['soi'];
-			$data['road']				= $resultData['road'];
-			$data['id_provinces']		= $resultData['id_provinces'];
-			$data['id_amphures']		= $resultData['id_amphures'];
-			$data['id_districts']		= $resultData['id_districts'];
-			$data['zipcode']			= $resultData['zipcode'];
-			$data['note_topic']			= $resultData['note_topic'];
-			$data['status']				= $resultData['status'];
-			$data['topic_address']		= "เลขที่ ".$resultData['t_address_no']." หมู่บ้าน ".$resultData['t_moo']." ซอย ".$resultData['t_soi']." ถนน ".$resultData['t_road']." ตำบล".$resultData['t_id_districts']." อำเภอ".$resultData['t_id_amphures']." จังหวัด".$resultData['t_id_provinces']."";
-			$data['place_landmarks']	= $resultData['place_landmarks'];
-			$data['response_person']	= $resultData['response_person'];
 
 			$data['getComment'] = $this->model('response')->getComment($id);
 			$data['id'] = $id;
@@ -248,6 +333,9 @@
 			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
 			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
 			$data['menu'] = array();
+			// echo "<pre>";
+			// var_dump($menu);
+			// exit();
 			$data['active_del'] = 0;
 			$data['active_add'] = 0;
 			$data['active_view'] = 0;
@@ -266,15 +354,32 @@
 					if($val['USER_EDIT']=="1"){
 						$data['active_edit'] = 1;
 					}
+
+					if($val['user_accept']=="1"){
+						$data['user_accept'] = 1;
+					}
+					if($val['user_change']=="1"){
+						$data['user_change'] = 1;
+					}
+					if($val['user_send']=="1"){
+						$data['user_send'] = 1;
+					}
+					if($val['user_topic']=="1"){
+						$data['user_topic'] = 1;
+					}
+					if($val['user_opm']=="1"){
+						$data['user_opm'] = 1;
+					}
 				}
 			}
 			$data['agency'] = $this->model('agency')->getlistsAgency();
 			$data['agencyMinor'] = $this->model('agency')->getlists();
 			$data['appeal'] = $this->model('appeal')->getlists();
-			$response 	= $this->model('response');
 			$resultData = $response->getList($id);
 
 			$data['ticket']				= $resultData['case_code'];
+			$data['case_code_opm']		= $resultData['case_code_opm'];
+			$data['case_id_opm']		= $resultData['case_id_opm'];
 			$data['dateadd']			= $resultData['dateadd'];
 			$data['idCard']				= $resultData['id_card'];
 			$data['fullname']			= $resultData['name_title']." ".$resultData['name']." ".$resultData['lastname'];
@@ -295,14 +400,35 @@
 			$data['TAMBON_NAME']		= $resultData['TAMBON_NAME'];
 			$data['zipcode']			= $resultData['zipcode'];
 			$data['note_topic']			= $resultData['note_topic'];
+			$data['file']				= $resultData['file'];
+			$data['approve_topic']		= $resultData['approve_topic'];
 			$data['contacts']			= '';
-
+			$data['status']				= $resultData['status'];
 			$data['topic_address']		= "เลขที่ ".$resultData['t_address_no']." หมู่บ้าน ".$resultData['t_moo']." ซอย ".$resultData['t_soi']." ถนน ".$resultData['t_road']." ตำบล".$resultData['t_TAMBON_NAME']." อำเภอ".$resultData['t_AMPHUR_NAME']." จังหวัด".$resultData['t_PROVINCE_NAME']."";
 			$data['place_landmarks']	= $resultData['place_landmarks'];
 			$data['response_person']	= $resultData['response_person'];
 			$data['id'] = $id = $resultData['id'];
 			$data['getResponse'] = $this->model('response')->getResponse($id);
 			// var_dump($data['getResponse']);
+
+			// $data['getCaseStatus'] = $this->model('opm')->getCaseStatus();
+			$data['getCaseStatus'] = array(
+				'0' => array(
+					'val'		=>	88,
+					'text' 		=>	'อยู่ระหว่างดำเนินการ',
+					'seq'		=>	'1',
+					'remark'	=> 	'P',
+					'ref_val'	=> '88'
+				),
+				'1' => array(
+					'val'		=>	99,
+					'text' 		=>	'ยุติเรื่อง',
+					'seq'		=>	'2',
+					'remark'	=> 	'C',
+					'ref_val'	=> '99'
+				)
+			);
+
 	    	$this->view('appeal/detail',$data);
 	    }	
 	    public function status() {
@@ -325,14 +451,14 @@
 			}
 			// echo "<pre>";
 			// var_dump($menu);exit();
-			$id 		= $_GET['id'];
+			$id 		= (int)$_GET['id'];
 			$data['agency'] = $this->model('agency')->getlistsAgency();
 			$data['agencyMinor'] = $this->model('agency')->getlists();
 			$data['appeal'] = $this->model('appeal')->getlists();
 			$response 	= $this->model('response');
 			$resultData = $response->getList($id);
 
-			$data['ticket']				= $resultData['case_code'];
+			$data['ticket']				= $resultData['case_code'];	
 			$data['dateadd']			= $resultData['dateadd'];
 			$data['idCard']				= $resultData['id_card'];
 			$data['fullname']			= $resultData['name_title']." ".$resultData['name']." ".$resultData['lastname'];
@@ -403,6 +529,7 @@
 					'take' => '10'
 				);
 				$data['result'] = $result = $this->model('opm')->getTimelineHeader($dataSelect);
+
 			}
 			if($result=="Err:Not found user!!!"){
 				$data['error'] = "Err:Not found user!!!";
@@ -451,18 +578,11 @@
 					'take' 		=> '10'
 				);
 				$result_TimelineOperating = $this->model('opm')->GetTimelineOperating($dataSelectTimelineOperating);
-				// var_dump($result_TimelineOperating);exit();
 				$dataSelectGetCase = array(
-					// 'token_id' 	=>  $token_id,
 					'case_id'	=> $case_id,
 				);
-				// echo "<pre>";
-				// var_dump($dataSelectGetCase);
 				$result_GetCase = $this->model('opm')->GetCase($dataSelectGetCase);
-				// echo "<pre>";
-				// var_dump($result_GetCase);exit();
 				$dataSelectgetOperatings = array(
-					// 'token_id' 		=>  $token_id,
 					'case_id'		=> $case_id,
 					'select_org_id'	=> '',
 					'skip' 			=> '0',
@@ -552,6 +672,7 @@
 	    	}
 	    	$this->model('opm')->updateDataAddress($data_province,$data_districts,$data_subDistricts);
 	    }
+
 	    public function submitSendOPM(){
 	    	$data = array();
 	    	$result = array(
@@ -708,6 +829,54 @@
 			$data['response_person']	= $resultData['response_person'];
 
 	    	$this->view('appeal/opmStatus',$data);
+	    }
+	    public function submitAddOPM(){
+	    	$result = array(
+	    		'status' => 'ไม่สามารถเพิ่มลงระบบได้'
+	    	);
+	    	if(method_post()){
+	    		$case_code = post('case_code');
+	    		$case_id = post('case_id');
+	    		$dataSelectGetCase = array(
+					'case_id'	=> $case_id,
+				);
+				$getCase = $this->model('opm')->GetCase($dataSelectGetCase);
+				if($getCase){
+					$data_insert = array(
+						'AUT_USER_ID' 	=> (int)$this->getSession('AUT_USER_ID'),
+						'addBy'			=> 2,
+						'case_code_opm' => $case_code,
+						'id_card' 		=> (isset($getCase['account']['citizen_id'])?$getCase['account']['citizen_id']:''),
+						'name' 			=> (isset($getCase['account']['firstname_th'])?$getCase['account']['firstname_th']:''),
+						'lastname' 		=> (isset($getCase['account']['lastname_th'])?$getCase['account']['lastname_th']:''),
+						'case_id_opm'		=> $case_id
+					);
+					$result_response = $this->model('response')->addResponse($data_insert);
+					if($result_response['result']=="success"){
+			    		$result = array(
+			    			'status' => 'เพิ่มลงระบบแล้ว'
+			    		);
+			    	}else{
+			    		$result = array(
+			    			'status' => $result_response['desc']
+			    		);
+			    	}
+			    }else{
+		    		$result = array(
+		    			'status' => 'API มีปัญหา'
+		    		);
+		    	}
+	    	}
+	    	$this->json($result);
+	    }
+	    public function checkCaseOPM(){
+	    	$result = array();
+	    	$case_code = get('case_code');
+	    	$result_response = $this->model('response')->checkCaseOPM($case_code);
+	    	$result = array(
+	    		'case_code' => $result_response
+	    	);
+	    	$this->json($result);
 	    }
 	}
 ?>

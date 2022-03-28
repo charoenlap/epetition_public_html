@@ -174,6 +174,13 @@
                 $user_add = post('user_add');
                 $user_edit = post('user_edit');
                 $user_del = post('user_del');
+
+                $user_accept = post('user_accept');
+                $user_change = post('user_change');
+                $user_send = post('user_send');
+                $user_topic = post('user_topic');
+                $user_opm = post('user_opm');
+
                 if($group_id){
                     $insert = array();
                     foreach($menu_id as $key => $val){
@@ -183,7 +190,12 @@
                             'USER_VIEW'         => $user_view[$key],
                             'USER_ADD'          => $user_add[$key],
                             'USER_EDIT'         => $user_edit[$key],
-                            'USER_DELETE'       => $user_del[$key]
+                            'USER_DELETE'       => $user_del[$key],
+                            'user_accept'       => $user_accept[$key], 
+                            'user_change'       => $user_change[$key], 
+                            'user_send'         => $user_send[$key], 
+                            'user_topic'        => $user_topic[$key], 
+                            'user_opm'          => $user_opm[$key], 
                         );
                     }
                 }

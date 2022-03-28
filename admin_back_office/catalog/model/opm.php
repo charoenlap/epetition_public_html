@@ -275,7 +275,7 @@
 			$case_id 		= (isset($data['case_id'])?$data['case_id']:'');
 			$status_id 		= (isset($data['status_id'])?$data['status_id']:'');
 			$result 		= (isset($data['result'])?$data['result']:'');
-
+			// ManageCenter
 			$array = array(
 				'params' 	=> array(
 					'token_id' 		=> $token_id,

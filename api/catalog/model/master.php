@@ -125,7 +125,7 @@
             $data['id_districts'] = $data['districts'];
             
 			$data['day_end']	= $day_end;
-			$data['dateadd']	= $dateadd; 
+			$data['dateadd']	= date('Y-m-d H:i:s'); 
 			$data['date_end']	= $date_end;
 			$data['status']		= 2;
 			$result_last_insert = $this->insert('response',$data);

@@ -71,8 +71,8 @@
 					$email = post('email');
 					if($email){
 				    	$to_email=$email;
-				    	$msg='<img src="https://e-petition.energy.go.th/images/logo.jpg">';
-				    	$msg.='<table style="width:100%;">';
+				    	$msg = '<img src="https://e-petition.energy.go.th/images/logo.jpg">';
+				    	$msg .='<table style="width:100%;">';
 				    	$msg .= "<tr><td>หมายเลขเรื่องร้องเรียน: ".$add."</td></tr>";
 						$msg .= "<tr><td>คำนำหน้า</td><td>".post('id_card')."</td></tr>";
 						$msg .= "<tr><td>เลขประจำตัวประชาชน</td><td>".post('name_title')."</td></tr>";

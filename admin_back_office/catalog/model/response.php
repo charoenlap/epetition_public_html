@@ -1,5 +1,21 @@
 <?php 
     class ResponseModel extends db {
+        public function checkCaseOPM($case_code_opm = 0){
+            $result = '';
+            // $case_code_opm = (isset($data['case_code_opm'])?$data['case_code_opm']:'');
+            $case_code_opm = $this->escape($case_code_opm);
+            if($case_code_opm){
+                $sql = "SELECT * FROM ep_response WHERE case_code_opm = '".$case_code_opm."'";
+                $result_check = $this->query($sql);
+                if($result_check->num_rows){
+                    $result = $result_check->row['case_code'];
+                }
+            }
+            return $result;
+        }
+        public function insertResponseSend($data = array()){
+            $this->insert('response_send',$data);
+        } 
         public function inputResponse($data = array()){
             foreach($data as $val){
                 $this->insert('response_status',$val);
@@ -10,25 +26,42 @@
                 $this->insert('response_comment',$data);
             // }
         } 
-        public function updateStatus($id=0,$status=0){
-            // foreach($data as $val){
-                $this->query("UPDATE ep_response SET `status` = '".(int)$status."' WHERE id = '".(int)$id."'");
-            // }
+        public function updateStatus($data=array()){
+            $id = (int)(isset($data['id'])?$data['id']:0);
+            $status = (int)(isset($data['status'])?$data['status']:0);
+            $approve_topic = (int)(isset($data['approve_topic'])?$data['approve_topic']:0);
+            $approve_user_id = (int)(isset($data['approve_user_id'])?$data['approve_user_id']:0);
+            $send_opm = (int)(isset($data['send_opm'])?$data['send_opm']:0);
+            if($id){
+                $sql = "UPDATE ep_response SET 
+                        `status` = '".$status."',
+                        `approve_topic` = '".$approve_topic."',
+                        `approve_user_id` = '".$approve_user_id."',
+                        `send_opm` = '".$send_opm."' 
+                        WHERE id = '".(int)$id."'";
+                $this->query($sql);
+            }
         } 
         public function delResponse($id=0){
             $this->delete('response_status',"id='".$id."'");
         }
         public function getResponse($id=0){
             $result = array();
-            $sql = "SELECT *,ep_response_status.id AS id,ep_response_status.date_create AS date_create 
+            $sql = "SELECT *,
+                        ep_response_status.id AS id,
+                        ep_response_status.date_create AS date_create
                     FROM ep_response_status 
                     LEFT JOIN ep_agency_minor ON ep_agency_minor.id = ep_response_status.id_agency_minor
+                    LEFT JOIN ep_agency ON ep_agency.id = ep_response_status.id_agency
                     LEFT JOIN ep_appeal ON ep_appeal.id = ep_response_status.id_appeal
 
             WHERE id_response = ".(int)$id;
             // echo $sql;exit();
-            $result = $this->query($sql);
-            return $result->rows;
+            $result = $this->query($sql)->rows;
+            // echo "<pre>";
+            // var_dump($result);
+            // exit();
+            return $result;
         }
         public function getComment($id=0){
             $result = array();
@@ -44,6 +77,7 @@
         }
         public function getlists($data = array()){
             $where = '';
+            $id_agency = (isset($data['id_agency'])?$data['id_agency']:'');
             $id_agency_minor = (isset($data['id_agency_minor'])?$data['id_agency_minor']:'');
             $topic_id = (isset($data['topic_id'])?$data['topic_id']:'');
             $dateadd = (isset($data['dateadd'])?trim($data['dateadd']):'');
@@ -120,7 +154,8 @@
                 $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
                 $where = " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
             }
-            $sql    = "SELECT *,a.id as id, 
+            $sql    = "SELECT *,
+            a.id as id, 
             `ep_status`.`status_class` as text_class,
             `ep_status`.`status_text` as text_status,
             `ep_status`.`status_icon` as status_icon,
@@ -172,8 +207,47 @@
             return $query->rows;
         }
         public function addResponse($data=array()){
-            $query = $this->insert('response',$data);
-            return $query;
+            $result = array(
+                'result' => 'failed'
+            );
+            $case_code_opm = (isset($data['case_code_opm'])?$data['case_code_opm']:'');
+            $case_code_opm = $this->escape($case_code_opm);
+            if($case_code_opm){
+                $sql = "SELECT * FROM ep_response WHERE case_code_opm = '".$case_code_opm."'";
+                $result_check = $this->query($sql);
+                if($result_check->num_rows == 0){
+                    $day_end = 30;
+                    $sql_config_day = "SELECT * FROM ep_config WHERE `name` = 'day_end'";
+                    $query_config_day = $this->query($sql_config_day);
+                    if($query_config_day->num_rows){
+                        $day_end = $query_config_day->row['val'];
+                    }
+
+                    $dateadd=date('Y-m-d');
+                    $date_end = date('Y-m-d', strtotime($dateadd. ' + '.$day_end.' days'));
+
+                    $data['day_end']    = $day_end;
+                    $data['dateadd']    = date('Y-m-d H:i:s'); 
+                    $data['date_end']   = $date_end;
+                    $data['status']     = 2;
+
+                    $result_last_insert = $this->insert('response',$data);
+
+                    $case_code = ((date('y')+43).date('m')).str_pad($result_last_insert,4,"0", STR_PAD_LEFT);
+                    $sql_update = "UPDATE ep_response SET case_code = '".$case_code."' WHERE id=".$result_last_insert;
+                    $query_update = $this->query($sql_update);
+
+                    $result = array(
+                        'result' => 'success'
+                    );
+                }else{
+                    $result = array(
+                        'result' => 'failed',
+                        'desc'  => 'มีในระบบแล้ว'
+                    );
+                }
+            }
+            return $result;
         }
         public function updateResponse($data=array(),$id){
             $query = $this->update('response',$data,"id=".$id);

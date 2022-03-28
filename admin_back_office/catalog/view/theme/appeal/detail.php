@@ -22,19 +22,22 @@
                         <div class="card-header">
                             <h4 class="card-title"><?php echo $title; ?></h4>
                             <a href="<?php echo route('appeal'); ?>" class="float-right btn btn-dark btn-sm ml-2">ย้อนกลับ</a> 
-                            <a href="#" class="float-right btn btn-danger btn-sm ml-2">ลบ</a> 
-                            <a href="#" class="float-right btn btn-warning btn-sm ml-2">แก้ไข</a> 
+                            <a href="<?php echo route('appeal/del&id='.$id); ?>" class="float-right btn btn-danger btn-sm ml-2 btn-del">ลบ</a> 
+
+                            <a href="<?php echo route('appeal/edit&id='.$id);?>" class="float-right btn btn-warning btn-sm ml-2">แก้ไข</a> 
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <table class="table table-bordered table-primary">
                                         <tbody>
                                             <tr>
-                                                <td>Ticket ID : <?php echo $ticket; ?></td>
+                                                <td>Ticket ID : </td>
+                                                <td><?php echo $ticket; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>วันที่เรื่องร้องเรียนเข้าระบบ : <?php echo $dateadd; ?></td>
+                                                <td>วันที่เรื่องร้องเรียนเข้าระบบ : </td>
+                                                <td><?php echo $dateadd; ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -70,11 +73,11 @@
                                             </tr>
                                             <tr>
                                                 <td>ถนน : <?php echo $road; ?></td>
-                                                <td>จังหวัด : <?php echo $id_provinces; ?></td>
+                                                <td>จังหวัด : <?php echo $PROVINCE_NAME; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>อำเภอ/เขต : <?php echo $id_amphures; ?></td>
-                                                <td>ตำบล/แขวง : <?php echo $id_districts; ?></td>
+                                                <td>อำเภอ/เขต : <?php echo $AMPHUR_NAME; ?></td>
+                                                <td>ตำบล/แขวง : <?php echo $TAMBON_NAME; ?></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2">รหัสไปรษณีย์ : <?php echo $zipcode; ?></td>
@@ -106,7 +109,9 @@
                                             </tr>
                                             <tr>
                                                 <td>เอกสารแนบ</td>
-                                                <td></td>
+                                                <td>
+                                                    <a href="<?php echo '../uploads/files/'.$file; ?>" target="_blank"><?php echo $file; ?></a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -115,6 +120,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <h4>ความก้าวหน้าการดำเนินการเรื่องร้องเรียน</h4>
+                                    <?php if($getResponse){ ?>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -145,169 +151,247 @@
                                             <?php } ?>
                                         </tbody>
                                     </table>
+                                    <?php }else{?>
+                                    <p>ไม่พบความก้าวหน้าเรื่องร้องเรียน</p>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">ความคิดเห็น</h4>
-                        </div>
-                        <div class="card-body">
-                            <form action="#" method="POST"  id="form-sender">
-                                <input type="hidden" name="id_response" value="<?php echo $id;?>">
-                                <?php foreach($getComment as $val){ ?>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-header bg-primary">
-                                                <h4 class="card-title"><?php echo $val['agency_minor_title']; ?></h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <p><?php echo $val['FIRSTNAME'].' '.$val['LASTNAME']; ?></p>
-                                                    </div>
-                                                    <div class="col-10">
-                                                        <small>วันที่ : <?php echo $val['date_create']; ?></small>
-                                                        <?php echo $val['note']; ?>
+            </div>
+            <div id="tabs">
+              <ul class="nav nav-pills mb-3">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#tabs-1">ความคิดเห็น</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tabs-2">ข้อเสนอแนวทางการพิจารณาดําเนินการ</a>
+                </li>
+              </ul>
+              <div id="tabs-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">ความคิดเห็น</h4>
+                            </div>
+                            <div class="card-body">
+                                <form action="#" method="POST"  id="form-sender-comment">
+                                    <input type="hidden" name="id_response" value="<?php echo $id;?>">
+                                    <?php foreach($getComment as $val){ ?>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header bg-primary">
+                                                    <h4 class="card-title"><?php echo $val['agency_minor_title']; ?></h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <p><?php echo $val['FIRSTNAME'].' '.$val['LASTNAME']; ?></p>
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <small>วันที่ : <?php echo $val['date_create']; ?></small>
+                                                           <div> <?php echo $val['note']; ?></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <?php } ?>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label for="">กรอกข้อมูล/ความเห็น</label>
-                                        <textarea name="note" id="summernote" cols="30" rows="30"></textarea>
+                                    <?php } ?>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="">กรอกข้อมูล/ความเห็น</label>
+                                            <textarea name="note" id="summernote" cols="30" rows="30"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input type="checkbox">
-                                        <label for="">อนุมัติเรื่อง</label>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="file" class="btn btn-info">เอกสารแนบ</label>
+                                            <input type="file" class="form-control d-none" id="file" accept="image/*,video/*">
+                                            รองรับไฟล์การอัพโหลด  doc , docx , pdf , xls , xlsx , jpeg , png , mp4 , wav เท่านั้น
+                                        </div>
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <input type="checkbox">
-                                        <label for="">ส่งต่อไปยังกรม</label>
+                                    <?php if($user_accept){ ?>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input id="approve_topic" type="checkbox" name="approve_topic" value="1" <?php echo ($approve_topic?'checked':'') ?>>
+                                            <label for="approve_topic">อนุมัติเรื่อง</label>
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control" placeholder="Email">
+                                    <hr>
+                                    <?php } ?>
+                                    <?php if($user_topic){ ?>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <input id="send_sub_agency" type="checkbox" name="send_sub_agency" value="1">
+                                            <label for="send_sub_agency">ส่งต่อไปยังกรม</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="">Email</label>
+                                            <input name="email_send[]" type="email" class="form-control" placeholder="Email">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="">ข้อความเพิ่มเติม</label>
+                                            <input name="comment_send[]" type="text" class="form-control" placeholder="ข้อความเพิ่มเติม">
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <input type="text" class="form-control" placeholder="ข้อความเพิ่มเติม">
+                                    <div class="row mt-2">
+                                        <div class="col-md-3 text-right">
+                                            ส่งอีเมล
+                                        </div>
+                                        <div class="col-9">
+                                            <textarea disabled name="email_log_comment_send" id="email_log_comment_send" cols="5" rows="3" class="form-control"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="file" class="btn btn-info">เอกสารแนบ</label>
-                                        <input type="file" class="form-control d-none" id="file" accept="image/*,video/*">
-                                        รองรับไฟล์การอัพโหลด  doc , docx , pdf , xls , xlsx , jpeg , png , mp4 , wav เท่านั้น
+                                    <hr>
+                                    <?php } ?>
+                                    <?php if($user_opm AND $case_code_opm){ ?>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <input id="send_opm" type="checkbox" name="send_opm" value="1">
+                                            <label for="send_opm">ส่งต่อไปยังสปน.</label><br>
+                                            <label><?php echo $case_code_opm;?></label><br>
+                                            <input type="hidden" name="case_id_opm" value="<?php echo $case_id_opm;?>">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="">สถานะ</label>
+                                            <select name="status_opm" class="form-control" id="">
+                                                <?php foreach($getCaseStatus as $val){ ?>
+                                                    <option value="<?php echo $val['val'];?>">
+                                                        <?php echo $val['text'];?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="">ข้อความเพิ่มเติม</label>
+                                            <input type="text" name="comment_opm" class="form-control" placeholder="ข้อความเพิ่มเติม">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <select name="status" id="status" class="form-control">
-                                            <option value="2" <?php echo ($status=="2"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างการดำเนินการ</option>
-                                            <option value="3" <?php echo ($status=="3"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์อีก 7 วันจะครบกำหนด</option>
-                                            <option value="4" <?php echo ($status=="4"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด</option>
-                                            <option value="1" <?php echo ($status=="1"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว</option>
-                                        </select>
+                                    <hr>
+                                    <?php } ?>
+                                    <?php if($user_change){ ?>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label for="">ปรับสถานะเรื่องร้องเรียน</label>
+                                            </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <select name="status" id="status" class="form-control">
+                                                <option value="2" <?php echo ($status=="2"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างการดำเนินการ</option>
+                                                <option value="3" <?php echo ($status=="3"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์อีก 7 วันจะครบกำหนด</option>
+                                                <option value="4" <?php echo ($status=="4"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด</option>
+                                                <option value="1" <?php echo ($status=="1"?'selected':''); ?> >เรื่องร้องเรียน/ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <button class="btn btn-primary">บันทึก</button>  
-                                        <a href="<?php echo route('appeal');?>" class="btn btn-danger">ยกเลิก</a>
+                                    <?php } ?>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-primary">บันทึก</button>  
+                                            <a href="<?php echo route('appeal');?>" class="btn btn-danger">ยกเลิก</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <form action="" method="post" id="form-sender">
-                        <input type="hidden" name="id_response" value="<?php echo $id;?>">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">ข้อเสนอแนวทางการพิจารณาดําเนินการ</h4>
+              </div>
+              <div id="tabs-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="" method="post" id="form-sender">
+                            <input type="hidden" name="id_response" value="<?php echo $id;?>">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">ข้อเสนอแนวทางการพิจารณาดําเนินการ</h4>
+                                </div>
+                                <div class="card-body">
+                                    <?php if($active_add){ ?>
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
+                                            <label for="">ประเด็นเรื่องร้องเรียน</label>
+                                            <select name="id_appeal" id="id_appeal" class="form-control">
+                                                <option value="">เลือกประเด็นเรื่องร้องเรียน</option>
+                                                <?php foreach($appeal->rows as $val){?>
+                                                    <option value="<?php echo $val['id'];?>"><?php echo $val['appeal_title'];?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>  
+                                        <div class="col-md-3">
+                                            <label for="">เลือกหน่วยงาน</label>
+                                            <select name="id_agency" id="id_agency" class="form-control">
+                                                <option value="">เลือกหน่วยงาน</option>
+                                                <?php foreach($agency->rows as $val){?>
+                                                    <option value="<?php echo $val['id'];?>"><?php echo $val['agency_title'];?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="">เลือกหน่วยงานระดับส่วน</label>
+                                            <select name="id_agency_minor" id="id_agency_minor" class="form-control">
+                                                <option value="">ทั้งหมด</option>
+                                                <?php /*foreach($agencyMinor->rows as $val){?>
+                                                    <option value="<?php echo $val['id'];?>"><?php echo $val['agency_minor_title'];?></option>
+                                                <?php }*/ ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a class="btn btn-primary" id="addFrom"><i class="fas fa-folder-plus"></i> <br>เพิ่ม</a>
+                                        </div>
+                                    </div>
+                                    <?php }?>
+                                    <table class="table-striped table" id="sender">
+                                        <thead></thead>
+                                        <tbody class="body">
+                                            <?php foreach($getResponse as $val){?>
+                                                <tr>
+                                                    <td><?php echo $val['appeal_title'];?></td>
+                                                    <td><?php echo $val['agency_title'];?></td>
+                                                    <td><?php echo $val['agency_minor_title'];?></td>
+                                                    <td>
+                                                        <?php if($active_del){ ?>
+                                                        <a href="#" class="btn btn-danger delForm" data-id="<?php echo $val['id'];?>">ลบ</a>
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                    <?php if($active_add){ ?>
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <input type="checkbox" id="chkSendEmailTo" name="chkSendEmailTo" checked value="1">
+                                            <label for="chkSendEmailTo">ส่งอีเมลแจ้งเตือนให้หน่วยงาน</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <p>อีเมลที่ถูกส่ง</p>
+                                            <textarea name="" id="email_log_send" cols="5" rows="3" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-12 text-center">
+                                            <button class="btn btn-dark" style="width:150px;" id="btn-sender" type="submit">ส่งเรื่อง</button>
+                                            <a href="<?php echo route('appeal');?>" class="btn btn-light">กลับหน้าหลัก</a>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <?php if($active_add){ ?>
-                                <div class="row mb-3">
-                                    <div class="col-md-5">
-                                        <label for="">ประเด็นเรื่องร้องเรียน</label>
-                                        <select name="id_appeal" id="id_appeal" class="form-control">
-                                            <option value="">เลือกประเด็นเรื่องร้องเรียน</option>
-                                            <?php foreach($appeal->rows as $val){?>
-                                                <option value="<?php echo $val['id'];?>"><?php echo $val['appeal_title'];?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>  
-                                    <div class="col-md-3">
-                                        <label for="">เลือกหน่วยงาน</label>
-                                        <select name="id_agency" id="id_agency" class="form-control">
-                                            <option value="">เลือกหน่วยงาน</option>
-                                            <?php foreach($agency->rows as $val){?>
-                                                <option value="<?php echo $val['id'];?>"><?php echo $val['agency_title'];?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">เลือกหน่วยงานระดับส่วน</label>
-                                        <select name="id_agency_minor" id="id_agency_minor" class="form-control">
-                                            <option value="">ทั้งหมด</option>
-                                            <?php foreach($agencyMinor->rows as $val){?>
-                                                <option value="<?php echo $val['id'];?>"><?php echo $val['agency_minor_title'];?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a class="btn btn-primary" id="addFrom"><i class="fas fa-folder-plus"></i> <br>เพิ่ม</a>
-                                    </div>
-                                </div>
-                                <?php }?>
-                                <table class="table-striped table" id="sender">
-                                    <thead></thead>
-                                    <tbody class="body">
-                                        <?php foreach($getResponse as $val){?>
-                                            <tr>
-                                                <td><?php echo $val['appeal_title'];?></td>
-                                                <td><?php echo $val['agency_minor_title'];?></td>
-                                                <td>
-                                                    <?php if($active_del){ ?>
-                                                    <a href="#" class="btn btn-danger delForm" data-id="<?php echo $val['id'];?>">ลบ</a>
-                                                    <?php } ?>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                                <?php if($active_add){ ?>
-                                <div class="row mt-2">
-                                    <div class="col-12">
-                                        <input type="checkbox" id="chkSendEmail" checked>
-                                        <label for="chkSendEmail">ส่งอีเมลแจ้งเตือนให้หน่วยงาน</label>
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col-md-12 text-center">
-                                        <button class="btn btn-dark" style="width:150px;" id="btn-sender" type="submit">ส่งเรื่อง</button>
-                                        <a href="<?php echo route('appeal');?>" class="btn btn-light">กลับหน้าหลัก</a>
-                                    </div>
-                                </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>  
+            </div>
+
+            
+            
                 <!-- <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
@@ -340,6 +424,7 @@
 <script>
     $(document).on('submit','#form-sender',function(e){
         var form = $(this);
+        console.log(form.serialize());
         $.ajax({
             url: 'index.php?route=appeal/sender',
             type: 'POST',
@@ -348,6 +433,14 @@
         })
         .done(function(data) {
             console.log(data);
+            // console.log(data.email);
+            var text_email = '';
+            console.log(data.email);
+            $.each(data.email, function(index, val) {
+                 text_email += val+',';
+                 console.log(text_email);
+            });
+            $('#email_log_send').text(text_email);
             // alert('บันทึกเรียบร้อย');
             console.log("success");
         })
@@ -408,7 +501,7 @@
         $(this).parent().parent().remove();
         e.preventDefault();
     });
-    $(document).on('submit','#form-sender',function(e){
+    $(document).on('submit','#form-sender-comment',function(e){
         var form = $(this);
         $.ajax({
             url: 'index.php?route=appeal/comment',
@@ -418,6 +511,13 @@
         })
         .done(function(data) {
             alert('บันทึกเข้าระบบเรียบร้อย');
+            var text_email = '';
+            console.log(data.email);
+            $.each(data.email, function(index, val) {
+                 text_email += val+',';
+                 console.log(text_email);
+            });
+            $('#email_log_comment_send').text(text_email);
             console.log(data);
             console.log("success");
         })
@@ -438,3 +538,46 @@
         height: 300
     });
 </script>
+<script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+  $(document).on('click','#tabs .nav-link',function(e){
+    $('#tabs .nav-link').removeClass('active');
+    $(this).addClass('active');
+  });
+  $('.btn-del').click(function(event){
+        if(confirm('ลบข้อมูล')==true){
+            window.location.href = $(this).attr('href');
+        }else{
+            event.preventDefault();
+        }
+    });
+  $(document).on('change','#id_agency',function(e){
+    var ele = $(this);
+    $.ajax({
+        url: 'index.php?route=appeal/getMinorAgency',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            id_agency: ele.val()
+        },
+    })
+    .done(function(json) {
+        console.log(json);
+        $.each(json, function(index, val) {
+            var html = '<option value=' + json[index].id + '>' + json[index].agency_minor_title + '</option>';
+             $("#id_agency_minor").append(html);
+        });
+        console.log("success");
+    })
+    .fail(function() {
+        console.log("error");
+    })
+    .always(function() {
+        console.log("complete");
+    });
+    
+  });
+</script>
+

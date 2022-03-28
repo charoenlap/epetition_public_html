@@ -27,7 +27,9 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title"><?php echo $title; ?></h4>
+                            <a href="<?php echo route('appeal/detail&id='.$id);?>" class="float-right btn btn-dark btn-sm ml-2">ย้อนกลับ</a> 
+
+                            <a href="<?php echo route('appeal/del&id='.$id); ?>" class="float-right btn btn-danger btn-sm ml-2 btn-del">ลบ</a> 
                         </div>
                         <div class="card-body">
                             <form action="<?php echo route('appeal/edit&id='.$data['id']); ?>" method="post">
@@ -346,6 +348,16 @@
   </div>
 </div>
 <script>
+      $('.btn-del').click(function(event){
+        if(confirm('ลบข้อมูล')==true){
+            window.location.href = $(this).attr('href');
+        }else{
+            event.preventDefault();
+        }
+    });
+</script>
+<script>
+
     $('#appeal').addClass('active');
     function idcard(obj){  
     var pattern=new String("_-____-_____-__-_"); // กำหนดรูปแบบในนี้  

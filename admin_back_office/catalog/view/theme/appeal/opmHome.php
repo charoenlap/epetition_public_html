@@ -87,6 +87,7 @@
                                                 </th>
                                                 <th class="text-center"  style="width:45px;">ลำดับ</th>
                                                 <th  style="width:80px;">Ticket ID</th>
+                                                <th  style="width:80px;">Ticket ID (สปน)</th>
                                                 <th style="width:180px;">ชื่อผู้ร้องเรียน</th>
                                                 <th>หัวข้อร้องเรียน</th>
                                                 <th>ช่องทางการร้องเรียน</th>
@@ -105,10 +106,16 @@
                                             <tr>
                                                 <td class="text-center">
                                                     <input type="checkbox" class="checkboxSend" value="<?php echo $val['case_code']; ?>"
-                                                    case_code="<?php echo $val['case_code'];?>">
+                                                    case_code="<?php echo $val['case_code'];?>"
+                                                    case_id="<?php echo $val['case_id'];?>">
                                                 </td>
                                                 <td class="text-center"><?php echo $i++;?></td>
-                                                <td><?php echo $val['case_code']; ?></td>
+                                                <td class="case_code_system" id="case_code_<?php echo $val['case_id'];?>">
+                                                    
+                                                </td>
+                                                <td class="case_code_td">
+                                                    <?php echo $val['case_code']; ?>
+                                                </td>
                                                 <td><?php echo $val['customer_name'];?></td>
                                                 <td><?php echo $val['summary'];?></td>
                                                 <td><?php echo $val['objective_text']; ?></td>
@@ -203,6 +210,32 @@
     </div>
 </div>
 <script>
+    $(function(e){
+        $( '.case_code_td' ).each(function( index ) {
+            var case_code = $.trim($(this).text());
+            var ele = $(this).parents('tr').find('.case_code_system');
+            $.ajax({
+                url: 'index.php?route=appeal/checkCaseOPM',
+                type: 'GET',
+                dataType: 'json',
+                data: {case_code: case_code},
+            })
+            .done(function(json) {
+                ele.text(json.case_code);
+                console.log("success");
+            })
+            .fail(function(a,b,c) {
+                console.log("error");
+                console.log(a);
+                console.log(b);
+                console.log(c);
+            })
+            .always(function() {
+                console.log("complete");
+            });
+            
+        })
+    });
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })
@@ -214,33 +247,36 @@
             var ele = $(this);
             
              if(ele.is(':checked')){
-                var case_code = ele.attr('case_code');
+                var case_code   = ele.attr('case_code');
+                var case_id     = ele.attr('case_id');
                 html = "<tr id='process_case_code_"+case_code+"'>"+
                             "<td class='text-case-code'>"+case_code+"</td>"+
-                            "<td class='process'>กำลังดำเนินการ"+
+                            "<td class='process' id='case_id_"+case_id+"'>กำลังดำเนินการ"+
                         "</tr>";
                 $('#process .modal-body .table tbody').append(html);
-                // $.ajax({
-                //     url: 'index.php?route=appeal/submitSendOPM',
-                //     type: 'GET',
-                //     dataType: 'json',
-                //     data: {
-                //         case_code: case_code
-                //     },
-                // })
-                // .done(function(json) {
-                //     $('#process_case_code_'+case_code+' .process').text(json.status);
-                //     console.log("success");
-                // })
-                // .fail(function(a,b,c) {
-                //     // 
-                //     console.log(a);
-                //     console.log(b);
-                //     console.log(c);
-                // })
-                // .always(function() {
-                //     console.log("complete");
-                // });
+                $.ajax({
+                    url: 'index.php?route=appeal/submitAddOPM',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        case_code: case_code,
+                        case_id: case_id
+                    },
+                })
+                .done(function(json) {
+                    console.log(json);
+                    $('#process_case_code_'+case_code+' .process').text(json.status);
+                    console.log("success");
+                })
+                .fail(function(a,b,c) {
+                    // 
+                    console.log(a);
+                    console.log(b);
+                    console.log(c);
+                })
+                .always(function() {
+                    console.log("complete");
+                });
              }
         });
         e.preventDefault();

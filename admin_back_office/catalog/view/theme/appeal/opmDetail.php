@@ -36,13 +36,11 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <table class="table table-bordered table-primary">
                                         <tbody>
                                             <tr>
                                                 <td>Case code : <?php echo $case_code; ?></td>
-                                            </tr>
-                                            <tr>
                                                 <td>วันที่เรื่องร้องเรียนเข้าระบบ : <?php echo (isset($getCase['ShowDateTime'])?$getCase['ShowDateTime']:'');?></td>
                                             </tr>
                                         </tbody>
@@ -275,7 +273,7 @@
                     </div>
                 </div> -->
             </div>
-            <?php if($active_add){?>
+            <?php /*if($active_add){?>
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">บันทึกผลสรุปการปฏิบัติงานของหน่วยงาน</h4>
@@ -303,7 +301,7 @@
                     </div>
                 </div>
             </div>
-            <?php } ?>
+            <?php }*/ ?>
         </div>
         <?php }else{?>
           <div class="container-fluid">
@@ -319,14 +317,14 @@
                 <script>
                 $(document).on('click','#btn-save-status',function(e){
                 $.ajax({
-                url: 'index.php?route=home/setOrgSummaryResult',
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                token_id: '<?php echo $token_id;?>',
-                case_id: '<?php echo $case_id;?>',
-                status_id: $('#status_id').val(),
-                result: $('#result').val()
+                    url: 'index.php?route=home/setOrgSummaryResult',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                    token_id: '<?php echo $token_id;?>',
+                    case_id: '<?php echo $case_id;?>',
+                    status_id: $('#status_id').val(),
+                    result: $('#result').val()
                 },
                 })
                 .done(function(json) {

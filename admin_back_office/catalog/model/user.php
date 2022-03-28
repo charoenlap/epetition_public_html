@@ -1,5 +1,16 @@
 <?php 
 	class UserModel extends db {
+        public function listEmailUser($data=array()){
+            $id_agency_minor = (int)(isset($data['id_agency_minor'])?$data['id_agency_minor']:'');
+            $id_agency = (int)(isset($data['id_agency'])?$data['id_agency']:'');
+            $where = '';
+            if($id_agency_minor){
+                $where = " AND id_agency_minor='".(int)$id_agency_minor."'";
+            }
+            $sql = "SELECT * FROM AUT_USER WHERE `email` != '' AND id_agency = '".(int)$id_agency."' ".$where;
+            $result = $this->query($sql);
+            return $result;
+        }
         public function checkUser($AUT_USERNAME=''){
             $result = 0;
             $AUT_USERNAME = $this->escape($AUT_USERNAME);

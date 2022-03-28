@@ -322,7 +322,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                <a href="<?php echo route('setting/approve'); ?>" class="nav-link px-1" id="pageSetting">
                   <i class="nav-icon fas fa-cog"></i>
                   <p>ตั้งค่าส่วนตัว การอนุมัติ</p>
                 </a>

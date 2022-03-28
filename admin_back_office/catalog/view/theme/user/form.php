@@ -107,11 +107,11 @@
                                         <input type="password" class="form-control" name="AUT_PASSWORD">
                                     </div>
                                     
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label for="">ชื่อ</label>
                                         <input type="text" class="form-control" name="FIRSTNAME"  value="<?php echo (isset($user['FIRSTNAME'])?$user['FIRSTNAME']:'');?>">
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label for="">นามสกุล</label>
                                         <input type="text" class="form-control" name="LASTNAME"  value="<?php echo (isset($user['LASTNAME'])?$user['LASTNAME']:'');?>">
                                     </div>
@@ -128,17 +128,42 @@
                                     <div class="col-md-2 mb-3">
                                         <a href="#">กำหนดสิทธิ์รายบุคคล</a>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="">E-mail</label>
+                                        <input type="text" class="form-control" name="email" value="<?php echo (isset($user['email'])?$user['email']:'');?>">
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-2">
                                     <div class="col-md-6 mb-3">
                                         <label for="">สถานะ</label>
-                                        เปิด<input type="radio" value="1" name="ACTIVE_STATUS" checked>
-                                        ปิด<input type="radio" value="0" name="ACTIVE_STATUS">
+                                        <input type="radio" value="1" name="ACTIVE_STATUS" checked>
+                                        เปิด
+                                        <input type="radio" value="0" name="ACTIVE_STATUS">
+                                        ปิด
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <label for="">Token API</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="text" class="form-control" name="" value="<?php echo encrypt($id);?>" id="token">
+                                    </div>
+                                    <div class="col-2">
+                                        <button onclick="coppy();return false;" class="btn btn-primary btn-block">Copy token</button>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
                                     <div class="col-md-12">
-                                        <button class="btn btn-primary">บันทึก</button>
+                                        <button class="btn btn-primary ">บันทึก</button>
                                         <a href="<?php echo route('user'); ?>" class="btn btn-dark">ยกเลิก</a>
                                     </div>
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -149,6 +174,20 @@
   </div>
 
 <script>
+    function coppy() {
+      /* Get the text field */
+      var copyText = document.getElementById("token");
+
+      /* Select the text field */
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+       /* Copy the text inside the text field */
+      navigator.clipboard.writeText(copyText.value);
+
+      /* Alert the copied text */
+      // alert("Copied the text: " + copyText.value);
+    }
     $('#pageUser').addClass('active');
     $(document).on('change','#id_agency',function(e){
         var ele = $(this);
