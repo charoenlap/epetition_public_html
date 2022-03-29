@@ -161,16 +161,16 @@
                                         <thead>
                                             <tr>
                                                 <th><input type="checkbox" id="checkAll"></th>
-                                                <th class="text-center"  style="width:45px;">ลำดับ</th>
-                                                <th  style="width:80px;">Ticket ID</th>
-                                                <th style="width:180px;">ชื่อผู้ร้องเรียน</th>
-                                                <th>ประเภทเรื่องที่ร้องเรียน</th>
-                                                <th>ช่องทางการร้องเรียน</th>
-                                                <th>สถานที่เกิดเหตุ</th>
-                                                <th style="width:130px;">วันที่ร้องเรียน</th>
-                                                <th style="width:130px;">จำนวนวันที่ผ่านมา</th>
-                                                <th class="text-center" style="width:50px;">สถานะ</th>
-                                                <th class="text-center" style="width:200px;">การจัดการ</th>
+                                                <th class="text-center align-top"  style="width:45px;">ลำดับ</th>
+                                                <th class="align-top"  style="width:80px;">Ticket ID</th>
+                                                <th class="align-top" style="width:180px;">ชื่อผู้ร้องเรียน</th>
+                                                <th class="align-top">ประเภทเรื่องที่ร้องเรียน</th>
+                                                <th class="align-top">ช่องทางการร้องเรียน</th>
+                                                <th class="align-top">สถานที่เกิดเหตุ</th>
+                                                <th class="align-top" style="width:130px;">วันที่ร้องเรียน</th>
+                                                <th class="align-top" style="width:130px;">จำนวนวันที่ผ่านมา</th>
+                                                <th class="text-center align-top" style="width:50px;">สถานะ</th>
+                                                <th class="text-center align-top" style="width:200px;">การจัดการ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -190,9 +190,9 @@
                                                 <td><?php echo $value['fullname']; ?></td>
                                                 <td><?php echo $value['topicTitle']; ?></td>
                                                 <td><?php echo $value['addBy']; ?></td>
-                                                <td><?php //echo $value['topicTitle']; ?></td>
+                                                <td><?php echo $value['PROVINCE_NAME']; ?></td>
                                                 <td><?php echo $value['dateadd']; ?></td>
-                                                <td></td>
+                                                <td><?php echo $value['days']; ?></td>
                                                 <td>
                                                     <i class="fas fa-square-full status-<?php echo $value['status_icon']; ?>"></i>
                                                 </td>

@@ -15,41 +15,73 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <form action="<?php echo route('setting'); ?>" method="POST">
+    <form action="<?php echo route('setting/submitApprove'); ?>" method="POST">
         <section class="content">
             <?php if($active_view){ ?>
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-3">
-                                <label for="">ช่วงวันที่ต้องการมอบหมายแทน</label>
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="">ช่วงวันที่ต้องการมอบหมายแทน</label>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control datethaipicker" name="date_start">
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control datethaipicker" name="date_end">
+                                </div>
                             </div>
-                            <div class="col-3">
-                                <input type="text" class="form-control">
+                            <div class="row mt-4">
+                                <div class="col-3">
+                                    <label for="">มอบหมายให้ บุคคลทำหน้าที่แทน</label>
+                                </div>
+                                <div class="col-6">
+                                    <select name="assign_user_id" id="assign_user_id" class="form-control">
+                                        <option value=""></option>
+                                        <?php foreach($users as $val){?>
+                                            <option value="<?php echo $val['AUT_USER_ID'];?>"><?php echo $val['FIRSTNAME'].' '.$val['LASTNAME'];?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-3">
-                                <input type="text" class="form-control">
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <input type="submit" class="btn btn-primary" value="บันทึก">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-3">
-                                <label for="">มอบหมายให้ บุคคลทำหน้าที่แทน</label>
-                            </div>
-                            <div class="col-6">
-                                <select name="" id="" class="form-control">
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-12">
-                                <input type="submit" class="btn btn-primary" value="บันทึก">
+
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <th>ชื่อ</th>
+                                            <th>นามสกุล</th>
+                                            <th>วันที่เริ่ม</th>
+                                            <th>วันที่สิ้นสุด</th>
+                                        </thead>
+                                        <tbody>
+                                            <?php if($listAssign){ ?>
+                                                <?php foreach($listAssign as $val){?>
+                                                    <tr>
+                                                        <td><?php echo $val['FIRSTNAME'];?></td>
+                                                        <td><?php echo $val['LASTNAME'];?></td>
+                                                        <td><?php echo $val['date_start'];?></td>
+                                                        <td><?php echo $val['date_end'];?></td>
+                                                    </tr>
+                                                <?php } ?>
+                                            <?php }else{?>
+                                                    <tr>
+                                                        <td colspan="4">ไม่พบข้อมูล</td>
+                                                    </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <?php }else{?>
               <div class="container-fluid">
                 <div class="row">
@@ -62,3 +94,16 @@
         </section>
     </form>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.datethaipicker').datetimepicker({
+            // yearOffset:222,
+            lang:'ch',
+            timepicker:false,
+            format:'Y-m-d H:i:s',
+            formatDate:'Y-m-d',
+            // minDate:'-1970/01/02', // yesterday is minimum date
+            // maxDate:'+1970/01/02' // and tommorow is maximum date calendar
+        });
+    });
+</script>

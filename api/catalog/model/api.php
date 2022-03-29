@@ -105,7 +105,7 @@
                         LEFT JOIN TAMBON ON a.`id_districts` = TAMBON.`TAMBON_ID` 
                         LEFT JOIN TAMBON t ON a.`t_id_districts` = t.`TAMBON_ID` 
                         WHERE a.del = 0 ".$where."
-                        ORDER BY a.id DESC  ";
+                        ORDER BY a.id DESC LIMIT 0,1";
 
                         $result_response = $this->query($sql);
                         if($result_response->num_rows){

@@ -1,7 +1,7 @@
 <?php 
 	class ApiController extends Controller {
 		public function getToken(){
-			$result = $result = array(
+			$result = array(
 				'code'		=>200,
 				'status' 	=> 'failed',
 				'desc' 		=> ''

@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">แผงควบคุม</h1>
+          <h1 class="m-0">แผงควบคุม (<?php echo $agency_title;?>)</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -22,6 +22,7 @@
     <?php if($active_view){ ?>
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
+      <?php if($user_shortcut){ ?>
       <div class="row">
         <div class="col-lg-3 col-6">
           <!-- small box -->
@@ -82,7 +83,8 @@
         </div>
         <!-- ./col -->
       </div>
-
+      <?php } ?>
+      <?php if($user_graph){ ?>
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -99,6 +101,7 @@
           </div>
         </div>
       </div> 
+      <?php } ?>
     </div>
     <?php }else{?>
       <div class="container-fluid">
@@ -115,29 +118,31 @@
 <script>
   $('#dashbord').addClass('active');
 </script>
+<?php if($user_graph){ ?>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawVisualization);
   function drawVisualization() {
     var data = google.visualization.arrayToDataTable([
-      ['หน่วยงาน', 'ได้รับเรื่องร้องเรียน', 'ดำเนินการแล้วเสร็จ', 'อยู่ระหว่างการดำเนินการ', 'ยังไม่เริ่มดำเนินการ'],
+      ['หน่วยงาน', 'ได้รับเรื่องร้องเรียน', 'ยังไม่เริ่มดำเนินการ', 'อยู่ระหว่างการดำเนินการ', 'ดำเนินการแล้วเสร็จ', 'รอดำเนินการ','7 วันจะครบกำหนด'],
         <?php foreach($report as $val){ ?>
-          ['<?php echo $val['title'];?>',<?php echo $val['count_all'];?>,<?php echo $val['complete'];?>,<?php echo $val['process'];?>,<?php echo $val['over'];?>],
+          ['<?php echo $val['title'];?>',<?php echo $val['count_all'];?>,<?php echo $val['over'];?>,<?php echo $val['process'];?>,<?php echo $val['complete'];?>,<?php echo $val['waiting'];?>,<?php echo $val['day7'];?>],
         <?php } ?>
     ]);
 
     var options = {
-      title : 'แยกตามหน่วยงาน',
+      title : 'แยกตามหัวข้อ',
       vAxis: {title: 'จำนวนเรื่องร้องเรียน'},
-      hAxis: {title: 'หน่วยงาน'},
+      hAxis: {title: 'หัวข้อปัญหา'},
       seriesType: 'bars',
-      series: {4: {type: 'line'}}
+      series: {6: {type: 'line'}}
     };
     var chart = new google.visualization.ComboChart(document.getElementById('chart_div_combo'));
     chart.draw(data, options);
   }
 </script>
+<?php } ?>
 <style>
   .jqvmap-zoomin, .jqvmap-zoomout{
     width: 20px;

@@ -12,9 +12,16 @@
 		    	// }else{
 		    	//  	redirect('home/login');
 		    	// }
-		    	$total_case 		= $this->model('dashboard')->getTotalCase();
-		    	$total_case_process = $this->model('dashboard')->getTotalCaseProcess();
-		    	$total_user 		= $this->model('dashboard')->getTotalUser();
+
+		    	$id_agency 			= $this->getSession('id_agency');
+		    	$id_agency_minor 	= $this->getSession('id_agency_minor');
+		    	$data_dashboard = array(
+		    		'id_agency' 		=> $id_agency,
+					'id_agency_minor' 	=> $id_agency_minor,
+		    	);
+		    	$total_case 		= $this->model('dashboard')->getTotalCase($data_dashboard);
+		    	$total_case_process = $this->model('dashboard')->getTotalCaseProcess($data_dashboard);
+		    	$total_user 		= $this->model('dashboard')->getTotalUser($data_dashboard);
 
 				$data['total_case'] 		= $total_case;
 				$data['total_case_process'] = $total_case_process;
@@ -23,10 +30,13 @@
 				$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
 				$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
 				$data['menu'] = array();
-				$data['active_del'] = 0;
-				$data['active_add'] = 0;
-				$data['active_view'] = 0;
-				$data['active_edit'] = 0;
+				$data['active_del'] 	= 0;
+				$data['active_add'] 	= 0;
+				$data['active_view'] 	= 0;
+				$data['active_edit'] 	= 0;
+				$data['user_shortcut'] 	= 0;
+				$data['user_graph'] 	= 0;
+				$data['user_graph_sub'] = 0;
 				// echo "<pre>";
 				// var_dump($menu);
 				//exit();
@@ -44,10 +54,25 @@
 						if($val['USER_EDIT']=="1"){
 							$data['active_edit'] = 1;
 						}
+
+						if($val['user_shortcut']=="1"){
+							$data['user_shortcut'] = 1;
+						}
+						if($val['user_graph']=="1"){
+							$data['user_graph'] = 1;
+						}
+						if($val['user_graph_sub']=="1"){
+							$data['user_graph_sub'] = 1;
+						}
 					}
 					// exit();
 				}
-				$data['report'] = $this->model('report')->getDashboardHome($province_id);
+				
+				if($data['user_graph']){
+					$data['report'] = $this->model('report')->getDashboardHome($province_id);
+				}
+				$id_agency 			= $this->getSession('id_agency');
+				$data['agency_title'] = $this->model('agency')->getAgency($id_agency);
 		    	$this->view('home',$data);
 		    }else{
 		    	redirect('login');

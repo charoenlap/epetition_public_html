@@ -40,6 +40,8 @@
 			if($USER_GROUP_ID>1){
 				$id_agency_minor = (int)$this->getSession('id_agency_minor');
 			}
+			
+
 			$data_search = array(
 				'topic_id' 			=> $data['topic_id'],
 				'dateadd'			=> $data['dateadd'],
@@ -73,6 +75,14 @@
 				}elseif($value['addBy']==2){
 					$addBy = 'จากสปน.';
 				}
+				$date1		=	date_create($value['dateadd']);
+				$date2		=	date_create(date('Y-m-d'));
+				$diff_date	=	date_diff($date1,$date2);
+				if($diff_date->format('%R')=='+'){
+					$days 	= 	$diff_date->format('%a').' วัน';
+				}else{
+					$days	= '-';
+				}
 				$data['lists'][] = array(
 					'case_code'			=> $value['case_code'],
 					'approve_topic'		=> $value['approve_topic'],
@@ -81,10 +91,12 @@
 					'dateadd'			=> date('d-m-Y',strtotime($value['dateadd'])),
 					'topicTitle'		=> $value['topic_title'],
 					't_id_provinces'	=> $value['PROVINCE_NAME'],
+					'PROVINCE_NAME'	=> $value['PROVINCE_NAME'],
 					'text_class'		=> $value['text_class'],
 					'text_status'		=> $value['text_status'],
 					'status_id'			=> $value['status_id'],
 					'status_icon'		=> $value['status_icon'],
+					'days'				=> $days,
 					'addBy'				=> $addBy,
 				);
 			}

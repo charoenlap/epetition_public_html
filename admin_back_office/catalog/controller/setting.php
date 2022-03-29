@@ -28,10 +28,44 @@
             }
             if($data['active_view']){
 				// $modelSetting 	= $this->model('setting');
-				
             }
+            // echo "<pre>";
+            // var_dump($_SESSION);
+            // exit();
+            $select = array(
+                'AUT_USER_ID'       => (int)$this->getSession('AUT_USER_ID'),
+                'id_agency'         => (int)$this->getSession('id_agency'),
+                'id_agency_minor'   => (int)$this->getSession('id_agency_minor'),
+            );
+            $data['users'] = $this->model('assign')->getlistUser($select);
+            $select = array(
+                'user_id'       => (int)$this->getSession('AUT_USER_ID'),
+            );
+            $data['listAssign'] = $this->model('assign')->getlistAssign($select);
 			$this->view('setting/approve',$data);
 		}
+        public function submitApprove(){
+            if(method_post()){
+                $AUT_USER_ID    = (int)$this->getSession('AUT_USER_ID');
+                $date_start     = post('date_start');
+                $date_end       = post('date_end');
+                $assign_user_id = post('assign_user_id');
+                if($date_start AND $date_start AND $date_end){
+                    $insertAssign = array(
+                        'user_id'       => $AUT_USER_ID,
+                        'date_start'    => $date_start,
+                        'date_end'      => $date_end,
+                        'assign_user_id'=> $assign_user_id,
+                        'group_id'      => (int)$this->getSession('USER_GROUP_ID'),
+                        'group_id_type' => 0
+                    );
+                    $this->model('assign')->insertAssign($insertAssign);
+                    redirect('setting/approve');
+                }else{
+                    redirect('setting/approve&result=data empty');
+                }
+            }
+        }
 	    public function index() {
 			$data = array();
 			$data['title'] 	= "ตั้งค่าระบบ";

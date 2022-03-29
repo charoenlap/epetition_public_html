@@ -51,9 +51,16 @@
             	foreach($query_count_status->rows as $cs){
             		$result_status[$cs['status']] = $cs['count_status'];
             	}
-
+                  $addBy = '';
+                  if($val['addBy']=='0'){
+                        $addBy = 'เว็บไซต์';
+                  }else if($val['addBy']=='1'){
+                        $addBy = 'แอปพิเคชั่น';
+                  }else if($val['addBy']=='2'){
+                        $addBy = 'อื่นๆ API';
+                  }
             	$result[] = array(
-            		'addBy' 				=> ($val['addBy']=='0'?'เว็บไซต์':'แอปพิเคชั่น'),
+            		'addBy' 				=> $addBy,
             		'count_all'				=> $result_count_all->row['count_all'],
             		'0'						=> (int)(isset($result_status[0])?$result_status[0]:''),
             		'complete'				=> (int)(isset($result_status[1])?$result_status[1]:''), //ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว
@@ -62,6 +69,51 @@
             		'over'					=> (int)(isset($result_status[4])?$result_status[4]:''), //ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด
             	);
             }
+            return $result;
+        } 
+        public function getReportZone($data = array()){
+            $result = array();
+            $sql = "SELECT * FROM ep_part";
+            $resultTopic = $this->query($sql)->rows;
+            $where = "";
+            // if($province_id){
+            //       $where = " AND ep_response.province_id = ".$province_id;
+            // }
+            foreach($resultTopic as $val){
+                  $sql_count = "SELECT count(ep_response.id) AS count_all FROM ep_response_status 
+                  LEFT JOIN ep_response ON ep_response_status.id_response = ep_response.id 
+                  LEFT JOIN PROVINCE ON ep_response.id_provinces = PROVINCE.PROVINCE_ID 
+                  WHERE PROVINCE.id_part = '".$val['id_part']."' 
+                  ".$where."
+                  ";
+                  $result_count_all = $this->query($sql_count);
+
+                  $sql_count_status = "SELECT ep_response.`status`,count(ep_response.`status`) as count_status FROM ep_response_status 
+                  LEFT JOIN ep_response ON ep_response_status.id_response = ep_response.id 
+                  LEFT JOIN PROVINCE ON ep_response.id_provinces = PROVINCE.PROVINCE_ID  
+                  WHERE PROVINCE.id_part = '".$val['id_part']."' 
+                  ".$where."
+                   GROUP BY ep_response.`status` 
+                  ";
+                  $query_count_status = $this->query($sql_count_status);
+                  $result_status = array();
+                  foreach($query_count_status->rows as $cs){
+                        $result_status[$cs['status']] = $cs['count_status'];
+                  }
+                  if($result_count_all->row['count_all']>0){
+                        $result[] = array(
+                              'agency'                       => str_replace(' ','',$val['agency']),
+                              'title'                       => str_replace(' ','',$val['title']),
+                              'count_all'                   => $result_count_all->row['count_all'],
+                              'waiting'                     => (int)(isset($result_status[0])?$result_status[0]:''),
+                              'complete'                    => (int)(isset($result_status[1])?$result_status[1]:''), //ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว
+                              'process'                     => (int)(isset($result_status[2])?$result_status[2]:''), //ร้องทุกข์อยู่ระหว่างการดำเนินการ
+                              'day7'                           => (int)(isset($result_status[3])?$result_status[3]:''), //ร้องทุกข์อีก 7 วันจะครบกำหนด
+                              'over'                        => (int)(isset($result_status[4])?$result_status[4]:''), //ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด
+                        );
+                  }
+            }
+            // exit();
             return $result;
         } 
         public function getReportMission($data = array()){
@@ -98,23 +150,23 @@
         } 
         public function getDashboardHome($province_id=0){
             $result = array();
-            $sql = "SELECT * FROM ep_agency";
-            $resultAgencyMinor = $this->query($sql)->rows;
+            $sql = "SELECT * FROM ep_topic";
+            $resultTopic = $this->query($sql)->rows;
             $where = "";
-            if($province_id){
-                  $where = " AND ep_response.province_id = ".$province_id;
-            }
-            foreach($resultAgencyMinor as $val){
+            // if($province_id){
+            //       $where = " AND ep_response.province_id = ".$province_id;
+            // }
+            foreach($resultTopic as $val){
                   $sql_count = "SELECT count(ep_response.id) AS count_all FROM ep_response_status 
                   LEFT JOIN ep_response ON ep_response_status.id_response = ep_response.id 
-                  WHERE ep_response_status.id_agency = '".$val['id']."' 
+                  WHERE ep_response.topic_id = '".$val['id']."' 
                   ".$where."
                   ";
                   $result_count_all = $this->query($sql_count);
 
                   $sql_count_status = "SELECT ep_response.`status`,count(ep_response.`status`) as count_status FROM ep_response_status 
                   LEFT JOIN ep_response ON ep_response_status.id_response = ep_response.id 
-                  WHERE ep_response_status.id_agency = '".$val['id']."' 
+                  WHERE ep_response.topic_id = '".$val['id']."' 
                   ".$where."
                    GROUP BY ep_response.`status` 
                   ";
@@ -125,16 +177,17 @@
                   }
                   if($result_count_all->row['count_all']>0){
                         $result[] = array(
-                              'title'                       => str_replace(' ','',$val['agency_title']),
+                              'title'                       => str_replace(' ','',$val['topic_title']),
                               'count_all'                   => $result_count_all->row['count_all'],
-                              '0'                           => (int)(isset($result_status[0])?$result_status[0]:''),
+                              'waiting'                     => (int)(isset($result_status[0])?$result_status[0]:''),
                               'complete'                    => (int)(isset($result_status[1])?$result_status[1]:''), //ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว
                               'process'                     => (int)(isset($result_status[2])?$result_status[2]:''), //ร้องทุกข์อยู่ระหว่างการดำเนินการ
-                              '3'                           => (int)(isset($result_status[3])?$result_status[3]:''), //ร้องทุกข์อีก 7 วันจะครบกำหนด
+                              'day7'                           => (int)(isset($result_status[3])?$result_status[3]:''), //ร้องทุกข์อีก 7 วันจะครบกำหนด
                               'over'                        => (int)(isset($result_status[4])?$result_status[4]:''), //ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด
                         );
                   }
             }
+            // exit();
             return $result;
         } 
         public function getReportLand($data = array()){

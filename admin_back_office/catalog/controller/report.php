@@ -108,7 +108,7 @@
 					}
 				}
 			}
-			$data['reportWay'] = $this->model('report')->getReportWay();
+			$data['reportZone'] = $this->model('report')->getReportZone();
 			$this->view('report/zone',$data);
 		}
 		public function mission(){

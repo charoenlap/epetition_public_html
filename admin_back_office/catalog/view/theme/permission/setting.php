@@ -41,19 +41,23 @@
                                             </th>
                                             <th rowspan="2">หัวข้อ</th>
                                             <th rowspan="2">ดู</th>
+                                            <th colspan="3" class="text-center">Dashboard</th>
                                             <th rowspan="2">เพิ่ม</th>
                                             <th rowspan="2">แก้ไข</th>
                                             <th rowspan="2">ลบ</th>
-                                            <th colspan="4" class="text-center">
+                                            <th colspan="5" class="text-center">
                                                 เรื่องร้องเรียน
                                             </th>
                                         </tr>
                                         <tr>
-                                            <th>อนุมัติเรื่อง</th>
-                                            <th>ปรับสถานะ</th>
-                                            <th>ส่งต่อหน่วยงาน</th>
-                                            <th>ส่งต่อไปยังกรม</th>
-                                            <th>ส่งต่อไปยังสปน</th>
+                                            <th class="bc-head-txt-label ">ทางลัด</th>
+                                            <th class="bc-head-txt-label ">กราฟกระทรวง</th>
+                                            <th class="bc-head-txt-label ">กราฟกรม</th>
+                                            <th class="bc-head-txt-label text-center">อนุมัติเรื่อง</th>
+                                            <th class="bc-head-txt-label text-center">ปรับสถานะ</th>
+                                            <th class="bc-head-txt-label text-center">ส่งต่อหน่วยงาน</th>
+                                            <th class="bc-head-txt-label text-center">ส่งต่อไปยังกรม</th>
+                                            <th class="bc-head-txt-label text-center">ส่งต่อไปยังสปน</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,12 +73,19 @@
                                             $user_send = false;
                                             $user_topic = false;
                                             $user_opm = false;
+
+                                            $user_shortcut  = false;
+                                            $user_graph     = false;
+                                            $user_graph_sub = false;
                                             // หน้าหลัก
                                             if($val['MENU_ID']==1){
-                                                $user_view = true;
-                                                $user_add = false;
-                                                $user_edit = false;
-                                                $user_del = false;
+                                                $user_view      = true;
+                                                $user_add       = false;
+                                                $user_edit      = false;
+                                                $user_del       = false;
+                                                $user_shortcut  = true;
+                                                $user_graph     = true;
+                                                $user_graph_sub = true;
                                             }
                                             if($val['MENU_ID']==2){
                                                 $user_view = true;
@@ -128,6 +139,7 @@
                                                 class="checkboxSend " 
                                                 <?php echo ($val['checkbox']?'checked':'');?>>
                                             </td>
+                                            
                                             <td><?php echo $val['MENU-DESC'];?></td>
                                             <td>
                                                 <?php if($user_view){?>
@@ -135,6 +147,33 @@
                                                 name="user_view[<?php echo $val['MENU_ID'];?>]" 
                                                 value="1" 
                                                 <?php echo ($val['USER_VIEW']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                
+                                                <?php if($user_shortcut){?>
+                                                <input type="checkbox" 
+                                                name="user_shortcut[<?php echo $val['MENU_ID'];?>]" 
+                                                value="1" 
+                                                <?php echo ($val['user_shortcut']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                
+                                                <?php if($user_graph){?>
+                                                <input type="checkbox" 
+                                                name="user_graph[<?php echo $val['MENU_ID'];?>]" 
+                                                value="1" 
+                                                <?php echo ($val['user_graph']?'checked':'');?>>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                
+                                                <?php if($user_graph_sub){?>
+                                                <input type="checkbox" 
+                                                name="user_graph_sub[<?php echo $val['MENU_ID'];?>]" 
+                                                value="1" 
+                                                <?php echo ($val['user_graph_sub']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
                                             <td>
@@ -161,7 +200,7 @@
                                                 <?php echo ($val['USER_DELETE']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <?php if($user_accept){ ?>
                                                 <input type="checkbox" 
                                                 name="user_accept[<?php echo $val['MENU_ID'];?>]" 
@@ -169,7 +208,7 @@
                                                 <?php echo ($val['user_accept']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <?php if($user_change){ ?>
                                                 <input type="checkbox" 
                                                 name="user_change[<?php echo $val['MENU_ID'];?>]" 
@@ -177,7 +216,7 @@
                                                 <?php echo ($val['user_change']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <?php if($user_send){ ?>
                                                 <input type="checkbox" 
                                                 name="user_send[<?php echo $val['MENU_ID'];?>]" 
@@ -185,7 +224,7 @@
                                                 <?php echo ($val['user_send']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <?php if($user_topic){ ?>
                                                 <input type="checkbox" 
                                                 name="user_topic[<?php echo $val['MENU_ID'];?>]" 
@@ -193,7 +232,7 @@
                                                 <?php echo ($val['user_topic']?'checked':'');?>>
                                                 <?php } ?>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <?php if($user_opm){ ?>
                                                 <input type="checkbox" 
                                                 name="user_opm[<?php echo $val['MENU_ID'];?>]" 
@@ -266,3 +305,13 @@
         });
     });
 </script>
+<style>
+    .bc-head-txt-label {
+    -ms-writing-mode: tb-rl;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    white-space: nowrap;
+}
+</style>

@@ -67,25 +67,22 @@
                                                 <th class="text-center align-middle" width="10%" >ลำดับ</th>
                                                 <th class="text-center align-middle" >เขตตรวจราชการ/จังหวัด</th>
                                                 <th class="text-center align-middle" >ได้รับเรื่องร้องเรียน</th>
-                                                <th  class="text-center">สถานะการดำเนินการเรื่องร้องเรียน</th>
-                                            </tr>
-                                            <tr>
                                                 <th class="text-center">ดำเนินการแล้วเสร็จ</th>
                                                 <th class="text-center">อยู่ระหว่างการดำเนินการ</th>
                                                 <th class="text-center">ยังไม่เริ่มดำเนินการ</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                          
+                                          <?php $i=1;foreach($reportZone as $val){ ?>
                                             <tr>
-                                                <td class="text-center">1</td>
-                                                <td>เขตตรวจราชการที่ 2</td>
-                                                <td class="text-center">573</td>
-                                                <td class="text-center">493</td>
-                                                <td class="text-center">78</td>
-                                                <td class="text-center">2</td>
+                                                <td class="text-center"><?php echo $i++; ?></td>
+                                                <td><?php echo $val['title'].' '.$val['agency']; ?></td>
+                                                <td class="text-center"><?php echo $val['count_all']; ?></td>
+                                                <td class="text-center"><?php echo $val['complete']; ?></td>
+                                                <td class="text-center"><?php echo $val['process']; ?></td>
+                                                <td class="text-center"><?php echo $val['waiting']; ?></td>
                                             </tr>
-
+                                          <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>

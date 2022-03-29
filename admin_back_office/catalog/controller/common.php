@@ -8,6 +8,9 @@
 			$role_name 			= $this->getSession('role_name');
 			$last_login 		= $this->getSession('last_login');
 			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+			$id_agency 			= $this->getSession('id_agency');
+			$data['agency_title'] = $this->model('agency')->getAgency($id_agency);
+			// exit();
 			// var_dump($_SESSION);exit();
 			$data['name'] 		= $officer_name;
 			$data['role_name'] 	= $role_name;

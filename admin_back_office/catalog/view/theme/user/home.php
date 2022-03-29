@@ -42,6 +42,7 @@
                                                <th style="width:70px;" class="text-center">#</th>
                                                <th>ชื่อ</th>
                                                <th>นามสกุล</th>
+                                               <th>เข้าระบบ</th>
                                                <th>กลุ่มผู้ใช้งาน</th>
                                                <th style="width:250px;">สำนัก</th>
                                                <th >สิทธิ์ผู้ใช้งาน</th>
@@ -55,6 +56,7 @@
                                              <td class="text-center"><?php echo $i; ?></td>
                                              <td><?php echo $val['FIRSTNAME']; ?></td>
                                              <td><?php echo $val['LASTNAME']; ?></td>
+                                             <td><?php echo $val['AUT_USERNAME']; ?></td>
                                              <td><?php echo $val['GROUP_NAME']; ?></td>
                                              <td><?php echo $val['agency_title']; ?></td>
                                              <td>กำหนดตามกลุ่ม</td>

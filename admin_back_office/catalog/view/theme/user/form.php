@@ -145,6 +145,7 @@
                                         ปิด
                                     </div>
                                 </div>
+                                <?php if(isset($id)){ ?>
                                 <div class="row">
                                     <div class="col-1">
                                         <label for="">Token API</label>
@@ -156,6 +157,7 @@
                                         <button onclick="coppy();return false;" class="btn btn-primary btn-block">Copy token</button>
                                     </div>
                                 </div>
+                                <?php } ?>
                                 <div class="row mt-2">
                                     <div class="col-md-12">
                                         <button class="btn btn-primary ">บันทึก</button>

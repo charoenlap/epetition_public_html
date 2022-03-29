@@ -181,6 +181,10 @@
                 $user_topic = post('user_topic');
                 $user_opm = post('user_opm');
 
+                $user_shortcut = post('user_shortcut');
+                $user_graph = post('user_graph');
+                $user_graph_sub = post('user_graph_sub');
+
                 if($group_id){
                     $insert = array();
                     foreach($menu_id as $key => $val){
@@ -196,6 +200,9 @@
                             'user_send'         => $user_send[$key], 
                             'user_topic'        => $user_topic[$key], 
                             'user_opm'          => $user_opm[$key], 
+                            'user_shortcut'     => $user_shortcut[$key], 
+                            'user_graph'        => $user_graph[$key], 
+                            'user_graph_sub'    => $user_graph_sub[$key], 
                         );
                     }
                 }
