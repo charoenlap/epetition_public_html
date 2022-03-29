@@ -2,7 +2,7 @@
 
 	ini_set('display_errors', '1');
 	ini_set('display_startup_errors', '1');
-	error_reporting(E_ALL);
+	error_reporting(E_ALL); 
 	
 	// URL TEST
 	// http://service.1111.go.th
