@@ -71,6 +71,18 @@
                                         <textarea name="contact" id="" cols="30" rows="10" class="summernote"><?php echo $data['contacts']; ?></textarea>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">ด้านล่าง</label>
+                                        <textarea name="footer" id="" cols="30" rows="10" class="summernote"><?php echo $data['contacts']; ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">ข้อตกลงหลักเกณฑ์รับเรื่องร้องเรียน/ร้องทุกข์</label>
+                                        <textarea name="agreement" id="" cols="30" rows="10" class="summernote"><?php echo $data['contacts']; ?></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

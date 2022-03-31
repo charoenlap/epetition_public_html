@@ -348,32 +348,32 @@
               </li>
               <?php } ?>
               <li class="nav-item">
-                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                <a href="<?php echo route('setting/prefix'); ?>" class="nav-link px-1" id="pageSetting">
                   <i class="nav-icon fas fa-cog"></i>
                   <p>คำนำหน้า</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                <a href="<?php echo route('setting/part'); ?>" class="nav-link px-1" id="pageSetting">
                   <i class="nav-icon fas fa-cog"></i>
                   <p>เขตที่ตรวจ</p>
                 </a>
               </li>
               
               <li class="nav-item">
-                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                <a href="<?php echo route('setting/provinces'); ?>" class="nav-link px-1" id="pageSetting">
                   <i class="nav-icon fas fa-cog"></i>
                   <p>จังหวัด</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                <a href="<?php echo route('setting/position'); ?>" class="nav-link px-1" id="pageSetting">
                   <i class="nav-icon fas fa-cog"></i>
                   <p>ตำแหน่ง</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php //echo route('setting'); ?>" class="nav-link px-1" id="pageSetting">
+                <a href="<?php echo route('setting/agency'); ?>" class="nav-link px-1" id="pageSetting">
                   <i class="nav-icon fas fa-cog"></i>
                   <p>หน่วยงาน</p>
                 </a>
