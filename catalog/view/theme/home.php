@@ -8,19 +8,19 @@
       <div class="carousel-item active">
         <img class="d-block w-100" src="images/1.png" alt="First slide">
         <div class="carousel-caption d-none d-md-block" >
-          <h1>ศูนย์รับเรื่องร้องเรียนกระทรวงพลังงาน</h1>
+          <h1>ศูนย์รับข้อร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
       <div class="carousel-item">
         <img class="d-block w-100" src="images/2.png" alt="Second slide">
         <div class="carousel-caption d-none d-md-block" >
-          <h1>ศูนย์รับเรื่องร้องเรียนกระทรวงพลังงาน</h1>
+          <h1>ศูนย์รับข้อร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
       <div class="carousel-item">
         <img class="d-block w-100" src="images/3.png" alt="Third slide">
         <div class="carousel-caption d-none d-md-block" >
-          <h1>ศูนย์รับเรื่องร้องเรียนกระทรวงพลังงาน</h1>
+          <h1>ศูนย์รับข้อร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
     </div>
     <div class="row mt-4">
       <div class="col-md-12">
-        <h4 class="text-theme font-weight-bold">ช่องทางที่ท่านสามารถแจ้งเรื่องร้องเรียนต่อศูนย์รับเรื่องร้องเรียนกระทรวงพลังงาน (กองตรวจราชการ) มีดังนี้</h4>
+        <h4 class="text-theme font-weight-bold">ช่องทางที่ท่านสามารถแจ้งเรื่องร้องเรียนต่อศูนย์รับข้อร้องเรียนกระทรวงพลังงาน (กองตรวจราชการ) มีดังนี้</h4>
         <ul>
           <li>เว็บไซต์www.energy.go.th</li>
           <li>จดหมายอิเล็กทรอนิกส์ (E-Mail) : inspector_g@energy.go.th</li>
