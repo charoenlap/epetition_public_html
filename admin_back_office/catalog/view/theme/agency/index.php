@@ -26,9 +26,9 @@
                         <table id="table" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="text-center">#</th>
+                                    <th width="50px;" class="text-center">#</th>
                                     <th>หน่วยงาน</th>
-                                    <th></th>
+                                    <th width="180px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,6 +40,7 @@
                                     <td class="text-center"><?php echo $i++; ?></td>
                                     <td><?php echo $val['agency_title']; ?></td>
                                     <td class="text-center">
+                                      <a href="<?php echo route('user/settingAgency&id='.$val['id']); ?>" class="btn btn-primary"><i class="fas fa-cog"></i></a>
                                       <a href="<?php echo route('setting/agencyEdit&id='.$val['id']); ?>" class="btn btn-primary"><i class="fas fa-edit"></i> แก้ไข</a>
                                       <a href="<?php echo route('setting/agencyDel&id='.$val['id']); ?>" class="btn btn-danger btn-del"><i class="fas fa-trash"></i> ลบ</a>
                                     </td>

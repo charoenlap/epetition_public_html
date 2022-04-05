@@ -42,6 +42,7 @@
             $data['getGroups'] = $this->model('user')->getGroups();
             $data['agency'] = $this->model('agency')->getlistsAgency();
             $data['agencyMinor'] = $this->model('agency')->getlistsAgencyMinor();
+            $data['position'] = $this->model('user')->getPosition();
             $data['action'] = route('user/submitAdd');
             $this->view('user/form',$data);
         }
@@ -90,6 +91,7 @@
             $id = get('id');
             $data['getGroups'] = $this->model('user')->getGroups();
             $data['user'] = $this->model('user')->getUser($id);
+            $data['position'] = $this->model('user')->getPosition();
             $data['agency'] = $this->model('agency')->getlistsAgency();
             $data['agencyMinor'] = $this->model('agency')->getlistsAgencyMinor();
             // var_dump($data['user']);
@@ -162,6 +164,60 @@
             $data['menu'] = $this->model('user')->getMenu(array('group_menu_id'=>$group_id));
             $data['action'] = route('user/submitSetting');
             $data['group_id'] = $group_id;
+            $this->view('permission/setting',$data);
+        }
+        public function settingPerson() {
+            // บุคคล
+            $data = array();
+            $data['title'] = '';
+            // $group_id = get('group_id');
+            $id = get('id');
+            $type=1;
+            $arrMenu = array(
+                            'type'  =>$type,
+                            'id'    =>$id
+                        );
+            $data['menu'] = $this->model('user')->getMenu($arrMenu);
+            $data['action'] = route('user/submitSetting');
+            // $data['group_id'] = $group_id;
+            $data['type'] = $type;
+            $data['user_id'] = $user_id;
+            $this->view('permission/setting',$data);
+        }
+        public function settingPosition() {
+            // บุคคล
+            $data = array();
+            $data['title'] = '';
+            // $group_id = get('group_id');
+            $id = get('id');
+            $type=2;
+            $arrMenu = array(
+                            'type'          =>$type,
+                            'position_id'   =>$id
+                        );
+            $data['menu'] = $this->model('user')->getMenu($arrMenu);
+            $data['action'] = route('user/submitSetting');
+            // $data['group_id'] = $group_id;
+            $data['type'] = $type;
+            $data['position_id'] = $id;
+            $this->view('permission/setting',$data);
+        }
+        public function settingAgency() {
+            // บุคคล
+            $data = array();
+            $data['title'] = '';
+            // $group_id = get('group_id');
+            $id = get('id');
+            $type=3;
+            $arrMenu = array(
+                            'type'        =>$type,
+                            'agency_id'   =>$id
+                        );
+            $data['menu'] = $this->model('user')->getMenu($arrMenu);
+            $data['action'] = route('user/submitSetting');
+            // $data['group_id'] = $group_id;
+            $data['type'] = $type;
+            $data['agency_id'] = $id;
             $this->view('permission/setting',$data);
         }
         public function submitSetting(){

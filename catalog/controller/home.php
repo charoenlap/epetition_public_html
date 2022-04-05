@@ -16,12 +16,14 @@
 	    	$data = array();
 	    	$data['title'] = "";
 	    	$data['descreption'] = "";
+	    	$data['contact'] = $this->model('master')->getContent();
  	    	$this->view('home',$data); 
 	    }
 	    public function agreement(){
 	    	$data = array();
 	    	$data['title'] = "";
 	    	$data['descreption'] = "";
+	    	$data['agreement'] = $this->model('master')->getAgreement();
  	    	$this->view('agreement',$data); 
 	    }
 	    public function topic(){

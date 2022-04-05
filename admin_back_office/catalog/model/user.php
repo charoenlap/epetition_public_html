@@ -97,13 +97,17 @@
             return $query->row;
         }
         public function getUser($id){
-            $sql = "SELECT * FROM AUT_USER 
-            LEFT JOIN ep_agency ON ep_agency.id=AUT_USER.id_agency
-            LEFT JOIN ep_agency_minor ON ep_agency_minor.id=AUT_USER.id_agency_minor
-            LEFT JOIN AUT_USER_GROUP ON AUT_USER_GROUP.AUT_USER_ID = AUT_USER.AUT_USER_ID
-            LEFT JOIN AUT_GROUP ON AUT_GROUP.USER_GROUP_ID = AUT_USER_GROUP.USER_GROUP_ID 
+            $sql = "SELECT *,
+                AUT_USER.id_agency AS id_agency,
+                AUT_USER.id_agency_minor AS id_agency_minor,
+                AUT_USER.position_id AS position_id 
+            FROM AUT_USER 
+                LEFT JOIN ep_agency ON ep_agency.id=AUT_USER.id_agency
+                LEFT JOIN ep_agency_minor ON ep_agency_minor.id=AUT_USER.id_agency_minor
+                LEFT JOIN AUT_USER_GROUP ON AUT_USER_GROUP.AUT_USER_ID = AUT_USER.AUT_USER_ID
+                LEFT JOIN AUT_GROUP ON AUT_GROUP.USER_GROUP_ID = AUT_USER_GROUP.USER_GROUP_ID 
             WHERE AUT_USER.AUT_USER_ID=".$id."
-            ORDER by AUT_USER.AUT_USER_ID DESC";
+                ORDER by AUT_USER.AUT_USER_ID DESC";
 
             $query = $this->query($sql);
             return $query->row;
@@ -112,8 +116,32 @@
             $query = $this->query("SELECT * FROM AUT_GROUP WHERE ACTIVE_STATUS = 1");
             return $query;
         }
+        public function getPosition(){
+            $query = $this->query("SELECT * FROM ep_position WHERE del = 0");
+            return $query;
+        }
         public function getMenu($data=array()){
         	$group_menu_id = (int)(isset($data['group_menu_id'])?$data['group_menu_id']:0);
+            $type = (int)(isset($data['type'])?$data['type']:0);
+            $id = (int)(isset($data['id'])?$data['id']:0);
+            $position_id = (int)(isset($data['position_id'])?$data['position_id']:0);
+            $agency_id = (int)(isset($data['agency_id'])?$data['agency_id']:0);
+            $where = '';
+            if($group_menu_id){
+                $where .= " AND AUT_GROUP_MENU_ID = '".$group_menu_id."'";
+            }
+            if($type){
+                $where .= " AND AUT_GROUP_MENU.type = '".$type."'";
+            }
+            if($id){
+                $where .= " AND AUT_GROUP_MENU.user_id = '".$id."'";
+            }
+            if($position_id){
+                $where .= " AND AUT_GROUP_MENU.position_id = '".$position_id."'";
+            }
+            if($agency_id){
+                $where .= " AND AUT_GROUP_MENU.agency_id = '".$agency_id."'";
+            }
         	$sql = "SELECT *,
                 AGM.USER_VIEW AS USER_VIEW,
                 AGM.MENU_ID AS checkbox,
@@ -121,10 +149,11 @@
         			FROM AUT_MENU_SETTING 
         			LEFT JOIN (
         				SELECT * FROM AUT_GROUP_MENU 
-        					WHERE AUT_GROUP_MENU_ID = '".$group_menu_id."') AGM 
+        					WHERE AUT_GROUP_MENU_ID <> ''  ".$where.") AGM 
         			ON AGM.MENU_ID = AUT_MENU_SETTING.MENU_ID 
         			ORDER BY AUT_MENU_SETTING.MENU_ORDER ASC
         			 ";
+            // echo $sql;exit();
             $query = $this->query($sql);
             return $query;
         }

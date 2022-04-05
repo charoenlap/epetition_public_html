@@ -35,6 +35,8 @@
 			$data['link_deposit'] = route('member/deposit'); 
 			$data['link_password'] = route('member/password'); 
 			$data['link_logout'] = route('member/logout'); 
+
+			$data['footer'] = $this->model('master')->getFooter();
 	    	$this->render('common/footer',$data);
 	    }
 	}

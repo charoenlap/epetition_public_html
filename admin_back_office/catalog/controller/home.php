@@ -132,6 +132,12 @@
 						// $this->setSession('position',$resultLogin['detail']['DEPARTMENT_NAME']);
 						$this->setSession('default_language','');
 						$this->setSession('last_login',$resultLogin['last_login']);
+						$log = array(
+							'AUT_USER_ID' => $resultLogin['detail']['AUT_USER_ID'],
+							'LOG_DESCRIPTION' => $resultLogin['detail']['FIRSTNAME'].' เข้าสู่ระบบ ด้วย Username และ รหัสผ่าน',
+							'CREATE_TIMESTAMP' => date('Y-m-d H:i:s')
+						);
+						$this->model('master')->insertLog($log);
 						$result = array(
 			    			'code' 			=> 200,
 			    			'status'		=> 'success',
@@ -252,6 +258,14 @@
 						// $this->setSession('position',$resultLogin['detail']['DEPARTMENT_NAME']);
 						$this->setSession('default_language','');
 						$this->setSession('last_login',$resultLogin['last_login']);
+
+						$log = array(
+							'AUT_USER_ID' => $resultLogin['detail']['AUT_USER_ID'],
+							'LOG_DESCRIPTION' => $resultLogin['detail']['FIRSTNAME'].' เข้าสู่ระบบ ด้วย Open ID',
+							'CREATE_TIMESTAMP' => date('Y-m-d H:i:s')
+						);
+						$this->model('master')->insertLog($log);
+
 						$result = array(
 			    			'code' 			=> 200,
 			    			'status'		=> 'success',
@@ -370,6 +384,13 @@
 							$this->setSession('org_name','');
 							$this->setSession('default_language','');
 							$this->setSession('last_login',$resultLogin['last_login']);
+
+							$log = array(
+								'AUT_USER_ID' => $resultLogin['detail']['AUT_USER_ID'],
+								'LOG_DESCRIPTION' => $resultLogin['detail']['FIRSTNAME'].' เข้าสู่ระบบ ด้วย LDAP',
+								'CREATE_TIMESTAMP' => date('Y-m-d H:i:s')
+							);
+							$this->model('master')->insertLog($log);
 							$result = array(
 				    			'code' 			=> 200,
 				    			'status'		=> 'success',

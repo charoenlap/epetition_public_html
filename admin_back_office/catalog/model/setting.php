@@ -1,8 +1,81 @@
 <?php
     class SettingModel extends db {
+        public function updateSettingContent($data=array()){
+            $contact = (isset($data['contact'])?$data['contact']:'');
+            $footer = (isset($data['footer'])?$data['footer']:'');
+            $agreement = (isset($data['agreement'])?$data['agreement']:'');
+            $data_content = array(
+                'value' => $contact
+            );
+            $this->update('setting_content',$data_content,"name='contact'");
+
+            $data_footer = array(
+                'value' => $footer
+            );
+            $this->update('setting_content',$data_footer,"name='footer'");
+
+            $data_agreement = array(
+                'value' => $agreement
+            );
+            $this->update('setting_content',$data_agreement,"name='agreement'");
+        }
+        public function updateSettingBanner($data=array()){
+            $this->insert('setting_banner',$data);
+        }
         public function getList(){
-            $query = $this->getdata('settings','id=1');
-            return $query->row;
+            $result = array();
+            $query_contact = $this->getdata('setting_content',"name='contact'")->row;
+            $query_footer = $this->getdata('setting_content',"name='footer'")->row;
+            $query_agreement = $this->getdata('setting_content',"name='agreement'")->row;
+            $result = array(
+                'contact' => $query_contact['value'],
+                'footer' => $query_footer['value'],
+                'agreement' => $query_agreement['value'],
+            );
+            return $result;
+        }
+        public function getMasterSetting($name=''){
+            $result = array();
+            $result = $this->getdata('settings',"name='".$this->escape($name)."'")->row['val'];
+            return $result;
+        }
+        public function getTopic(){
+            $result = array();
+            $result = $this->getdata('topic')->rows;
+            return $result;
+        }
+        public function getLog(){
+            $result = array();
+            $result = $this->query('SELECT * FROM LOG_HISTORY ORDER BY AUT_LOG_ID DESC LIMIT 0,30')->rows;
+            return $result;
+        }
+        public function getSubTopic($id=0){
+            $result = array();
+            $result = $this->getdata('topic_sub',"topic_id=".(int)$id)->rows;
+            return $result;
+        }
+        public function getSubTopicConfig($id=0){
+            $result = array();
+            $result = $this->getdata('topic_sub',"id=".(int)$id)->row;
+            return $result;
+        }
+        public function updategetMasterSetting($data=array()){
+            $query = $this->update('settings',array('val'=>$data['val']),"name='".$data['name']."'");
+            return $query;
+        }
+        public function setSubTopicConfigDaysProcess($id=0,$val=''){
+            $query = $this->update('topic_sub',array('days_process'=>$val),"id='".$id."'");
+            return $query;
+        }
+        public function setSubTopicConfigDaysEnd($id=0,$val=''){
+            $query = $this->update('topic_sub',array('days_end'=>$val),"id='".$id."'");
+            return $query;
+        }
+        public function updategetMasterSettings($data=array()){
+            foreach($data as $val){
+                $query = $this->update('settings',array('val'=>$val['val']),"name='".$val['name']."'");
+            }
+            return $query;
         }
         public function updateSetting($id,$data=array()){
             $query = $this->update('settings',$data,'id='.$id);
@@ -12,6 +85,14 @@
         public function prefixLists(){
             $query = $this->query("SELECT * FROM ep_prefix where del = '0' order by id desc"); 
             return $query->rows;
+        }
+        public function getBanners(){
+            $query = $this->query("SELECT * FROM ep_setting_banner where del = '0' order by id desc"); 
+            return $query->rows;
+        }
+        public function deleteBanner($id=0){
+            $query = $this->query("UPDATE ep_setting_banner SET del=1 WHERE id = '".(int)$id."'"); 
+            return true;
         }
         public function prefixDetail($id){
             $query = $this->getdata('prefix','id='.$id);

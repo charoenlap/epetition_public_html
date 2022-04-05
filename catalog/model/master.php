@@ -1,5 +1,23 @@
 <?php 
 	class MasterModel extends db {
+		public function getContent(){
+            $result = array();
+            $query_contact = $this->getdata('setting_content',"name='contact'")->row;
+            $result = $query_contact['value'];
+            return $result;
+        }
+        public function getFooter(){
+            $result = array();
+            $query_footer = $this->getdata('setting_content',"name='footer'")->row;
+            $result = $query_footer['value'];
+            return $result;
+        }
+        public function getAgreement(){
+            $result = array();
+            $query_agreement = $this->getdata('setting_content',"name='agreement'")->row;
+            $result = $query_agreement['value'];
+            return $result;
+        }
 		public function getConfigDay(){
 			$result = 2;
 			$sql = "SELECT * FROM ep_config WHERE `name`='limit_mb'";

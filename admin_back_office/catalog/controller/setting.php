@@ -95,19 +95,279 @@
             if($data['active_view']){
 				$modelSetting 	= $this->model('setting');
 				$data['data']	= $modelSetting->getList();
-				if($_SERVER['REQUEST_METHOD'] == "POST"){
-					$id 	= '1';
-					$post 	= array(
-						'contacts'	=> $_POST['contact']
-					);
-					$update = $modelSetting->updateSetting($id,$post);
-					if($update){
-						redirect('setting');
-					}
-				}
+                $data['banners']  = $modelSetting->getBanners();
+                $data['limitFile']  = $modelSetting->getMasterSetting('limitFile');
+                $data['m']          = $modelSetting->getMasterSetting('m');
+                $data['h']          = $modelSetting->getMasterSetting('h');
+                $data['d']          = $modelSetting->getMasterSetting('d');
+                $data['month']      = $modelSetting->getMasterSetting('month');
+                $data['week']       = $modelSetting->getMasterSetting('week');
+                $data['m_code']     = $modelSetting->getMasterSetting('m_code');
+                $data['h_code']     = $modelSetting->getMasterSetting('h_code');
+                $data['d_code']     = $modelSetting->getMasterSetting('d_code');
+                $data['month_code'] = $modelSetting->getMasterSetting('month_code');
+                $data['week_code']  = $modelSetting->getMasterSetting('week_code');
+                $data['mail_agency']  = $modelSetting->getMasterSetting('mail_agency');
+                $data['mail_people']  = $modelSetting->getMasterSetting('mail_people');
+                $data['topic']      = $modelSetting->getTopic();
             }
 	    	$this->view('setting/home',$data);
 	    }
+        public function submitMaster(){
+            $return = array();
+            if(method_post()){
+                $post   = array(
+                    'name'  => 'limitFile',
+                    'val' => post('limitFile')
+                );
+                $update = $this->model('setting')->updategetMasterSetting($post);
+                $return = array(
+                    'status' => 'success'
+                );
+                $this->json($return);
+            }
+        }
+        public function btnUpdateGit(){
+            $return = array();
+            if(method_post()){
+                $result = exec('git pull');
+
+                // $post   = array(
+                //     'name'  => 'limitFile',
+                //     'val' => post('limitFile')
+                // );
+                // $update = $this->model('setting')->updategetMasterSetting($post);
+                if($result=="Already up to date."){
+                    $result = "โปรแกรมอยู่ในการอัพเดทปัจจุบันแล้ว ".date('Y-m-d H:i:s');
+                }
+                $return = array(
+                    'status' => 'success',
+                    'desc'  => $result
+                );
+                $this->json($return);
+            }
+        }
+        public function getLog(){
+            // $return = array();
+            $result = '';
+            $show = '';
+            if(method_post()){
+                $val = post('val');
+                if($val=="login"){
+                    $log = $this->model('setting')->getLog();
+                    foreach($log as $val){
+                        $result .= $val['CREATE_TIMESTAMP'].' '.$val['LOG_DESCRIPTION'].PHP_EOL;
+                    }
+                }else{
+                    $path = '/var/log/'.$val;
+                    $myfile = fopen($path, "r");
+                    $result = fread($myfile,filesize($path));
+                    fclose($myfile);
+                }
+                // $post   = array(
+                //     'name'  => 'limitFile',
+                //     'val' => post('limitFile')
+                // );
+                // $update = $this->model('setting')->updategetMasterSetting($post);
+                
+                $return = array(
+                    'status' => 'success',
+                    'desc'  => $result,
+                    'show'  => $show
+                );
+                $this->json($return);
+            }
+        }
+        public function submitContent(){
+            $return = array();
+            if(method_post()){
+                $post   = array(
+                    'contact' => post('contact'),
+                    'footer' => post('footer'),
+                    'agreement' => post('agreement'),
+                );
+
+                $update = $this->model('setting')->updateSettingContent($post);
+                $return = array(
+                    'status' => 'success'
+                );
+                $this->json($return);
+            }
+        }
+        public function submitBackup(){
+            $return = array();
+            $post = array();
+            if(method_post()){
+                $post[]   = array(
+                    'name'  => 'm',
+                    'val' => post('m')
+                );
+                $post[]   = array(
+                    'name'  => 'h',
+                    'val' => post('h')
+                );
+                $post[]   = array(
+                    'name'  => 'd',
+                    'val' => post('d')
+                );
+                $post[]   = array(
+                    'name'  => 'month',
+                    'val' => post('month')
+                );
+                $post[]   = array(
+                    'name'  => 'week',
+                    'val' => post('week')
+                );
+                $post[]   = array(
+                    'name'  => 'm_code',
+                    'val' => post('m_code')
+                );
+                $post[]   = array(
+                    'name'  => 'h_code',
+                    'val' => post('h_code')
+                );
+                $post[]   = array(
+                    'name'  => 'd_code',
+                    'val' => post('d_code')
+                );
+                $post[]   = array(
+                    'name'  => 'month_code',
+                    'val' => post('month_code')
+                );
+                $post[]   = array(
+                    'name'  => 'week_code',
+                    'val' => post('week_code')
+                );
+                // var_dump($post);
+                $update = $this->model('setting')->updategetMasterSettings($post);
+                $return = array(
+                    'status' => 'success'
+                );
+                $this->json($return);
+            }
+        }
+        public function submitConfigDays(){
+            $return = array();
+            $post = array();
+            if(method_post()){
+                $post[]   = array(
+                    'name'  => 'master_process',
+                    'val' => post('master_process')
+                );
+                $post[]   = array(
+                    'name'  => 'master_end',
+                    'val' => post('master_end')
+                );
+                // var_dump($post);
+                $update = $this->model('setting')->updategetMasterSettings($post);
+                $return = array(
+                    'status' => 'success'
+                );
+                $this->json($return);
+            }
+        }
+        public function submitConfigEmail(){
+            $return = array();
+            $post = array();
+            if(method_post()){
+                $post[]   = array(
+                    'name'  => 'mail_agency',
+                    'val' => post('mail_agency')
+                );
+                $post[]   = array(
+                    'name'  => 'mail_people',
+                    'val' => post('mail_people')
+                );
+                // var_dump($post);
+                $update = $this->model('setting')->updategetMasterSettings($post);
+                $return = array(
+                    'status' => 'success'
+                );
+                $this->json($return);
+            }
+        }
+        public function delBanner(){
+            $return = array();
+            if(method_post()){
+                $id = post('id');
+                $result = $this->model('setting')->deleteBanner($id);
+                $return = array(
+                    'status' => 'success'
+                );
+                $this->json($return);
+            }
+        }
+        public function getSubTopic(){
+            $return = array();
+            if(method_post()){
+                $id = post('id');
+                $result = $this->model('setting')->getSubTopic($id);
+                $return = array(
+                    'status'    => 'success',
+                    'detail'    => $result
+                );
+                $this->json($return);
+            }
+        }
+        public function getSubTopicConfig(){
+            $return = array();
+            if(method_post()){
+                $id = post('id');
+                $result = $this->model('setting')->getSubTopicConfig($id);
+                $return = array(
+                    'status'    => 'success',
+                    'days_process'    => $result['days_process'],
+                    'days_end'    => $result['days_end']
+                );
+                $this->json($return);
+            }
+        }
+        public function setSubTopicConfigDaysProcess(){
+            $return = array();
+            if(method_post()){
+                $topic_sub = post('topic_sub');
+                $val = post('val');
+                $result = $this->model('setting')->setSubTopicConfigDaysProcess($topic_sub,$val);
+                $return = array(
+                    'status'    => 'success'
+                );
+                $this->json($return);
+            }
+        }
+        public function setSubTopicConfigDaysEnd(){
+            $return = array();
+            if(method_post()){
+                $topic_sub = post('topic_sub');
+                $val = post('val');
+                $result = $this->model('setting')->setSubTopicConfigDaysEnd($topic_sub,$val);
+                $return = array(
+                    'status'    => 'success'
+                );
+                $this->json($return);
+            }
+        }
+        public function submitBanner(){
+            $return = array();
+            if(method_post()){
+                $data_select  = array();
+                $countfiles = count($_FILES['banner']['name']);
+                for($i=0;$i<$countfiles;$i++){
+                    $filename = time()."_".$_FILES['banner']['name'][$i];
+                    $file = $_FILES['banner']['tmp_name'][$i];
+                    $data_select = array(
+                        'filename' => $filename,
+                        'file' => '../uploads/banner/'.$filename,
+                        'date_create' => date('Y-m-d H:i:s')
+                    );
+                    move_uploaded_file($file,'../uploads/banner/'.$filename);
+                }
+                $update = $this->model('setting')->updateSettingBanner($data_select);
+                $return = array(
+                    'status' => 'success'
+                );
+                $this->json($return);
+            }
+        }
 	    public function EncodeString(){
 	    	$url_test = "http://203.113.25.98/CoreService/";
 	    	$url = "http://service.1111.go.th/";

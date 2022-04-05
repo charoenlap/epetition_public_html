@@ -86,6 +86,14 @@
                                         <label for="">ตำแหน่ง</label>
                                         <select name="" id="" class="form-control">
                                             <option value="">เลือกตำแหน่ง</option>
+                                            <?php foreach($position->rows as $val){
+                                                $position_id = (isset($user['position_id'])?$user['position_id']:'');
+                                            ?>
+                                                <option value="<?php echo $val['id'];?>"
+                                                    <?php echo ($position_id==$val['id']?'SELECTED':'');?>>
+                                                    <?php echo $val['title'];?>
+                                                </option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -119,14 +127,14 @@
                                     <div class="col-md-2 mb-3">
                                         <label for="">สิทธิ์การเข้าใช้งาน</label>
                                         <select name="" id="" class="form-control">
-                                            <option value="">กำหนดตามกลุ่ม</option>
-                                            <option value="">สิทธิ์รายบุคคล</option>
-                                            <option value="">สิทธิ์รายตำแหน่ง</option>
-                                            <option value="">สิทธิ์รายหน่วยงาน</option>
+                                            <option value="0">กำหนดตามกลุ่ม</option>
+                                            <option value="1">สิทธิ์รายบุคคล</option>
+                                            <option value="2">สิทธิ์รายตำแหน่ง</option>
+                                            <option value="3">สิทธิ์รายหน่วยงาน</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <a href="#">กำหนดสิทธิ์รายบุคคล</a>
+                                        <a href="<?php echo route('user/settingPerson&id='.$id);?>">กำหนดสิทธิ์รายบุคคล</a>
                                     </div>
                                 </div>
                                 <div class="row">

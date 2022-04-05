@@ -1,5 +1,8 @@
 <?php 
 	class MasterModel extends db {
+		public function insertLog($data = array()){
+			$this->insert('LOG_HISTORY',$data,false);
+		}
 		public function getPrefix($data=array()){
 			$result = array();
 			$sql = "SELECT * FROM ep_prefix";

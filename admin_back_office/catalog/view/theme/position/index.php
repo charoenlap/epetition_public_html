@@ -26,24 +26,31 @@
                         <table id="table" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="text-center">#</th>
+                                    <th style="width:50px;" class="text-center">#</th>
                                     <th>ตำแหน่ง</th>
-                                    <th></th>
+                                    <th style="width:180px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
                               <?php
                                 $i = '1';
-                                foreach($lists as $key => $val){ 
-                              ?>
-                                <tr>
-                                    <td class="text-center"><?php echo $i++; ?></td>
-                                    <td><?php echo $val['title']; ?></td>
-                                    <td class="text-center">
-                                      <a href="<?php echo route('setting/positionEdit&id='.$val['id']); ?>" class="btn btn-primary"><i class="fas fa-edit"></i> แก้ไข</a>
-                                      <a href="<?php echo route('setting/positionDel&id='.$val['id']); ?>" class="btn btn-danger btn-del"><i class="fas fa-trash"></i> ลบ</a>
-                                    </td>
-                                </tr>
+                                if($lists){
+                                  foreach($lists as $key => $val){ 
+                                ?>
+                                  <tr>
+                                      <td class="text-center"><?php echo $i++; ?></td>
+                                      <td><?php echo $val['title']; ?></td>
+                                      <td class="text-right">
+                                        <a href="<?php echo route('user/settingPosition&id='.$val['id']); ?>" class="btn btn-primary"><i class="fas fa-cog"></i></a>
+                                        <a href="<?php echo route('setting/positionEdit&id='.$val['id']); ?>" class="btn btn-primary"><i class="fas fa-edit"></i> แก้ไข</a>
+                                        <a href="<?php echo route('setting/positionDel&id='.$val['id']); ?>" class="btn btn-danger btn-del"><i class="fas fa-trash"></i> ลบ</a>
+                                      </td>
+                                  </tr>
+                                <?php } ?>
+                              <?php }else{?>
+                                  <tr>
+                                      <td colspan="4">ไม่พบข้อมูล</td>
+                                  </tr>
                               <?php } ?>
                             </tbody>
                         </table>
