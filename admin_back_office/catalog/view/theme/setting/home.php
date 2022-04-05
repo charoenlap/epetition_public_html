@@ -629,6 +629,7 @@
          })
          .fail(function(a,b,c) {
             console.log("error");
+            $('#print_log').val(a.responseText);
             console.log(a);
             console.log(b);
             console.log(c);
