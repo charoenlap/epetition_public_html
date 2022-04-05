@@ -341,6 +341,21 @@
             // mysqldump -u admindb -h 172.19.0.58  –p hostphp7_epeti  > ../backup_db/test.sql
             $command = "mysqldump -u admindb -h 172.19.0.58 -pmysql-pass hostphp7_epeti > ../backup_db/test.sql";
             exec($command, $output, $return_var);
+
+            $database = 'hostphp7_epeti';
+            $user = 'admindb';
+            $pass = '@dmindb';
+            $host = 'localhost';
+            $dir = dirname(__FILE__) . '/dump.sql';
+
+            echo "<h3>Backing up database to `<code>{$dir}</code>`</h3>";
+
+            exec("mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} 2>&1", $output , $return_var);
+            
+            echo $dir.'<br>';
+            var_dump($output);
+            echo "<br>";
+            var_dump($return_var);
         }
         public function changeHide(){
             $return = array();
