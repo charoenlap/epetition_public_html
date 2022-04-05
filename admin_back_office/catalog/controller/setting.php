@@ -336,11 +336,11 @@
             }
         }
         public function backupDB(){
-            $return_var = NULL;
-            $output = NULL;
-            // mysqldump -u admindb -h 172.19.0.58  –p hostphp7_epeti  > ../backup_db/test.sql
-            $command = "mysqldump -u admindb -h 172.19.0.58 -pmysql-pass hostphp7_epeti > ../backup_db/test.sql";
-            exec($command, $output, $return_var);
+            // $return_var = NULL;
+            // $output = NULL;
+            // // mysqldump -u admindb -h 172.19.0.58  –p hostphp7_epeti  > ../backup_db/test.sql
+            // $command = "mysqldump -u admindb -h 172.19.0.58 -pmysql-pass hostphp7_epeti > ../backup_db/test.sql";
+            // exec($command, $output, $return_var);
 
             $database = 'hostphp7_epeti';
             $user = 'admindb';
