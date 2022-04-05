@@ -110,6 +110,7 @@
                 $data['mail_agency']  = $modelSetting->getMasterSetting('mail_agency');
                 $data['mail_people']  = $modelSetting->getMasterSetting('mail_people');
                 $data['topic']      = $modelSetting->getTopic();
+                $data['listField']      = $modelSetting->getlistField();
             }
 	    	$this->view('setting/home',$data);
 	    }

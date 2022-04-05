@@ -513,13 +513,18 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <th>เนื้อหาที่ปกปิด</th>
-                                            <th width="50px;">ลบ</th>
+                                            <th width="150px;">สถานะ</th>
                                         </thead>
                                         <tbody>
+                                            <?php foreach($listField as $val){ ?>
                                             <tr>
-                                                <td>ชื่อ</td>
-                                                <td><a href="#" class="btn btn-danger">ลบ</a></td>
+                                                <td><?php echo $val['name_th'] ?></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-success">เปิด</a>
+                                                    <a href="#" class="btn btn-danger">ปิด</a>
+                                                </td>
                                             </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>

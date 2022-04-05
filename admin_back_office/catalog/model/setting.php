@@ -44,6 +44,11 @@
             $result = $this->getdata('topic')->rows;
             return $result;
         }
+        public function getlistField(){
+            $result = array();
+            $result = $this->getdata('setting_hide_data')->rows;
+            return $result;
+        }
         public function getLog(){
             $result = array();
             $result = $this->query('SELECT * FROM LOG_HISTORY ORDER BY AUT_LOG_ID DESC LIMIT 0,30')->rows;
