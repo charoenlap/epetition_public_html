@@ -95,8 +95,43 @@
             $query = $this->query("SELECT * FROM ep_setting_banner where del = '0' order by id desc"); 
             return $query->rows;
         }
+        public function getHideTopicSub(){
+            $return = array();
+            $query = $this->query("SELECT * FROM ep_setting_hide_take"); 
+            foreach($query->rows as $val){
+                $return[] = array(
+                    'id_hide_data'  => $val['id_hide_data'],
+                    'id_topic'      => $val['id_topic'],
+                    'id_sub_topic'  => $val['id_sub_topic'],
+                    'status'        => $val['status']
+                );
+            }
+            return $return;
+        }
+         public function changeHide($id=0,$val=0,$id_topic=0,$id_topic_sub=0){
+            $return = array();
+            $sql = "DELETE FROM ep_setting_hide_take 
+                        WHERE 
+                    id_hide_data = '".(int)$id."' 
+                    AND id_topic = ".(int)$id_topic."
+                    AND id_sub_topic = ".(int)$id_topic_sub;
+            $query = $this->query($sql); 
+
+            $data_insert = array(
+                'id_hide_data'  => $id,
+                'id_topic'      => $id_topic,
+                'id_sub_topic'  => $id_topic_sub,
+                'status'        => $val
+            );
+            $this->insert('setting_hide_take',$data_insert);
+            return $return;
+        }
         public function deleteBanner($id=0){
             $query = $this->query("UPDATE ep_setting_banner SET del=1 WHERE id = '".(int)$id."'"); 
+            return true;
+        }
+        public function changeRequire($id=0,$val=0){
+            $query = $this->query("UPDATE ep_setting_hide_data SET required=".$val." WHERE id = '".(int)$id."'"); 
             return true;
         }
         public function prefixDetail($id){

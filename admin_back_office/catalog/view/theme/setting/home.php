@@ -62,7 +62,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active"  href="#tabs-8">
-                            Required field
+                            บังคับกรอก
                         </a>
                     </li>
                 </ul>
@@ -480,8 +480,11 @@
                                     ประเภทเรื่องร้องเรียน
                                 </div>
                                 <div class="col-md-3">
-                                    <select name="" id="" class="form-control">
+                                    <select name="hide_topic" id="hide_topic" class="form-control">
                                         <option value="">เลือกประเภทเรื่องร้องเรียน</option>
+                                            <?php foreach($topic as $val){?>
+                                                <option value="<?php echo $val['id'];?>"><?php echo $val['topic_title'];?></option>
+                                            <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -490,21 +493,8 @@
                                     ประเภทเรื่องร้องเรียนย่อย
                                 </div>
                                 <div class="col-md-3">
-                                    <select name="" id="" class="form-control">
+                                    <select name="hide_topic_sub" id="hide_topic_sub" class="form-control">
                                         <option value="">เลือกประเภทย่อย</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-3">
-                                    เนื้อหาที่จะปิด
-                                </div>
-                                <div class="col-md-3">
-                                    <select name="" id="" class="form-control">
-                                        <option value="">เลือกเนื้อหา</option>
-                                        <option value="">ชื่อ</option>
-                                        <option value="">นามสกุล</option>
-                                        <option value="">เบอร์โทร</option>
                                     </select>
                                 </div>
                             </div>
@@ -520,7 +510,11 @@
                                             <tr>
                                                 <td><?php echo $val['name_th'] ?></td>
                                                 <td>
-                                                    <select name="" id="">
+                                                    <select 
+                                                        name="<?php echo $val['name_en'] ?>" 
+                                                        data-id="<?php echo $val['id'] ?>" 
+                                                        id="hide<?php echo $val['id'] ?>"
+                                                        class="form-control changeHide">
                                                         <option value="0">เปิด</option>
                                                         <option value="1">ปิด</option>
                                                     </select>
@@ -536,40 +530,29 @@
                 </div>
                 <div id="tabs-8">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Required field</h4>
-                        </div>
                         <div class="card-body">
-                            <div class="row mb-3">
-                                <div class="col-md-3">
-                                    เลือกหัวข้อที่ต้องการให้บังคับกรอก
-                                </div>
-                                <div class="col-md-3">
-                                    <select name="required" id="required" class="form-control">
-                                        <option value="">เลือกหัวข้อ</option>
-                                        <option value="">ชื่อ</option>
-                                        <option value="">นามสกุล</option>
-                                        <option value="">เบอร์โทร</option>
-                                        <option value="">อีเมล</option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="row mb-3">
                                 <div class="col-12">
                                     <table class="table table-striped">
                                         <thead>
                                             <th>หัวข้อที่ต้องการให้บังคับกรอก</th>
-                                            <th width="50px;">ลบ</th>
+                                            <th width="100px;">ตั้งค่า</th>
                                         </thead>
                                         <tbody>
+                                            <?php foreach($listField as $val){ ?>
                                             <tr>
-                                                <td>ชื่อ</td>
-                                                <td><a href="#" class="btn btn-danger">ลบ</a></td>
+                                                <td><?php echo $val['name_th'] ?></td>
+                                                <td>
+                                                    <select 
+                                                        name="<?php echo $val['name_en'] ?>" 
+                                                        data-id="<?php echo $val['id'] ?>" 
+                                                        class="form-control changeRequire">
+                                                        <option value="0" <?php echo ($val['required']==0?'selected':'') ?>>เปิด</option>
+                                                        <option value="1" <?php echo ($val['required']==1?'selected':'') ?>>ปิด</option>
+                                                    </select>
+                                                </td>
                                             </tr>
-                                            <tr>
-                                                <td>นามสกุล</td>
-                                                <td><a href="#" class="btn btn-danger">ลบ</a></td>
-                                            </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -617,6 +600,94 @@
     }
 </style>
 <script>
+    $(document).on('change','#hide_topic_sub',function(e){
+        var topic_sub_id = $(this).val();
+        $.ajax({
+            url: 'index.php?route=setting/getHideTopicSub',
+            type: 'POST',
+            dataType: 'json',
+            data: {id: topic_sub_id},
+        })
+        .done(function(json) {
+            console.log(json);
+            if(json.status=="success"){
+                $.each(json.desc, function(index, val) {
+                    $('#hide'+val.id_hide_data).val(val.status);
+                    console.log('#hide'+val.id);
+                })
+            }
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+    });
+
+    // var $toast = toastr('test', title);
+    $(document).on('change','.changeHide',function(e){
+        var id = $(this).attr('data-id');
+        var val = $(this).val();
+        var hide_topic = $('#hide_topic').val();
+        var hide_topic_sub = $('#hide_topic_sub').val();
+        if(hide_topic != '' && hide_topic_sub!=''){
+            $.ajax({
+                url: 'index.php?route=setting/changeHide',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id: id,
+                    val: val,
+                    id_topic: hide_topic,
+                    id_topic_sub: hide_topic_sub
+                },
+            })
+            .done(function() {
+                toastr.success('บันทึกสถานะเรียบร้อย');
+                console.log("success");
+            })
+            .fail(function(a,b,c) {
+                console.log("error");
+                console.log(a);
+                console.log(b);
+                console.log(c);
+            })
+            .always(function() {
+                console.log("complete");
+            });
+        }
+        
+    });
+    $(document).on('change','.changeRequire',function(e){
+        var id = $(this).attr('data-id');
+        var val = $(this).val();
+        $.ajax({
+            url: 'index.php?route=setting/changeRequire',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: id,
+                val: val
+            },
+        })
+        .done(function() {
+            toastr.success('บันทึกสถานะเรียบร้อย');
+            console.log("success");
+        })
+        .fail(function(a,b,c) {
+            console.log("error");
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+    });
     $(document).on('change','#log',function(e){
         var val = $(this).val();
         $.ajax({
@@ -666,7 +737,7 @@
             console.log(a);
             console.log(b);
             console.log(c);
-        })
+         })
          .always(function() {
              console.log("complete");
          });
@@ -674,31 +745,31 @@
      $(document).on('keyup','#days_process',function(e){
          var val = $(this).val();
          console.log(val);
-         if($('#topic_sub').val()!=''){
-         $.ajax({
-             url: 'index.php?route=setting/setSubTopicConfigDaysProcess',
-             type: 'POST',
-             dataType: 'json',
-             data: {
-                topic_sub:$('#topic_sub').val(),
-                val: val
-            },
-         })
-         .done(function(json) {
-             if(json.status=="success"){
-                 // console.log(json.detail);
-             }
-             console.log("success");
-         })
-         .fail(function(a,b,c) {
-            console.log("error");
-            console.log(a);
-            console.log(b);
-            console.log(c);
-         })
-         .always(function() {
-             console.log("complete");
-         });
+        if($('#topic_sub').val()!=''){
+             $.ajax({
+                 url: 'index.php?route=setting/setSubTopicConfigDaysProcess',
+                 type: 'POST',
+                 dataType: 'json',
+                 data: {
+                    topic_sub:$('#topic_sub').val(),
+                    val: val
+                },
+             })
+             .done(function(json) {
+                 if(json.status=="success"){
+                     // console.log(json.detail);
+                 }
+                 console.log("success");
+             })
+             .fail(function(a,b,c) {
+                console.log("error");
+                console.log(a);
+                console.log(b);
+                console.log(c);
+             })
+             .always(function() {
+                 console.log("complete");
+             });
         }
      });
      $(document).on('keyup','#days_end',function(e){
@@ -729,6 +800,36 @@
                  console.log("complete");
              });
         }
+     });
+     $(document).on('change','#hide_topic',function(e){
+         var id = $(this).val();
+         $.ajax({
+             url: 'index.php?route=setting/getSubTopic',
+             type: 'POST',
+             dataType: 'json',
+             data: {id: id},
+         })
+         .done(function(json) {
+             if(json.status=="success"){
+                 console.log(json.detail);
+                  $('#hide_topic_sub').empty();
+                  $('#hide_topic_sub').append('<option value="">เลือกประเภทย่อย</option>');
+                 $.each(json.detail, function(index, val) {
+                      $('#hide_topic_sub').append('<option value="'+val.id+'">'+val.title+'</option>');
+                 });
+             }
+             console.log("success");
+         })
+         .fail(function(a,b,c) {
+            console.log("error");
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        })
+         .always(function() {
+             console.log("complete");
+         });
+        
      });
      $(document).on('change','#topic',function(e){
          var id = $(this).val();

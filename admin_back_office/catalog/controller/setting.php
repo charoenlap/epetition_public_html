@@ -310,6 +310,47 @@
                 $this->json($return);
             }
         }
+        public function changeRequire(){
+            $return = array();
+            if(method_post()){
+                $id = post('id');
+                $val = post('val');
+                $result = $this->model('setting')->changeRequire($id,$val);
+                $return = array(
+                    'status'    => 'success',
+                    'detail'    => $result
+                );
+                $this->json($return);
+            }
+        }
+        public function getHideTopicSub(){
+            $return = array();
+            if(method_post()){
+                $id = post('id');
+                $result = $this->model('setting')->getHideTopicSub($id);
+                $return = array(
+                    'status'    => 'success',
+                    'desc'    => $result
+                );
+                $this->json($return);
+            }
+        }
+        public function changeHide(){
+            $return = array();
+            if(method_post()){
+                $id             = post('id');
+                $val            = post('val');
+                $id_topic       = post('id_topic');
+                $id_topic_sub   = post('id_topic_sub');
+
+                $result         = $this->model('setting')->changeHide($id,$val,$id_topic,$id_topic_sub);
+                $return = array(
+                    'status'    => 'success',
+                    'desc'    => $result
+                );
+                $this->json($return);
+            }
+        }
         public function getSubTopicConfig(){
             $return = array();
             if(method_post()){
