@@ -1,5 +1,9 @@
 <?php 
 	class MasterModel extends db {
+		 public function getBanners(){
+            $query = $this->query("SELECT * FROM ep_setting_banner where del = '0' order by id desc"); 
+            return $query->rows;
+        }
 		public function getContent(){
             $result = array();
             $query_contact = $this->getdata('setting_content',"name='contact'")->row;

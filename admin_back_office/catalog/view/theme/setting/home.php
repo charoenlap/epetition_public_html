@@ -520,8 +520,10 @@
                                             <tr>
                                                 <td><?php echo $val['name_th'] ?></td>
                                                 <td>
-                                                    <a href="#" class="btn btn-success">เปิด</a>
-                                                    <a href="#" class="btn btn-danger">ปิด</a>
+                                                    <select name="" id="">
+                                                        <option value="0">เปิด</option>
+                                                        <option value="1">ปิด</option>
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <?php } ?>

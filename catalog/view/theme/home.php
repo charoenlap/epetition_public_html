@@ -1,28 +1,18 @@
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <?php $i=0;foreach($banners as $banner){ ?>
+      <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i; ?>" class="<?php echo ($i==0?'active':'');?>"></li>
+      <?php $i++;} ?>
     </ol> 
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img class="d-block w-100" src="images/1.png" alt="First slide">
+      <?php $i=0;foreach($banners as $banner){ ?>
+      <div class="carousel-item <?php echo ($i==0?'active':'');?>">
+        <div class="d-block w-100" style="background:url('uploads/banner/<?php echo $banner['filename'] ?>');background-size:cover;width:100%;height:500px;background-position: center;"></div>
         <div class="carousel-caption d-none d-md-block" >
           <h1>ศูนย์รับข้อร้องเรียนกระทรวงพลังงาน</h1>
         </div>
       </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="images/2.png" alt="Second slide">
-        <div class="carousel-caption d-none d-md-block" >
-          <h1>ศูนย์รับข้อร้องเรียนกระทรวงพลังงาน</h1>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="images/3.png" alt="Third slide">
-        <div class="carousel-caption d-none d-md-block" >
-          <h1>ศูนย์รับข้อร้องเรียนกระทรวงพลังงาน</h1>
-        </div>
-      </div>
+      <?php $i++;} ?>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

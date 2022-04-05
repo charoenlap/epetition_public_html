@@ -17,6 +17,7 @@
 	    	$data['title'] = "";
 	    	$data['descreption'] = "";
 	    	$data['contact'] = $this->model('master')->getContent();
+	    	$data['banners'] = $this->model('master')->getBanners();
  	    	$this->view('home',$data); 
 	    }
 	    public function agreement(){
