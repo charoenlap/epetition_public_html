@@ -1,7 +1,29 @@
 <?php 
 	class MasterModel extends db {
+
 		public function insertLog($data = array()){
 			$this->insert('LOG_HISTORY',$data,false);
+		}
+		public function getTopic($id){
+			$sql = "SELECT * FROM ep_topic_sub 
+					LEFT JOIN ep_topic ON ep_topic_sub.topic_id = ep_topic.id 
+					WHERE ep_topic_sub.id = '".(int)$id."'";
+			$result = $this->query($sql);
+			return $result->row;
+		}
+		public function getHideTake($data = array()){
+			$result = array();
+			$topic_id = (isset($data['topic_id'])?$data['topic_id']:'');
+			$sub_topic_id = (isset($data['sub_topic_id'])?$data['sub_topic_id']:'');
+
+			$sql_get = "SELECT * FROM ep_setting_hide_take  
+			LEFT JOIN ep_setting_hide_data ON ep_setting_hide_take.id_hide_data = ep_setting_hide_data.id
+			WHERE id_topic = '".$topic_id."' AND id_sub_topic = '".$sub_topic_id."'";
+			$result_get = $this->query($sql_get);
+			foreach($result_get->rows as $val){
+				$result[$val['name_en']] = $val['status'];
+			}
+			return $result;
 		}
 		public function getPrefix($data=array()){
 			$result = array();

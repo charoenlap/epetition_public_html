@@ -23,8 +23,8 @@
             <input type="hidden" name="sub_topic_id" value="<?php echo $sub_topic_id;?>">
         <div class="row mb-3">
             <div class="col-md-12">
-                <label for="">เลขประจำตัวประชาชน <span class="text-danger">*</span></label>
-                <input type="text" name="id_card" id="id_card" class="form-control" placeholder="x-xxxxx-xxxxx-xx-x" required
+                <label for="">เลขประจำตัวประชาชน <?php echo ($hide['id_card']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="id_card" id="id_card" class="form-control" placeholder="x-xxxxx-xxxxx-xx-x" <?php echo ($hide['id_card']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
                 size="30"  onkeyup="idcard(this);"  minlength="15" maxlength="25" >
@@ -32,8 +32,8 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-2">
-                <label for="">คำนำหน้า <span class="text-danger">*</span></label>
-                <select name="name_title" id="" class="form-control" required
+                <label for="">คำนำหน้า <?php echo ($hide['name_title']?'<span class="text-danger">*</span>':''); ?></label>
+                <select name="name_title" id="" class="form-control" <?php echo ($hide['name_title']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
                  >
@@ -43,15 +43,15 @@
                 </select>
             </div>
             <div class="col-md-5">
-                <label for="">ชื่อ <span class="text-danger">*</span></label>
-                <input type="text" name="name" class="form-control" placeholder="ชื่อ" required
+                <label for="">ชื่อ <?php echo ($hide['name']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="name" class="form-control" placeholder="ชื่อ" <?php echo ($hide['name']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
                  >
             </div>
             <div class="col-md-5">
-                <label for="">นามสกุล <span class="text-danger">*</span></label>
-                <input type="text" name="lastname" class="form-control" placeholder="นามสกุล" required
+                <label for="">นามสกุล <?php echo ($hide['lastname']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="lastname" class="form-control" placeholder="นามสกุล" <?php echo ($hide['lastname']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
                  >
@@ -59,80 +59,86 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="">อายุ</label>
-                <input type="text" name="age" id="age" class="form-control" placeholder="อายุ">
+                <label for="">อายุ <?php echo ($hide['age']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="age" id="age" class="form-control" <?php echo ($hide['age']?'required':''); ?> placeholder="อายุ">
             </div>
             <div class="col-md-6">
-                <label for="">โทรศัพท์บ้าน</label>
-                <input type="text" name="tel" id="tel" class="form-control" placeholder="โทรศัพท์บ้าน" 
+                <label for="">โทรศัพท์บ้าน <?php echo ($hide['tel']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="tel" id="tel" class="form-control" <?php echo ($hide['tel']?'required':''); ?> placeholder="โทรศัพท์บ้าน" 
                 size="25" onkeyup="home(this)"  minlength="9" maxlength="11"
                 >
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="">โทรศัพท์มือถือ <span class="text-danger">*</span></label>
-                <input type="text" name="phone" id="phone" class="form-control" placeholder="โทรศัพท์มือถือ" required
+                <label for="">โทรศัพท์มือถือ <?php echo ($hide['phone']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="phone" id="phone" class="form-control" placeholder="โทรศัพท์มือถือ" 
+                <?php echo ($hide['phone']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
 
                 size="25" onkeyup="phoneTab(this)"  minlength="10" maxlength="12" >
             </div>
             <div class="col-md-6">
-                <label for="">e-mail</label>
-                <input type="text" name="email" class="form-control" placeholder="e-mail">
+                <label for="">e-mail <?php echo ($hide['email']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="email" class="form-control" placeholder="e-mail"
+                <?php echo ($hide['email']?'required':''); ?> >
             </div>
         </div>
         
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="">บ้านเลขที่</label>
-                <input type="text" name="address_no" class="form-control" placeholder="บ้านเลขที่">
+                <label for="">บ้านเลขที่ <?php echo ($hide['number_topic']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="address_no" <?php echo ($hide['address_no']?'required':''); ?> class="form-control" placeholder="บ้านเลขที่">
             </div>
             <div class="col-md-6">
-                <label for="">หมู่ที่</label>
-                <input type="text" name="moo" class="form-control" placeholder="หมู่ที่">
+                <label for="">หมู่ที่ <?php echo ($hide['moo']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="moo" <?php echo ($hide['moo']?'required':''); ?> class="form-control" placeholder="หมู่ที่">
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-md-4">
-                <label for="">ชื่อหมู่บ้าน</label>
-                <input type="text" name="housename" class="form-control" placeholder="ชื่อหมู่บ้าน">
+                <label for="">ชื่อหมู่บ้าน <?php echo ($hide['housename']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="housename" class="form-control" <?php echo ($hide['housename']?'required':''); ?> placeholder="ชื่อหมู่บ้าน">
             </div>
             <div class="col-md-4">
-                <label for="">ซอย</label>
-                <input type="text" name="soi" class="form-control" placeholder="ซอย">
+                <label for="">ซอย <?php echo ($hide['soi']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="soi" class="form-control" <?php echo ($hide['soi']?'required':''); ?> placeholder="ซอย">
             </div>
             <div class="col-md-4">
-                <label for="">ถนน</label>
-                <input type="text" name="road" class="form-control" placeholder="ถนน">
+                <label for="">ถนน <?php echo ($hide['road']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="road" class="form-control" <?php echo ($hide['road']?'required':''); ?> placeholder="ถนน">
             </div>
             
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="">จังหวัด</label>
-                <select name="id_provinces" id="provinces" class="form-control">
+                <label for="">จังหวัด <?php echo ($hide['provinces']?'<span class="text-danger">*</span>':''); ?></label>
+                <select name="id_provinces" id="provinces" class="form-control" 
+                <?php echo ($hide['provinces']?'required':''); ?>>
                     <option value="">-- จังหวัด --</option>
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="">อำเภอ/เขต</label>
-                <select name="id_amphures" id="amphures" class="form-control">
+                <label for="">อำเภอ/เขต <?php echo ($hide['amphures']?'<span class="text-danger">*</span>':''); ?></label>
+                <select name="id_amphures" id="amphures" class="form-control" 
+                <?php echo ($hide['amphures']?'required':''); ?>>
                     <option value="">-- อำเภอ/เขต --</option>
                 </select>
             </div>
         </div>
         <div class="row mb-5">
             <div class="col-md-6">
-                <label for="">ตำบล/แขวง</label>
-                <select name="id_districts" id="districts" class="form-control">
+                <label for="">ตำบล/แขวง <?php echo ($hide['districts']?'<span class="text-danger">*</span>':''); ?></label>
+                <select name="id_districts" id="districts" class="form-control" 
+                <?php echo ($hide['districts']?'required':''); ?>>
                     <option value="">-- ตำบล/แขวง --</option>
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="">รหัสไปรษณีย์</label>
-                <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="รหัสไปรษณีย์">
+                <label for="">รหัสไปรษณีย์ <?php echo ($hide['zipcode']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="รหัสไปรษณีย์"
+                <?php echo ($hide['zipcode']?'required':''); ?>>
             </div>
         </div>
         
@@ -212,13 +218,13 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-12">
-                <label for="">อ้างอิงเลขหนังสือ</label>
+                <label for="">อ้างอิงเลขหนังสือ <?php echo ($hide['number_topic']?'<span class="text-danger">*</span>':''); ?></label>
                 <input type="text" name="number_topic" class="form-control">
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-md-12">
-                <h5>ประเด็นที่ท่านต้องการร้องเรียน/แจ้งข้อเสนอแนะ <span class="text-danger">*</span></h5>
+                <h5>ประเด็นที่ท่านต้องการร้องเรียน/แจ้งข้อเสนอแนะ <?php echo ($hide['complain_name']?'<span class="text-danger">*</span>':''); ?></h5>
                 <textarea name="complain_name" id="" cols="30" rows="10" class="form-control" required
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
@@ -232,33 +238,34 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="">เลขที่</label>
-                <input type="text" name="t_address_no" class="form-control">
+                <label for="">เลขที่ <?php echo ($hide['t_address_no']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="t_address_no" class="form-control" <?php echo ($hide['t_address_no']?'required':''); ?>>
             </div>
             <div class="col-md-6">
-                <label for="">หมู่ที่</label>
-                <input type="text" name="t_moo" class="form-control">
+                <label for="">หมู่ที่ <?php echo ($hide['t_moo']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="t_moo" class="form-control" <?php echo ($hide['t_moo']?'required':''); ?>>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-md-4">
-                <label for="">ชื่อหมู่บ้าน</label>
-                <input type="text" name="t_housename" class="form-control">
+                <label for="">ชื่อหมู่บ้าน <?php echo ($hide['t_housename']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="t_housename" class="form-control" <?php echo ($hide['t_housename']?'required':''); ?>>
             </div>
             <div class="col-md-4">
-                <label for="">ซอย</label>
-                <input type="text" name="t_soi" class="form-control">
+                <label for="">ซอย <?php echo ($hide['t_soi']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="t_soi" class="form-control" <?php echo ($hide['t_soi']?'required':''); ?>>
             </div>
             <div class="col-md-4">
-                <label for="">ถนน</label>
-                <input type="text" name="t_road" class="form-control">
+                <label for="">ถนน <?php echo ($hide['t_road']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="t_road" class="form-control" <?php echo ($hide['t_road']?'required':''); ?>>
             </div>
             
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="">จังหวัด <span class="text-danger">*</span></label>
-                <select name="t_id_provinces" id="t_provinces" class="form-control" required
+                <label for="">จังหวัด <?php echo ($hide['t_provinces']?'<span class="text-danger">*</span>':''); ?></label>
+                <select name="t_id_provinces" id="t_provinces" class="form-control" 
+                <?php echo ($hide['t_provinces']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
                  >
@@ -267,8 +274,9 @@
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="">อำเภอ/เขต <span class="text-danger">*</span></label>
-                <select name="t_id_amphures" id="t_amphures" class="form-control" required
+                <label for="">อำเภอ/เขต <?php echo ($hide['t_amphures']?'<span class="text-danger">*</span>':''); ?></label>
+                <select name="t_id_amphures" id="t_amphures" class="form-control" 
+                <?php echo ($hide['t_amphures']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
                  >
@@ -279,8 +287,9 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="">ตำบล/แขวง <span class="text-danger">*</span></label>
-                <select name="t_id_districts" id="t_districts" class="form-control" required
+                <label for="">ตำบล/แขวง <?php echo ($hide['t_districts']?'<span class="text-danger">*</span>':''); ?></label>
+                <select name="t_id_districts" id="t_districts" class="form-control" 
+                <?php echo ($hide['t_districts']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
                  >
@@ -289,20 +298,21 @@
                 </select>
             </div>
             <div class="col-md-6">
-                <label for="">รหัสไปรษณีย์</label>
-                <input type="text" name="t_zipcode" id="t_zipcode" class="form-control" placeholder="รหัสไปรษณีย์">
+                <label for="">รหัสไปรษณีย์ <?php echo ($hide['t_zipcode']?'<span class="text-danger">*</span>':''); ?></label>
+                <input type="text" name="t_zipcode" id="t_zipcode" class="form-control" placeholder="รหัสไปรษณีย์"
+                <?php echo ($hide['t_zipcode']?'required':''); ?>>
             </div> 
         </div>
         <div class="row mb-3">
             <div class="col-md-12">
-                <label for="">จุดสังเกตหรือสถานที่ใกล้เคียงที่สำคัญ (โปรดระบุ หากท่านทราบข้อมูล)</label>
-                <textarea name="place_landmarks" id="" cols="30" rows="5" class="form-control"></textarea>
+                <label for="">จุดสังเกตหรือสถานที่ใกล้เคียงที่สำคัญ (โปรดระบุ หากท่านทราบข้อมูล) <?php echo ($hide['place_landmarks']?'<span class="text-danger">*</span>':''); ?></label>
+                <textarea name="place_landmarks" id="" cols="30" rows="5" class="form-control" <?php echo ($hide['place_landmarks']?'required':''); ?>></textarea>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-md-12">
-                <label for="">สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ <span class="text-danger">*</span></label>
-                <textarea name="response_person" id="" cols="30" rows="5" class="form-control" required
+                <label for="">สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ <?php echo ($hide['response_person']?'<span class="text-danger">*</span>':''); ?> <?php echo ($hide['response_person']?'<span class="text-danger">*</span>':''); ?></label>
+                <textarea name="response_person" id="" cols="30" rows="5" class="form-control" <?php echo ($hide['response_person']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
                  ></textarea>

@@ -336,26 +336,52 @@
             }
         }
         public function backupDB(){
-            // $return_var = NULL;
-            // $output = NULL;
-            // // mysqldump -u admindb -h 172.19.0.58  –p hostphp7_epeti  > ../backup_db/test.sql
-            // $command = "mysqldump -u admindb -h 172.19.0.58 -pmysql-pass hostphp7_epeti > ../backup_db/test.sql";
-            // exec($command, $output, $return_var);
 
-            $database = 'hostphp7_epeti';
-            $user = 'admindb';
-            $pass = '@dmindb';
-            $host = 'localhost';
-            $dir = '/dump.sql';
+            $table = post('tables');
+            // header('Pragma: public');
+            // header('Expires: 0');
+            // header('Content-Description: File Transfer');
+            // header('Content-Type: application/octet-stream');
+            // header('Content-Disposition: attachment; filename="' . DB_DB . '_' . date('Y-m-d_H-i-s', time()) . '_backup.sql"');
+            // header('Content-Transfer-Encoding: binary');
 
-            echo "<h3>Backing up database to `<code>{$dir}</code>`</h3>";
+            $output = '';
 
-            exec("mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} 2>&1", $output , $return_var);
+            foreach ($tables as $table) {
 
-            echo $dir.'<br>';
-            var_dump($output);
-            echo "<br>";
-            var_dump($return_var);
+                if ($status) {
+                    $output .= 'TRUNCATE TABLE `' . $table . '`;' . "\n\n";
+
+                    $query = $this->db->query("SELECT * FROM `" . $table . "`");
+
+                    foreach ($query->rows as $result) {
+                        $fields = '';
+
+                        foreach (array_keys($result) as $value) {
+                            $fields .= '`' . $value . '`, ';
+                        }
+
+                        $values = '';
+
+                        foreach (array_values($result) as $value) {
+                            $value = str_replace(array("\x00", "\x0a", "\x0d", "\x1a"), array('\0', '\n', '\r', '\Z'), $value);
+                            $value = str_replace(array("\n", "\r", "\t"), array('\n', '\r', '\t'), $value);
+                            $value = str_replace('\\', '\\\\',  $value);
+                            $value = str_replace('\'', '\\\'',  $value);
+                            $value = str_replace('\\\n', '\n',  $value);
+                            $value = str_replace('\\\r', '\r',  $value);
+                            $value = str_replace('\\\t', '\t',  $value);
+
+                            $values .= '\'' . $value . '\', ';
+                        }
+
+                        $output .= 'INSERT INTO `' . $table . '` (' . preg_replace('/, $/', '', $fields) . ') VALUES (' . preg_replace('/, $/', '', $values) . ');' . "\n";
+                    }
+
+                    $output .= "\n\n";
+                }
+            }
+
         }
         public function changeHide(){
             $return = array();

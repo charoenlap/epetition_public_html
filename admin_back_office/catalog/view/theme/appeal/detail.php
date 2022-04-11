@@ -32,12 +32,20 @@
                                     <table class="table table-bordered table-primary">
                                         <tbody>
                                             <tr>
-                                                <td>Ticket ID : </td>
+                                                <td style="width:240px;">Ticket ID : </td>
                                                 <td><?php echo $ticket; ?></td>
                                             </tr>
                                             <tr>
                                                 <td>วันที่เรื่องร้องเรียนเข้าระบบ : </td>
                                                 <td><?php echo $dateadd; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>หัวข้อเรื่องร้องเรียน : </td>
+                                                <td><?php echo $topic['topic_title']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>หัวข้อย่อยเรื่องร้องเรียน : </td>
+                                                <td><?php echo $topic['title']; ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -53,34 +61,37 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td colspan="2">เลขประจำตัวประชาชน : <?php echo $idCard; ?></td>
+                                                <td colspan="2">เลขประจำตัวประชาชน : <?php echo (isset($hide['id_card'])?'ซ่อนข้อมูล':$idCard); ?></td>
                                             </tr>
                                             <tr>
-                                                <td width="50%">ชื่อสกุล : <?php echo $fullname; ?></td>
-                                                <td>อายุ : <?php echo $age; ?> ปี</td>
+                                                <td width="50%">ชื่อสกุล : 
+                                                    <?php echo (isset($hide['name'])?'ซ่อนข้อมูล':$name); ?> 
+                                                    <?php echo (isset($hide['lastname'])?'ซ่อนข้อมูล':$lastname); ?>
+                                                </td>
+                                                <td>อายุ : <?php echo (isset($hide['age'])?'ซ่อนข้อมูล':$age); ?> ปี</td>
                                             </tr>
                                             <tr>
-                                                <td>โทรศัพท์บ้าน : <?php echo $tel; ?> ,โทรศัพท์มือถือ : <?php echo $phone; ?></td>
-                                                <td>e-mail : <?php echo $email; ?></td>
+                                                <td>โทรศัพท์บ้าน : <?php echo (isset($hide['tel'])?'ซ่อนข้อมูล':$tel); ?> ,โทรศัพท์มือถือ : <?php echo (isset($hide['phone'])?'ซ่อนข้อมูล':$phone); ?></td>
+                                                <td>e-mail : <?php echo (isset($hide['email'])?'ซ่อนข้อมูล':$email); ?></td>
                                             </tr>
                                             <tr>
-                                                <td>บ้านเลขที่ : <?php echo $address_no; ?></td>
-                                                <td>หมู่ที่ : <?php echo $moo; ?></td>
+                                                <td>บ้านเลขที่ : <?php echo (isset($hide['address_no'])?'ซ่อนข้อมูล':$address_no); ?></td>
+                                                <td>หมู่ที่ : <?php echo (isset($hide['moo'])?'ซ่อนข้อมูล':$moo); ?></td>
                                             </tr>
                                             <tr>
-                                                <td>ชื่อหมู่บ้าน :  <?php echo $housename; ?></td>
-                                                <td>ซอย : <?php echo $soi; ?></td>
+                                                <td>ชื่อหมู่บ้าน :  <?php echo (isset($hide['housename'])?'ซ่อนข้อมูล':$housename); ?></td>
+                                                <td>ซอย : <?php echo (isset($hide['soi'])?'ซ่อนข้อมูล':$soi); ?></td>
                                             </tr>
                                             <tr>
-                                                <td>ถนน : <?php echo $road; ?></td>
-                                                <td>จังหวัด : <?php echo $PROVINCE_NAME; ?></td>
+                                                <td>ถนน : <?php echo (isset($hide['road'])?'ซ่อนข้อมูล':$road); ?></td>
+                                                <td>จังหวัด : <?php echo (isset($hide['provinces'])?'ซ่อนข้อมูล':$provinces); ?></td>
                                             </tr>
                                             <tr>
-                                                <td>อำเภอ/เขต : <?php echo $AMPHUR_NAME; ?></td>
-                                                <td>ตำบล/แขวง : <?php echo $TAMBON_NAME; ?></td>
+                                                <td>อำเภอ/เขต : <?php echo (isset($hide['amphures'])?'ซ่อนข้อมูล':$amphures); ?></td>
+                                                <td>ตำบล/แขวง : <?php echo (isset($hide['districts'])?'ซ่อนข้อมูล':$districts); ?></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">รหัสไปรษณีย์ : <?php echo $zipcode; ?></td>
+                                                <td colspan="2">รหัสไปรษณีย์ : <?php echo (isset($hide['zipcode'])?'ซ่อนข้อมูล':$zipcode); ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -93,19 +104,19 @@
                                         <tbody>
                                             <tr>
                                                 <td>บุคคล/หน่วยงาน/สถานที่ที่ต้องการร้องเรียน </td>
-                                                <td><?php echo $note_topic; ?></td>
+                                                <td><?php echo (isset($hide['note_topic'])?'ซ่อนข้อมูล':$note_topic); ?></td>
                                             </tr>
                                             <tr>
                                                 <td>บริเวณที่เกิดเหตุ</td>
-                                                <td><?php echo $topic_address; ?></td>
+                                                <td><?php echo (isset($hide['topic_address'])?'ซ่อนข้อมูล':$topic_address); ?></td>
                                             </tr>
                                             <tr>
                                                 <td>จุดสังเกตหรือสถานที่ใกล้เคียงที่สำคัญ (โปรดระบุ หากท่านทราบข้อมูล)</td>
-                                                <td><?php echo $place_landmarks; ?></td>
+                                                <td><?php echo (isset($hide['place_landmarks'])?'ซ่อนข้อมูล':$place_landmarks); ?></td>
                                             </tr>
                                             <tr>
                                                 <td>สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ</td>
-                                                <td><?php echo $response_person; ?></td>
+                                                <td><?php echo (isset($hide['response_person'])?'ซ่อนข้อมูล':$response_person); ?></td>
                                             </tr>
                                             <tr>
                                                 <td>เอกสารแนบ</td>

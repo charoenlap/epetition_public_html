@@ -43,6 +43,7 @@
 		// }
 	    public function form(){
 	    	$data = array();
+	    	$data['hide'] = $this->model('master')->getHideData();
 	    	$data['production'] = true;
 	    	if($_SERVER['HTTP_HOST']=='localhost'){
 	    		$data['production'] = false;

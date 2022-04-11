@@ -4,6 +4,14 @@
             $query = $this->query("SELECT * FROM ep_setting_banner where del = '0' order by id desc"); 
             return $query->rows;
         }
+        public function getHideData(){
+        	$result = array();
+            $query = $this->query("SELECT * FROM ep_setting_hide_data"); 
+            foreach($query->rows as $val){
+            	$result[$val['name_en']] = $val['required'];
+            }
+            return $result;
+        }
 		public function getContent(){
             $result = array();
             $query_contact = $this->getdata('setting_content',"name='contact'")->row;

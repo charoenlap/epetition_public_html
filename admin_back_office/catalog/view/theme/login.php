@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>E-Petition</title>
+  <title>E-Petition - เข้าสู่ระบบ</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -56,7 +56,7 @@
         </div>
         <div class="row mt-2">
           <div class="col-12 text-right">
-            <a href="#">ลืมรหัสผ่าน</a>
+            <a href="<?php echo route('login/forgot');?>">ลืมรหัสผ่าน</a>
           </div>
         </div>
       </form> 

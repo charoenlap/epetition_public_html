@@ -389,12 +389,23 @@
 			$data['appeal'] = $this->model('appeal')->getlists();
 			$resultData = $response->getList($id);
 
+			$topic_id 		= (int)$resultData['topic_id'];
+			$sub_topic_id 	= (int)$resultData['sub_topic_id'];
+			$select = array(
+				'topic_id' => $topic_id,
+				'sub_topic_id' => $sub_topic_id,
+			);
+			$data['hide'] = $this->model('master')->getHideTake($select);
+			$data['topic'] = $this->model('master')->getTopic($sub_topic_id);
+			
 			$data['ticket']				= $resultData['case_code'];
 			$data['case_code_opm']		= $resultData['case_code_opm'];
 			$data['case_id_opm']		= $resultData['case_id_opm'];
 			$data['dateadd']			= $resultData['dateadd'];
 			$data['idCard']				= $resultData['id_card'];
 			$data['fullname']			= $resultData['name_title']." ".$resultData['name']." ".$resultData['lastname'];
+			$data['name']				= $resultData['name'];
+			$data['lastname']			= $resultData['lastname'];
 			$data['age']				= $resultData['age'];
 			$data['tel']				= $resultData['tel'];
 			$data['phone']				= $resultData['phone'];
@@ -405,11 +416,11 @@
 			$data['soi']				= $resultData['soi'];
 			$data['road']				= $resultData['road'];
 			$data['id_provinces']		= $resultData['id_provinces'];
-			$data['PROVINCE_NAME']		= $resultData['PROVINCE_NAME'];
+			$data['provinces']		= $resultData['PROVINCE_NAME'];
 			$data['id_amphures']		= $resultData['id_amphures'];
-			$data['AMPHUR_NAME']		= $resultData['AMPHUR_NAME'];
+			$data['amphures']		= $resultData['AMPHUR_NAME'];
 			$data['id_districts']		= $resultData['id_districts'];
-			$data['TAMBON_NAME']		= $resultData['TAMBON_NAME'];
+			$data['districts']		= $resultData['TAMBON_NAME'];
 			$data['zipcode']			= $resultData['zipcode'];
 			$data['note_topic']			= $resultData['note_topic'];
 			$data['file']				= $resultData['file'];
@@ -421,7 +432,7 @@
 			$data['response_person']	= $resultData['response_person'];
 			$data['id'] = $id = $resultData['id'];
 			$data['getResponse'] = $this->model('response')->getResponse($id);
-			// var_dump($data['getResponse']);
+			// var_dump($data['getResponse']);exit();
 
 			// $data['getCaseStatus'] = $this->model('opm')->getCaseStatus();
 			$data['getCaseStatus'] = array(

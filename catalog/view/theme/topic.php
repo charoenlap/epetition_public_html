@@ -24,7 +24,7 @@
               foreach($topic as $key => $value){ 
             ?>
             <h3 class="text-link text-topic-link btn-block">
-              <?php echo $i++; ?>. <?php echo $value['rows']['topic_title']; ?>
+              <?php echo $value['rows']['topic_title']; ?>
             </h3>
               
               <div class="col-md-12">
