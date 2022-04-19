@@ -9,6 +9,11 @@
 			}
 			return $result;
 		}
+		public function changePassword($data = array()){
+			$data['email'] = $this->escape(decrypt($data['email']));
+			$data['password'] = $this->escape(md5(decrypt($data['password'])));
+			$this->update('AUT_USER',array('password'=>$data['password']),"email='".$email."'",false);
+		}
 		public function insertLog($data = array()){
 			$this->insert('LOG_HISTORY',$data,false);
 		}

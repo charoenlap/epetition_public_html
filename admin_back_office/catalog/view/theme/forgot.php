@@ -16,7 +16,7 @@
       <div class="text-center">
         <img src="../images/logo.jpg" alt="" style="width:250px;height:auto;">
       </div>
-      <form action="#" method="post" id="form-login">
+      <form action="<?php echo route('login/forgot'); ?>" method="post" id="form-login">
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="E-mail" id="email" name="email" value="">
           <div class="input-group-append">
@@ -25,11 +25,13 @@
             </div>
           </div>
         </div>
+        <?php if($result){ ?>
         <div class="row">
           <div class="col-12">
-            <div id="alert" class=""></div>
+            <div id="alert" class="text-success"><?php echo $result;?></div>
           </div>
         </div>
+        <?php } ?>
         <div class="row mb-2">
           <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">ลืมรหัสผ่าน</button>
