@@ -385,6 +385,7 @@
                                 <h4 class="card-title">ตั้งค่าอีเมล</h4>
                             </div>
                             <div class="card-body">
+                                
                                 <div class="row mb-3">
                                     <div class="col-md-3">
                                         ส่งอีเมลไปยังหน่วยงาน
@@ -395,12 +396,25 @@
                                     <div class="col-md-3">
                                         <table class="table table-striped">
                                             <tr>
-                                                <td>{{name}}</td>
-                                                <td>ชื่อที่อยู่ในระบบ</td>
+                                                <td>{{subject}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        ส่งอีเมลไปยังกรม
+                                    </div>
+                                    <div class="col-md-6">
+                                        <textarea name="mail_agency_sub" id="" cols="30" rows="10" class="summernote"><?php echo $mail_agency_sub; ?></textarea>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <table class="table table-striped">
+                                            <tr>
+                                                <td>{{subject}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{email}}</td>
-                                                <td>อีเมลที่อยู่ในระบบ</td>
+                                                <td>{{comment}}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -414,27 +428,71 @@
                                     </div>
                                     <div class="col-md-3">
                                         <table class="table table-striped">
+                                            <table class="table table-striped">
                                             <tr>
-                                                <td>{{name}}</td>
-                                                <td>ชื่อที่อยู่ในระบบ</td>
+                                                <td>{{ticket_id}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{email}}</td>
-                                                <td>อีเมลที่อยู่ในระบบ</td>
+                                                <td>{{id_card}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{name_title}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{lastname}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{age}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{tel}}</td>
                                             </tr>
                                             <tr>
                                                 <td>{{phone}}</td>
-                                                <td>อีเมลที่อยู่ในระบบ</td>
                                             </tr>
                                             <tr>
-                                                <td>{{topic}}</td>
-                                                <td>หัวข้อเรื่องร้องเรียน</td>
+                                                <td>{{email}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{comment}}</td>
-                                                <td>ข้อเสนอแนะ</td>
+                                                <td>{{complain_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{response_person}}</td>
                                             </tr>
                                         </table>
+                                        </table>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        Host
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" value="<?php echo $email_host;?>" name="host" id="host" >
+                                    </div>
+                                    <div class="col-md-3">
+                                        Port
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" value="<?php echo $email_port;?>" name="post" id="post" >
+                                    </div>
+                                </div>
+                                <div class="row mt-2 mb-2">
+                                    <div class="col-md-3">
+                                        User
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" value="<?php echo $email_user;?>" name="user" id="user" >
+                                    </div>
+                                    <div class="col-md-3">
+                                        Pass
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" value="<?php echo $email_pass;?>" name="pass" id="pass" >
                                     </div>
                                 </div>
                             </div>

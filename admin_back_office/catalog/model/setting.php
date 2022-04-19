@@ -35,8 +35,11 @@
             return $result;
         }
         public function getMasterSetting($name=''){
-            $result = array();
-            $result = $this->getdata('settings',"name='".$this->escape($name)."'")->row['val'];
+            $result = '';
+            $result = $this->getdata('settings',"name='".$this->escape($name)."'");
+            if($result->num_rows){
+                $result = $result->row['val'];
+            }
             return $result;
         }
         public function getTopic(){
@@ -79,6 +82,12 @@
         public function updategetMasterSettings($data=array()){
             foreach($data as $val){
                 $query = $this->update('settings',array('val'=>$val['val']),"name='".$val['name']."'");
+            }
+            return $query;
+        }
+        public function updategetEmailMasterSettings($data=array()){
+            foreach($data as $val){
+                $query = $this->update('template_email',array('template_email'=>$val['val']),"type='".$val['type']."'");
             }
             return $query;
         }

@@ -74,23 +74,22 @@
 
 					$email = post('email');
 					if($email){
-				    	$to_email=$email;
-				    	$msg = '<img src="https://e-petition.energy.go.th/images/logo.jpg">';
-				    	$msg .='<table style="width:100%;">';
-				    	$msg .= "<tr><td>หมายเลขเรื่องร้องเรียน: ".$add."</td></tr>";
-						$msg .= "<tr><td>คำนำหน้า</td><td>".post('id_card')."</td></tr>";
-						$msg .= "<tr><td>เลขประจำตัวประชาชน</td><td>".post('name_title')."</td></tr>";
-						$msg .= "<tr><td>ชื่อ</td><td>".post('name')."</td></tr>";
-						$msg .= "<tr><td>นามสกุล</td><td>".post('lastname')."</td></tr>";
-						$msg .= "<tr><td>อายุ</td><td>".post('age')."</td></tr>";
-						$msg .= "<tr><td>โทรศัพท์บ้าน</td><td>".post('tel')."</td></tr>";
-						$msg .= "<tr><td>โทรศัพท์มือถือ</td><td>".post('phone')."</td></tr>";
-						$msg .= "<tr><td>E-Mail</td><td>".post('email')."</td></tr>";
-						$msg .= "<tr><td>ประเด็นที่ท่านต้องการร้องเรียน/แจ้งข้อเสนอแนะ</td><td>".post('complain_name')."</td></tr>";
-						$msg .= "<tr><td>สิ่งที่ต้องการให้กระทรวงพลังงานดำเนินการ</td><td>".post('response_person')."</td></tr>";
-						$msg.="</table>";
+						$to_email=$email;
+						$data['mail_people']  = $this->model('master')->getMasterSetting('mail_people');
+						$templateEmail = str_replace("{{ticket_id}}", $add, $templateEmail);
+						$templateEmail = str_replace("{{id_card}}",post('id_card'),$templateEmail);
+						$templateEmail = str_replace("{{name_title}}",post('name_title'),$templateEmail);
+						$templateEmail = str_replace("{{name}}",post('name'),$templateEmail);
+						$templateEmail = str_replace("{{lastname}}",post('lastname'),$templateEmail);
+						$templateEmail = str_replace("{{age}}",post('age'),$templateEmail);
+						$templateEmail = str_replace("{{tel}}",post('tel'),$templateEmail);
+						$templateEmail = str_replace("{{phone}}",post('phone'),$templateEmail);
+						$templateEmail = str_replace("{{email}}",post('email'),$templateEmail);
+						$templateEmail = str_replace("{{complain_name}}",post('complain_name'),$templateEmail);
+						$templateEmail = str_replace("{{response_person}}",post('response_person'),$templateEmail);
+
 				    	$subject="ระบบแจ้งเรื่องร้องเรียน กระทรวงพลังงาน";
-				    	sendmailSmtp($to_email,$msg,$subject);
+				    	sendmailSmtp($to_email,$templateEmail,$subject);
 				    }
 					if($add){
 						redirect('home/formComplate&case_code='.$add);

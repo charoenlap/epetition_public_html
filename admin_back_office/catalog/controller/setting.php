@@ -107,10 +107,22 @@
                 $data['d_code']     = $modelSetting->getMasterSetting('d_code');
                 $data['month_code'] = $modelSetting->getMasterSetting('month_code');
                 $data['week_code']  = $modelSetting->getMasterSetting('week_code');
-                $data['mail_agency']  = $modelSetting->getMasterSetting('mail_agency');
+                
                 $data['mail_people']  = $modelSetting->getMasterSetting('mail_people');
+                $data['email_host']  = $modelSetting->getMasterSetting('email_host');
+                $data['email_port']  = $modelSetting->getMasterSetting('email_port');
+                $data['email_user']  = $modelSetting->getMasterSetting('email_user');
+                $data['email_pass']  = $modelSetting->getMasterSetting('email_pass');
                 $data['topic']      = $modelSetting->getTopic();
                 $data['listField']      = $modelSetting->getlistField();
+
+                // $resultTemplateEmail = $this->model('email')->agency();
+                // if($resultTemplateEmail){
+                //     $templateEmail  = $resultTemplateEmail['template_email'];
+                //     $subject        = $resultTemplateEmail['subject'];
+                // }
+                $data['mail_agency']        = $this->model('email')->agency()['template_email'];
+                $data['mail_agency_sub']    = $this->model('email')->agencySub()['template_email'];
             }
 	    	$this->view('setting/home',$data);
 	    }
@@ -271,16 +283,38 @@
             $return = array();
             $post = array();
             if(method_post()){
-                $post[]   = array(
-                    'name'  => 'mail_agency',
-                    'val' => post('mail_agency')
+                $template_email[]   = array(
+                    'val' => post('mail_agency'),
+                    'type'  => 1
                 );
+                $template_email[]   = array(
+                    'val' => post('mail_agency_sub'),
+                    'type'  => 0
+                );
+
                 $post[]   = array(
                     'name'  => 'mail_people',
                     'val' => post('mail_people')
                 );
+                $post[]   = array(
+                    'name'  => 'email_host',
+                    'val' => post('email_host')
+                );
+                $post[]   = array(
+                    'name'  => 'email_port',
+                    'val' => post('email_port')
+                );
+                $post[]   = array(
+                    'name'  => 'email_user',
+                    'val' => post('email_user')
+                );
+                $post[]   = array(
+                    'name'  => 'email_pass',
+                    'val' => post('email_pass')
+                );
                 // var_dump($post);
                 $update = $this->model('setting')->updategetMasterSettings($post);
+                $update = $this->model('setting')->updategetEmailMasterSettings($template_email);
                 $return = array(
                     'status' => 'success'
                 );

@@ -41,11 +41,11 @@
                                             </tr>
                                             <tr>
                                                 <td>หัวข้อเรื่องร้องเรียน : </td>
-                                                <td><?php echo $topic['topic_title']; ?></td>
+                                                <td><?php echo (isset($topic['topic_title'])?$topic['topic_title']:'-'); ?></td>
                                             </tr>
                                             <tr>
                                                 <td>หัวข้อย่อยเรื่องร้องเรียน : </td>
-                                                <td><?php echo $topic['title']; ?></td>
+                                                <td><?php echo (isset($topic['title'])?$topic['title']:'-'); ?></td>
                                             </tr>
                                         </tbody>
                                     </table>

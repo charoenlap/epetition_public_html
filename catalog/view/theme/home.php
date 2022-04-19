@@ -43,6 +43,22 @@
 </section>   
 <section class="">
   <?php echo $contact; ?>
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-6 text-right">
+        <a href="https://play.google.com/store/apps/details?id=th.go.energy.epetition" target="_blank">
+          <img src="assets/android.png" class="img-fluid" style="max-width: 200px;" alt="">
+        </a>
+        <div><img src="assets/qr/android.png" alt="" class="img-fluid" style="max-width: 200px;"></div>
+      </div>
+      <div class="col-6">
+        <a href="https://apps.apple.com/us/app/e-petition-energy/id1614997528" target="_blank">
+          <img src="assets/ios.png" class="img-fluid" style="max-width: 200px;" alt="">
+        </a>
+        <div><img src="assets/qr/ios.png" alt="" class="img-fluid" style="max-width: 200px;"></div>
+      </div>
+    </div>
+  </div>
 </section>
 <script>
     $('.carousel').carousel();

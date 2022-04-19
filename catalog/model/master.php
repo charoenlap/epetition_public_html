@@ -1,5 +1,13 @@
 <?php 
 	class MasterModel extends db {
+		public function getMasterSetting($name=''){
+            $result = '';
+            $result = $this->getdata('settings',"name='".$this->escape($name)."'");
+            if($result->num_rows){
+                $result = $result->row['val'];
+            }
+            return $result;
+        }
 		 public function getBanners(){
             $query = $this->query("SELECT * FROM ep_setting_banner where del = '0' order by id desc"); 
             return $query->rows;

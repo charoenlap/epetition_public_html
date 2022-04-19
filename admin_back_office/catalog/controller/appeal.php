@@ -212,7 +212,7 @@
 							$templateEmail 	= $resultTemplateEmail['template_email'];
 							$subject 		= $resultTemplateEmail['subject'];
 						}
-						$bodytag = str_replace("{{subject}}", $subject, $templateEmail);
+
 						$result['bodytag'] = $bodytag;
 
 						foreach($email_send as $key => $val){
@@ -226,7 +226,9 @@
 							);
 							$this->model('response')->insertResponseSend($insertDataSend);
 							if(!empty($val)){
-								//endmailSmtp($email,$templateEmail,$subject);
+								$templateEmail = str_replace("{{subject}}", $subject, $templateEmail);
+								$templateEmail = str_replace("{{comment}}", $comment_send, $templateEmail);
+								endmailSmtp($email,$templateEmail,$subject);
 								$result['email'][] = $val;
 								// $result['templateEmail'][] = $email;
 							}
