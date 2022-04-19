@@ -123,6 +123,9 @@
                 // }
                 $data['mail_agency']        = $this->model('email')->agency()['template_email'];
                 $data['mail_agency_sub']    = $this->model('email')->agencySub()['template_email'];
+
+                // DOCUMENT_ROOT.'log/sql/'
+                $data['list_files'] = scandir(DOCUMENT_ROOT.'log/sql/');
             }
 	    	$this->view('setting/home',$data);
 	    }
@@ -371,22 +374,21 @@
         }
         public function backupDB(){
 
-            $table = post('tables');
-            // header('Pragma: public');
-            // header('Expires: 0');
-            // header('Content-Description: File Transfer');
-            // header('Content-Type: application/octet-stream');
-            // header('Content-Disposition: attachment; filename="' . DB_DB . '_' . date('Y-m-d_H-i-s', time()) . '_backup.sql"');
-            // header('Content-Transfer-Encoding: binary');
+            $tables = get('tables');
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . DB_DB . '_' . date('Y-m-d_H-i-s', time()) . '_backup.sql"');
+            header('Content-Transfer-Encoding: binary');
 
             $output = '';
 
             foreach ($tables as $table) {
 
-                if ($status) {
                     $output .= 'TRUNCATE TABLE `' . $table . '`;' . "\n\n";
 
-                    $query = $this->db->query("SELECT * FROM `" . $table . "`");
+                    $query = $this->model('master')->querydb("SELECT * FROM `" . $table . "`");
 
                     foreach ($query->rows as $result) {
                         $fields = '';
@@ -413,9 +415,13 @@
                     }
 
                     $output .= "\n\n";
-                }
+                
             }
+            echo $output;
 
+            $file = fopen(DOCUMENT_ROOT.'log/sql/'.date('Y-m-d_H-i-s').".sql","w");
+            echo fwrite($file,$output);
+            fclose($file);
         }
         public function changeHide(){
             $return = array();
@@ -744,6 +750,17 @@
             if($delete){
                 redirect('setting/agency');
             }
+        }
+        public function recoveryFile(){
+            $data = array();
+            if(method_post()){
+                if(post('file')){
+                    $data['result'] = 'success';
+                }else{
+                    $data['result'] = 'failed';
+                }
+            }
+            $this->json($data);
         }
 	}
 ?>

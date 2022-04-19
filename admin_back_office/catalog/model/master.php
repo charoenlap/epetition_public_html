@@ -1,8 +1,22 @@
 <?php 
 	class MasterModel extends db {
-
+		public function addNoti($id_user=0,$id=0){
+			$result = array();
+			$sql = "SELECT * FROM ep_notification WHERE id_user = '".$id_user."' AND id_response = '".$id."'";
+			$result_noti = $this->query($sql);
+			if($result_noti->num_rows==0){
+				$this->insert('notification',array('id_response'=>$id,'id_user'=>$id_user));
+			}
+			return $result;
+		}
 		public function insertLog($data = array()){
 			$this->insert('LOG_HISTORY',$data,false);
+		}
+		public function querydb($sql=''){
+			$result = new \stdClass;
+			$result_query = $this->query($sql);
+			$result->rows = $result_query->rows;
+			return $result;
 		}
 		public function getTopic($id){
 			$sql = "SELECT * FROM ep_topic_sub 

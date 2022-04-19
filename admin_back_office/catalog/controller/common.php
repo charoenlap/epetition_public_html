@@ -22,6 +22,25 @@
 			foreach($menu as $val){
 				$data['menu'][$val['MENU_ID']] = $val['checkbox'];
 			}
+
+			$USER_GROUP_ID = (int)$this->getSession('USER_GROUP_ID');
+			$id_agency_minor = 0;
+			if($USER_GROUP_ID>1){
+				$id_agency_minor = (int)$this->getSession('id_agency_minor');
+			}
+			$AUT_USER_ID = $this->getSession('AUT_USER_ID');
+			$data_search = array(
+				'id_agency_minor'	=> $id_agency_minor,
+				'AUT_USER_ID'		=> $AUT_USER_ID
+			);
+			
+			$resultData 	= $this->model('response')->getNotification($data_search);
+			$data['noti'] = 0;
+			foreach($resultData->rows as $val){
+				if(!$val['id_noti']){
+					$data['noti'] +=1;
+				}
+			}
 	    	$this->render('common/header',$data);
 	    }
 	    public function footer($data=array()){

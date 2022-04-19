@@ -335,10 +335,15 @@
 	    	$this->view('appeal/edit',$data);
 	    }
 	    public function detail() {
+	    	// var_dump($_SESSION);exit();
+
 			$data['title'] 	= "รายละเอียดเรื่องร้องเรียน";
 
 			$id 		= (int)$_GET['id'];
 			$response 	= $this->model('response');
+
+			$AUT_USER_ID = $this->getSession('AUT_USER_ID');
+	    	$this->model('master')->addNoti($AUT_USER_ID,$id);
 
 			$data['getComment'] = $this->model('response')->getComment($id);
 			$data['id'] = $id;

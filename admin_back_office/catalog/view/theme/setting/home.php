@@ -171,8 +171,26 @@
                                     <div class="col-md-3">
                                         Backup ฐานข้อมูล
                                     </div>
-                                    <div class="col-md-9">
-                                        <button class="btn btn-primary " disabled id="">Backup ฐานข้อมูล</button>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <input type="checkbox" value="ep_response" name="table[]"> 
+                                            <label for="ep_response">เรื่องร้องเรียน</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="ep_response_comment" name="table[]"> 
+                                            <label for="ep_response_comment">ความก้าวหน้า</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="ep_response_send" name="table[]"> 
+                                            <label for="ep_response_send">ส่งต่อเรื่องร้องเรียน</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" value="ep_response_status" name="table[]"> 
+                                            <label for="ep_response_status">สถานะเรื่องร้องเรียน</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#" class="btn btn-primary" id="btn-backup-db">Backup ฐานข้อมูล</a>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -181,11 +199,17 @@
                                     </div>
                                     <div class="col-md-3">
                                         <select name="recoveryFile" id="recoveryFile" class="form-control">
-                                            <option value="">ไม่พบการ Backup</option>
+                                            <option value="">เลือก</option>
+                                            <?php foreach($list_files as $val){ 
+                                                if($val=="."){ continue;}
+                                                if($val==".."){ continue;}
+                                            ?>
+                                            <option value="<?php echo $val;?>"><?php echo $val;?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
-                                        <button class="btn btn-primary " disabled id="">ยืนยัน Recovery ฐานข้อมูล</button>
+                                        <a href="#" class="btn btn-primary " id="btn-recovery">ยืนยัน Recovery ฐานข้อมูล</a>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -472,13 +496,13 @@
                                         Host
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="text" class="form-control" value="<?php echo $email_host;?>" name="host" id="host" >
+                                        <input type="text" class="form-control" value="<?php echo $email_host;?>" name="email_host" id="email_host" >
                                     </div>
                                     <div class="col-md-3">
                                         Port
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="text" class="form-control" value="<?php echo $email_port;?>" name="post" id="post" >
+                                        <input type="text" class="form-control" value="<?php echo $email_port;?>" name="email_port" id="email_port" >
                                     </div>
                                 </div>
                                 <div class="row mt-2 mb-2">
@@ -486,13 +510,13 @@
                                         User
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="text" class="form-control" value="<?php echo $email_user;?>" name="user" id="user" >
+                                        <input type="text" class="form-control" value="<?php echo $email_user;?>" name="email_user" id="email_user" >
                                     </div>
                                     <div class="col-md-3">
                                         Pass
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="text" class="form-control" value="<?php echo $email_pass;?>" name="pass" id="pass" >
+                                        <input type="text" class="form-control" value="<?php echo $email_pass;?>" name="email_pass" id="email_pass" >
                                     </div>
                                 </div>
                             </div>
@@ -1135,8 +1159,7 @@
     $( "#tabs" ).tabs();
     $('.nav-link.activea').click();
   } );
-  </script>
-<script>
+
     $('#pageSetting').addClass('active');
 
 
@@ -1193,4 +1216,51 @@
         });
         e.preventDefault();
     });
+    $(document).on('click','#btn-recovery',function(e){
+        var file = $('#recoveryFile').val();
+        $.ajax({
+            url: 'index.php?route=setting/recoveryFile',
+            type: 'POST',
+            dataType: 'json',
+            data: {file: file},
+        })
+        .done(function(json) {
+            console.log("success");
+            console.log(json);
+            if(json.result=="success"){
+                toastr.success('Recovery เรียบร้อย');
+            }else{
+                toastr.info('Recovery ไม่สำเร็จ');
+            }
+            // $('#resultUpdateSoftware').text(json.desc);
+        })
+        .fail(function(a,b,c) {
+            console.log("error");
+            console.log(a,b,c);
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        e.preventDefault();
+    });
+    $(document).on('click','#btn-backup-db',function(e){
+        var table = new Array();
+        $("input[name^='table']:checked").each(function(){
+           table.push($(this).val());
+        });
+        var paramsArray = []
+        var tableParams = createParamList(table,'tables[]');
+        if (tableParams){
+            paramsArray.push(tableParams);
+        }
+        var url = 'index.php?route=setting/backupDB&'+paramsArray.join('&');
+        window.location = url;
+        // window.location = 'index.php?route=setting/backupDB'+paramsArray.join('&');
+        e.preventDefault();
+    });
+    function createParamList(arrayObj, prefix){
+        var result = arrayObj.map(function(obj){return prefix+'='+obj;}).join('&');
+        return result;
+
+    }
 </script>

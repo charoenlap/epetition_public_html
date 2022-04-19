@@ -23,7 +23,7 @@
             <input type="hidden" name="sub_topic_id" value="<?php echo $sub_topic_id;?>">
         <div class="row mb-3">
             <div class="col-md-12">
-                <label for="">เลขประจำตัวประชาชน <?php echo ($hide['id_card']?'<span class="text-danger">*</span>':''); ?></label>
+                <label for="">เลขประจำตัวประชาชน <?php echo ($hide['id_card']?'<span class="text-danger">*</span>':''); ?></label> <label for="" id="txt-result-id-card"></label>
                 <input type="text" name="id_card" id="id_card" class="form-control" placeholder="x-xxxxx-xxxxx-xx-x" <?php echo ($hide['id_card']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
@@ -545,7 +545,52 @@ $('#t_amphures').on("change",function(){
         }
     });
 });
+$(document).on('blur','#id_card',function(e){
+    var ele = $('#id_card');
+    var val = ele.val().replace("-", "").replace("-", "").replace("-", "").replace("-", "").replace("-", "").replace("-", "").replace("-", "");
+    if (CheckPersonID(val)) {
+        $('#txt-result-id-card').removeClass('text-success');
+        $('#txt-result-id-card').removeClass('text-danger');
 
+        $('#txt-result-id-card').addClass('text-success');
+        $('#txt-result-id-card').text('รหัสบัตรประชาชน '+val+' ถูกต้อง');
+    } else {
+        $('#txt-result-id-card').removeClass('text-success');
+        $('#txt-result-id-card').removeClass('text-danger');
+
+        $('#txt-result-id-card').addClass('text-danger');
+        $('#txt-result-id-card').text('รหัสบัตรประชาชน '+val+' ไม่ถูกต้อง');
+
+        ele.val('');
+        
+    } 
+});
+function CheckPersonID (id) {
+    var x = new String(id);
+    // x.replace("-", "");
+    splitext = x.replace("-", "").split("");
+    console.log(splitext);
+    // splitext.replace("-", "");
+    var total = 0;
+    var mul = 13;
+    for(i=0;i<splitext.length-1;i++) {
+        total = total + splitext[i] * mul;
+        mul = mul -1;
+    }
+    var mod;
+    mod = parseInt(total % 11);
+    // console.log(mod);
+    nsub = 11 - parseInt(mod);
+    // console.log(nsub);
+    mod2 = (nsub % 10);
+
+    if(mod2!=splitext[12]){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
 // document.getElementById("btnLoad").addEventListener("click", function showFileSize() {
 //     // (Can't use `typeof FileReader === "function"` because apparently it
 //     // comes back as "object" on some browsers. So just see if it's there

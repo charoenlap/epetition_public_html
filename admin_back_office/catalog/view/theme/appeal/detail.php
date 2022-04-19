@@ -238,7 +238,7 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <input id="send_sub_agency" type="checkbox" name="send_sub_agency" value="1">
-                                            <label for="send_sub_agency">ส่งต่อไปยังกรม</label>
+                                            <label for="send_sub_agency">ส่งต่อหน่วยงานภายใต้กรม</label>
                                         </div>
                                         <div class="col-md-3">
                                             <label for="">Email</label>
@@ -344,7 +344,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <label for="">เลือกหน่วยงานระดับส่วน</label>
+                                            <label for="">เลือกหน่วยงานระดับกรม</label>
                                             <select name="id_agency_minor" id="id_agency_minor" class="form-control">
                                                 <option value="">ทั้งหมด</option>
                                                 <?php /*foreach($agencyMinor->rows as $val){?>

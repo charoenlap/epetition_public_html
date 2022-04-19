@@ -170,7 +170,7 @@
             <a href="<?php echo route('appeal'); ?>" class="nav-link px-1" id="appeal">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                เรื่องร้องเรียน <i class="fas fa-circle text-danger"></i>
+                เรื่องร้องเรียน <label class="text-danger">( <?php echo $noti;?> ) </label>
               </p>
             </a>
           </li>
@@ -402,4 +402,7 @@
     .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
       color: #000 !important;
     }
+   .nav-link.px-1.active .text-danger{
+    color:#fff !important;
+   }
   </style>

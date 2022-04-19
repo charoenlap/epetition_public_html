@@ -174,6 +174,33 @@
             $query->num_rows = $query_row;
             return $query;
         }
+        public function getNotification($data = array()){
+            $where = '';
+            $id_agency = (isset($data['id_agency'])?$data['id_agency']:'');
+            $id_agency_minor = (isset($data['id_agency_minor'])?$data['id_agency_minor']:'');
+            $AUT_USER_ID = (isset($data['AUT_USER_ID'])?$data['AUT_USER_ID']:'');
+           
+           
+            $left_join = '';
+            if($id_agency_minor){
+                $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
+                $where = " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
+            }
+            $sql    = "SELECT 
+            ep_notification.id_noti as id_noti  
+            FROM ep_response a 
+            ".$left_join."
+            LEFT JOIN ep_topic b ON a.topic_id = b.id 
+            LEFT JOIN ep_status ON a.`status` = ep_status.`id` 
+            LEFT JOIN PROVINCE ON a.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+            LEFT JOIN (SELECT * FROM ep_notification WHERE ep_notification.id_user = '".$AUT_USER_ID."' ) ep_notification ON a.id = ep_notification.id_response  
+            WHERE a.del = 0 ".$where."
+            ORDER BY a.id DESC  ";
+            $query  = $this->query($sql);
+
+
+            return $query;
+        }
         public function getList($id){
             $sql    = "SELECT *,
             tp.PROVINCE_NAME AS t_PROVINCE_NAME,
