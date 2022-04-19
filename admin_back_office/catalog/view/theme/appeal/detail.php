@@ -249,14 +249,14 @@
                                             <input name="comment_send[]" type="text" class="form-control" placeholder="ข้อความเพิ่มเติม">
                                         </div>
                                     </div>
-                                    <div class="row mt-2">
+                                    <!-- <div class="row mt-2">
                                         <div class="col-md-3 text-right">
                                             ส่งอีเมล
                                         </div>
                                         <div class="col-9">
                                             <textarea disabled name="email_log_comment_send" id="email_log_comment_send" cols="5" rows="3" class="form-control"></textarea>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <hr>
                                     <?php } ?>
                                     <?php if($user_opm AND $case_code_opm){ ?>
@@ -383,8 +383,9 @@
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-12">
-                                            <p>อีเมลที่ถูกส่ง</p>
-                                            <textarea name="" id="email_log_send" cols="5" rows="3" class="form-control"></textarea>
+                                            <label for="" id="email_log_send"></label>
+                                            <!-- <p>อีเมลที่ถูกส่ง</p>
+                                            <textarea name="" id="email_log_send" cols="5" rows="3" class="form-control"></textarea> -->
                                         </div>
                                     </div>
                                     <div class="row mt-2">
@@ -445,13 +446,15 @@
         .done(function(data) {
             console.log(data);
             // console.log(data.email);
-            var text_email = '';
-            console.log(data.email);
-            $.each(data.email, function(index, val) {
-                 text_email += val+',';
-                 console.log(text_email);
-            });
-            $('#email_log_send').text(text_email);
+            // var text_email = '';
+            // console.log(data.email);
+            // $.each(data.email, function(index, val) {
+            //      text_email += val+',';
+            //      console.log(text_email);
+            // });
+            // $('#email_log_send').text(text_email);
+            toastr.success('ส่งเรื่องไปยังหน่วยงานเรียบร้อยแล้ว');
+            // $('#email_log_send').text('ส่งเรื่องไปยังหน่วยงานเรียบร้อยแล้ว');
             // alert('บันทึกเรียบร้อย');
             console.log("success");
         })
@@ -514,6 +517,7 @@
     });
     $(document).on('submit','#form-sender-comment',function(e){
         var form = $(this);
+        toastr.info('กรุณารอซักครู่');
         $.ajax({
             url: 'index.php?route=appeal/comment',
             type: 'POST',
@@ -521,7 +525,7 @@
             data: form.serialize(),
         })
         .done(function(data) {
-            alert('บันทึกเข้าระบบเรียบร้อย');
+            toastr.success('บันทึกเข้าระบบเรียบร้อย');
             var text_email = '';
             console.log(data.email);
             $.each(data.email, function(index, val) {

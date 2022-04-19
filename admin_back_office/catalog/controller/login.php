@@ -8,12 +8,16 @@
 	    	$data['result'] = get('result');
 	    	if(method_post()){
 	    		$email = post('email');
-	    		$subject = "แจ้งลืมรหัสผ่าน";
-	    		$password = rand(100000000,999999999);
-	    		
-	    		$msg = 'เพื่อยันยันการเปลี่ยนรหัสผ่านใหม่เป็น <b>'.$password.'</b> <a href="'.route('login/active&key='.encrypt($password).'&m='.encrypt($email)).'">คลิกที่นี่</a> ';
-	    		sendmailSmtp($email,$msg,$subject);
-	    		$this->redirect('login/forgot&result=ระบบได้ส่งการยันยันการเปลี่ยนรหัสผ่านไปที่ email '.$email);
+	    		if($email){
+		    		$subject = "แจ้งลืมรหัสผ่าน";
+		    		$password = rand(100000000,999999999);
+
+		    		$msg = 'เพื่อยันยันการเปลี่ยนรหัสผ่านใหม่เป็น <b>'.$password.'</b> <a href="'.route('login/active&key='.encrypt($password).'&m='.encrypt($email)).'">คลิกที่นี่</a> ';
+		    		sendmailSmtp($email,$msg,$subject);
+		    		echo 'ระบบได้ส่งการยันยันการเปลี่ยนรหัสผ่านไปที่ email '.$email;
+		    	}else{
+		    		echo 'อีเมลไม่ควรเป็นค่าว่าง';
+		    	}
 	    	}else{
 	    		$this->render('forgot',$data);
 	    	}

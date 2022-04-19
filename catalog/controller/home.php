@@ -76,6 +76,7 @@
 					if($email){
 						$to_email=$email;
 						$data['mail_people']  = $this->model('master')->getMasterSetting('mail_people');
+						$templateEmail = $data['mail_people'];
 						$templateEmail = str_replace("{{ticket_id}}", $add, $templateEmail);
 						$templateEmail = str_replace("{{id_card}}",post('id_card'),$templateEmail);
 						$templateEmail = str_replace("{{name_title}}",post('name_title'),$templateEmail);
@@ -89,7 +90,17 @@
 						$templateEmail = str_replace("{{response_person}}",post('response_person'),$templateEmail);
 
 				    	$subject="ระบบแจ้งเรื่องร้องเรียน กระทรวงพลังงาน";
-				    	sendmailSmtp($to_email,$templateEmail,$subject);
+				    	$config_email = $this->model('master')->getEmailConfig();
+				    	$data_send = array(
+							'email_host' 		=> $config_email['email_host'],
+							'email_port' 		=> $config_email['email_port'],
+							'email_user' 		=> $config_email['email_user'],
+							'email_pass' 		=> $config_email['email_pass'],
+							'email_send' 		=> $config_email['email_send'],
+							'email_stmpsecure' 	=> $config_email['email_stmpsecure']
+				    	);
+				    	
+				    	sendmailSmtp($to_email,$templateEmail,$subject,$data_send);
 				    }
 					if($add){
 						redirect('home/formComplate&case_code='.$add);

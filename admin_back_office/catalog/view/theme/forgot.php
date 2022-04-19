@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -16,22 +17,20 @@
       <div class="text-center">
         <img src="../images/logo.jpg" alt="" style="width:250px;height:auto;">
       </div>
-      <form action="<?php echo route('login/forgot'); ?>" method="post" id="form-login">
+      <form action="#" method="post" id="form-login">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="E-mail" id="email" name="email" value="">
+          <input type="email" class="form-control" placeholder="E-mail" id="email" name="email" value="" >
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
-        <?php if($result){ ?>
         <div class="row">
           <div class="col-12">
-            <div id="alert" class="text-success"><?php echo $result;?></div>
+            <div id="alert" class="text-success"></div>
           </div>
         </div>
-        <?php } ?>
         <div class="row mb-2">
           <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">ลืมรหัสผ่าน</button>
@@ -70,5 +69,30 @@
       width: 460px;
     }
   </style>
+  <script>
+    $(document).on('submit','#form-login',function(e){
+      var ele = $('#form-login');
+      $.ajax({
+        url: 'index.php?route=login/forgot',
+        type: 'POST',
+        dataType: 'html',
+        data: ele.serialize(),
+      })
+      .done(function(html) {
+        console.log("success");
+        console.log(html);
+        $('#alert').html(html);
+      })
+      .fail(function(a,b,c) {
+        console.log("error");
+        console.log(a);console.log(b);console.log(c);
+      })
+      .always(function() {
+        console.log("complete");
+      });
+      
+      e.preventDefault();
+    });
+  </script>
 </body>
 </html>

@@ -159,16 +159,30 @@
 								$templateEmail 	= $resultTemplateEmail['template_email'];
 								$subject 		= $resultTemplateEmail['subject'];
 							}
-							$bodytag = str_replace("{{subject}}", $subject, $templateEmail);
-							$result['bodytag'] = $bodytag;
+							$templateEmail = str_replace("{{subject}}", $subject, $templateEmail);
+							$result['bodytag'] = $templateEmail;
 							$result['find_email'] = $find_email;
+							$config_email = $this->model('master')->getEmailConfig();
+					    	$data_send = array(
+								'email_host' 		=> $config_email['email_host'],
+								'email_port' 		=> $config_email['email_port'],
+								'email_user' 		=> $config_email['email_user'],
+								'email_pass' 		=> $config_email['email_pass'],
+								'email_send' 		=> $config_email['email_send'],
+								'email_stmpsecure' 	=> $config_email['email_stmpsecure']
+					    	);
+
 							foreach($find_email as $val){
 								$listEmailUser = $this->model('user')->listEmailUser($val);
 								$result['listEmailUser'] = $listEmailUser;
 								foreach($listEmailUser->rows as $email){
 									if(!empty($email)){
-										sendmailSmtp($email,$templateEmail,$subject);
-										$result['email'][] = $email['email'];
+										// var_dump($email);
+										if (filter_var($email['email'], FILTER_VALIDATE_EMAIL)) {
+										  	sendmailSmtp($email['email'],$templateEmail,$subject,$data_send);
+											$result['email'][] = $email['email'];
+										}
+										
 										// $result['templateEmail'][] = $email;
 									}
 								}
@@ -213,7 +227,16 @@
 							$subject 		= $resultTemplateEmail['subject'];
 						}
 
-						$result['bodytag'] = $bodytag;
+						// $result['bodytag'] = $bodytag;
+						$config_email = $this->model('master')->getEmailConfig();
+				    	$data_send = array(
+							'email_host' 		=> $config_email['email_host'],
+							'email_port' 		=> $config_email['email_port'],
+							'email_user' 		=> $config_email['email_user'],
+							'email_pass' 		=> $config_email['email_pass'],
+							'email_send' 		=> $config_email['email_send'],
+							'email_stmpsecure' 	=> $config_email['email_stmpsecure']
+				    	);
 
 						foreach($email_send as $key => $val){
 							$insertDataSend = array(
@@ -227,8 +250,8 @@
 							$this->model('response')->insertResponseSend($insertDataSend);
 							if(!empty($val)){
 								$templateEmail = str_replace("{{subject}}", $subject, $templateEmail);
-								$templateEmail = str_replace("{{comment}}", $comment_send, $templateEmail);
-								endmailSmtp($email,$templateEmail,$subject);
+								$templateEmail = str_replace("{{comment}}", $comment_send[$key], $templateEmail);
+								sendmailSmtp($val,$templateEmail,$subject,$data_send);
 								$result['email'][] = $val;
 								// $result['templateEmail'][] = $email;
 							}

@@ -1,5 +1,13 @@
 <?php 
 	class MasterModel extends db {
+		public function getEmailConfig(){
+			$result = array();
+			$result_query = $this->query("SELECT * FROM ep_settings WHERE `name` like 'email_%'");
+			foreach($result_query->rows as $val){
+				$result[$val['name']] = $val['val'];
+			}
+			return $result;
+		}
 		public function getMasterSetting($name=''){
             $result = '';
             $result = $this->getdata('settings',"name='".$this->escape($name)."'");

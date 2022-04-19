@@ -1,5 +1,13 @@
 <?php 
 	class MasterModel extends db {
+		public function getEmailConfig(){
+			$result = array();
+			$result_query = $this->query("SELECT * FROM ep_settings WHERE `name` like 'email_%'");
+			foreach($result_query->rows as $val){
+				$result[$val['name']] = $val['val'];
+			}
+			return $result;
+		}
 		public function addNoti($id_user=0,$id=0){
 			$result = array();
 			$sql = "SELECT * FROM ep_notification WHERE id_user = '".$id_user."' AND id_response = '".$id."'";
