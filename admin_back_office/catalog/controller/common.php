@@ -2,13 +2,18 @@
 	class CommonController extends Controller {
 	    public function header($data=array()) {
 	    	$data = array();
+	    	// var_dump($_SESSION);exit();
 	    	$user_name 			= $this->getSession('user_name');
+	    	$AUT_USER_ID 		= $this->getSession('AUT_USER_ID');
 			$officer_id 		= $this->getSession('officer_id');
 			$officer_name 		= $this->getSession('officer_name');
 			$role_name 			= $this->getSession('role_name');
 			$last_login 		= $this->getSession('last_login');
 			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
 			$id_agency 			= $this->getSession('id_agency');
+			if(!$AUT_USER_ID){
+				redirect('login');
+			}
 			$data['agency_title'] = $this->model('agency')->getAgency($id_agency);
 			// exit();
 			// var_dump($_SESSION);exit();
