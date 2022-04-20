@@ -27,7 +27,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active"  href="#tabs-1-2">
-                            ปรับแต่งแบนเนอร์
+                            ปรับแต่งแบนเนอร์.
                         </a>
                     </li>
                     <li class="nav-item">
