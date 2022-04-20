@@ -58,6 +58,7 @@
                         <tr>
                             <td><b>สถานะ</b></td>
                             <td class="">
+                                <?php if($color=="orange"){ $txt_status='เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างการดำเนินการ';} ?>
                                 <?php echo $txt_status; ?>
                             </td>
                         </tr>
