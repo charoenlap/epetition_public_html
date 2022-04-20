@@ -373,7 +373,6 @@
             }
         }
         public function backupDB(){
-
             $tables = get('tables');
             header('Pragma: public');
             header('Expires: 0');
@@ -382,6 +381,49 @@
             header('Content-Disposition: attachment; filename="' . DB_DB . '_' . date('Y-m-d_H-i-s', time()) . '_backup.sql"');
             header('Content-Transfer-Encoding: binary');
 
+            $output = '';
+
+            foreach ($tables as $table) {
+
+                    $output .= 'TRUNCATE TABLE `' . $table . '`;' . "\n\n";
+
+                    $query = $this->model('master')->querydb("SELECT * FROM `" . $table . "`");
+
+                    foreach ($query->rows as $result) {
+                        $fields = '';
+
+                        foreach (array_keys($result) as $value) {
+                            $fields .= '`' . $value . '`, ';
+                        }
+
+                        $values = '';
+
+                        foreach (array_values($result) as $value) {
+                            $value = str_replace(array("\x00", "\x0a", "\x0d", "\x1a"), array('\0', '\n', '\r', '\Z'), $value);
+                            $value = str_replace(array("\n", "\r", "\t"), array('\n', '\r', '\t'), $value);
+                            $value = str_replace('\\', '\\\\',  $value);
+                            $value = str_replace('\'', '\\\'',  $value);
+                            $value = str_replace('\\\n', '\n',  $value);
+                            $value = str_replace('\\\r', '\r',  $value);
+                            $value = str_replace('\\\t', '\t',  $value);
+
+                            $values .= '\'' . $value . '\', ';
+                        }
+
+                        $output .= 'INSERT INTO `' . $table . '` (' . preg_replace('/, $/', '', $fields) . ') VALUES (' . preg_replace('/, $/', '', $values) . ');' . "\n";
+                    }
+
+                    $output .= "\n\n";
+                
+            }
+            echo $output;
+
+            $file = fopen(DOCUMENT_ROOT.'log/sql/'.date('Y-m-d_H-i-s').".sql","w");
+            echo fwrite($file,$output);
+            fclose($file);
+        }
+        public function crontabBackupDB(){
+            $tables = array('ep_response','ep_response_comment','ep_response_send','ep_response_status');
             $output = '';
 
             foreach ($tables as $table) {
