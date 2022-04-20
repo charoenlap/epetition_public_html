@@ -305,7 +305,7 @@
                                             ข้อความเพิ่มเติม ไปยังประชาชน
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <textarea type="text" class="form-control" value="" name="txt_to_people">
+                                            <textarea type="text" class="form-control" value="" name="txt_to_people" id="txt_to_people"></textarea>
                                         </div>
                                     </div>
                                     <?php } ?>
