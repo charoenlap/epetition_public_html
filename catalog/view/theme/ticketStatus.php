@@ -31,7 +31,7 @@
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
-                            <td width="200px;"><b>รหัสเรื่องร้องเรียน (Ticket ID)</b></td>
+                            <td width="230px;"><b>รหัสเรื่องร้องเรียน (Ticket ID)</b></td>
                             <td><?php echo $val['detail']['case_code']; ?></td>
                         </tr>
                         <tr>
@@ -39,7 +39,7 @@
                             <td><?php echo $val['detail']['response_person']; ?></td>
                         </tr>
                         <tr>
-                            <td><b>การดำเนินการ</b></td>
+                            <td><b>หน่วยงานดำเนินการ</b></td>
                             <td>
                                 <?php 
                                 if($val['agency']){
