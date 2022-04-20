@@ -37,6 +37,7 @@
 			$data['page'] = (get('page')?get('page'):1);
 			$USER_GROUP_ID = (int)$this->getSession('USER_GROUP_ID');
 			$id_agency_minor = 0;
+			$id_agency = 0;
 			if($USER_GROUP_ID>1){
 				if($USER_GROUP_ID>1){
 					$id_agency_minor = (int)$this->getSession('id_agency_minor');

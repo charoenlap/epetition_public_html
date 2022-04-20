@@ -176,7 +176,7 @@
             <a href="<?php echo route('appeal'); ?>" class="nav-link px-1" id="appeal">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                เรื่องร้องเรียน <label class="text-danger">( <?php echo $noti;?> ) </label>
+                เรื่องร้องเรียน <label class="text-danger"><?php echo ($noti>0?' ( '.$noti.' )':'');?></label>
               </p>
             </a>
           </li>
