@@ -146,7 +146,7 @@
         public function btnUpdateGit(){
             $return = array();
             if(method_post()){
-                $result = exec('git pull');
+                $result = exec('cd ..;cd ..;cd var/www/html/e-petition.energy.go.th/public_html/;git pull;');
 
                 // $post   = array(
                 //     'name'  => 'limitFile',
