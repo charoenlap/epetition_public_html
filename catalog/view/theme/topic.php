@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row mb-3">
             <div class="col-md-12">
-                <h3 class="text-theme font-weight-bold">ประเภทเรื่องร้องเรียน</h3>
+                <h3 class="text-theme font-weight-bold">กรุณาเลือกประเภทเรื่องร้องเรียน</h3>
             </div>
         </div>
         <div class="row" id="accordion">

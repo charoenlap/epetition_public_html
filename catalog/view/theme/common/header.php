@@ -19,7 +19,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-theme">
         <div class="container">
-        <a class="navbar-brand" href="<?php echo route('home'); ?>"><img src="images/logo.jpg" alt="" class="w-50"></a>
+        <a class="navbar-brand" href="<?php echo route('home'); ?>"><img src="images/logo.jpg" alt="" class="w-50" style="width: 65% !important;"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
