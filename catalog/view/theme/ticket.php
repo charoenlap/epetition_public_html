@@ -18,16 +18,18 @@
                 <form action="<?php echo route('ticket/ticketStatus');?>" method="POST">
                   <div>ค้นหาด้วย</div>
                   <input type="radio" name="rdoType" value="ticket" id="ticket" checked>
-                  <label for="ticket">รหัสเรื่องร้องเรียน</label>
+                  <label for="ticket">รหัสเรื่องร้องเรียน (Ticket ID)</label>
                   <input type="radio" name="rdoType" value="idno" id="idno">
                   <label for="idno">เลขบัตรประจำตัวประชาชน</label>
 
                   <input type="text" class="form-control form-control-lg mt-2 mb-3" id="case_code" onkeyup="idcard(this);" placeholder="รหัสเรื่องร้องเรียน" name="case_code" id="case_code" required>
-                  <input type="text" class="form-control form-control-lg mb-3" id="phone" onkeyup="phoneTab(this);" placeholder="กรอกข้อมูลเบอร์โทรศัพท์" name="phone" required>
+                  <input type="text" class="form-control form-control-lg mb-3" id="phone" onkeyup="phoneTab(this);" placeholder="กรอกข้อมูลเบอร์โทรศัพท์มือถือ" name="phone" required>
                   <?php if($production){ ?>
                       <div class="g-recaptcha mb-2" data-sitekey="6LeEVQIfAAAAAO7mj5F76RKroMqtd5k3PErjiexu" id="reCAPTCHA"></div>
                   <?php } ?>
-                  
+                  <div>
+                    <label for="">* กรุณากรอกข้อมูลทั้ง 2 ช่อง</label>
+                  </div>
                   <button class="btn btn-theme btn-lg btn-block"  type="submit">ค้นหา</button>
                 </form>
             </div>
