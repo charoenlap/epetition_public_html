@@ -35,11 +35,15 @@
                             <td><?php echo $val['detail']['case_code']; ?></td>
                         </tr>
                         <tr>
+                            <td width="230px;"><b>วันที่แจ้ง</b></td>
+                            <td><?php echo (isset($val['detail']['dateadd'])?$val['detail']['dateadd']:''); ?></td>
+                        </tr>
+                        <tr>
                             <td><b>ชื่อเรื่อง</b></td>
                             <td><?php echo $val['detail']['response_person']; ?></td>
                         </tr>
                         <tr>
-                            <td><b>หน่วยงานดำเนินการ</b></td>
+                            <td><b>อยู่ระหว่างตรวจสอบข้อมูล เพื่อส่งต่อให้หน่วยงานที่รับผิดชอบ</b></td>
                             <td>
                                 <?php 
                                 if($val['agency']){
