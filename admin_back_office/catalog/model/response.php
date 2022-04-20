@@ -150,9 +150,14 @@
             }
             $limit = " LIMIT ".$limit;
             $left_join = '';
+            $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
             if($id_agency_minor){
-                $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
-                $where = " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
+                // $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
+                $where .= " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
+            }
+            if($id_agency){
+                // $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
+                $where .= " AND ep_response_status.id_agency = '".$id_agency."'";
             }
             $sql    = "SELECT *,
             a.id as id, 
@@ -182,10 +187,16 @@
            
            
             $left_join = '';
+            $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
             if($id_agency_minor){
-                $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
-                $where = " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
+                // $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
+                $where .= " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
             }
+            if($id_agency){
+                // $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
+                $where .= " AND ep_response_status.id_agency = '".$id_agency."'";
+            }
+
             $sql    = "SELECT 
             ep_notification.id_noti as id_noti  
             FROM ep_response a 

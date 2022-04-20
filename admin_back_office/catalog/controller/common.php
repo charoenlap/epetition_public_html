@@ -36,13 +36,18 @@
 
 			$USER_GROUP_ID = (int)$this->getSession('USER_GROUP_ID');
 			$id_agency_minor = 0;
+			$id_agency = 0;
 			if($USER_GROUP_ID>1){
 				$id_agency_minor = (int)$this->getSession('id_agency_minor');
+				$id_agency = (int)$this->getSession('id_agency');
 			}
+			// echo $id_agency_minor;exit();
+			// var_dump($_SESSION);exit();
 			$AUT_USER_ID = $this->getSession('AUT_USER_ID');
 			$data_search = array(
 				'id_agency_minor'	=> $id_agency_minor,
-				'AUT_USER_ID'		=> $AUT_USER_ID
+				'AUT_USER_ID'		=> $AUT_USER_ID,
+				'id_agency'			=> $id_agency
 			);
 			
 			$resultData 	= $this->model('response')->getNotification($data_search);

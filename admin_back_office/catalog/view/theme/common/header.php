@@ -119,9 +119,9 @@
     <img src="http://localhost/epetition/public_html/images/logo.jpg" alt="" style="width:auto;height:50px;">
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <?php if(isset($assign)){ ?>
+      <?php if(isset($assign->row['date_end'])){ ?>
       <li class="nav-item">
-        <span class="text-danger">คุณได้รับสิทธ์ในการอนุมัติ ถึงวันที่ <?php echo $assign->row['date_end']; ?></span>
+        <span class="text-danger">คุณได้รับสิทธ์ในการอนุมัติ ถึงวันที่ <?php echo (isset($assign->row['date_end'])?$assign->row['date_end']:''); ?></span>
       </li>
       <?php } ?>
       <li class="nav-item">
