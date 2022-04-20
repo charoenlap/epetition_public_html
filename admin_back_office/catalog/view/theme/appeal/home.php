@@ -28,7 +28,7 @@
                                 <input type="hidden" name="route" value="appeal">
                                 <div class="row mb-3">
                                     <div class="col-md-3 mb-3">
-                                        <label for="">เรื่องที่ร้องเรียน/ร้องทุกข์</label>
+                                        <label for="">ประเภท</label>
                                         <select name="topic_id" id="topic_id" class="form-control">
                                             <option value="">ประเภท</option>
                                             <?php foreach($topic as $val){ ?>

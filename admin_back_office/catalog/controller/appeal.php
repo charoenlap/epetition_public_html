@@ -2,7 +2,7 @@
 	class AppealController extends Controller {
 		public function index() {
 	    	// var_dump($_SESSION);exit();
-			$data['title'] 	= "เรื่องที่ร้องเรียน/ร้องทุกข์"; 
+			$data['title'] 	= "เรื่องร้องเรียน/ร้องทุกข์"; 
 			$data['topic'] 			= $this->model('topic')->getLists();
 			$data['department'] 	= $this->model('agency')->getLists();
 			$data['status'] 		= $this->model('status')->getLists();
