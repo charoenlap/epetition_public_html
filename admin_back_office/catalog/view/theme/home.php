@@ -90,11 +90,28 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <!-- <div class="col-md-5">
-                  <div id="vmap" style="width: 100%; height: 800px;"></div>
-                </div> -->
+                <!--  -->
                 <div class="col-md-12">
                   <div id="chart_div_combo" style="height: 500px;"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5">
+                  <div id="vmap" style="width: 100%; height: 800px;"></div>
+                </div>
+                <div class="col-md-7">
+                  <table class="table table-striped">
+                    <thead>
+                      <th></th>
+                      <th></th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -150,28 +167,28 @@
   }
 </style>  
 <script type="text/javascript">
-	// jQuery('#vmap').vectorMap(
- //  {
- //      map: 'thai_en',
- //      backgroundColor: '#fff',
- //      borderColor: '#F3F0D7',
- //      borderOpacity: 0.25,
- //      borderWidth: 1,
- //      color: '#CEE5D0',
- //      enableZoom: true,
- //      hoverColor: '#FF7878',
- //      hoverOpacity: null,
- //      normalizeFunction: 'linear',
- //      scaleColors: ['#b6d6ff', '#005ace'],
- //      selectedColor: '#c9dfaf',
- //      selectedRegion: true,
- //      showTooltip: true,
- //      showLabels: true,
- //      onRegionClick: function(element, code, region)
- //      {
- //        console.log(element);
- //          var message = 'จังหวัด "'+region+' '+code+' ' +'" เรื่องร้องเรียนทั้งหมด 0 เรื่อง' 
- //          alert(message);
- //      }
- //  });
+  jQuery('#vmap').vectorMap(
+  {
+      map: 'thai_en',
+      backgroundColor: '#fff',
+      borderColor: '#F3F0D7',
+      borderOpacity: 0.25,
+      borderWidth: 1,
+      color: '#CEE5D0',
+      enableZoom: true,
+      hoverColor: '#FF7878',
+      hoverOpacity: null,
+      normalizeFunction: 'linear',
+      scaleColors: ['#b6d6ff', '#005ace'],
+      selectedColor: '#c9dfaf',
+      selectedRegion: true,
+      showTooltip: true,
+      showLabels: true,
+      onRegionClick: function(element, code, region)
+      {
+        console.log(element);
+          var message = 'จังหวัด "'+region+' '+code+' ' +'" เรื่องร้องเรียนทั้งหมด 0 เรื่อง' 
+          alert(message);
+      }
+  });
 </script>
