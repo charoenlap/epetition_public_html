@@ -44,10 +44,6 @@
                                         <label for="">ถึงวันที่</label>
                                         <input type="text" name="dateadd_end" value="<?php echo $dateadd_end; ?>" class="datethaipicker form-control">
                                     </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="dateadd">เวลา</label>
-                                        <input type="text" name="dateadd_time" value="<?php echo $dateadd_time; ?>" class="time timepicker form-control">
-                                    </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="">รหัสเรื่อง (Ticket ID)</label>
                                         <input type="text" name="case_code" value="<?php echo $case_code; ?>" id="case_code" class="form-control" placeholder="Ticket ID">
