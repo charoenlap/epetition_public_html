@@ -99,46 +99,6 @@
     $(document).ready(function(){
         $('.datethaipicker').datepicker({
             dateFormat: 'yy-mm-dd' 
-        //  $('.datethaipicker').datetimepicker({
-        //     // yearOffset:222,
-        //     lang:'th',
-        //     timepicker:false,
-        //     format:'Y-m-d H:i:s',
-        //     formatDate:'Y-m-d',
-        //     // minDate:'-1970/01/02', // yesterday is minimum date
-        //     // maxDate:'+1970/01/02' // and tommorow is maximum date calendar
         });
     });
-        
-    // });
-    // $( function() {
-    //     var dateFormat = "yy-mm-dd",
-    //       from = $( "#date_start" )
-    //         .datepicker({
-    //           defaultDate: "+1w",
-    //           changeMonth: true,
-    //           numberOfMonths: 3
-    //         })
-    //         .on( "change", function() {
-    //           to.datepicker( "option", "minDate", getDate( this ) );
-    //         }),
-    //       to = $( "#date_end" ).datepicker({
-    //         defaultDate: "+1w",
-    //         changeMonth: true,
-    //         numberOfMonths: 3
-    //       })
-    //       .on( "change", function() {
-    //         from.datepicker( "option", "maxDate", getDate( this ) );
-    //       });
-    // } );
-    // function getDate( element ) {
-    //   var date;
-    //   try {
-    //     date = $.datepicker.parseDate( dateFormat, element.value );
-    //   } catch( error ) {
-    //     date = null;
-    //   }
- 
-    //   return date;
-    // }
 </script>
