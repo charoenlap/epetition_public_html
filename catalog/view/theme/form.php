@@ -23,6 +23,11 @@
             <input type="hidden" name="sub_topic_id" value="<?php echo $sub_topic_id;?>">
         <div class="row mb-3">
             <div class="col-md-12">
+                <input type="checkbox" id="" name="chkConceal"> <label for="chkConceal">ไม่ต้องการให้เปิดเผยข้อมูล</label>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
                 <label for="">เลขประจำตัวประชาชน <?php echo ($hide['id_card']?'<span class="text-danger">*</span>':''); ?></label> <label for="" id="txt-result-id-card"></label>
                 <input type="text" name="id_card" id="id_card" class="form-control" placeholder="x-xxxxx-xxxxx-xx-x" <?php echo ($hide['id_card']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
