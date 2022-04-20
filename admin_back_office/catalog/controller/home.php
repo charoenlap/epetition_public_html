@@ -27,7 +27,14 @@
 				$data['total_case_process'] = $total_case_process;
 				$data['total_report'] 		= 8;
 				$data['total_user'] 		= $total_user;
+
+				// var_dump($_SESSION);exit();
+				$AUT_USER_ID = $this->getSession('AUT_USER_ID');
+				$group_id = $this->model('user')->checkUserGroup($AUT_USER_ID);
 				$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+				if($group_id){
+					$USER_GROUP_ID = $group_id;
+				}
 				$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
 				$data['menu'] = array();
 				$data['active_del'] 	= 0;

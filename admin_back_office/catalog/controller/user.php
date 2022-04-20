@@ -178,10 +178,10 @@
                             'id'    =>$id
                         );
             $data['menu'] = $this->model('user')->getMenu($arrMenu);
-            $data['action'] = route('user/submitSetting');
+            $data['action'] = route('user/submitSettingPerson');
             // $data['group_id'] = $group_id;
             $data['type'] = $type;
-            $data['user_id'] = $user_id;
+            $data['id'] = $id;
             $this->view('permission/setting',$data);
         }
         public function settingPosition() {
@@ -196,7 +196,7 @@
                             'position_id'   =>$id
                         );
             $data['menu'] = $this->model('user')->getMenu($arrMenu);
-            $data['action'] = route('user/submitSetting');
+            $data['action'] = route('user/submitSettingPosition');
             // $data['group_id'] = $group_id;
             $data['type'] = $type;
             $data['position_id'] = $id;
@@ -264,6 +264,153 @@
                 }
                 $this->model('user')->saveMenu($insert,$group_id);
                 redirect('user/setting&group_id='.$group_id);
+            }
+        }
+        public function submitSettingPerson(){
+            if(method_post()){
+                $insert = array();
+
+                $id = (int)post('id');
+                $menu_id = post('menu_id');
+                $user_view = post('user_view');
+                $user_add = post('user_add');
+                $user_edit = post('user_edit');
+                $user_del = post('user_del');
+
+                $user_accept = post('user_accept');
+                $user_change = post('user_change');
+                $user_send = post('user_send');
+                $user_topic = post('user_topic');
+                $user_opm = post('user_opm');
+
+                $user_shortcut = post('user_shortcut');
+                $user_graph = post('user_graph');
+                $user_graph_sub = post('user_graph_sub');
+
+                if($id){
+                    // var_dump($user_view);exit();
+                    $insert = array();
+                    foreach($menu_id as $key => $val){
+                        $insert[] = array(
+                            'user_id'           => $id,
+                            'type'              => 1,
+                            'MENU_ID'           => (isset($menu_id[$key])?$menu_id[$key]:''),
+                            'USER_VIEW'         => (isset($user_view[$key])?$user_view[$key]:''),
+                            'USER_ADD'          => (isset($user_add[$key])?$user_add[$key]:''),
+                            'USER_EDIT'         => (isset($user_edit[$key])?$user_edit[$key]:''),
+                            'USER_DELETE'       => (isset($user_del[$key])?$user_del[$key]:''),
+                            'user_accept'       => (isset($user_accept[$key])?$user_accept[$key]:''), 
+                            'user_change'       => (isset($user_change[$key])?$user_change[$key]:''), 
+                            'user_send'         => (isset($user_send[$key])?$user_send[$key]:''), 
+                            'user_topic'        => (isset($user_topic[$key])?$user_topic[$key]:''), 
+                            'user_opm'          => (isset($user_opm[$key])?$user_opm[$key]:''), 
+                            'user_shortcut'     => (isset($user_shortcut[$key])?$user_shortcut[$key]:''), 
+                            'user_graph'        => (isset($user_graph[$key])?$user_graph[$key]:''), 
+                            'user_graph_sub'    => (isset($user_graph_sub[$key])?$user_graph_sub[$key]:''), 
+                        );
+                    }
+                }
+
+                $this->model('user')->saveMenuPerson($insert,$id);
+                redirect('user/settingPerson&id='.$id);
+            }
+        }
+        public function submitSettingPosition(){
+            if(method_post()){
+                $insert = array();
+
+                $id = (int)post('position_id');
+                $menu_id = post('menu_id');
+                $user_view = post('user_view');
+                $user_add = post('user_add');
+                $user_edit = post('user_edit');
+                $user_del = post('user_del');
+
+                $user_accept = post('user_accept');
+                $user_change = post('user_change');
+                $user_send = post('user_send');
+                $user_topic = post('user_topic');
+                $user_opm = post('user_opm');
+
+                $user_shortcut = post('user_shortcut');
+                $user_graph = post('user_graph');
+                $user_graph_sub = post('user_graph_sub');
+
+                if($id){
+                    // var_dump($user_view);exit();
+                    $insert = array();
+                    foreach($menu_id as $key => $val){
+                        $insert[] = array(
+                            'position_id'           => $id,
+                            'type'              => 2,
+                            'MENU_ID'           => (isset($menu_id[$key])?$menu_id[$key]:''),
+                            'USER_VIEW'         => (isset($user_view[$key])?$user_view[$key]:''),
+                            'USER_ADD'          => (isset($user_add[$key])?$user_add[$key]:''),
+                            'USER_EDIT'         => (isset($user_edit[$key])?$user_edit[$key]:''),
+                            'USER_DELETE'       => (isset($user_del[$key])?$user_del[$key]:''),
+                            'user_accept'       => (isset($user_accept[$key])?$user_accept[$key]:''), 
+                            'user_change'       => (isset($user_change[$key])?$user_change[$key]:''), 
+                            'user_send'         => (isset($user_send[$key])?$user_send[$key]:''), 
+                            'user_topic'        => (isset($user_topic[$key])?$user_topic[$key]:''), 
+                            'user_opm'          => (isset($user_opm[$key])?$user_opm[$key]:''), 
+                            'user_shortcut'     => (isset($user_shortcut[$key])?$user_shortcut[$key]:''), 
+                            'user_graph'        => (isset($user_graph[$key])?$user_graph[$key]:''), 
+                            'user_graph_sub'    => (isset($user_graph_sub[$key])?$user_graph_sub[$key]:''), 
+                        );
+                    }
+                }
+
+                $this->model('user')->saveMenuPerson($insert,$id);
+                redirect('user/settingPosition&id='.$id);
+            }
+        }
+        public function submitSettingAgency(){
+            if(method_post()){
+                $insert = array();
+
+                $id = (int)post('agency_id');
+                $menu_id = post('menu_id');
+                $user_view = post('user_view');
+                $user_add = post('user_add');
+                $user_edit = post('user_edit');
+                $user_del = post('user_del');
+
+                $user_accept = post('user_accept');
+                $user_change = post('user_change');
+                $user_send = post('user_send');
+                $user_topic = post('user_topic');
+                $user_opm = post('user_opm');
+
+                $user_shortcut = post('user_shortcut');
+                $user_graph = post('user_graph');
+                $user_graph_sub = post('user_graph_sub');
+
+                if($id){
+                    // var_dump($user_view);exit();
+                    $insert = array();
+                    foreach($menu_id as $key => $val){
+                        $insert[] = array(
+                            'agency_id'           => $id,
+                            'type'              => 3,
+                            'MENU_ID'           => (isset($menu_id[$key])?$menu_id[$key]:''),
+                            'USER_VIEW'         => (isset($user_view[$key])?$user_view[$key]:''),
+                            'USER_ADD'          => (isset($user_add[$key])?$user_add[$key]:''),
+                            'USER_EDIT'         => (isset($user_edit[$key])?$user_edit[$key]:''),
+                            'USER_DELETE'       => (isset($user_del[$key])?$user_del[$key]:''),
+                            'user_accept'       => (isset($user_accept[$key])?$user_accept[$key]:''), 
+                            'user_change'       => (isset($user_change[$key])?$user_change[$key]:''), 
+                            'user_send'         => (isset($user_send[$key])?$user_send[$key]:''), 
+                            'user_topic'        => (isset($user_topic[$key])?$user_topic[$key]:''), 
+                            'user_opm'          => (isset($user_opm[$key])?$user_opm[$key]:''), 
+                            'user_shortcut'     => (isset($user_shortcut[$key])?$user_shortcut[$key]:''), 
+                            'user_graph'        => (isset($user_graph[$key])?$user_graph[$key]:''), 
+                            'user_graph_sub'    => (isset($user_graph_sub[$key])?$user_graph_sub[$key]:''), 
+                        );
+                    }
+                }
+
+                $this->model('user')->saveMenuPerson($insert,$id);
+                redirect('user/settingAgency&id='.$id);
             }
         }
     }

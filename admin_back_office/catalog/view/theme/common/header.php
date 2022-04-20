@@ -53,6 +53,7 @@
 <script type="text/javascript" language="javascript" src="<?php echo 'assets/vfs_fonts.js';?>"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+<script type="text/javascript" language="javascript" src="assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
 
 <!-- jQuery UI 1.11.4 -->
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -118,6 +119,11 @@
     <img src="http://localhost/epetition/public_html/images/logo.jpg" alt="" style="width:auto;height:50px;">
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      <?php if(isset($assign)){ ?>
+      <li class="nav-item">
+        <span class="text-danger">คุณได้รับสิทธ์ในการอนุมัติ ถึงวันที่ <?php echo $assign->row['date_end']; ?></span>
+      </li>
+      <?php } ?>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>

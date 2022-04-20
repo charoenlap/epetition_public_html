@@ -22,6 +22,12 @@
 			$data['image']		= '';
 			$data['last_login']	= $last_login;
 			// echo $USER_GROUP_ID;exit();
+			$group_id = $this->model('user')->checkUserGroup($AUT_USER_ID);
+			$data['assign'] = $this->model('user')->checkUserGroupHeader($AUT_USER_ID);
+			if($group_id){
+				$USER_GROUP_ID = $group_id;
+			}
+
 			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
 			$data['menu'] = array();
 			foreach($menu as $val){

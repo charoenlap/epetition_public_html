@@ -17,6 +17,28 @@
             $result = $this->query("SELECT * FROM AUT_USER WHERE AUT_USERNAME = '".$AUT_USERNAME."' LIMIT 0,1");
             return $result->num_rows;
         }
+        public function checkUserGroup($AUT_USER_ID=''){
+            $result = '';
+            $AUT_USER_ID = $this->escape($AUT_USER_ID);
+            $sql ="SELECT * FROM ep_assign WHERE assign_user_id = '".$AUT_USER_ID."' AND ('".date("Y-m-d H:i:s")."' BETWEEN date_start AND date_end) LIMIT 0,1";
+            $result_assign = $this->query($sql);
+            if($result_assign->num_rows){
+                $result = $result_assign->row['group_id'];
+            }
+            // echo $result;exit();
+            return $result;
+        }
+        public function checkUserGroupHeader($AUT_USER_ID=''){
+            $result = '';
+            $AUT_USER_ID = $this->escape($AUT_USER_ID);
+            $sql ="SELECT * FROM ep_assign WHERE assign_user_id = '".$AUT_USER_ID."' AND ('".date("Y-m-d H:i:s")."' BETWEEN date_start AND date_end) LIMIT 0,1";
+            $result_assign = $this->query($sql);
+            if($result_assign->num_rows){
+                $result = $result_assign;
+            }
+            // echo $result;exit();
+            return $result;
+        }
         public function addUser($data = array()){
             $insert = $data;
             $insert['AUT_PASSWORD'] = md5($insert['AUT_PASSWORD']);
@@ -149,7 +171,7 @@
         			FROM AUT_MENU_SETTING 
         			LEFT JOIN (
         				SELECT * FROM AUT_GROUP_MENU 
-        					WHERE AUT_GROUP_MENU_ID <> ''  ".$where.") AGM 
+        					WHERE MENU_ID <> ''  ".$where.") AGM 
         			ON AGM.MENU_ID = AUT_MENU_SETTING.MENU_ID 
         			ORDER BY AUT_MENU_SETTING.MENU_ORDER ASC
         			 ";
@@ -164,6 +186,14 @@
         			$this->insert('AUT_GROUP_MENU',$val,false);
         		}
         	}
+        }
+        public function saveMenuPerson($insert=array(),$id=0){
+            if($id){
+                $this->query("DELETE FROM AUT_GROUP_MENU WHERE user_id=".(int)$id);
+                foreach($insert as $val){
+                    $this->insert('AUT_GROUP_MENU',$val,false);
+                }
+            }
         }
         // public function addUser($data=array()){
         //     $query = $this->insert('AUT_USER',$data,false);

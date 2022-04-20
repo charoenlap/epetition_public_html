@@ -25,7 +25,10 @@
                 </div>
                 <div class="card-body">
                     <form action="<?php echo $action;?>" method="POST">
-                        <input type="hidden" name="group_id" value="<?php echo $group_id;?>">
+                        <input type="hidden" name="group_id" value="<?php echo (isset($group_id)?$group_id:'');?>">
+                        <input type="hidden" name="id" value="<?php echo (isset($id)?$id:'');?>">
+                        <input type="hidden" name="position_id" value="<?php echo (isset($position_id)?$position_id:'');?>">
+                        <input type="hidden" name="agency_id" value="<?php echo (isset($agency_id)?$agency_id:'');?>">
                         <div class="row mb-2">
                             <div class="col-md-12 text-right">
                                 <input type="submit" value="บันทึก" class="btn btn-primary">

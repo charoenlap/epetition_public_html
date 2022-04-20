@@ -436,7 +436,8 @@
 <script>
     $(document).on('submit','#form-sender',function(e){
         var form = $(this);
-        console.log(form.serialize());
+        // console.log(form.serialize());
+        toastr.info('กรุณารอซักครู่');
         $.ajax({
             url: 'index.php?route=appeal/sender',
             type: 'POST',
