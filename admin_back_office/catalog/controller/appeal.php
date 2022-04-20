@@ -38,9 +38,10 @@
 			$USER_GROUP_ID = (int)$this->getSession('USER_GROUP_ID');
 			$id_agency_minor = 0;
 			if($USER_GROUP_ID>1){
-				$id_agency_minor = (int)$this->getSession('id_agency_minor');
+				if($USER_GROUP_ID>1){
+					$id_agency_minor = (int)$this->getSession('id_agency_minor');
+				}
 			}
-			
 
 			$data_search = array(
 				'topic_id' 			=> $data['topic_id'],
@@ -384,7 +385,7 @@
 			if($group_id){
 				$USER_GROUP_ID = $group_id;
 			}
-			
+
 			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
 			$data['menu'] = array();
 			// echo "<pre>";
