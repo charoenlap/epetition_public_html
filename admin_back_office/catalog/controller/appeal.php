@@ -102,7 +102,12 @@
 			}
 			$data['page_limit'] = ceil($resultData->num_rows/DEFAULT_LIMIT_PAGE);
 
+			$AUT_USER_ID 		= $this->getSession('AUT_USER_ID');
 			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+			$group_id = $this->model('user')->checkUserGroup($AUT_USER_ID);
+			if($group_id){
+				$USER_GROUP_ID = $group_id;
+			}
 			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
 			$data['menu'] = array();
 			$data['active_del'] = 0;
@@ -372,7 +377,14 @@
 			$data['id'] = $id;
 
 
+			// $USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+			$AUT_USER_ID 		= $this->getSession('AUT_USER_ID');
 			$USER_GROUP_ID 		= $this->getSession('USER_GROUP_ID');
+			$group_id = $this->model('user')->checkUserGroup($AUT_USER_ID);
+			if($group_id){
+				$USER_GROUP_ID = $group_id;
+			}
+			
 			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
 			$data['menu'] = array();
 			// echo "<pre>";
