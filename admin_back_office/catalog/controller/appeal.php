@@ -47,7 +47,7 @@
 			$data_search = array(
 				'topic_id' 			=> $data['topic_id'],
 				'dateadd'			=> $data['dateadd'],
-				'dateadd_time'		=> $data['dateadd_time'],
+				'dateadd_time'		=> '23:59',
 				'dateadd_end'		=> $data['dateadd_end'],
 				'case_code'			=> $data['case_code'],
 				'department_id'		=> $data['department_id'], 
