@@ -96,6 +96,7 @@
             $date_respect = (isset($data['date_respect'])?$data['date_respect']:'');
             $page = (isset($data['page'])?$data['page']:'');
             $addBy = (isset($data['addBy'])?$data['addBy']:'');
+            $USER_GROUP_ID = (isset($data['USER_GROUP_ID'])?$data['USER_GROUP_ID']:'');
 
             if(!empty($topic_id)){
                 $where .= " AND topic_id = '".$topic_id."'";
@@ -150,7 +151,7 @@
             }
             $limit = " LIMIT ".$limit;
             $left_join = '';
-            $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
+            $left_join = ($USER_GROUP_ID==1?'LEFT':'INNER')." JOIN ep_response_status ON a.id = ep_response_status.id_response ";
             if($id_agency_minor){
                 // $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
                 $where .= " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";

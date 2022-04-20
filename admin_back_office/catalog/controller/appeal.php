@@ -40,6 +40,7 @@
 			if($USER_GROUP_ID>1){
 				if($USER_GROUP_ID>1){
 					$id_agency_minor = (int)$this->getSession('id_agency_minor');
+					$id_agency = (int)$this->getSession('id_agency');
 				}
 			}
 
@@ -60,7 +61,9 @@
 				'status_id'			=> $data['status_id'],
 				'page'				=> $data['page'],
 				'addBy'				=> $data['addBy'],
-				'id_agency_minor'	=> $id_agency_minor
+				'id_agency_minor'	=> $id_agency_minor,
+				'USER_GROUP_ID'		=> $USER_GROUP_ID,
+				'id_agency'			=> $id_agency,
 			);
 			
 			$resultData 	= $response->getLists($data_search);
