@@ -30,14 +30,14 @@
                                     <div class="col-md-3 mb-3">
                                         <label for="">เรื่องที่ร้องเรียน/ร้องทุกข์</label>
                                         <select name="topic_id" id="topic_id" class="form-control">
-                                            <option value="">เลือก</option>
+                                            <option value="">ประเภท</option>
                                             <?php foreach($topic as $val){ ?>
                                                 <option value="<?php echo $val['id']; ?>"><?php echo $val['topic_title']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label for="">วันที่เรื่องร้องเรียน/ร้องทุกข์</label>
+                                        <label for="">วันที่</label>
                                         <input type="text" name="dateadd" value="<?php echo $dateadd; ?>" class="datethaipicker form-control">
                                     </div>
                                     <div class="col-md-2 mb-3">
@@ -45,15 +45,15 @@
                                         <input type="text" name="dateadd_end" value="<?php echo $dateadd_end; ?>" class="datethaipicker form-control">
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label for="dateadd">เวลาที่ร้องเรียน/ร้องทุกข์</label>
+                                        <label for="dateadd">เวลา</label>
                                         <input type="text" name="dateadd_time" value="<?php echo $dateadd_time; ?>" class="time timepicker form-control">
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="">รหัสเรื่องที่ร้องเรียน/ร้องทุกข์ (Ticket ID)</label>
+                                        <label for="">รหัสเรื่อง (Ticket ID)</label>
                                         <input type="text" name="case_code" value="<?php echo $case_code; ?>" id="case_code" class="form-control" placeholder="Ticket ID">
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="">สถานะเรื่องร้องเรียน/ร้องทุกข์</label>
+                                        <label for="">สถานะ</label>
                                         <select name="status_id" class="form-control">
                                             <option value="">เลือก</option>
                                             <?php foreach($status as $val){ ?>
@@ -85,11 +85,11 @@
                                         <input type="text" name="id_card" value="<?php echo $id_card;?>" class="form-control" placeholder="">
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="">ชื่อสกุลผู้ร้องเรียน/ร้องทุกข์</label>
+                                        <label for="">ชื่อสกุล</label>
                                         <input type="text" name="name_lastname" value="<?php echo $name_lastname;?>" class="form-control" placeholder="">
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="">เบอร์โทรศัพท์ผู้ร้องเรียน/ร้องทุกข์</label>
+                                        <label for="">เบอร์โทรศัพท์</label>
                                         <input type="text" name="phone" value="<?php echo $phone;?>" class="form-control" placeholder="">
                                         <input type="radio" name="chkTypePhone" <?php echo ($chkTypePhone=="tel"?'selected':'');?> value="tel" id="rdoHome" checked>
                                         <label for="rdoHome">โทรศัพท์บ้าน</label>
@@ -131,7 +131,7 @@
                                 <div class="col-md-6 text-right">
                                     <!-- <a href="" class="btn btn-warning"><i class="fas fa-cloud-upload-alt"></i> สำรองข้อมูล</a> -->
                                     <?php if($active_add){ ?>
-                                    <a href="<?php echo route('appeal/add');?>" class="btn btn-info"><i class="fas fa-folder-plus"></i> แบบฟอร์มเรื่องร้องเรียน</a>
+                                    <a href="<?php echo route('appeal/add');?>" class="btn btn-info"><i class="fas fa-folder-plus"></i> เพิ่มเรื่องร้องเรียน</a>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -140,16 +140,16 @@
                                     <table class="table">
                                         <tr>
                                             <td>
-                                                <i class="fas fa-square-full status-yellow"></i> <small>เรื่องร้องเรียน/ร้องทุกข์อยู่ระหว่างการดำเนินการ</small>
+                                                <i class="fas fa-square-full status-yellow"></i> <small>อยู่ระหว่างการดำเนินการ</small>
                                             </td>
                                             <td>
-                                                <i class="fas fa-square-full status-orange"></i> <small>เรื่องร้องเรียน/ร้องทุกข์อีก 7 วันจะครบกำหนด</small>
+                                                <i class="fas fa-square-full status-orange"></i> <small>อีก 7 วันจะครบกำหนด</small>
                                             </td>
                                             <td>
-                                                <i class="fas fa-square-full status-red"></i> <small>เรื่องร้องเรียน/ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด</small>
+                                                <i class="fas fa-square-full status-red"></i> <small>ยังไม่เสร็จ และช้ากว่ากำหนด</small>
                                             </td>
                                             <td>
-                                                <i class="fas fa-square-full status-green"></i> <small>เรื่องร้องเรียน/ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว</small>
+                                                <i class="fas fa-square-full status-green"></i> <small>ดำเนินการเสร็จสิ้นแล้ว</small>
                                             </td>
                                         </tr>
                                     </table>

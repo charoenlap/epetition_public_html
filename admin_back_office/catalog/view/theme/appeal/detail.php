@@ -300,6 +300,14 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            ข้อความเพิ่มเติม ไปยังประชาชน
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <textarea type="text" class="form-control" value="" name="txt_to_people">
+                                        </div>
+                                    </div>
                                     <?php } ?>
                                     <div class="row">
                                         <div class="col-md-12">
