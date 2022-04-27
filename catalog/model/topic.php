@@ -11,7 +11,7 @@
             $result_topic = $this->query($sql);
             if($result_topic->num_rows){
                 foreach($result_topic->rows as $val){
-                    $sql_sub = "SELECT * FROM ep_topic_sub WHERE topic_id = ".(int)$val['id'];
+                    $sql_sub = "SELECT * FROM ep_topic_sub WHERE topic_id = ".(int)$val['id']." ORDER BY `sort` ASC";
                     $result_sub = $this->query($sql_sub);
                     $result[] = array(
                         'rows'  => $val,

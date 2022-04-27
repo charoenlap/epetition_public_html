@@ -14,8 +14,11 @@
 <section class="py-5">
     <div class="container">
         <div class="row mb-3">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <h3 class="text-theme font-weight-bold">กรุณาเลือกประเภทเรื่องร้องเรียน</h3>
+            </div>
+            <div class="col-md-6 text-right">
+              <a href="#" class="btn btn-primary">เปิดทั้งหมด</a>
             </div>
         </div>
         <div class="row" id="accordion">
@@ -23,15 +26,21 @@
               $i = 1;
               foreach($topic as $key => $value){ 
             ?>
-            <h3 class="text-link text-topic-link btn-block">
+            <h3 class="text-link text-topic-link btn-block btn-topic">
               <?php echo $value['rows']['topic_title']; ?>
             </h3>
               
               <div class="col-md-12">
-                <?php foreach($value['sub'] as $v){ ?>
-                <a href="<?php echo route('home/form&topic_id='.$value['rows']['id'].'&sub_topic_id='.$v['id']); ?>" >
-                  <p><?php echo $v['title']; ?></p>
-                </a>
+                <?php foreach($value['sub'] as $v){ 
+                  if(!$v['unclick']){
+                    $url = route('home/form&topic_id='.$value['rows']['id'].'&sub_topic_id='.$v['id']); ?>
+                     <a href="<?php echo $url; ?>" >
+                      <p><?php echo $v['title']; ?></p>
+                    </a>
+                  <?php }else{?>
+                    <p><?php echo $v['title']; ?></p>
+                  <?php } ?>
+               
                 <?php } ?>
               </div>
               
@@ -49,4 +58,7 @@
 height:100% !important;
 transition: all .25s ease;
  } 
+ .btn-topic {
+  cursor: pointer;
+ }
 </style>
