@@ -230,7 +230,7 @@
         <div class="row mb-3">
             <div class="col-md-12">
                 <h5>ประเด็นที่ท่านต้องการร้องเรียน/แจ้งข้อเสนอแนะ <?php echo (isset($hide['complain_name'])?'<span class="text-danger">*</span>':''); ?></h5>
-                <textarea name="complain_name" id="" cols="30" rows="10" class="form-control" required
+                <textarea name="complain_name" id="" cols="30" rows="10" class="form-control" <?php echo ($hide['complain_name']?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
                  ></textarea>
