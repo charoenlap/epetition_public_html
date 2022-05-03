@@ -224,7 +224,7 @@
         <div class="row mb-3">
             <div class="col-md-12">
                 <label for="">อ้างอิงเลขหนังสือ <?php echo ($hide['number_topic']?'<span class="text-danger">*</span>':''); ?></label>
-                <input type="text" name="number_topic" class="form-control">
+                <input type="text" name="number_topic" class="form-control" <?php echo ($hide['number_topic']?'required':''); ?>>
             </div>
         </div>
         <div class="row mb-3">
