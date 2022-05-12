@@ -18,7 +18,7 @@
                 <h3 class="text-theme font-weight-bold">กรุณาเลือกประเภทเรื่องร้องเรียน</h3>
             </div>
             <div class="col-md-6 text-right">
-              <a href="#" class="btn btn-primary">เปิดทั้งหมด</a>
+              <a href="#" class="btn btn-primary" id="btn-expand">เปิดทั้งหมด</a>
             </div>
         </div>
         <div class="row" id="accordion">
@@ -52,13 +52,17 @@
   $(function(){
     $( "#accordion" ).accordion();
   });
+  $(document).on('click','#btn-expand',function(e){
+    $(".ui-accordion-content").show();
+    e.preventDefault();
+  });
 </script>
 <style>
  .col-md-12.ui-accordion-content.ui-corner-bottom.ui-widget-content{
-height:100% !important;
-transition: all .25s ease;
+    height:100% !important;
+    transition: all .25s ease;
  } 
  .btn-topic {
-  cursor: pointer;
+    cursor: pointer;
  }
 </style>

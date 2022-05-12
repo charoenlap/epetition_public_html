@@ -54,8 +54,8 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="">เลขประจำตัวประชาชน <span class="text-danger">*</span></label>
-                                        <input type="text" name="id_card" class="form-control" placeholder="เลขประจำตัวประชาชน" value="<?php echo $data['id_card']; ?>">
+                                        <label for="">เลขประจำตัวประชาชน</label>
+                                        <input type="text" name="id_card" class="form-control" placeholder="เลขประจำตัวประชาชน" value="<?php echo $data['id_card']; ?>" onkeyup="idcard(this);" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -87,7 +87,11 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">โทรศัพท์มือถือ <span class="text-danger">*</span></label>
-                                        <input type="text" name="phone" class="form-control" placeholder="โทรศัพท์มือถือ" value="<?php echo $data['phone']; ?>">
+                                        <input type="text" name="phone" class="form-control" oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                                        oninput="this.setCustomValidity('')" 
+                                        size="25" 
+                                        onkeyup="phoneTab(this)"  minlength="10" maxlength="12" 
+                                        value="<?php echo $data['phone']; ?>">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">e-mail</label>
@@ -297,6 +301,7 @@
                                         <textarea name="response_person" id="" cols="30" rows="5" class="form-control"><?php echo $data['response_person']; ?></textarea>
                                     </div>
                                 </div>
+                                <?php /* ?>
                                 <div class="row mb-3">
                                     <div class="col-md-12">
                                         <h5>เอกสารหรือภาพประกอบการร้องเรียน</h5>
@@ -309,6 +314,7 @@
                                         <div id="showFileSize"></div>
                                     </div>
                                 </div>
+                                <?php */?>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="text-danger">หมายเหตุ : รายการข้อมูลทั้งหมดทางระบบจะเก็บเป็นความลับ
@@ -359,7 +365,16 @@
 <script>
 
     $('#appeal').addClass('active');
-    function idcard(obj){  
+function idcard(obj){  
+    // var txtbox = obj;
+    // obj.value = a;
+    // console.log(a);
+    // var vchar = String.fromCharCode(obj.keyCode);
+    // console.log(vchar);
+    // if ((vchar<'0' || vchar>'9') && (vchar != '-')) return false;
+    // obj.onKeyPress=vchar;
+
+
     var pattern=new String("_-____-_____-__-_"); // กำหนดรูปแบบในนี้  
     var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  
     var returnText=new String("");  
@@ -367,7 +382,7 @@
     var obj_l2=obj_l-1;  
     for(i=0;i<pattern.length;i++){             
         if(obj_l2==i && pattern.charAt(i+1)==pattern_ex){  
-            returnText+=obj.value+pattern_ex;  
+            returnText+= obj.value+pattern_ex;  
             obj.value=returnText;  
         }  
     }  

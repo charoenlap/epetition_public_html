@@ -15,9 +15,15 @@
 
 		    	$id_agency 			= $this->getSession('id_agency');
 		    	$id_agency_minor 	= $this->getSession('id_agency_minor');
+		    	$role_id 			= $this->getSession('role_id');
+		    	// var_dump($_SESSION);exit();
+		  //   	echo $id_agency.'/';
+				// echo $id_agency_minor;
+				// exit();
 		    	$data_dashboard = array(
 		    		'id_agency' 		=> $id_agency,
 					'id_agency_minor' 	=> $id_agency_minor,
+					'role_id'			=> $role_id
 		    	);
 		    	$total_case 		= $this->model('dashboard')->getTotalCase($data_dashboard);
 		    	$total_case_process = $this->model('dashboard')->getTotalCaseProcess($data_dashboard);

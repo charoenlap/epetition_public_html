@@ -187,7 +187,7 @@
       onRegionClick: function(element, code, region)
       {
         console.log(element);
-          var message = 'จังหวัด "'+region+' '+code+' ' +'" เรื่องร้องเรียนทั้งหมด 0 เรื่อง' 
+          var message = 'จังหวัด ">'+region+'< '+code+' ' +'" เรื่องร้องเรียนทั้งหมด 0 เรื่อง' 
           alert(message);
       }
   });

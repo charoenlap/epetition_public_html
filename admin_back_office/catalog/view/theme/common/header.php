@@ -90,7 +90,6 @@
 <script src="plugins/jqvmap-thai-stable/jqvmap/jquery.vmap.js"></script>
 <script src="plugins/jqvmap-thai-stable/jqvmap/maps/jquery.vmap.world.js"></script>
 <script src="plugins/jqvmap-thai-stable/jqvmap/maps/jquery.vmap.thai.js"></script>
-<script src="plugins/jqvmap-thai-stable/jqvmap/maps/jquery.vmap.thai.js"></script>
   <?php 
   if(isset($script)){
   foreach ($script as $key => $value) { ?>
