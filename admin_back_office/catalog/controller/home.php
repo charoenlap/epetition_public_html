@@ -1,8 +1,27 @@
 <?php 
 	class HomeController extends Controller {
+		public function getDataMap(){
+			$data = array();
+			if(method_post()){
+
+				$id_agency 			= $this->getSession('id_agency');
+		    	$id_agency_minor 	= $this->getSession('id_agency_minor');
+		    	$role_id 			= $this->getSession('role_id');
+				$province_name 		= post('province_name');
+
+				$data_dashboard = array(
+		    		'id_agency' 		=> $id_agency,
+					'id_agency_minor' 	=> $id_agency_minor,
+					'role_id'			=> $role_id,
+					'province_name'		=> $province_name
+		    	);
+		    	$data['total_case'] 	= $this->model('dashboard')->getTotalCaseProvince($data_dashboard);
+		    	
+			}
+			$this->json($data);
+		}
 	    public function index() {
 	    	$data = array(); 
-
 			$last_login = $this->getSession('last_login');
 			if($last_login){
 				$province_id = get('province_id');
@@ -16,6 +35,8 @@
 		    	$id_agency 			= $this->getSession('id_agency');
 		    	$id_agency_minor 	= $this->getSession('id_agency_minor');
 		    	$role_id 			= $this->getSession('role_id');
+
+
 		    	// var_dump($_SESSION);exit();
 		  //   	echo $id_agency.'/';
 				// echo $id_agency_minor;

@@ -230,7 +230,7 @@
         <div class="row mb-3">
             <div class="col-md-12">
                 <h5>ประเด็นที่ท่านต้องการร้องเรียน/แจ้งข้อเสนอแนะ <?php echo (isset($hide['complain_name'])?'<span class="text-danger">*</span>':''); ?></h5>
-                <textarea name="complain_name" id="" cols="30" rows="10" class="form-control" <?php echo ($hide['complain_name']?'required':''); ?>
+                <textarea name="complain_name" id="" cols="30" rows="10" class="form-control" <?php echo (isset($hide['complain_name'])?'required':''); ?>
                 oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                 oninput="this.setCustomValidity('')"
                  ></textarea>
@@ -337,7 +337,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <p class="text-danger">หมายเหตุ : รายการข้อมูลทั้งหมดทางระบบจะเก็บเป็นความลับ ตามพระราชบัญญัติคอมพิวเตอร์ พ.ศ. 2551</p>
+                <p class="text-danger">หมายเหตุ : รายการข้อมูลทั้งหมดทางระบบจะเก็บเป็นความลับ ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</p>
             </div>
         </div>
         <div class="row">

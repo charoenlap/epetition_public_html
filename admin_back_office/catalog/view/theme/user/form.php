@@ -216,7 +216,7 @@
             });
             $.each(json, function(index, val) {
                  $('#id_agency_minor').append($('<option>', {
-                    value: val.id_agency,
+                    value: val.id,
                     text: val.agency_minor_title
                 }));
             });

@@ -60,6 +60,7 @@
                     $input['CREATE_TIMESTAMP'] = $date_current;
                     $input['UPDATE_TIMESTAMP'] = $date_current;
                     $input['DELETE_FLAG'] = 0;
+                    // var_dump($input);exit();
                     $this->model('user')->addUser($input);
                     redirect('user');
                 }

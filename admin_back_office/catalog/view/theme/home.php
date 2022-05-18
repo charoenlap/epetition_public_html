@@ -187,8 +187,26 @@
       onRegionClick: function(element, code, region)
       {
         console.log(element);
-          var message = 'จังหวัด ">'+region+'< '+code+' ' +'" เรื่องร้องเรียนทั้งหมด 0 เรื่อง' 
-          alert(message);
+          // var message = 'จังหวัด ">'+region+'< '+code+' ' +'" เรื่องร้องเรียนทั้งหมด 0 เรื่อง' 
+          // alert(message);
+          var province_name = region;
+          $.ajax({
+            url: 'index.php?route=home/getDataMap',
+            type: 'POST',
+            dataType: 'json',
+            data: {provinceName: province_name},
+          })
+          .done(function(data) {
+            console.log("success");
+            console.log(data);
+          })
+          .fail(function() {
+            console.log("error");
+          })
+          .always(function() {
+            console.log("complete");
+          });
+          
       }
   });
 </script>
