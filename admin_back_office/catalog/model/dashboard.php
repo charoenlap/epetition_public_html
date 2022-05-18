@@ -17,7 +17,7 @@
 	            }
 	        }
 	        if($province_name){
-                $where .= " AND PROVINCE.PROVINCE_NAME = '".$province_name."'";
+                $where .= " AND PROVINCE.match_name = '".$province_name."'";
             }
 			$result = 0;
 			$sql = "SELECT COUNT(ep_response.id) as total FROM ep_response 

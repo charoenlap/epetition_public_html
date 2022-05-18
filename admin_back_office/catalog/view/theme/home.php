@@ -102,13 +102,13 @@
                 <div class="col-md-7">
                   <table class="table table-striped">
                     <thead>
-                      <th></th>
-                      <th></th>
+                      <th>ชื่อจังหวัด</th>
+                      <th>จำนวนเรื่อง</th>
                     </thead>
                     <tbody>
                       <tr>
-                        <td></td>
-                        <td></td>
+                        <td id="map_province_name"></td>
+                        <td id="map_unit"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -199,6 +199,8 @@
           .done(function(data) {
             console.log("success");
             console.log(data);
+            $('#map_province_name').text(province_name);
+            $('#map_unit').text(data.total_case);
           })
           .fail(function() {
             console.log("error");

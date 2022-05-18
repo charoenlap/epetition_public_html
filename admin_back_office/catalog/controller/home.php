@@ -7,7 +7,7 @@
 				$id_agency 			= $this->getSession('id_agency');
 		    	$id_agency_minor 	= $this->getSession('id_agency_minor');
 		    	$role_id 			= $this->getSession('role_id');
-				$province_name 		= post('province_name');
+				$province_name 		= post('provinceName');
 
 				$data_dashboard = array(
 		    		'id_agency' 		=> $id_agency,
