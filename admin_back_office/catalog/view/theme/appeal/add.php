@@ -28,13 +28,10 @@
                                 <div class="row mb-3">
                                     <div class="col-md-4">
                                         <label for="">ช่องทางการร้องเรียน</label>   
-                                        <select name="" id="" class="form-control">
-                                            <option value="">จดหมาย</option> 
-                                            <option value="">เว็บไซต์ และ อีเมล์ </option>
-                                            <option value="">Call center </option>
-                                            <option value="">ยื่นหนังสือด้วยตนเอง</option>
-                                            <option value="">facebook </option>
-                                            <option value="">ส่วนด่วน</option>
+                                        <select name="addBy" id="addBy" class="form-control">
+                                            <option value="0">เว็บไซต์</option>
+                                            <option value="1">แอฟพิเคชั่น</option>
+                                            <option value="2">สปน</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -47,7 +44,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">เลขประจำตัวประชาชน <span class="text-danger">*</span></label>
-                                        <input type="text" name="id_card" class="form-control" placeholder="เลขประจำตัวประชาชน" required>
+                                        <input type="text" name="id_card" class="form-control" onkeyup="idcard(this);" placeholder="เลขประจำตัวประชาชน" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -71,15 +68,25 @@
                                 <div class="row mb-3">
                                     <div class="col-md-2">
                                         <label for="">อายุ</label>
-                                        <input type="text" name="age" class="form-control" placeholder="อายุ">
+                                        <input type="number" name="age" class="form-control" placeholder="อายุ">
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">โทรศัพท์บ้าน</label>
-                                        <input type="text" name="tel" class="form-control" placeholder="โทรศัพท์บ้าน">
+                                        <input type="number" name="tel" class="form-control" placeholder="โทรศัพท์บ้าน"
+                                        oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                                        oninput="this.setCustomValidity('')" 
+                                        size="25" 
+                                        onkeyup="home(this)"  minlength="10" maxlength="12" 
+                                        >
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">โทรศัพท์มือถือ <span class="text-danger">*</span></label>
-                                        <input type="text" name="phone" class="form-control" placeholder="โทรศัพท์มือถือ" required>
+                                        <input type="text" name="phone" class="form-control" placeholder="โทรศัพท์มือถือ" 
+                                        oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                                        oninput="this.setCustomValidity('')" 
+                                        size="25" 
+                                        onkeyup="phoneTab(this)"  minlength="10" maxlength="12" 
+                                        required>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">e-mail</label>
@@ -362,6 +369,7 @@
   </div>
 </div>
 <script>
+function PhoneNumberOnBlur(el) { el.value = el.value.replace(/(\d{3})(\d{3})(\d{4})/, "$1/$2/$3"); }
     function idcard(obj){  
     var pattern=new String("_-____-_____-__-_"); // กำหนดรูปแบบในนี้  
     var pattern_ex=new String("-"); // กำหนดสัญลักษณ์หรือเครื่องหมายที่ใช้แบ่งในนี้  

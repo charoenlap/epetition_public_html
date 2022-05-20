@@ -29,20 +29,17 @@
                         <div class="card-header">
                             <a href="<?php echo route('appeal/detail&id='.$id);?>" class="float-right btn btn-dark btn-sm ml-2">ย้อนกลับ</a> 
 
-                            <a href="<?php echo route('appeal/del&id='.$id); ?>" class="float-right btn btn-danger btn-sm ml-2 btn-del">ลบ</a> 
+                            <!-- <a href="<?php echo route('appeal/del&id='.$id); ?>" class="float-right btn btn-danger btn-sm ml-2 btn-del">ลบ</a> --> 
                         </div>
                         <div class="card-body">
                             <form action="<?php echo route('appeal/edit&id='.$data['id']); ?>" method="post">
                                 <div class="row mb-3">
                                     <div class="col-md-4">
                                         <label for="">ช่องทางการร้องเรียน</label>   
-                                        <select name="" id="" class="form-control">
-                                            <option value="">จดหมาย</option> 
-                                            <option value="">เว็บไซต์ และ อีเมล์ </option>
-                                            <option value="">Call center </option>
-                                            <option value="">ยื่นหนังสือด้วยตนเอง</option>
-                                            <option value="">facebook </option>
-                                            <option value="">ส่วนด่วน</option>
+                                        <select name="addBy" id="addBy" class="form-control">
+                                            <option value="0" <?php echo ($data['addBy']==0?'selected':'');?>>เว็บไซต์</option>
+                                            <option value="1" <?php echo ($data['addBy']==1?'selected':'');?>>แอฟพิเคชั่น</option>
+                                            <option value="2" <?php echo ($data['addBy']==2?'selected':'');?>>สปน</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -87,7 +84,8 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">โทรศัพท์มือถือ <span class="text-danger">*</span></label>
-                                        <input type="text" name="phone" class="form-control" oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
+                                        <input type="text" name="phone" class="form-control" 
+                                        oninvalid="this.setCustomValidity('โปรดระบุข้อมูลให้ครบถ้วน')"
                                         oninput="this.setCustomValidity('')" 
                                         size="25" 
                                         onkeyup="phoneTab(this)"  minlength="10" maxlength="12" 

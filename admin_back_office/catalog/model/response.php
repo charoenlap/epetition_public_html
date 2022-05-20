@@ -76,6 +76,7 @@
             return $result->rows;
         }
         public function getlists($data = array()){
+            // echo "test";
             $where = '';
             $id_agency = (isset($data['id_agency'])?$data['id_agency']:'');
             $id_agency_minor = (isset($data['id_agency_minor'])?$data['id_agency_minor']:'');
@@ -99,50 +100,51 @@
             $USER_GROUP_ID = (isset($data['USER_GROUP_ID'])?$data['USER_GROUP_ID']:'');
 
             if(!empty($topic_id)){
-                $where .= " AND topic_id = '".$topic_id."'";
+                $where .= " AND topic_id = '".trim($topic_id)."'";
             }
             if(!empty($dateadd) and empty($dateadd_end)){
-                $where .= " AND dateadd like '".$dateadd."%'";
+                $where .= " AND dateadd like '".trim($dateadd)."%'";
             }
             if(!empty($dateadd_end)){
-                $where .= " AND (dateadd BETWEEN '".$dateadd.' '.$dateadd_time."' AND '".$dateadd_end.' '.$dateadd_time."')";
+                $where .= " AND (dateadd BETWEEN '".trim($dateadd).' '.$dateadd_time."' AND '".trim($dateadd_end).' '.trim($dateadd_time)."')";
             }
             if(!empty($case_code)){
-                $where .= " AND case_code like '%".$case_code."%'";
+                $where .= " AND case_code like '%".trim($case_code)."%'";
             }
             if(!empty($department_id)){
-                $where .= " AND department_id = '".$department_id."'";
+                $where .= " AND department_id = '".trim($department_id)."'";
             }
             if(!empty($t_id_provinces)){
-                $where .= " AND t_id_provinces = '".$t_id_provinces."'";
+                $where .= " AND t_id_provinces = '".trim($t_id_provinces)."'";
             }
             if(!empty($date_end)){
-                $where .= " AND date_end like '".$date_end."%'";
+                $where .= " AND date_end like '".trim($date_end)."%'";
             }
             if(!empty($id_card)){
-                $where .= " AND id_card like '%".$id_card."%'";
+                $where .= " AND id_card like '%".trim($id_card)."%'";
             }
             if(!empty($name_lastname)){
-                $where .= " AND (name like '%".$name_lastname."%' OR lastname like '%".$name_lastname."%')";
+                $where .= " AND (name like '%".trim($name_lastname)."%' OR lastname like '%".trim($name_lastname)."%')";
             }
             if(!empty($tel)){
-                $where .= " AND tel like '%".$tel."%'";
+                $where .= " AND tel like '%".trim($tel)."%'";
             }
             if(!empty($phone)){
-                $where .= " AND phone like '%".$phone."%'";
+                $where .= " AND phone like '%".trim($phone)."%'";
             }
             if(!empty($date_respect)){
-                $where .= " AND date_end like '".$date_respect."%'";
+                $where .= " AND date_end like '".trim($date_respect)."%'";
             }
             if(!empty($response_person)){
-                $where .= " AND response_person like '%".$response_person."%'";
+                $where .= " AND response_person like '%".trim($response_person)."%'";
             }
             if(!empty($status_id)){
-                $where .= " AND status = '".$status_id."'";
+                $where .= " AND status = '".trim($status_id)."'";
             }
             if(!empty($addBy)){
-                $where .= " AND addBy = '".$addBy."'";
+                $where .= " AND a.addBy = '".trim($addBy)."'";
             }
+            // echo $addBy;exit();
             $limit = "0,".DEFAULT_LIMIT_PAGE;
             if($page){
                 $limit_start    = ($page-1)*DEFAULT_LIMIT_PAGE;
@@ -171,7 +173,8 @@
             LEFT JOIN ep_topic b ON a.topic_id = b.id 
             LEFT JOIN ep_status ON a.`status` = ep_status.`id` 
             LEFT JOIN PROVINCE ON a.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
-            WHERE a.del = 0 ".$where."
+            WHERE a.del = 0 ".$where." 
+            GROUP BY a.case_code 
             ORDER BY a.id DESC  ";
             // echo $sql;exit();
 

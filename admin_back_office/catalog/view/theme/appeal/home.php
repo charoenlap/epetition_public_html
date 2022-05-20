@@ -102,6 +102,7 @@
                                             <option value="">ทั้งหมด</option>
                                             <option value="0" <?php echo ($addBy==0?'selected':'');?>>เว็บไซต์</option>
                                             <option value="1" <?php echo ($addBy==1?'selected':'');?>>แอฟพิเคชั่น</option>
+                                            <option value="2" <?php echo ($addBy==2?'selected':'');?>>สปน</option>
                                         </select>
                                     </div>
                                 </div>

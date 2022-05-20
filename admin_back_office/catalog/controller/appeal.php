@@ -67,7 +67,7 @@
 				'id_agency'			=> $id_agency,
 			);
 			
-			$resultData 	= $response->getLists($data_search);
+			$resultData 	= $response->getlists($data_search);
 			// echo "<pre>";
 			// var_dump($resultData);
 			// exit();
@@ -76,7 +76,7 @@
 				if($value['addBy']==0){
 					$addBy = 'จากเว็บไซต์';
 				}elseif($value['addBy']==1){
-					$addBy = 'จากเว็บไซต์';
+					$addBy = 'แอฟพิเคชั่น';
 				}elseif($value['addBy']==2){
 					$addBy = 'จากสปน.';
 				}
@@ -470,6 +470,7 @@
 			$data['districts']		= $resultData['TAMBON_NAME'];
 			$data['zipcode']			= $resultData['zipcode'];
 			$data['note_topic']			= $resultData['note_topic'];
+			$data['name_topic']			= $resultData['name_topic'];
 			$data['file']				= $resultData['file'];
 			$data['approve_topic']		= $resultData['approve_topic'];
 			$data['contacts']			= '';

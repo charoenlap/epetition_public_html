@@ -103,7 +103,21 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>บุคคล/หน่วยงาน/สถานที่ที่ต้องการร้องเรียน </td>
+                                                <?php 
+                                                    $name_topic_txt = '';
+                                                    if($name_topic==1){
+                                                        $name_topic_txt = 'บุคคล';
+                                                    }else if($name_topic==2){
+                                                        $name_topic_txt = 'กลุ่ม/คณะบุคคล';
+                                                    }else if($name_topic==3){
+                                                        $name_topic_txt = 'หน่วยงาน';
+                                                    }else if($name_topic==4){
+                                                        $name_topic_txt = 'บริษัท/ห้างร้าน';
+                                                    }else if($name_topic==5){
+                                                        $name_topic_txt = 'อื่น ๆ';
+                                                    } 
+                                                ?>
+                                                <td><?php echo $name_topic_txt; ?></td>
                                                 <td><?php echo (isset($hide['note_topic'])?'ซ่อนข้อมูล':$note_topic); ?></td>
                                             </tr>
                                             <tr>
