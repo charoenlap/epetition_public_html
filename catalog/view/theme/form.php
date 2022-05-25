@@ -18,6 +18,7 @@
                 <h5 class="text-theme font-weight-bold">ข้อมูลผู้ร้องเรียน</h5>
             </div>
         </div>
+        <?php echo $_SERVER['HTTP_HOST']; ?>
         <form action="<?php echo route('home/form'); ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="topic_id" value="<?php echo $topic_id;?>">
             <input type="hidden" name="sub_topic_id" value="<?php echo $sub_topic_id;?>">
@@ -343,9 +344,9 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <?php if($production){ ?>
-                    <div class="g-recaptcha mb-2" data-sitekey="6LeEVQIfAAAAAO7mj5F76RKroMqtd5k3PErjiexu" id="reCAPTCHA"></div>
+                    <div class="g-recaptcha mb-2" data-callback="recaptchaCallback" data-sitekey="6LeEVQIfAAAAAO7mj5F76RKroMqtd5k3PErjiexu" id="reCAPTCHA"></div>
                 <?php } ?>
-                <button type="submit" class="btn btn-theme  g-recaptcha" style="min-width:180px;">ส่งเรื่อง</button>
+                <button type="submit" class="btn btn-theme  g-recaptcha" id="submitBtn" disabled style="min-width:180px;">ส่งเรื่อง</button>
             </div>
         </div>
         </form>
@@ -383,7 +384,11 @@
       'sitekey' : '6LeEVQIfAAAAAO7mj5F76RKroMqtd5k3PErjiexu'
     });
   };
+  function recaptchaCallback() {
+    $('#submitBtn').removeAttr('disabled');
+  };
 </script>
+
 <?php } ?>
 <script>
 $(function(e){
