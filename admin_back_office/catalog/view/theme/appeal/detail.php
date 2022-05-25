@@ -22,7 +22,7 @@
                         <div class="card-header">
                             <h4 class="card-title"><?php echo $title; ?></h4>
                             <a href="<?php echo route('appeal'); ?>" class="float-right btn btn-dark btn-sm ml-2">ย้อนกลับ</a> 
-                            <a href="<?php echo route('appeal/del&id='.$id); ?>" class="float-right btn btn-danger btn-sm ml-2 btn-del">ลบ</a> 
+                            <!-- <a href="<?php echo route('appeal/del&id='.$id); ?>" class="float-right btn btn-danger btn-sm ml-2 btn-del">ลบ</a>  -->
 
                             <a href="<?php echo route('appeal/edit&id='.$id);?>" class="float-right btn btn-warning btn-sm ml-2">แก้ไข</a> 
                         </div>

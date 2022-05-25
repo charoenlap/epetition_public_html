@@ -36,7 +36,15 @@
 		    	$id_agency_minor 	= $this->getSession('id_agency_minor');
 		    	$role_id 			= $this->getSession('role_id');
 
-
+		    	$USER_GROUP_ID = (int)$this->getSession('USER_GROUP_ID');
+				$id_agency_minor = 0;
+				$id_agency = 0;
+				if($USER_GROUP_ID>1){
+					if($USER_GROUP_ID>1){
+						$id_agency_minor = (int)$this->getSession('id_agency_minor');
+						$id_agency = (int)$this->getSession('id_agency');
+					}
+				}
 		    	// var_dump($_SESSION);exit();
 		  //   	echo $id_agency.'/';
 				// echo $id_agency_minor;
@@ -46,7 +54,17 @@
 					'id_agency_minor' 	=> $id_agency_minor,
 					'role_id'			=> $role_id
 		    	);
-		    	$total_case 		= $this->model('dashboard')->getTotalCase($data_dashboard);
+		    	$data_search = array(
+					'id_agency_minor'	=> $id_agency_minor,
+					'id_agency'			=> $id_agency,
+					'USER_GROUP_ID'		=> $USER_GROUP_ID
+				);
+				
+				$resultData 	= $this->model('response')->getlists($data_search);
+				// echo "<pre>";
+				// var_dump($resultData->num_rows);exit();
+
+		    	$total_case 		= $resultData->num_rows;//$this->model('dashboard')->getTotalCase($data_dashboard);
 		    	$total_case_process = $this->model('dashboard')->getTotalCaseProcess($data_dashboard);
 		    	$total_user 		= $this->model('dashboard')->getTotalUser($data_dashboard);
 

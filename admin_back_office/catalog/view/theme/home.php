@@ -107,7 +107,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td id="map_province_name"></td>
+                        <td id="map_province_name">กรุณาเลือกจังหวัด</td>
                         <td id="map_unit"></td>
                       </tr>
                     </tbody>

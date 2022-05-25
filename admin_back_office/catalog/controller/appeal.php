@@ -68,9 +68,7 @@
 			);
 			
 			$resultData 	= $response->getlists($data_search);
-			// echo "<pre>";
-			// var_dump($resultData);
-			// exit();
+			
 			foreach($resultData->rows as $key => $value){
 				$addBy = '';
 				if($value['addBy']==0){
