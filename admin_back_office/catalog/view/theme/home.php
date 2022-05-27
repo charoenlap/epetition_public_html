@@ -101,14 +101,34 @@
                 </div>
                 <div class="col-md-7">
                   <table class="table table-striped">
-                    <thead>
-                      <th>ชื่อจังหวัด</th>
-                      <th>จำนวนเรื่อง</th>
-                    </thead>
                     <tbody>
                       <tr>
+                        <td>ชื่อจังหวัด</td>
                         <td id="map_province_name">กรุณาเลือกจังหวัด</td>
+                      </tr>
+                      <tr>
+                        <td>จำนวนเรื่อง</td>
                         <td id="map_unit"></td>
+                      </tr>
+                      <tr>
+                        <td>รับเรื่อง</td>
+                        <td id="status_0"></td>
+                      </tr>
+                      <tr>
+                        <td>ดำเนินการเสร็จสิ้นแล้ว</td>
+                        <td id="status_1"></td>
+                      </tr>
+                      <tr>
+                        <td>อยู่ระหว่างการดำเนินการ</td>
+                        <td id="status_2"></td>
+                      </tr>
+                      <tr>
+                        <td>อีก 7 วันจะครบกำหนด</td>
+                        <td id="status_3"></td>
+                      </tr>
+                      <tr>
+                        <td>ยังไม่เสร็จ และช้ากว่ากำหนด</td>
+                        <td id="status_4"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -201,9 +221,17 @@
             console.log(data);
             $('#map_province_name').text(province_name);
             $('#map_unit').text(data.total_case);
+            $('#status_0').text(data.status_0);
+            $('#status_1').text(data.status_1);
+            $('#status_2').text(data.status_2);
+            $('#status_3').text(data.status_3);
+            $('#status_4').text(data.status_4);
           })
-          .fail(function() {
+          .fail(function(a,b,c) {
             console.log("error");
+            console.log(a);
+            console.log(b);
+            console.log(c);
           })
           .always(function() {
             console.log("complete");

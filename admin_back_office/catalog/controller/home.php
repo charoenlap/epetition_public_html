@@ -15,8 +15,13 @@
 					'role_id'			=> $role_id,
 					'province_name'		=> $province_name
 		    	);
-		    	$data['total_case'] 	= $this->model('dashboard')->getTotalCaseProvince($data_dashboard);
-		    	
+		    	$dashboard = $this->model('dashboard')->getTotalCaseProvince($data_dashboard);
+		    	$data['total_case'] 	= $dashboard['total'];
+		    	$data['status_0'] 		= $dashboard['status_0'];
+		    	$data['status_1'] 		= $dashboard['status_1'];
+		    	$data['status_2'] 		= $dashboard['status_2'];
+		    	$data['status_3'] 		= $dashboard['status_3'];
+		    	$data['status_4'] 		= $dashboard['status_4'];
 			}
 			$this->json($data);
 		}

@@ -13,20 +13,56 @@
 	                if($id_agency_minor){
 	                    $where .= " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
 	                }
-	                
 	            }
 	        }
 	        if($province_name){
                 $where .= " AND PROVINCE.PROVINCE_NAME = '".$province_name."'";
             }
-			$result = 0;
+			$result = array();
 			$sql = "SELECT COUNT(ep_response.id) as total FROM ep_response 
 			LEFT JOIN ep_response_status ON ep_response.id = ep_response_status.id_response 
 			LEFT JOIN PROVINCE ON PROVINCE.PROVINCE_id = ep_response.t_id_provinces 
 			WHERE ".$where;
 			$query = $this->query($sql);
+
+			$sql_status_0 = "SELECT COUNT(ep_response.id) as total FROM ep_response 
+			LEFT JOIN ep_response_status ON ep_response.id = ep_response_status.id_response 
+			LEFT JOIN PROVINCE ON PROVINCE.PROVINCE_id = ep_response.t_id_provinces 
+			WHERE ep_response.`status` = 0 AND ".$where;
+			$query_status_0 = $this->query($sql_status_0);
+
+			$sql_status_1 = "SELECT COUNT(ep_response.id) as total FROM ep_response 
+			LEFT JOIN ep_response_status ON ep_response.id = ep_response_status.id_response 
+			LEFT JOIN PROVINCE ON PROVINCE.PROVINCE_id = ep_response.t_id_provinces 
+			WHERE ep_response.`status` = 1 AND ".$where;
+			$query_status_1 = $this->query($sql_status_1);
+
+			$sql_status_2 = "SELECT COUNT(ep_response.id) as total FROM ep_response 
+			LEFT JOIN ep_response_status ON ep_response.id = ep_response_status.id_response 
+			LEFT JOIN PROVINCE ON PROVINCE.PROVINCE_id = ep_response.t_id_provinces 
+			WHERE ep_response.`status` = 2 AND ".$where;
+			$query_status_2 = $this->query($sql_status_2);
+
+			$sql_status_3 = "SELECT COUNT(ep_response.id) as total FROM ep_response 
+			LEFT JOIN ep_response_status ON ep_response.id = ep_response_status.id_response 
+			LEFT JOIN PROVINCE ON PROVINCE.PROVINCE_id = ep_response.t_id_provinces 
+			WHERE ep_response.`status` = 3 AND ".$where;
+			$query_status_3 = $this->query($sql_status_3);
+
+			$sql_status_4 = "SELECT COUNT(ep_response.id) as total FROM ep_response 
+			LEFT JOIN ep_response_status ON ep_response.id = ep_response_status.id_response 
+			LEFT JOIN PROVINCE ON PROVINCE.PROVINCE_id = ep_response.t_id_provinces 
+			WHERE ep_response.`status` = 4 AND ".$where;
+			$query_status_4 = $this->query($sql_status_4);
+
+
 			if($query->num_rows){
-				$result = $query->row['total'];
+				$result['total'] = $query->row['total'];
+				$result['status_0'] = $query_status_0->row['total'];
+				$result['status_1'] = $query_status_1->row['total'];
+				$result['status_2'] = $query_status_2->row['total'];
+				$result['status_3'] = $query_status_3->row['total'];
+				$result['status_4'] = $query_status_4->row['total'];
 			}
 			return $result;
 		}
