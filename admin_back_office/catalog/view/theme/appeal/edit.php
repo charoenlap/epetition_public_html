@@ -32,6 +32,7 @@
                             <!-- <a href="<?php echo route('appeal/del&id='.$id); ?>" class="float-right btn btn-danger btn-sm ml-2 btn-del">ลบ</a> --> 
                         </div>
                         <div class="card-body">
+                            <?php $addBy = (int)$data['addBy']; ?>
                             <form action="<?php echo route('appeal/edit&id='.$data['id']); ?>" method="post">
                                 <div class="row mb-3">
                                     <div class="col-md-4">
@@ -40,6 +41,11 @@
                                             <option value="0" <?php echo ($data['addBy']==0?'selected':'');?>>เว็บไซต์</option>
                                             <option value="1" <?php echo ($data['addBy']==1?'selected':'');?>>แอฟพิเคชั่น</option>
                                             <option value="2" <?php echo ($data['addBy']==2?'selected':'');?>>สปน</option>
+                                            <option value="3" <?php echo ($data['addBy']==3?'selected':'');?>>ยื่นหนังสือด้วยตนเอง</option>
+                                            <option value="4" <?php echo ($data['addBy']==4?'selected':'');?>>จดหมาย</option>
+                                            <option value="5" <?php echo ($data['addBy']==5?'selected':'');?>>หมายเลขโทรศัพท์</option>
+                                            <option value="6" <?php echo ($data['addBy']==6?'selected':'');?>>สายด่วน</option>
+                                            <option value="7" <?php echo ($data['addBy']==7?'selected':'');?>>อีเมล</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -58,7 +64,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-2">
                                         <label for="">คำนำหน้า <span class="text-danger">*</span></label>
-                                        <select name="name_title" id="" class="form-control">
+                                        <select name="name_title" id="" class="form-control" <?php echo ($addBy==0?'readonly':'')?>>
                                             <option value="นาย" <?php if($data['name_title']=="นาย"){ echo "selected"; } ?>>นาย</option>
                                             <option value="นาง" <?php if($data['name_title']=="นาง"){ echo "selected"; } ?>>นาง</option>
                                             <option value="นางสาว" <?php if($data['name_title']=="นางสาว"){ echo "selected"; } ?>>นางสาว</option>
@@ -66,21 +72,21 @@
                                     </div>
                                     <div class="col-md-5">
                                         <label for="">ชื่อ <span class="text-danger">*</span></label>
-                                        <input type="text" name="name" class="form-control" placeholder="ชื่อ" value="<?php echo $data['name']; ?>">
+                                        <input type="text" name="name" class="form-control" placeholder="ชื่อ" value="<?php echo $data['name']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                     <div class="col-md-5">
                                         <label for="">นามสกุล <span class="text-danger">*</span></label>
-                                        <input type="text" name="lastname" class="form-control" placeholder="นามสกุล" value="<?php echo $data['lastname']; ?>">
+                                        <input type="text" name="lastname" class="form-control" placeholder="นามสกุล" value="<?php echo $data['lastname']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-2">
                                         <label for="">อายุ</label>
-                                        <input type="text" name="age" class="form-control" placeholder="อายุ" value="<?php echo $data['age']; ?>">
+                                        <input type="text" name="age" class="form-control" placeholder="อายุ" value="<?php echo $data['age']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">โทรศัพท์บ้าน</label>
-                                        <input type="text" name="tel" class="form-control" placeholder="โทรศัพท์บ้าน" value="<?php echo $data['tel']; ?>">
+                                        <input type="text" name="tel" class="form-control" placeholder="โทรศัพท์บ้าน" value="<?php echo $data['tel']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">โทรศัพท์มือถือ <span class="text-danger">*</span></label>
@@ -89,47 +95,47 @@
                                         oninput="this.setCustomValidity('')" 
                                         size="25" 
                                         onkeyup="phoneTab(this)"  minlength="10" maxlength="12" 
-                                        value="<?php echo $data['phone']; ?>">
+                                        value="<?php echo $data['phone']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">e-mail</label>
-                                        <input type="text" name="email" class="form-control" placeholder="e-mail" value="<?php echo $data['email']; ?>">
+                                        <input type="text" name="email" class="form-control" placeholder="e-mail" value="<?php echo $data['email']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-3">
                                         <label for="">บ้านเลขที่</label>
-                                        <input type="text" name="address_no" class="form-control" placeholder="บ้านเลขที่" value="<?php echo $data['address_no']; ?>">
+                                        <input type="text" name="address_no" class="form-control" placeholder="บ้านเลขที่" value="<?php echo $data['address_no']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">หมู่ที่</label>
-                                        <input type="text" name="moo" class="form-control" placeholder="หมู่ที่" value="<?php echo $data['moo']; ?>">
+                                        <input type="text" name="moo" class="form-control" placeholder="หมู่ที่" value="<?php echo $data['moo']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">ชื่อหมู่บ้าน</label>
-                                        <input type="text" name="housename" class="form-control" placeholder="ชื่อหมู่บ้าน" value="<?php echo $data['housename']; ?>">
+                                        <input type="text" name="housename" class="form-control" placeholder="ชื่อหมู่บ้าน" value="<?php echo $data['housename']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="">ซอย</label>
-                                        <input type="text" name="soi" class="form-control" placeholder="ซอย" value="<?php echo $data['soi']; ?>">
+                                        <input type="text" name="soi" class="form-control" placeholder="ซอย" value="<?php echo $data['soi']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="">ถนน</label>
-                                        <input type="text" name="road" class="form-control" placeholder="ถนน" value="<?php echo $data['road']; ?>">
+                                        <input type="text" name="road" class="form-control" placeholder="ถนน" value="<?php echo $data['road']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="">จังหวัด</label>
-                                        <select name="id_provinces" id="provinces" class="form-control">
+                                        <select name="id_provinces" id="provinces" class="form-control" <?php echo ($addBy==0?'readonly':'')?>>
                                             <option value="<?php echo $data['id_provinces']; ?>"><?php echo $data['id_provinces']; ?></option>
                                         </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">อำเภอ/เขต</label>
-                                        <select name="id_amphures" id="amphures" class="form-control">
+                                        <select name="id_amphures" id="amphures" class="form-control" <?php echo ($addBy==0?'readonly':'')?>>
                                             <option value="<?php echo $data['id_provinces']; ?>"><?php echo $data['id_amphures']; ?></option>
                                         </select>
                                     </div>
@@ -137,13 +143,13 @@
                                 <div class="row mb-5">
                                     <div class="col-md-6">
                                         <label for="">ตำบล/แขวง</label>
-                                        <select name="id_districts" id="districts" class="form-control">
+                                        <select name="id_districts" id="districts" class="form-control" <?php echo ($addBy==0?'readonly':'')?>>
                                             <option value="<?php echo $data['id_provinces']; ?>"><?php echo $data['id_districts']; ?></option>
                                         </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">รหัสไปรษณีย์</label>
-                                        <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="รหัสไปรษณีย์" value="<?php echo $data['zipcode']; ?>">
+                                        <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="รหัสไปรษณีย์" value="<?php echo $data['zipcode']; ?>" <?php echo ($addBy==0?'readonly':'')?>>
                                     </div>
                                 </div>
 
@@ -163,7 +169,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-10">
-                                        <input type="text" name="note_topic" class="form-control note-1" placeholder="ชื่อ-นามสกุล" value="<?php echo $data['note_topic']; ?>" disabled>
+                                        <input type="text" name="note_topic" class="form-control note-1" placeholder="ชื่อ-นามสกุล" value="<?php echo ($data['name_topic']=="1"?$data['note_topic']:''); ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -176,7 +182,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-10">
-                                        <textarea name="note_topic" id="" cols="30" rows="3" class="form-control note-2" disabled><?php echo $data['note_topic']; ?></textarea>
+                                        <textarea name="note_topic" id="" cols="30" rows="3" class="form-control note-2" disabled><?php echo ($data['name_topic']=="2"?$data['note_topic']:''); ?></textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -189,7 +195,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-10">
-                                        <textarea name="note_topic" id="" cols="30" rows="3" class="form-control note-3" disabled><?php echo $data['note_topic']; ?></textarea>
+                                        <textarea name="note_topic" id="" cols="30" rows="3" class="form-control note-3" disabled><?php echo ($data['name_topic']=="3"?$data['note_topic']:''); ?></textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -202,7 +208,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-10">
-                                        <textarea name="note_topic" id="" cols="30" rows="3" class="form-control note-4" disabled><?php echo $data['note_topic']; ?></textarea>
+                                        <textarea name="note_topic" id="" cols="30" rows="3" class="form-control note-4" disabled><?php echo ($data['name_topic']=="4"?$data['note_topic']:''); ?></textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -215,7 +221,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-10">
-                                        <textarea name="note_topic" id="" cols="30" rows="3" class="form-control note-5" disabled><?php echo $data['note_topic']; ?></textarea>
+                                        <textarea name="note_topic" id="" cols="30" rows="3" class="form-control note-5" disabled><?php echo ($data['name_topic']=="5"?$data['note_topic']:''); ?></textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -315,8 +321,7 @@
                                 <?php */?>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p class="text-danger">หมายเหตุ : รายการข้อมูลทั้งหมดทางระบบจะเก็บเป็นความลับ
-                                            ตามพระราชบัญญัติคอมพิวเตอร์ พ.ศ. 2551</p>
+                                        <p class="text-danger">หมายเหตุ: พรบ. คอมพิวเตอร์เป็นพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ.2562</p>
                                     </div>
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-theme btn-lg">ส่งเรื่อง</button>

@@ -103,6 +103,11 @@
                                             <option value="0" <?php echo ($addBy==0?'selected':'');?>>เว็บไซต์</option>
                                             <option value="1" <?php echo ($addBy==1?'selected':'');?>>แอฟพิเคชั่น</option>
                                             <option value="2" <?php echo ($addBy==2?'selected':'');?>>สปน</option>
+                                            <option value="3" <?php echo ($addBy==3?'selected':'');?>>ยื่นหนังสือด้วยตนเอง</option>
+                                            <option value="4" <?php echo ($addBy==4?'selected':'');?>>จดหมาย</option>
+                                            <option value="5" <?php echo ($addBy==5?'selected':'');?>>หมายเลขโทรศัพท์</option>
+                                            <option value="6" <?php echo ($addBy==6?'selected':'');?>>สายด่วน</option>
+                                            <option value="7" <?php echo ($addBy==7?'selected':'');?>>อีเมล</option>
                                         </select>
                                     </div>
                                 </div>

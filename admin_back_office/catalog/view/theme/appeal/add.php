@@ -32,6 +32,11 @@
                                             <option value="0">เว็บไซต์</option>
                                             <option value="1">แอฟพิเคชั่น</option>
                                             <option value="2">สปน</option>
+                                            <option value="3">ยื่นหนังสือด้วยตนเอง</option>
+                                            <option value="4">จดหมาย</option>
+                                            <option value="5">หมายเลขโทรศัพท์</option>
+                                            <option value="6">สายด่วน</option>
+                                            <option value="7">อีเมล</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">

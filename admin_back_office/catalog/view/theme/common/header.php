@@ -185,7 +185,7 @@
             <a href="<?php echo route('appeal/opm'); ?>" class="nav-link px-1" id="appealOPM">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                เรื่องร้องเรียนจากสำนักงานปลัด สำนักงานนายกรัฐมนตรี
+                เรื่องร้องเรียนจากสำนักงานปลัด สำนักนายกรัฐมนตรี
               </p>
             </a>
           </li>
