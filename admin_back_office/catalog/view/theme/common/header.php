@@ -210,11 +210,19 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <?php if($menu[9]){ ?>
+              <li class="nav-item">
+                <a href="<?php echo route('report/mission'); ?>" class="nav-link px-1" id="mission">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>รายงานแยกตามหน่วยงาน</p>
+                </a>
+              </li>
+              <?php } ?>
               <?php if($menu[6]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/department'); ?>" class="nav-link px-1" id="department">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>แยกตามหน่วยงาน</p>
+                  <p>รายงานสำนักงานพลังงานจังหวัด</p>
                 </a>
               </li>
               <?php } ?>
@@ -234,14 +242,7 @@
                 </a>
               </li>
               <?php } ?>
-              <?php if($menu[9]){ ?>
-              <li class="nav-item">
-                <a href="<?php echo route('report/mission'); ?>" class="nav-link px-1" id="mission">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>แยกตามกลุ่มภารกิจ</p>
-                </a>
-              </li>
-              <?php } ?>
+              
               <?php if($menu[10]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/land'); ?>" class="nav-link px-1" id="land">
