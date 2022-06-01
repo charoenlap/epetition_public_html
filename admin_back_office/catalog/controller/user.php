@@ -95,6 +95,7 @@
             $data['position'] = $this->model('user')->getPosition();
             $data['agency'] = $this->model('agency')->getlistsAgency();
             $data['agencyMinor'] = $this->model('agency')->getlistsAgencyMinor();
+            $data['opm_list'] = $this->model('agency')->getListOPM();
             // var_dump($data['user']);
             $data['action'] = route('user/submitEdit');
             $data['id'] = $id;

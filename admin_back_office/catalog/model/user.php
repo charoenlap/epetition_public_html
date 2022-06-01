@@ -115,7 +115,7 @@
 			return $result;
 		}
 		public function getList($id){
-            $query = $this->query('SELECT * FROM AUT_USER WHERE AUT_USER_ID='.$id);
+            $query = $this->query('SELECT * FROM AUT_USER LEFT JOIN ep_opm_user ON AUT_USER.id_opm_user = ep_opm_user.id WHERE AUT_USER_ID='.$id);
             return $query->row;
         }
         public function getUser($id){

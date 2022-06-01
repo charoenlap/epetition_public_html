@@ -1,8 +1,13 @@
 <?php 
     class AgencyModel extends db {
-        public function getlistsAgency($data = array()){
-        	$sql = "SELECT * FROM ep_agency";
+        public function getListOPM($data = array()){
+        	$sql = "SELECT * FROM ep_opm_user";
          	$query  = $this->query($sql);
+            return $query;
+        }
+        public function getlistsAgency($data = array()){
+            $sql = "SELECT * FROM ep_agency";
+            $query  = $this->query($sql);
             return $query;
         }
         public function getAgency($id_agency=0){

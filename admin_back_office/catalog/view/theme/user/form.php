@@ -142,6 +142,19 @@
                                         <label for="">E-mail</label>
                                         <input type="text" class="form-control" name="email" value="<?php echo (isset($user['email'])?$user['email']:'');?>">
                                     </div>
+                                    <div class="col-4">
+                                        <label for="">อนุญาติให้เข้าสู่ระบบของสปน.</label>
+                                        <?php // echo (isset($user['email'])?$user['email']:'');?>
+                                        <select name="id_opm_user" id="id_opm_user" class="form-control">
+                                            <option value="0">ไม่อนุญาติ</option>
+                                            <?php foreach($opm_list->rows as $val){?>
+                                                <option value="<?php echo $val['id'];?>" 
+                                                    <?php echo ($val['id']==$user['id_opm_user']?'selected':'');?>>
+                                                    <?php echo $val['name'];?>
+                                                </option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
                                 </div>
                                 
                                 <div class="row mt-2">

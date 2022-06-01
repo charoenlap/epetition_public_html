@@ -1,9 +1,10 @@
 <?php 
 	class OpmModel extends db {
 		public $token_id;
-		public function __construct(){
-			$username 			= USERNAME;
-			$password 			= PASSWORD;
+		public function __construct($para1='',$para2=''){
+			$username 			= $para1;
+			$password 			= $para2;
+			// echo $username.' '.$password ;exit();
 			$encryptPassword = $this->encodeString(array('txt'=>$password));
 			$array = array(
 				'params' 	=> array(
@@ -18,7 +19,11 @@
 			$resultGetToken = soap($array);
 			$result = json_decode($resultGetToken->GetTokenResult,true);
 			// var_dump($result);
-			$this->token_id = $result['token_id'];
+			// if(isset($this->token_id)){
+			if(isset($result['token_id'])){
+				$this->token_id = $result['token_id'];
+			}
+			// }
 		}
 		public function encodeString($data = array()){
 			$result = "";

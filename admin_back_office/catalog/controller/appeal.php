@@ -559,7 +559,7 @@
 	    }
 
 	    public function opm() {
-			$data['title'] 	= "เรื่องร้องเรียนจาก สปน"; 
+			$data['title'] 	= "เรื่องร้องเรียนจาก สปน."; 
 			$data['token_id'] = $token_id = $this->getSession('token_id');
 			$data['error'] = '';
 			$data['result'] = array();
@@ -597,7 +597,15 @@
 					'skip' => '0',
 					'take' => '10'
 				);
-				$data['result'] = $result = $this->model('opm')->getTimelineHeader($dataSelect);
+				// var_dump($_SESSION);exit();
+				$AUT_USER_ID = $this->getSession('AUT_USER_ID');
+				$user_detail = $this->model('user')->getList($AUT_USER_ID);
+				// var_dump($user_detail);exit();
+
+				$opm_user = $user_detail['user'];
+				$opm_pass = $user_detail['pass'];
+				// echo $opm_user.' '.$opm_pass;exit();
+				$data['result'] = $result = $this->modelOPM('opm',$opm_user,$opm_pass)->getTimelineHeader($dataSelect);
 
 			}
 			if($result=="Err:Not found user!!!"){

@@ -97,6 +97,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php if(is_array($result)){ ?>
                                             <?php $i=1;foreach($result as $val){ 
                                                 $status = '';
                                                 if($val['main_status_text']=="อยู่ระหว่างดำเนินการ"){
@@ -127,8 +128,9 @@
                                                     <a href="<?php echo route('appeal/opmEdit&case_id='.$val['case_id'].'&case_code='.$val['case_code']);?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="แก้ไขข้อมูล"><i class="fas fa-edit"></i></a>
                                                     <a href="<?php echo route('appeal/opmDel&case_id='.$val['case_id'].'&case_code='.$val['case_code']); ?>" class="btn btn-danger btn-sm btn-del" data-toggle="tooltip" data-placement="top" title="ลบข้อมูล"><i class="far fa-trash-alt"></i></a> -->
                                                 </td>
-                                                <?php } ?>
                                             </tr>
+                                            <?php } ?>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                     <!-- <nav aria-label="Page navigation example">
