@@ -4,12 +4,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">แบ่งตามพื้นที่เขตตรวจราชการ</h1>
+          <h1 class="m-0">แยกตามพื้นที่เขตตรวจ</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
-            <li class="breadcrumb-item active">แบ่งตามพื้นที่เขตตรวจราชการ</li>
+            <li class="breadcrumb-item active">แยกตามพื้นที่เขตตรวจ</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->

@@ -26,7 +26,34 @@
                         <div class="card-body">
                             <form action="<?php echo route('appeal');?>" method="get">
                                 <input type="hidden" name="route" value="appeal">
-                                <div class="row mb-3">
+                                <div class="row ">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="">ชื่อสกุล</label>
+                                        <input type="text" name="name_lastname" value="<?php echo $name_lastname;?>" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="">รหัสเรื่อง (Ticket ID)</label>
+                                        <input type="text" name="case_code" value="<?php echo $case_code; ?>" id="case_code" class="form-control" placeholder="Ticket ID">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="">สถานะ</label>
+                                        <select name="status_id" class="form-control">
+                                            <option value="">เลือก</option>
+                                            <?php foreach($status as $val){ ?>
+                                            <option value="<?php echo $val['id']; ?>" <?php echo ($status_id==$val['id']?'selected':'');?>><?php echo $val['status_text']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <label for="">&nbsp;</label>
+                                        <button class="btn btn-success " type="submit"><i class="fas fa-search"></i> ค้นหา</button>
+                                        <a class="btn btn-warning" href="<?php echo route("appeal"); ?>">ล้างคำค้นหา</a>
+                                        <div class="text-center">
+                                            <a href="#" id="btn-find-advance">ค้นหาแบบละเอียด</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3" style="display:none;" id="panel-search">
                                     <div class="col-md-3 mb-3">
                                         <label for="">ประเภท</label>
                                         <select name="topic_id" id="topic_id" class="form-control">
@@ -44,19 +71,8 @@
                                         <label for="">ถึงวันที่</label>
                                         <input type="text" name="dateadd_end" value="<?php echo $dateadd_end; ?>" class="datethaipicker form-control">
                                     </div>
-                                    <div class="col-md-5 mb-3">
-                                        <label for="">รหัสเรื่อง (Ticket ID)</label>
-                                        <input type="text" name="case_code" value="<?php echo $case_code; ?>" id="case_code" class="form-control" placeholder="Ticket ID">
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="">สถานะ</label>
-                                        <select name="status_id" class="form-control">
-                                            <option value="">เลือก</option>
-                                            <?php foreach($status as $val){ ?>
-                                            <option value="<?php echo $val['id']; ?>" <?php echo ($status_id==$val['id']?'selected':'');?>><?php echo $val['status_text']; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
+                                    
+                                    
                                     <div class="col-md-3 mb-3">
                                         <label for="">หน่วยงานที่รับผิดชอบ</label>
                                         <select name="department_id" id="department_id" class="form-control">
@@ -80,10 +96,7 @@
                                         <label for="">หมายเลขบัตรประชาชน</label>
                                         <input type="text" name="id_card" value="<?php echo $id_card;?>" class="form-control" placeholder="">
                                     </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="">ชื่อสกุล</label>
-                                        <input type="text" name="name_lastname" value="<?php echo $name_lastname;?>" class="form-control" placeholder="">
-                                    </div>
+                                    
                                     <div class="col-md-3 mb-3">
                                         <label for="">เบอร์โทรศัพท์</label>
                                         <input type="text" name="phone" value="<?php echo $phone;?>" class="form-control" placeholder="">
@@ -96,7 +109,7 @@
                                         <label for="">คำสำคัญ</label>
                                         <input type="text" class="form-control" name="response_person" placeholder="" value="<?php echo $response_person;?>">
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label for="">ช่องทางการร้องเรียน</label>
                                         <select name="addBy" id="addBy" class="form-control">
                                             <option value="">ทั้งหมด</option>
@@ -109,13 +122,6 @@
                                             <option value="6" <?php echo ($addBy==6?'selected':'');?>>สายด่วน</option>
                                             <option value="7" <?php echo ($addBy==7?'selected':'');?>>อีเมล</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <label for="">&nbsp;</label>
-                                        <button class="btn btn-success " type="submit"><i class="fas fa-search"></i> ค้นหา</button>
-                                        <a class="btn btn-warning" href="<?php echo route("appeal"); ?>">ล้างคำค้นหา</a>
                                     </div>
                                 </div>
                             </form>
@@ -281,6 +287,9 @@
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })
+    $(document).on('click','#btn-find-advance',function(e){
+        $('#panel-search').toggle(function(e){})
+    });
     $(document).on('click','#btn-send-topic',function(e){
         $('#process').modal('show');
         var html = '';

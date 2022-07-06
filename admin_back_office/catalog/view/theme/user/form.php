@@ -37,7 +37,7 @@
                             <form action="<?php echo $action;?>" method="POST">
                                 <input type="hidden" name="id" value="<?php echo $id;?>">
                                 <div class="row">
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label for="">หน่วยงาน</label>
                                         <select name="id_agency" id="id_agency" class="form-control">
                                             <option value="">เลือกหน่วยงาน</option>
@@ -52,7 +52,7 @@
                                             <?php } ?>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label for="">หน่วยงานระดับส่วน</label>
                                         <select name="id_agency_minor" id="id_agency_minor" class="form-control">
                                             <option value="">เลือกหน่วยงานระดับส่วน</option>
@@ -227,6 +227,10 @@
             $('#id_agency_minor option').each(function() {
                 $(this).remove();
             });
+            $('#id_agency_minor').append($('<option>', {
+                value: '',
+                text: 'เลือกหน่วยงานระดับส่วน'
+            }));
             $.each(json, function(index, val) {
                  $('#id_agency_minor').append($('<option>', {
                     value: val.id,

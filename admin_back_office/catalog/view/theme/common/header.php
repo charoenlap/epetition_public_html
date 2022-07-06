@@ -185,7 +185,7 @@
             <a href="<?php echo route('appeal/opm'); ?>" class="nav-link px-1" id="appealOPM">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                เรื่องร้องเรียนจากสำนักงานปลัด สำนักนายกรัฐมนตรี
+                เรื่องร้องเรียนจากสำนักงานปลัดสำนักนายกรัฐมนตรี
               </p>
             </a>
           </li>
@@ -267,14 +267,14 @@
                 </a>
               </li>
               <?php } ?>
-              <?php if($menu[13]){ ?>
+              <?php /*if($menu[13]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/progress'); ?>" class="nav-link px-1" id="progressReport">
                   <i class="far fa-circle nav-icon"></i>
                   <p>รายงานความก้าวหน้า</p>
                 </a>
               </li>
-              <?php } ?>
+              <?php }*/ ?>
               <?php if($menu[14]){ ?>
               <li class="nav-item">
                 <a href="<?php echo route('report/topic'); ?>" class="nav-link px-1" id="topic">
