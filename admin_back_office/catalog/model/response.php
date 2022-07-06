@@ -139,7 +139,7 @@
                 $where .= " AND response_person like '%".trim($response_person)."%'";
             }
             if(!empty($status_id)){
-                $where .= " AND status = '".trim($status_id)."'";
+                $where .= " AND a.status = '".trim($status_id)."'";
             }
             if(!empty($addBy)){
                 $where .= " AND a.addBy = '".trim($addBy)."'";
