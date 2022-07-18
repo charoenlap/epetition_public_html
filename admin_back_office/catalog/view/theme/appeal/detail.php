@@ -160,7 +160,7 @@
                                         <tbody>
                                             <?php $i=1;foreach($getResponse as $val){ ?>
                                             <tr>
-                                                <td><?php echo $i; ?></td>
+                                                <td><?php echo $i++; ?></td>
                                                 <td><?php echo $val['date_create']; ?></td>
                                                 <td><?php echo $val['appeal_title'];?></td>
                                                 <td><?php echo $val['agency_minor_title'];?></td>

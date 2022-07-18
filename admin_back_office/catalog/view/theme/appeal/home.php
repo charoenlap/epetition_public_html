@@ -144,23 +144,32 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table">
-                                        <tr>
-                                            <td>
-                                                <i class="fas fa-square-full status-yellow"></i> <small>อยู่ระหว่างการดำเนินการ</small>
-                                            </td>
-                                            <td>
-                                                <i class="fas fa-square-full status-orange"></i> <small>อีก 7 วันจะครบกำหนด</small>
-                                            </td>
-                                            <td>
-                                                <i class="fas fa-square-full status-red"></i> <small>ยังไม่เสร็จ และช้ากว่ากำหนด</small>
-                                            </td>
-                                            <td>
-                                                <i class="fas fa-square-full status-green"></i> <small>ดำเนินการเสร็จสิ้นแล้ว</small>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                <div class="col-md-4">
+                                    จำนวนเรื่องร้องเรียนทั้งหมด
+                                    (<?php echo $total; ?>) 
+                                </div>
+                                <div class="col-md-4">
+                                    <small>เรื่องร้องเรียนผ่าน สปน. (<?php echo $status_total['sorpornor']; ?>)</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <small>เรื่องร้องเรียนผ่านกระทรวงพลังงาน (<?php echo $status_total['ministry']; ?>)</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <a href="<?php echo route('appeal&status_id=2'); ?>">
+                                        <i class="fas fa-square-full status-yellow"></i> <small>อยู่ระหว่างการดำเนินการ</small>(<?php echo $status_total['process']; ?>)
+                                    </a>
+                                </div>
+                                <div class="col-4">
+                                    <a href="<?php echo route('appeal&status_id=1'); ?>">
+                                        <i class="fas fa-square-full status-green"></i> <small>ดำเนินการแล้วเสร็จ</small>(<?php echo $status_total['complete']; ?>)
+                                    </a>
+                                </div>
+                                <div class="col-4">
+                                    <a href="<?php echo route('appeal&status_id=4'); ?>">
+                                        <i class="fas fa-square-full status-red"></i> <small>ดำเนินการล้าช้า</small>(<?php echo $status_total['incomplete']; ?>)
+                                    </a>
                                 </div>
                             </div>
                             <div class="row">
@@ -173,8 +182,7 @@
                                                 <th class="align-top"  style="width:80px;">Ticket ID</th>
                                                 <th class="align-top" style="width:180px;">ชื่อผู้ร้องเรียน</th>
                                                 <th class="align-top">ประเภทเรื่องที่ร้องเรียน</th>
-                                                <th class="align-top">ช่องทางการร้องเรียน</th>
-                                                <th class="align-top">สถานที่เกิดเหตุ</th>
+                                                <th class="align-top">สถานะการรับเรื่อง/ส่งต่อ</th>
                                                 <th class="align-top" style="width:130px;">วันที่ร้องเรียน</th>
                                                 <th class="align-top" style="width:130px;">จำนวนวันที่ผ่านมา</th>
                                                 <th class="text-center align-top" style="width:50px;">สถานะ</th>
@@ -194,11 +202,14 @@
                                                     >
                                                 </td>
                                                 <td class="text-center"><?php echo ++$i; ?></td>
-                                                <td><?php echo $value['case_code']; ?></td>
+                                                <td><?php echo $value['case_code']; ?>
+                                                    <div class="text-center">
+                                                        <b class="text-danger"><?php echo ($value['id_noti']==''?'ใหม่':'');?></b>
+                                                    </div>
+                                                </td>
                                                 <td><?php echo $value['fullname']; ?></td>
                                                 <td><?php echo $value['topicTitle']; ?></td>
-                                                <td><?php echo $value['addBy']; ?></td>
-                                                <td><?php echo $value['PROVINCE_NAME']; ?></td>
+                                                <td><?php echo ''; ?></td>
                                                 <td><?php echo $value['dateadd']; ?></td>
                                                 <td><?php echo $value['days']; ?></td>
                                                 <td>

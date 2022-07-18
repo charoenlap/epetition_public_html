@@ -62,6 +62,19 @@
                                 <?php echo $txt_status; ?>
                             </td>
                         </tr>
+                        <tr>
+                            <td><b>รายละเอียดดำเนินการ</b></td>
+                            <td>
+                                <?php 
+                                if($val['cus_comments']){
+                                    foreach ($val['cus_comments'] as $key => $value) {
+                                       echo $value['date_create'].' : '.$value['comment']."<br>";
+                                    } ?>
+                                <?php }else{?>
+                                    <p>อยู่ระหว่างตรวจสอบข้อมูล เพื่อส่งต่อให้หน่วยงานที่รับผิดชอบ</p>
+                                <?php } ?>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <?php } ?>

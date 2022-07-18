@@ -15,6 +15,17 @@
     <script src="assets/js/jquery-3.6.0.js"></script>
     <script src="assets/bootstrap-4/js/bootstrap.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+    <style>
+      *{
+        font-family: 'Prompt', sans-serif;
+      }
+    </style>
+
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-theme">

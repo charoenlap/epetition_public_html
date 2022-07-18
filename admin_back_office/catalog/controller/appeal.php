@@ -1,6 +1,7 @@
 <?php 
 	class AppealController extends Controller {
 		public function index() {
+			// session_destroy();exit();
 	    	// var_dump($_SESSION);exit();
 			$data['title'] 	= "เรื่องร้องเรียน/ร้องทุกข์"; 
 			$data['topic'] 			= $this->model('topic')->getLists();
@@ -27,6 +28,10 @@
 			$data['date_respect'] = get('date_respect');
 			$data['status_id'] = get('status_id');
 			$data['addBy'] = get('addBy');
+
+			$AUT_USER_ID = $_SESSION['AUT_USER_ID'];
+			// var_dump($_SESSION);exit(); 
+
 			$tel 	= '';
 			$phone 	= '';
 			if($chkTypePhone==1){
@@ -65,10 +70,11 @@
 				'id_agency_minor'	=> $id_agency_minor,
 				'USER_GROUP_ID'		=> $USER_GROUP_ID,
 				'id_agency'			=> $id_agency,
+				'AUT_USER_ID'		=> $AUT_USER_ID
 			);
 			
 			$resultData 	= $response->getlists($data_search);
-			
+
 			foreach($resultData->rows as $key => $value){
 				$addBy = '';
 				if($value['addBy']==0){
@@ -99,6 +105,7 @@
 					'text_status'		=> $value['text_status'],
 					'status_id'			=> $value['status_id'],
 					'status_icon'		=> $value['status_icon'],
+					'id_noti'			=> $value['id_noti'],
 					'days'				=> $days,
 					'addBy'				=> $addBy,
 				);
@@ -111,7 +118,19 @@
 			if($group_id){
 				$USER_GROUP_ID = $group_id;
 			}
+			$role_id 			= $this->getSession('role_id');
+			// echo $id_agency_minor;exit();
+			// var_dump($_SESSION);exit();
+			$data_total_status = array(
+	    		'id_agency' 		=> $id_agency,
+				'id_agency_minor' 	=> $id_agency_minor,
+				'role_id'			=> $role_id
+	    	);
+	    	$data['total'] = $resultData->num_rows;
+			$data['status_total'] = $this->model('response')->getTotalStatus($data_total_status);
+
 			$menu = $this->model('user')->getMenu(array('group_menu_id'=>$USER_GROUP_ID))->rows;
+
 			$data['menu'] = array();
 			$data['active_del'] = 0;
 			$data['active_add'] = 0;
@@ -212,15 +231,24 @@
 				$approve_topic = (int)post('approve_topic');
 				$id_response = (int)post('id_response');
 				$send_opm 	= (int)post('send_opm');
+				$txt_to_people 	= post('txt_to_people');
 
 				$update = array(
 					'id' 				=> $id_response,
 					'status' 			=> $status,
 					'approve_topic'		=> $approve_topic,
 					'approve_user_id' 	=> $this->getSession('AUT_USER_ID'),
-					'send_opm'			=> $send_opm
+					'send_opm'			=> $send_opm,
 				);
 				$this->model('response')->updateStatus($update);
+				$txt_insert = array(
+					'id_response' 	=> $id_response,
+					'id_user'		=> $this->getSession('AUT_USER_ID'),
+					'comment'		=> $txt_to_people,
+					'del'			=> 0,
+					'date_create'	=> date('Y-m-d H:i:s')
+				);
+				$this->model('response')->insertCommentCustomer($txt_insert);
 
 				$send_sub_agency 	= (int)post('send_sub_agency');
 				$email_send 		= post('email_send');
@@ -401,31 +429,49 @@
 				if($val['MENU_ID']=="2"){
 					if($val['USER_DELETE']=="1"){
 						$data['active_del'] = 1;
+					}else{
+						$data['active_del'] = 0;
 					}
 					if($val['USER_ADD']=="1"){
 						$data['active_add'] = 1;
+					}else{
+						$data['active_add'] = 0;
 					}
 					if($val['USER_VIEW']=="1"){
 						$data['active_view'] = 1;
+					}else{
+						$data['active_view'] = 0;
 					}
 					if($val['USER_EDIT']=="1"){
 						$data['active_edit'] = 1;
+					}else{
+						$data['active_edit'] = 0;
 					}
 
 					if($val['user_accept']=="1"){
 						$data['user_accept'] = 1;
+					}else{
+						$data['user_accept'] = 0;
 					}
 					if($val['user_change']=="1"){
 						$data['user_change'] = 1;
+					}else{
+						$data['user_change'] = 0;
 					}
 					if($val['user_send']=="1"){
 						$data['user_send'] = 1;
+					}else{
+						$data['user_send'] = 0;
 					}
 					if($val['user_topic']=="1"){
 						$data['user_topic'] = 1;
+					}else{
+						$data['user_topic'] = 0;
 					}
 					if($val['user_opm']=="1"){
 						$data['user_opm'] = 1;
+					}else{
+						$data['user_opm'] = 0;
 					}
 				}
 			}

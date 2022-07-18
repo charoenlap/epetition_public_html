@@ -22,11 +22,17 @@
                     $sql_agency = "SELECT *,ep_response_status.id AS id,ep_response_status.date_create AS date_create FROM ep_response_status 
                         LEFT JOIN ep_agency_minor ON ep_agency_minor.id = ep_response_status.id_agency_minor
                     WHERE id_response = ".(int)$id;
+
+                    $sql_customer_comment = "SELECT * FROM ep_response_customer_comment  
+                    WHERE id_response = ".(int)$id.' AND del=0';
+
                     $result[] = array(
-                        'detail'    => $val,
-                        'agency'    => $this->query($sql_agency)->rows
+                        'detail'            => $val,
+                        'agency'            => $this->query($sql_agency)->rows,
+                        'cus_comments'      => $this->query($sql_customer_comment)->rows
                     );
                 }
+                // echo $sql;exit();
 	        }
             return $result;
         }
@@ -50,9 +56,14 @@
                     $sql_agency = "SELECT *,ep_response_status.id AS id,ep_response_status.date_create AS date_create FROM ep_response_status 
                         LEFT JOIN ep_agency_minor ON ep_agency_minor.id = ep_response_status.id_agency_minor
                     WHERE id_response = ".(int)$id;
+
+                    $sql_customer_comment = "SELECT * FROM ep_response_customer_comment  
+                    WHERE id_response = ".(int)$id.' AND del=0';
+
                     $result[] = array(
                         'detail'    => $val,
-                        'agency'    => $this->query($sql_agency)->rows
+                        'agency'    => $this->query($sql_agency)->rows,
+                        'cus_comments'      => $this->query($sql_customer_comment)->rows
                     );
                 }
             }

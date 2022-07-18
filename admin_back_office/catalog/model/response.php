@@ -1,5 +1,111 @@
 <?php 
     class ResponseModel extends db {
+        public function getTotalStatus($data = array()){
+            $result = array();
+            $status = array(
+                1, // เสร็จสิ้นแล้ว
+                2, // อยู่ระหว่างดำเนินการ
+                4, // ยังไม่เสร็จ และช้ากว่ากำหนด
+            );
+
+            $id_agency          = (isset($data['id_agency'])?$data['id_agency']:'');
+            $id_agency_minor    = (isset($data['id_agency_minor'])?$data['id_agency_minor']:'');
+            $role_id    = (isset($data['role_id'])?$data['role_id']:'');
+            
+            $where = "";
+            if($id_agency){
+                $where .= " AND ep_response_status.id_agency = '".$id_agency."'";
+                if($id_agency_minor){
+                    $where .= " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
+                }
+            }
+            // echo $where;
+            // exit();
+            // เสร็จสิ้นแล้ว
+            $sql_complete = "SELECT count(*) as total FROM (
+                SELECT
+                    COUNT(ep_response.case_code) AS total 
+                FROM
+                    ep_response
+                    INNER JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
+                    LEFT JOIN ep_topic b ON ep_response.topic_id = b.id
+                    LEFT JOIN ep_status ON ep_response.`status` = ep_status.`id`
+                    LEFT JOIN PROVINCE ON ep_response.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+                WHERE
+                    ep_response.`status` = 1 
+                    AND ep_response.del <> 1 
+                    ".$where."
+                GROUP BY
+                    ep_response.case_code
+            ) t";
+            $result_complete = $this->query($sql_complete);
+
+            $sql_process = "SELECT count(*) as total FROM (
+                SELECT
+                    COUNT(ep_response.case_code) AS total 
+                FROM
+                    ep_response
+                    INNER JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
+                    LEFT JOIN ep_topic b ON ep_response.topic_id = b.id
+                    LEFT JOIN ep_status ON ep_response.`status` = ep_status.`id`
+                    LEFT JOIN PROVINCE ON ep_response.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+                WHERE
+                    ep_response.`status` = 2 
+                    AND ep_response.del <> 1 
+                    ".$where."
+                GROUP BY
+                    ep_response.case_code
+            ) t";
+            $result_process = $this->query($sql_process);
+
+            $sql_incomplete = "SELECT count(*) as total FROM (
+                SELECT
+                    COUNT(ep_response.case_code) AS total 
+                FROM
+                    ep_response
+                    INNER JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
+                    LEFT JOIN ep_topic b ON ep_response.topic_id = b.id
+                    LEFT JOIN ep_status ON ep_response.`status` = ep_status.`id`
+                    LEFT JOIN PROVINCE ON ep_response.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+                WHERE
+                    ep_response.`status` = 4 
+                    AND ep_response.del <> 1 
+                    ".$where."
+                GROUP BY
+                    ep_response.case_code
+            ) t";
+            $result_incomplete = $this->query($sql_incomplete);
+
+            $sql_sorpornor = "SELECT count(*) as total FROM (
+                SELECT
+                    COUNT(ep_response.case_code) AS total 
+                FROM
+                    ep_response
+                    INNER JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
+                    LEFT JOIN ep_topic b ON ep_response.topic_id = b.id
+                    LEFT JOIN ep_status ON ep_response.`status` = ep_status.`id`
+                    LEFT JOIN PROVINCE ON ep_response.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+                WHERE
+                    ep_response.`addBy` = 4 
+                    AND ep_response.del <> 1 
+                    ".$where."
+                GROUP BY
+                    ep_response.case_code
+            ) t";
+            $result_sorpornor = $this->query($sql_sorpornor);
+
+            $all = $result_complete->row['total']+$result_process->row['total']+$result_incomplete->row['total'];
+            $result = array(
+                'complete'      => $result_complete->row['total'],
+                'process'       => $result_process->row['total'],
+                'incomplete'    => $result_incomplete->row['total'],
+                'all'           => $all,
+                'sorpornor'     => $result_sorpornor->row['total'],
+                'ministry'      => $all - $result_sorpornor->row['total']
+            );
+
+            return $result;
+        }
         public function checkCaseOPM($case_code_opm = 0){
             $result = '';
             // $case_code_opm = (isset($data['case_code_opm'])?$data['case_code_opm']:'');
@@ -24,6 +130,11 @@
         public function inputComment($data = array()){
             // foreach($data as $val){
                 $this->insert('response_comment',$data);
+            // }
+        } 
+        public function insertCommentCustomer($data = array()){
+            // foreach($data as $val){
+                $this->insert('response_customer_comment',$data);
             // }
         } 
         public function updateStatus($data=array()){
@@ -98,6 +209,7 @@
             $page = (isset($data['page'])?$data['page']:'');
             $addBy = (isset($data['addBy'])?$data['addBy']:'');
             $USER_GROUP_ID = (isset($data['USER_GROUP_ID'])?$data['USER_GROUP_ID']:'');
+            $AUT_USER_ID = (isset($data['AUT_USER_ID'])?$data['AUT_USER_ID']:'');
 
             if(!empty($topic_id)){
                 $where .= " AND topic_id = '".trim($topic_id)."'";
@@ -162,6 +274,8 @@
                 // $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
                 $where .= " AND ep_response_status.id_agency = '".$id_agency."'";
             }
+
+            // echo $where;exit();
             $sql    = "SELECT *,
             a.id as id, 
             `ep_status`.`status_class` as text_class,
@@ -173,6 +287,7 @@
             LEFT JOIN ep_topic b ON a.topic_id = b.id 
             LEFT JOIN ep_status ON a.`status` = ep_status.`id` 
             LEFT JOIN PROVINCE ON a.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+            LEFT JOIN ep_notification ON a.id = ep_notification.id_response AND id_user = '".(int)$AUT_USER_ID."'
             WHERE a.del = 0 ".$where." 
             GROUP BY a.case_code 
             ORDER BY a.id DESC  ";
