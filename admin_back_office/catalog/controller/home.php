@@ -73,6 +73,14 @@
 		    	$total_case_process = $this->model('dashboard')->getTotalCaseProcess($data_dashboard);
 		    	$total_user 		= $this->model('dashboard')->getTotalUser($data_dashboard);
 
+		    	$data_total_status = array(
+		    		'id_agency' 		=> $id_agency,
+					'id_agency_minor' 	=> $id_agency_minor,
+					'role_id'			=> $role_id
+		    	);
+		    	$data['total'] = $resultData->num_rows;
+				$data['status_total'] = $this->model('response')->getTotalStatus($data_total_status);
+
 				$data['total_case'] 		= $total_case;
 				$data['total_case_process'] = $total_case_process;
 				$data['total_report'] 		= 8;

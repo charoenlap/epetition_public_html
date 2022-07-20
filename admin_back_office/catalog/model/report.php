@@ -222,6 +222,43 @@
             }
             return $result;
       }
+      public function getReportLand2($data = array()){
+
+            $result = array();
+            $sql = "SELECT *, ep_address_geographies.`name` AS `name` FROM ep_address_geographies";
+            $resultAgencyMinor = $this->query($sql)->rows;
+            foreach($resultAgencyMinor as $val){
+                  $sql_count = "SELECT count(ep_response.id) AS count_all 
+                  FROM ep_response_status 
+                  LEFT JOIN ep_response ON ep_response_status.id_response = ep_response.id 
+                  LEFT JOIN PROVINCE ON ep_response.id_provinces = PROVINCE.PROVINCE_ID 
+                  WHERE PROVINCE.id_sector = '".$val['id']."'";
+                  $result_count_all = $this->query($sql_count);
+
+                  $sql_count_status = "SELECT ep_response.`status`,count(ep_response.`status`) as count_status FROM ep_response_status 
+                  LEFT JOIN ep_response ON ep_response_status.id_response = ep_response.id 
+                  LEFT JOIN PROVINCE ON ep_response.id_provinces = PROVINCE.PROVINCE_ID 
+
+                  WHERE PROVINCE.id_sector = '".$val['id']."'  GROUP BY ep_response.`status` 
+                  ";
+                  $query_count_status = $this->query($sql_count_status);
+                  $result_status = array();
+                  foreach($query_count_status->rows as $cs){
+                        $result_status[$cs['status']] = $cs['count_status'];
+                  }
+
+                  $result[] = array(
+                        'title'                       => $val['name'],
+                        'count_all'                   => $result_count_all->row['count_all'],
+                        '0'                           => (int)(isset($result_status[0])?$result_status[0]:''),
+                        'complete'                    => (int)(isset($result_status[1])?$result_status[1]:''), //ร้องทุกข์ที่ดำเนินการเสร็จสิ้นแล้ว
+                        'process'                     => (int)(isset($result_status[2])?$result_status[2]:''), //ร้องทุกข์อยู่ระหว่างการดำเนินการ
+                        '3'                           => (int)(isset($result_status[3])?$result_status[3]:''), //ร้องทุกข์อีก 7 วันจะครบกำหนด
+                        'over'                        => (int)(isset($result_status[4])?$result_status[4]:''), //ร้องทุกข์ที่ยังไม่เสร็จ และช้ากว่ากำหนด
+                  );
+            }
+            return $result;
+      }
       public function getReportLandLimit5($data = array()){
             $result = array();
             $sql = "SELECT * FROM PROVINCE";

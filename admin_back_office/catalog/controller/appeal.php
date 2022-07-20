@@ -965,25 +965,31 @@
 				);
 				$getCase = $this->model('opm')->GetCase($dataSelectGetCase);
 				if($getCase){
-					$data_insert = array(
-						'AUT_USER_ID' 	=> (int)$this->getSession('AUT_USER_ID'),
-						'addBy'			=> 2,
-						'case_code_opm' => $case_code,
-						'id_card' 		=> (isset($getCase['account']['citizen_id'])?$getCase['account']['citizen_id']:''),
-						'name' 			=> (isset($getCase['account']['firstname_th'])?$getCase['account']['firstname_th']:''),
-						'lastname' 		=> (isset($getCase['account']['lastname_th'])?$getCase['account']['lastname_th']:''),
-						'case_id_opm'		=> $case_id
-					);
-					$result_response = $this->model('response')->addResponse($data_insert);
-					if($result_response['result']=="success"){
-			    		$result = array(
-			    			'status' => 'เพิ่มลงระบบแล้ว'
+					if($getCase!="Err:Not found user!!!"){
+						$data_insert = array(
+							'AUT_USER_ID' 	=> (int)$this->getSession('AUT_USER_ID'),
+							'addBy'			=> 2,
+							'case_code_opm' => $case_code,
+							'id_card' 		=> (isset($getCase['account']['citizen_id'])?$getCase['account']['citizen_id']:''),
+							'name' 			=> (isset($getCase['account']['firstname_th'])?$getCase['account']['firstname_th']:''),
+							'lastname' 		=> (isset($getCase['account']['lastname_th'])?$getCase['account']['lastname_th']:''),
+							'case_id_opm'		=> $case_id
+						);
+						$result_response = $this->model('response')->addResponse($data_insert);
+						if($result_response['result']=="success"){
+				    		$result = array(
+				    			'status' => 'เพิ่มลงระบบแล้ว'
+				    		);
+				    	}else{
+				    		$result = array(
+				    			'status' => $result_response['desc']
+				    		);
+				    	}
+				    }else{
+				    	$result = array(
+			    			'status' => 'สาเหตุ: '.$getCase
 			    		);
-			    	}else{
-			    		$result = array(
-			    			'status' => $result_response['desc']
-			    		);
-			    	}
+				    }
 			    }else{
 		    		$result = array(
 		    			'status' => 'API มีปัญหา'

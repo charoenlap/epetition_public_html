@@ -10,48 +10,55 @@
 
             $id_agency          = (isset($data['id_agency'])?$data['id_agency']:'');
             $id_agency_minor    = (isset($data['id_agency_minor'])?$data['id_agency_minor']:'');
-            $role_id    = (isset($data['role_id'])?$data['role_id']:'');
-            
+            $role_id            = (isset($data['role_id'])?$data['role_id']:'');
+            // var_dump($role_id);exit();
             $where = "";
-            if($id_agency){
-                $where .= " AND ep_response_status.id_agency = '".$id_agency."'";
-                if($id_agency_minor){
-                    $where .= " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
+            if($role_id>1){
+                if($id_agency){
+                    $where .= " AND ep_response_status.id_agency = '".$id_agency."'";
+                    if($id_agency_minor){
+                        $where .= " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
+                    }
                 }
             }
             // echo $where;
             // exit();
             // เสร็จสิ้นแล้ว
+
+            // echo $where;exit();
             $sql_complete = "SELECT count(*) as total FROM (
                 SELECT
                     COUNT(ep_response.case_code) AS total 
                 FROM
                     ep_response
-                    INNER JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
+                    LEFT JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
                     LEFT JOIN ep_topic b ON ep_response.topic_id = b.id
                     LEFT JOIN ep_status ON ep_response.`status` = ep_status.`id`
                     LEFT JOIN PROVINCE ON ep_response.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+                    LEFT JOIN ep_notification ON ep_response.id = ep_notification.id_response 
                 WHERE
                     ep_response.`status` = 1 
-                    AND ep_response.del <> 1 
+                    AND ep_response.del = 0 
                     ".$where."
                 GROUP BY
                     ep_response.case_code
             ) t";
+            // echo $sql_complete;exit();
             $result_complete = $this->query($sql_complete);
-
+            // echo $sql_complete;exit();
             $sql_process = "SELECT count(*) as total FROM (
                 SELECT
                     COUNT(ep_response.case_code) AS total 
                 FROM
                     ep_response
-                    INNER JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
+                    LEFT JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
                     LEFT JOIN ep_topic b ON ep_response.topic_id = b.id
                     LEFT JOIN ep_status ON ep_response.`status` = ep_status.`id`
                     LEFT JOIN PROVINCE ON ep_response.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+                    LEFT JOIN ep_notification ON ep_response.id = ep_notification.id_response 
                 WHERE
-                    ep_response.`status` = 2 
-                    AND ep_response.del <> 1 
+                    (ep_response.`status` = 2 OR ep_response.`status` = 3 OR ep_response.`status` IS NULL OR ep_response.`status` = 0)
+                    AND ep_response.del = 0 
                     ".$where."
                 GROUP BY
                     ep_response.case_code
@@ -63,13 +70,14 @@
                     COUNT(ep_response.case_code) AS total 
                 FROM
                     ep_response
-                    INNER JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
+                    LEFT JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
                     LEFT JOIN ep_topic b ON ep_response.topic_id = b.id
                     LEFT JOIN ep_status ON ep_response.`status` = ep_status.`id`
                     LEFT JOIN PROVINCE ON ep_response.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+                    LEFT JOIN ep_notification ON ep_response.id = ep_notification.id_response 
                 WHERE
                     ep_response.`status` = 4 
-                    AND ep_response.del <> 1 
+                    AND ep_response.del = 0 
                     ".$where."
                 GROUP BY
                     ep_response.case_code
@@ -81,19 +89,20 @@
                     COUNT(ep_response.case_code) AS total 
                 FROM
                     ep_response
-                    INNER JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
+                    LEFT JOIN ep_response_status ON ep_response.id = ep_response_status.id_response
                     LEFT JOIN ep_topic b ON ep_response.topic_id = b.id
                     LEFT JOIN ep_status ON ep_response.`status` = ep_status.`id`
-                    LEFT JOIN PROVINCE ON ep_response.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
+                    LEFT JOIN PROVINCE ON ep_response.`t_id_provinces` = PROVINCE.`PROVINCE_id`
+                    LEFT JOIN ep_notification ON ep_response.id = ep_notification.id_response  
                 WHERE
                     ep_response.`addBy` = 4 
-                    AND ep_response.del <> 1 
+                    AND ep_response.del = 0 
                     ".$where."
                 GROUP BY
                     ep_response.case_code
             ) t";
             $result_sorpornor = $this->query($sql_sorpornor);
-
+            // echo $sql_sorpornor;exit();
             $all = $result_complete->row['total']+$result_process->row['total']+$result_incomplete->row['total'];
             $result = array(
                 'complete'      => $result_complete->row['total'],
@@ -265,7 +274,7 @@
             }
             $limit = " LIMIT ".$limit;
             $left_join = '';
-            $left_join = ($USER_GROUP_ID==1?'LEFT':'INNER')." JOIN ep_response_status ON a.id = ep_response_status.id_response ";
+            $left_join = " LEFT JOIN ep_response_status ON a.id = ep_response_status.id_response ";
             if($id_agency_minor){
                 // $left_join = " INNER JOIN ep_response_status ON a.id = ep_response_status.id_response ";
                 $where .= " AND ep_response_status.id_agency_minor = '".$id_agency_minor."'";
@@ -287,7 +296,7 @@
             LEFT JOIN ep_topic b ON a.topic_id = b.id 
             LEFT JOIN ep_status ON a.`status` = ep_status.`id` 
             LEFT JOIN PROVINCE ON a.`t_id_provinces` = PROVINCE.`PROVINCE_id` 
-            LEFT JOIN ep_notification ON a.id = ep_notification.id_response AND id_user = '".(int)$AUT_USER_ID."'
+            LEFT JOIN ep_notification ON a.id = ep_notification.id_response 
             WHERE a.del = 0 ".$where." 
             GROUP BY a.case_code 
             ORDER BY a.id DESC  ";

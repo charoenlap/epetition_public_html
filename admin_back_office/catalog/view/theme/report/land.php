@@ -96,6 +96,35 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <?php // var_dump($reportLand); ?>
+                                    <table class="table table-bordered" id="datatable2">
+                                        <thead class="bg-primary">
+                                            <tr>
+                                                <th class="text-center align-middle" width="10%">ลำดับ</th>
+                                                <th class="text-center align-middle">ภาค</th>
+                                                <th class="text-center align-middle">ได้รับเรื่องร้องเรียน</th>
+                                                <th class="text-center">ดำเนินการแล้วเสร็จ</th>
+                                                <th class="text-center">อยู่ระหว่างการดำเนินการ</th>
+                                                <th class="text-center">ยังไม่เริ่มดำเนินการ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php $i=1;foreach($reportLand2 as $val){ ?>
+                                            <tr>
+                                              <td class="text-center"><?php echo $i++;?></td>
+                                              <td><?php echo $val['title']; ?></td>
+                                              <td class="text-center"><?php echo $val['count_all'] ?></td>
+                                              <td class="text-center"><?php echo $val['complete'] ?></td>
+                                              <td class="text-center"><?php echo $val['process'] ?></td>
+                                              <td class="text-center"><?php echo $val['over'] ?></td>
+                                          </tr>
+                                          <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
               </div>
@@ -128,7 +157,7 @@
          bolditalics: 'THSarabun-BoldItalic.ttf'
        }
     }
-    $('#datatable').DataTable( {
+    $('#datatable,#datatable2').DataTable( {
       lengthChange: false,
       extend: 'collection',
         // processing: true,

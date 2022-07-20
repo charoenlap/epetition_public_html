@@ -11,25 +11,20 @@
             <li class="breadcrumb-item"><a href="#">หน้าหลัก</a></li>
             <li class="breadcrumb-item active">แผงควบคุม</li>
           </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- /.content-header -->
-
-  <!-- Main content -->
   <section class="content">
     <?php if($active_view){ ?>
     <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
       <?php if($user_shortcut){ ?>
       <div class="row">
         <div class="col-lg-3 col-6">
-          <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3><?php echo $total_case;?></h3>
-              <p>เรื่องร้องเรียน</p>
+              <h3><?php echo $status_total['all']; ?></h3>
+              <p>ทั้งหมด</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -37,13 +32,23 @@
             <a href="<?php echo route('appeal'); ?>" class="small-box-footer">รายละเอียด <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
         <div class="col-lg-3 col-6">
-          <!-- small box -->
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3><?php echo $status_total['process']; ?></h3>
+              <p>อยู่ระหว่างการดำเนินการ</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="<?php echo route('appeal&status_id=2'); ?>" class="small-box-footer">รายละเอียด <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
           <div class="small-box bg-success">
             <div class="inner">
-              <h3><?php echo $total_case_process;?></h3>
-              <p>ความก้าวหน้าของเรื่องร้องเรียน</p>
+              <h3><?php echo $status_total['complete']; ?></h3>
+              <p>ดำเนินการแล้วเสร็จ</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -51,37 +56,20 @@
             <a href="<?php echo route('appeal&status=1'); ?>" class="small-box-footer">รายละเอียด <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-warning">
-            <div class="inner">
-              <h3><?php echo $total_report;?></h3>
-              <p>รายงาน</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="<?php echo route('report/department'); ?>" class="small-box-footer">รายละเอียด <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <!-- ./col -->
         <div class="col-lg-3 col-6">
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3><?php echo $total_user;?></h3>
+              <h3><?php echo $status_total['incomplete']; ?></h3>
 
-              <p>ผู้ใช้งานระบบ</p>
+              <p>ดำเนินการล้าช้า</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">รายละเอียด <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?php echo route('appeal&status_id=4'); ?>" class="small-box-footer">รายละเอียด <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
       </div>
       <?php } ?>
       <?php if($user_graph){ ?>
@@ -93,6 +81,9 @@
                 <!--  -->
                 <div class="col-md-12">
                   <div id="chart_div_combo" style="height: 500px;"></div>
+                </div>
+                <div class="col-md-12">
+                  <div id="piechart" style="width: 100%; height: 500px;"></div>
                 </div>
               </div>
               <div class="row">
@@ -187,6 +178,29 @@
   }
 </style>  
 <script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+  var data = google.visualization.arrayToDataTable([
+      ['', ''],
+      ['อยู่ระหว่างการดำเนินการ', <?php echo $status_total['process']; ?>],
+      ['ดำเนินการล้าช้า', <?php echo $status_total['incomplete']; ?>],
+      ['ดำเนินการแล้วเสร็จ', <?php echo $status_total['complete']; ?>],
+  ]);
+
+  var options = {
+      title: 'รายงานเวลาเฉลี่ยของแต่ละประเภทปัญหา'
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+  chart.draw(data, options);
+  }
+
+  google.charts.setOnLoadCallback(drawVisualization);
+
   jQuery('#vmap').vectorMap(
   {
       map: 'thai_en',

@@ -165,7 +165,9 @@
 				}
 			}
 			$data['reportLand'] 		= $this->model('report')->getReportLand();
-			// var_dump($data['reportLand']);
+
+			$data['reportLand2'] 		= $this->model('report')->getReportLand2();
+			// var_dump($data['reportLand2']);
 			$data['reportLandLimit5'] 	= $this->model('report')->getReportLandLimit5();
 			$this->view('report/land',$data);
 		}
