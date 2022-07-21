@@ -92,6 +92,11 @@
 				}else{
 					$days	= '-';
 				}
+
+				$process = $this->model('response')->getProgress($value['id']);
+				// var_dump($process);exit();
+				$agency_title = (isset($process['agency_title'])?$process['agency_title']:'');
+				$agency_minor_title = (isset($process['agency_minor_title'])?' > '.$process['agency_minor_title']:'');
 				$data['lists'][] = array(
 					'case_code'			=> $value['case_code'],
 					'approve_topic'		=> $value['approve_topic'],
@@ -100,7 +105,7 @@
 					'dateadd'			=> date('d-m-Y',strtotime($value['dateadd'])),
 					'topicTitle'		=> $value['topic_title'],
 					't_id_provinces'	=> $value['PROVINCE_NAME'],
-					'PROVINCE_NAME'	=> $value['PROVINCE_NAME'],
+					'PROVINCE_NAME'		=> $value['PROVINCE_NAME'],
 					'text_class'		=> $value['text_class'],
 					'text_status'		=> $value['text_status'],
 					'status_id'			=> $value['status_id'],
@@ -108,6 +113,8 @@
 					'id_noti'			=> $value['id_noti'],
 					'days'				=> $days,
 					'addBy'				=> $addBy,
+					'agency_title'		=> $agency_title,
+					'agency_minor_title'=> $agency_minor_title,
 				);
 			}
 			$data['page_limit'] = ceil($resultData->num_rows/DEFAULT_LIMIT_PAGE);

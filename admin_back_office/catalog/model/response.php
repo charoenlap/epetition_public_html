@@ -195,6 +195,16 @@
             $result = $this->query($sql);
             return $result->rows;
         }
+        public function getProgress($id_response=0){
+            $result = '';
+            $sql = "SELECT * FROM ep_response_status 
+            LEFT JOIN ep_agency_minor ON ep_agency_minor.id = ep_response_status.id_agency_minor
+            LEFT JOIN ep_agency ON ep_agency.id = ep_response_status.id_agency
+            WHERE ep_response_status.id_response = ".(int)$id_response." ORDER BY ep_response_status.id DESC LIMIT 0,1";
+            // echo $sql;exit();
+            $result = $this->query($sql);
+            return $result->row;
+        }
         public function getlists($data = array()){
             // echo "test";
             $where = '';

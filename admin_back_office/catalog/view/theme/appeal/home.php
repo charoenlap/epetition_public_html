@@ -209,7 +209,7 @@
                                                 </td>
                                                 <td><?php echo $value['fullname']; ?></td>
                                                 <td><?php echo $value['topicTitle']; ?></td>
-                                                <td><?php echo ''; ?></td>
+                                                <td><?php echo $value['agency_title']; ?> <?php echo $value['agency_minor_title']; ?></td>
                                                 <td><?php echo $value['dateadd']; ?></td>
                                                 <td><?php echo $value['days']; ?></td>
                                                 <td>
